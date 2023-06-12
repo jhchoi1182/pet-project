@@ -3,18 +3,7 @@
 import { useContext } from "react";
 import { TodoContext } from "@/utils/Context";
 import Link from "next/link";
-
-type TodoSlug = {
-  params: {
-    slug: string;
-  };
-};
-
-export const generateMetadata = ({ params }: TodoSlug) => {
-  return {
-    title: `나의 TODO: ${params.slug}`,
-  };
-};
+import { TodoSlug } from "./layout";
 
 export default function DetailPage({ params: { slug } }: TodoSlug) {
   const { todos } = useContext(TodoContext);
