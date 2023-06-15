@@ -1,14 +1,12 @@
 "use client";
 
-import { useContext, useState } from "react";
-import { TodoContext } from "@/utils/Context";
+import { useState } from "react";
 import { postTodo } from "@/service/todo";
 
 const INPUT_STYLE = "rounded-lg h-8 px-3";
 
 export default function Form() {
   const [enteredTodo, setEnteredTodo] = useState({ title: "", contents: "" });
-  const { setTodos } = useContext(TodoContext);
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -20,13 +18,10 @@ export default function Form() {
     if ((enteredTodo.title, enteredTodo.contents === "")) return null;
     const { title, contents } = enteredTodo;
     const todo = {
-      id: `todos_${new Date().getTime() + Math.random()}`,
-      isDone: false,
       title: title,
       contents: contents,
     };
     postTodo(todo);
-    setTodos((prev) => [...prev, todo]);
     setEnteredTodo({ title: "", contents: "" });
   };
 

@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
+import Form from "@/components/Form";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={inter.className}>
       <body className="w-[1200px] mx-auto">
         <Header />
+        <Form />
         {children}
       </body>
     </html>
