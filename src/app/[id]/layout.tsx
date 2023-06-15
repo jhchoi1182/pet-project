@@ -1,14 +1,14 @@
 import React from "react";
 
-export type TodoSlug = {
+export type TodoId = {
   params: {
-    slug: string;
+    id: string;
   };
 };
 
-export const generateMetadata = ({ params: { slug } }: TodoSlug) => {
+export const generateMetadata = ({ params: { id } }: TodoId) => {
   return {
-    title: `나의 TODO: ${slug}`,
+    title: `나의 TODO: ${id}`,
   };
 };
 

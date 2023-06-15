@@ -24,7 +24,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   const todo = await request.json();
   const collection = await connectToMongo();
-  const result = await collection.insertOne({ ...todo });
+  await collection.insertOne({ ...todo });
   const todos = await collection.find({}).toArray();
   return new Response(JSON.stringify({ todos }));
 }

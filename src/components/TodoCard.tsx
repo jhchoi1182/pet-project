@@ -1,5 +1,5 @@
 import { TodoContext } from "@/Context/TodoContextProvider";
-import { __deleteTodo, __getTodo, responseTodo } from "@/service/todo";
+import { __deleteTodo, __getTodo, __updateTodo, responseTodo } from "@/service/todo";
 import Link from "next/link";
 import { useContext } from "react";
 
@@ -11,9 +11,9 @@ const BUTTON_STYLE = "w-32 h-10 border-2 rounded-lg shadow-sm";
 
 export default function TodoCard({ todo: { _id, title, contents, isDone } }: TodoCardProps) {
   const { setTodos } = useContext(TodoContext);
-  const isDoneChange = (id: string) => {
-    // const changedTodos = todos.map((todo) => (todo.id === id ? { ...todo, isDone: !todo.isDone } : todo));
-    // setTodos(changedTodos);
+  const isDoneChange = async (id: string, isDone: boolean) => {
+    const responseTodo = await __updateTodo(id, isDone);
+    setTodos(responseTodo);
   };
 
   const deleteTodo = async (id: string) => {
@@ -35,7 +35,7 @@ export default function TodoCard({ todo: { _id, title, contents, isDone } }: Tod
         <button className={`${BUTTON_STYLE} border-red-500`} onClick={() => deleteTodo(_id)}>
           삭제하기
         </button>
-        <button className={`${BUTTON_STYLE} border-green-600`} onClick={() => isDoneChange(_id)}>
+        <button className={`${BUTTON_STYLE} border-green-600`} onClick={() => isDoneChange(_id, isDone)}>
           {isDone ? "취소" : "완료"}
         </button>
       </div>

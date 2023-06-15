@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { TodoSlug } from "./layout";
+import { TodoId } from "./layout";
 
-export default function DetailPage({ params: { slug } }: TodoSlug) {
+export default function DetailPage({ params: { id } }: TodoId) {
 
   return (
     <section>
       {/* {todos?.map(
         (todo) =>
-          todo.id === slug && (
+          todo.id === id && (
             <>
               <h1>제목: {todo.title}</h1>
               <p>내용: {todo.contents}</p>
