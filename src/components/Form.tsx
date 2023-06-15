@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useState } from "react";
-import { postTodo, responseTodo } from "@/service/todo";
+import { __postTodo } from "@/service/todo";
 import { TodoContext } from "@/Context/TodoContextProvider";
 
 const INPUT_STYLE = "rounded-lg h-8 px-3";
@@ -23,7 +23,7 @@ export default function Form() {
       title: title,
       contents: contents,
     };
-    const data = await postTodo(todo);
+    const data = await __postTodo(todo);
     setTodos(data);
     setEnteredTodo({ title: "", contents: "" });
   };

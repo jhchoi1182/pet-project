@@ -1,5 +1,7 @@
-import { responseTodo } from "@/service/todo";
+import { TodoContext } from "@/Context/TodoContextProvider";
+import { __deleteTodo, __getTodo, responseTodo } from "@/service/todo";
 import Link from "next/link";
+import { useContext } from "react";
 
 type TodoCardProps = {
   todo: responseTodo;
@@ -8,14 +10,16 @@ type TodoCardProps = {
 const BUTTON_STYLE = "w-32 h-10 border-2 rounded-lg shadow-sm";
 
 export default function TodoCard({ todo: { _id, title, contents, isDone } }: TodoCardProps) {
+  const { setTodos } = useContext(TodoContext);
   const isDoneChange = (id: string) => {
     // const changedTodos = todos.map((todo) => (todo.id === id ? { ...todo, isDone: !todo.isDone } : todo));
     // setTodos(changedTodos);
   };
 
-  const deleteTodo = (id: string) => {
-    // const deletedTodos = todos.filter((todo) => todo.id !== id);
-    // setTodos(deletedTodos);
+  const deleteTodo = async (id: string) => {
+    await __deleteTodo(id);
+    const responseTodo = await __getTodo();
+    setTodos(responseTodo);
   };
 
   return (

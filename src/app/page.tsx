@@ -2,7 +2,7 @@
 
 import { useContext, useEffect } from "react";
 import TodoCard from "@/components/TodoCard";
-import { getTodo } from "@/service/todo";
+import { __getTodo } from "@/service/todo";
 import { TodoContext } from "@/Context/TodoContextProvider";
 
 const FONT_STYLE = "text-2xl font-bold py-6";
@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     const fetchTodos = async () => {
       setIsLoading(true);
-      const responseTodo = await getTodo();
+      const responseTodo = await __getTodo();
       setTodos(responseTodo);
       setIsLoading(false);
     };
