@@ -1,32 +1,46 @@
 "use client";
 
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import TodoCard from "@/components/TodoCard";
 import { getTodo } from "@/service/todo";
+import { TodoContext } from "@/Context/TodoContextProvider";
 
 const FONT_STYLE = "text-2xl font-bold py-6";
 const TODOBOX_STYLE = "grid grid-cols-4 gap-5";
 
 export default function Home() {
+  const { todos, setTodos, isLoading, setIsLoading } = useContext(TodoContext);
 
   useEffect(() => {
-    getTodo();
-  }, []);
+    const fetchTodos = async () => {
+      setIsLoading(true);
+      const responseTodo = await getTodo();
+      setTodos(responseTodo);
+      setIsLoading(false);
+    };
+    fetchTodos();
+  }, [setIsLoading, setTodos]);
 
   return (
     <section>
-      <h2 className={FONT_STYLE}>Working.. 🔥</h2>
-      <ul className={TODOBOX_STYLE}>
-        {/* {todos?.map((todo) => {
-          return !todo.isDone && <TodoCard key={todo.id} todo={todo} />;
-        })} */}
-      </ul>
-      <h2 className={FONT_STYLE}>Done..! 🎉</h2>
-      <ul className={TODOBOX_STYLE}>
-        {/* {todos?.map((todo) => {
-          return todo.isDone && <TodoCard key={todo.id} todo={todo} />;
-        })} */}
-      </ul>
+      {isLoading ? (
+        <div className="text-center mt-24 text-3xl font-bold">로딩중...</div>
+      ) : (
+        <>
+          <h2 className={FONT_STYLE}>Working.. 🔥</h2>
+          <ul className={TODOBOX_STYLE}>
+            {todos?.map((todo) => {
+              return !todo.isDone && <TodoCard key={todo._id} todo={todo} />;
+            })}
+          </ul>
+          <h2 className={FONT_STYLE}>Done..! 🎉</h2>
+          <ul className={TODOBOX_STYLE}>
+            {todos?.map((todo) => {
+              return todo.isDone && <TodoCard key={todo._id} todo={todo} />;
+            })}
+          </ul>
+        </>
+      )}
     </section>
   );
 }

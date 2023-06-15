@@ -1,19 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import { postTodo } from "@/service/todo";
+import { useContext, useState } from "react";
+import { postTodo, responseTodo } from "@/service/todo";
+import { TodoContext } from "@/Context/TodoContextProvider";
 
 const INPUT_STYLE = "rounded-lg h-8 px-3";
 
 export default function Form() {
   const [enteredTodo, setEnteredTodo] = useState({ title: "", contents: "" });
+  const { setTodos } = useContext(TodoContext);
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setEnteredTodo((prev) => ({ ...prev, [name]: value }));
   };
 
-  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if ((enteredTodo.title, enteredTodo.contents === "")) return null;
     const { title, contents } = enteredTodo;
@@ -21,7 +23,8 @@ export default function Form() {
       title: title,
       contents: contents,
     };
-    postTodo(todo);
+    const data = await postTodo(todo);
+    setTodos(data);
     setEnteredTodo({ title: "", contents: "" });
   };
 

@@ -1,20 +1,20 @@
-import { NextResponse } from "next/server";
-
 export interface requestTodo {
   title: string;
   contents: string;
 }
 
-export async function getTodo() {
+export interface responseTodo extends requestTodo {
+  _id: string;
+  isDone: boolean;
+}
+
+export async function getTodo(): Promise<responseTodo[]> {
   const response = await fetch("/api/");
-
   const data = await response.json();
-  console.log(data.todos);
-
   return data.todos;
 }
 
-export async function postTodo(data: requestTodo) {
+export async function postTodo(data: requestTodo): Promise<responseTodo[]> {
   const todo = { ...data, isDone: false };
   const response = await fetch("/api/", {
     method: "POST",
@@ -24,5 +24,5 @@ export async function postTodo(data: requestTodo) {
     },
   });
   const res = await response.json();
-  return NextResponse.json(res);
+  return res.todos;
 }
