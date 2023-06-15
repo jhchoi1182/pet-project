@@ -11,20 +11,37 @@ const client = new MongoClient(uri, {
 });
 
 export async function connectToMongo() {
-  const mongo = await client.connect();
-  return mongo.db("todos").collection("todo");
+  try {
+    const mongo = await client.connect();
+    return mongo.db("todos").collection("todo");
+  } catch (error) {
+    console.error("Failed to connect to MongoDB:", error);
+    throw new Error("Failed to connect to MongoDB");
+  }
 }
 
 export async function GET() {
-  const collection = await connectToMongo();
-  const todos = await collection.find({}).toArray();
-  return new Response(JSON.stringify({ todos }));
+  try {
+    const collection = await connectToMongo();
+    const todos = await collection.find({}).toArray();
+    return new Response(JSON.stringify({ todos }));
+  } catch (error) {
+    console.log("투두 GET :", error);
+    return new Response(JSON.stringify({ message: "서버에서 투두를 불러오는 중에 오류가 발생했습니다." }), {
+      status: 500,
+    });
+  }
 }
 
 export async function POST(request: NextRequest) {
-  const todo = await request.json();
-  const collection = await connectToMongo();
-  await collection.insertOne({ ...todo });
-  const todos = await collection.find({}).toArray();
-  return new Response(JSON.stringify({ todos }));
+  try {
+    const todo = await request.json();
+    const collection = await connectToMongo();
+    await collection.insertOne({ ...todo });
+    const todos = await collection.find({}).toArray();
+    return new Response(JSON.stringify({ todos }));
+  } catch (error) {
+    console.log("투두 POST :", error);
+    return new Response(JSON.stringify({ message: "투두 생성 중에 오류가 발생했습니다." }), { status: 500 });
+  }
 }
