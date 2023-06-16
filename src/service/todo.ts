@@ -66,22 +66,17 @@ export async function __deleteTodo(id: string) {
   }
 }
 
-export async function __updateTodo(id: string, isDone: boolean): Promise<responseTodo[]> {
-  try {
-    const response = await fetch(checkEnvironment().concat(`/api/todo/${id}`), {
-      method: "PATCH",
-      body: JSON.stringify(isDone),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!response.ok) {
-      throw new Error("투두 업데이트에 실패했습니다.");
-    }
-    const { todos } = await response.json();
-    return todos;
-  } catch (error) {
-    console.error("투두 PATCH :", error);
-    throw new Error("투두 업데이트 중에 오류가 발생했습니다.");
+export async function __updateTodo(id: string, isDone: boolean): Promise<responseTodo> {
+  const response = await fetch(checkEnvironment().concat(`/api/todo/${id}`), {
+    method: "PATCH",
+    body: JSON.stringify(isDone),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    throw new Error("투두 업데이트에 실패했습니다.");
   }
+  const { updatedTodo } = await response.json();
+  return updatedTodo;
 }

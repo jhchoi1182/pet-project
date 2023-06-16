@@ -1,34 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![image](https://github.com/jhchoi1182/next-todo/assets/116577489/37675973-b846-4f0e-bfa8-05c13919ec9b)
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## 트러블 슈팅
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. 동적 경로 세그먼트에 대해 SSG를 적용하려는데 API의 URL을 분석할 수 없다며 오류가 발생.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. 다른 곳에서는 잘 작동 되기에 API 로직 자체엔 대해선 문제가 없다고 판단. API URL을 수정 => 실패
 
-## Learn More
+3. 공식 문서를 참고해 12이전 버전에서 사용되던 handler함수 방식을 사용해봄 => 실패
 
-To learn more about Next.js, take a look at the following resources:
+4. 키워드를 바꿔가며 구글링하다가 상대 경로로 사용하는 URL을 절대 경로로 수정해 비슷한 문제를 해결한 글을 발견
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. 추가 검색으로 Next.js에서 제공하는 기본 기능으로 process.env.NODE_ENV가 개발 환경에 따라 값이 스위칭된다는 것을 것을 확인
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+6. 상대 경로를 절대 경로로 바꾸고 개발 환경에 따라 URL을 바꾸는 로직으로 문제 해결
+<br>
 
-## Deploy on Vercel
+- 최신 버전이라 검색해도 안 나온다고 겁 먹을 필요 없는 듯
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<br>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 렌더링 속도 개선
+
+<br>
+
+기본적인 CRUD인데도 req / res 속도가 너무 느린 것 같음. (몽고DB 자체가 조금 구린 것 같다.)
+
+바로 개선 돌입!
+
+- 측정 항목 - isDone 수정 시 렌더링 반영까지 걸리는 시간
+- 측정 조건 - todo가 10개일 때 수정이 반영되기까지 걸리는 시간
+
+<br>
+
+**로직 변경 1**   
+async / await를 기다릴 필요 없이 업데이트 시킨 후 오류나면 원래대로 되돌리는 로직으로 수정
+
+<br>
+
+**로직 변경 2**   
+response로 받아오는 값 메시지로 바꿔서 요청 속도 단축시키기
+
+<br>
+
+**before : 10번 평균 3.7ms**
+
+ ![image](https://github.com/jhchoi1182/next-todo/assets/116577489/89c418fd-51e5-40b8-a3bc-193b81cf4440)
+
+<br>
+
+**after : 10번 평균 1.97ms**
+
+![image](https://github.com/jhchoi1182/next-todo/assets/116577489/25ada9e9-d9be-4f34-92bf-b11432788951)
+
+<br>
+
+**렌더링 속도 53% 개선**

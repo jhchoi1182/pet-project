@@ -9,7 +9,7 @@ const FONT_STYLE = "text-2xl font-bold py-6";
 const TODOBOX_STYLE = "grid grid-cols-4 gap-5";
 
 export default function Home() {
-  const { todos, setTodos, isLoading, setIsLoading } = useContext(TodoContext);
+  const { todos, setTodos, setPrevTodos, isLoading, setIsLoading } = useContext(TodoContext);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -17,13 +17,14 @@ export default function Home() {
       try {
         const responseTodo = await __getTodo();
         setTodos(responseTodo);
+        setPrevTodos(responseTodo);
       } catch (error) {
         alert(error);
       }
       setIsLoading(false);
     };
     fetchTodos();
-  }, [setIsLoading, setTodos]);
+  }, [setIsLoading, setTodos, setPrevTodos]);
 
   return (
     <section>
