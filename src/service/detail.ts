@@ -7,6 +7,6 @@ export async function __getDetail(id: string): Promise<responseTodo> {
     throw new Error("상세 정보를 가져오는 데 실패했습니다.");
   }
 
-  const { todos } = await response.json();
-  return todos;
+  const { todo } = await response.json();
+  return todo;
 }
