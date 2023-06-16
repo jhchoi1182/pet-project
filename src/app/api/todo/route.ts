@@ -15,8 +15,8 @@ export async function connectToMongo() {
     const mongo = await client.connect();
     return mongo.db("todos").collection("todo");
   } catch (error) {
-    console.error("Failed to connect to MongoDB:", error);
-    throw new Error("Failed to connect to MongoDB");
+    console.error("몽고DB 연결 실패:", error);
+    throw new Error("몽고DB 연결 실패");
   }
 }
 
