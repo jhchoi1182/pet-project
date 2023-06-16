@@ -8,11 +8,16 @@ export interface responseTodo extends requestTodo {
   isDone: boolean;
 }
 
+export const checkEnvironment = () => {
+  let base_url = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://next-todo-mu.vercel.app/";
+  return base_url;
+};
+
 // NextResponse.json()으로 return할 경우 setState에서 타입 오류가 발생함
 
 export async function __getTodo(): Promise<responseTodo[]> {
   try {
-    const response = await fetch("/api/todo");
+    const response = await fetch(checkEnvironment().concat("/api/todo"));
     if (!response.ok) {
       throw new Error("투두 불러오기에 실패했습니다.");
     }
@@ -27,7 +32,7 @@ export async function __getTodo(): Promise<responseTodo[]> {
 export async function __postTodo(data: requestTodo): Promise<responseTodo[]> {
   try {
     const todo = { ...data, isDone: false };
-    const response = await fetch("/api/todo", {
+    const response = await fetch(checkEnvironment().concat("/api/todo"), {
       method: "POST",
       body: JSON.stringify(todo),
       headers: {
@@ -47,7 +52,7 @@ export async function __postTodo(data: requestTodo): Promise<responseTodo[]> {
 
 export async function __deleteTodo(id: string) {
   try {
-    const response = await fetch(`/api/todo/${id}`, {
+    const response = await fetch(checkEnvironment().concat(`/api/todo/${id}`), {
       method: "DELETE",
     });
     if (!response.ok) {
@@ -63,7 +68,7 @@ export async function __deleteTodo(id: string) {
 
 export async function __updateTodo(id: string, isDone: boolean): Promise<responseTodo[]> {
   try {
-    const response = await fetch(`/api/todo/${id}`, {
+    const response = await fetch(checkEnvironment().concat(`/api/todo/${id}`), {
       method: "PATCH",
       body: JSON.stringify(isDone),
       headers: {
