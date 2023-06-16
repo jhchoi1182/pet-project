@@ -14,8 +14,12 @@ export default function Home() {
   useEffect(() => {
     const fetchTodos = async () => {
       setIsLoading(true);
-      const responseTodo = await __getTodo();
-      setTodos(responseTodo);
+      try {
+        const responseTodo = await __getTodo();
+        setTodos(responseTodo);
+      } catch (error) {
+        alert(error);
+      }
       setIsLoading(false);
     };
     fetchTodos();

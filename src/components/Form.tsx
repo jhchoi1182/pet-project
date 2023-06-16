@@ -17,14 +17,18 @@ export default function Form() {
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if ((enteredTodo.title, enteredTodo.contents === "")) return null;
+    if (enteredTodo.title === "" || enteredTodo.contents === "") return null;
     const { title, contents } = enteredTodo;
     const todo = {
       title: title,
       contents: contents,
     };
-    const data = await __postTodo(todo);
-    setTodos(data);
+    try {
+      const data = await __postTodo(todo);
+      setTodos(data);
+    } catch (error) {
+      alert(error);
+    }
     setEnteredTodo({ title: "", contents: "" });
   };
 

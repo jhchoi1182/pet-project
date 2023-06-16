@@ -11,16 +11,22 @@ const BUTTON_STYLE = "w-32 h-10 border-2 rounded-lg shadow-sm";
 
 export default function TodoCard({ todo: { _id, title, contents, isDone } }: TodoCardProps) {
   const { todos, setTodos } = useContext(TodoContext);
-  const isDoneChange = (id: string, isDone: boolean) => {
-    __updateTodo(id, isDone);
-    const changedTodos = todos.map((todo) => (todo._id === id ? { ...todo, isDone: !todo.isDone } : todo));
-    setTodos(changedTodos);
+  const isDoneChange = async (id: string, isDone: boolean) => {
+    try {
+      const changedTodos = await __updateTodo(id, isDone);
+      setTodos(changedTodos);
+    } catch (error) {
+      alert(error);
+    }
   };
 
-  const deleteTodo = (id: string) => {
-    __deleteTodo(id);
-    const deletedTodos = todos.filter((todo) => todo._id !== id);
-    setTodos(deletedTodos);
+  const deleteTodo = async (id: string) => {
+    try {
+      const deletedTodos = await __deleteTodo(id);
+      setTodos(deletedTodos);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (
