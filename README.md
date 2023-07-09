@@ -1,8 +1,9 @@
 ![image](https://github.com/jhchoi1182/next-todo/assets/116577489/37675973-b846-4f0e-bfa8-05c13919ec9b)
 
 ## 특징
-* Next.js를 통한 백엔드 작업으로 Mongo DB에 연결
+* Mongo DB와 Next.js의 서비스 로직을 이용해 풀스택 개발
 * 동적 세그먼트인 디테일 페이지를 SSG 방식으로 변경
+* 상태 관리 라이브러리 기능을 직접 구현해 렌더링 속도 53% 개선
 
 <br>
 
