@@ -4,7 +4,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
 import Form from "@/components/Form";
-import TodoContextProvider from "@/Context/TodoContextProvider";
+import QueryContext from "@/Context/QueryContextProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,15 +16,19 @@ export const metadata: Metadata = {
   description: "필사즉생 필생즉사 스터디 모임 과제",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={inter.className}>
       <body className="w-[1200px] mx-auto">
         <Header />
-        <TodoContextProvider>
+        <QueryContext>
           <Form />
           {children}
-        </TodoContextProvider>
+        </QueryContext>
       </body>
     </html>
   );

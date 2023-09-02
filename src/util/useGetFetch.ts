@@ -1,21 +1,25 @@
-import { useState, useEffect } from "react";
+import { QueryContext } from "@/Context/QueryContextProvider";
+import { useState, useEffect, useContext } from "react";
 
 interface FetchResult<T> {
-  data: T | unknown;
+  data: T | any;
   isLoading: boolean;
   isError: unknown;
 }
 
 interface FetchOptions<T> {
+  queryKey: string;
   queryFn: Promise<Response>;
   onSuccess?: (data?: T | any) => void;
 }
 
 const useGetFetch = <T>({
+  queryKey,
   queryFn,
   onSuccess,
 }: FetchOptions<T>): FetchResult<T> => {
-  const [data, setData] = useState<T | unknown>(null);
+  const { setTotalData } = useContext(QueryContext);
+  const [data, setData] = useState<T | any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState<unknown>(null);
 
@@ -25,11 +29,16 @@ const useGetFetch = <T>({
       try {
         const response = await queryFn;
         if (!response.ok) {
-          throw new Error("네트워크 요청 실패");
+          const error = await response.json();
+          throw new Error(error ?? "네트워크 요청 실패");
         }
-        const { todos } = await response.json();
-        setData(todos);
-        onSuccess && onSuccess(todos);
+        const result = await response.json();
+        setTotalData((prev: any) => ({
+          ...prev,
+          [queryKey]: result,
+        }));
+        setData(result);
+        onSuccess && onSuccess(result);
         setIsLoading(false);
       } catch (error) {
         setIsError(error);
