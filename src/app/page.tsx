@@ -1,30 +1,26 @@
 "use client";
 
-import { useContext, useEffect } from "react";
 import TodoCard from "@/components/TodoCard";
-import { __getTodo } from "@/service/todo";
-import { TodoContext } from "@/Context/TodoContextProvider";
+import { __getTodo, responseTodo } from "@/service/todo";
+import { todoApi } from "@/service/api";
+import useGetFetch from "@/util/useGetFetch";
+import { useState } from "react";
 
 const FONT_STYLE = "text-2xl font-bold py-6";
 const TODOBOX_STYLE = "grid grid-cols-4 gap-5";
 
 export default function Home() {
-  const { todos, setTodos, setPrevTodos, isLoading, setIsLoading } = useContext(TodoContext);
+  const [todos, setTodos] = useState<responseTodo[]>([]);
+  const { isLoading, isError } = useGetFetch<responseTodo[]>({
+    queryFn: todoApi.getTodo(),
+    onSuccess: (data) => {
+      setTodos(data);
+    },
+  });
 
-  useEffect(() => {
-    const fetchTodos = async () => {
-      setIsLoading(true);
-      try {
-        const responseTodo = await __getTodo();
-        setTodos(responseTodo);
-        setPrevTodos(responseTodo);
-      } catch (error) {
-        alert(error);
-      }
-      setIsLoading(false);
-    };
-    fetchTodos();
-  }, [setIsLoading, setTodos, setPrevTodos]);
+  console.log(todos);
+
+  if (isError) return <div>{`${isError}`}</div>;
 
   return (
     <section>
@@ -35,13 +31,21 @@ export default function Home() {
           <h2 className={FONT_STYLE}>Working.. 🔥</h2>
           <ul className={TODOBOX_STYLE}>
             {todos?.map((todo) => {
-              return !todo.isDone && <TodoCard key={todo._id} todo={todo} />;
+              return (
+                !todo.isDone && (
+                  <TodoCard key={todo._id} todo={todo} setTodos={setTodos} />
+                )
+              );
             })}
           </ul>
           <h2 className={FONT_STYLE}>Done..! 🎉</h2>
           <ul className={TODOBOX_STYLE}>
             {todos?.map((todo) => {
-              return todo.isDone && <TodoCard key={todo._id} todo={todo} />;
+              return (
+                todo.isDone && (
+                  <TodoCard key={todo._id} todo={todo} setTodos={setTodos} />
+                )
+              );
             })}
           </ul>
         </>

@@ -1,22 +1,35 @@
 import { TodoContext } from "@/Context/TodoContextProvider";
-import { __deleteTodo, __getTodo, __updateTodo, responseTodo } from "@/service/todo";
+import {
+  __deleteTodo,
+  __getTodo,
+  __updateTodo,
+  responseTodo,
+} from "@/service/todo";
 import Link from "next/link";
 import { useContext } from "react";
 
 type TodoCardProps = {
   todo: responseTodo;
+  setTodos: React.Dispatch<React.SetStateAction<responseTodo[]>>;
 };
 
 const BUTTON_STYLE = "w-32 h-10 border-2 rounded-lg shadow-sm";
 
-export default function TodoCard({ todo: { _id, title, contents, isDone } }: TodoCardProps) {
+export default function TodoCard({
+  todo: { _id, title, contents, isDone },
+  // setTodos,
+}: TodoCardProps) {
   const { todos, setTodos, prevTodos, setPrevTodos } = useContext(TodoContext);
   const handleUpdateError = () => {
     alert("투두 업데이트에 실패했습니다.");
     setTodos(prevTodos);
   };
 
-  const todoChangeHandler = (id: string, type: "update" | "delete", isDone?: boolean) => {
+  const todoChangeHandler = (
+    id: string,
+    type: "update" | "delete",
+    isDone?: boolean,
+  ) => {
     setPrevTodos(todos);
 
     if (type === "delete") {
@@ -26,7 +39,11 @@ export default function TodoCard({ todo: { _id, title, contents, isDone } }: Tod
     }
 
     if (type === "update") {
-      setTodos((todos) => todos.map((todo) => (todo._id === id ? { ...todo, isDone: !todo.isDone } : todo)));
+      setTodos((todos) =>
+        todos.map((todo) =>
+          todo._id === id ? { ...todo, isDone: !todo.isDone } : todo,
+        ),
+      );
       return __updateTodo(id, isDone ?? false) //
         .catch(handleUpdateError);
     }
@@ -42,10 +59,16 @@ export default function TodoCard({ todo: { _id, title, contents, isDone } }: Tod
         <p className="pb-2 line-clamp-3">{contents}</p>
       </div>
       <div className="flex gap-7 mt-auto pt-2">
-        <button className={`${BUTTON_STYLE} border-red-500`} onClick={() => todoChangeHandler(_id, "delete")}>
+        <button
+          className={`${BUTTON_STYLE} border-red-500`}
+          onClick={() => todoChangeHandler(_id, "delete")}
+        >
           삭제하기
         </button>
-        <button className={`${BUTTON_STYLE} border-green-600`} onClick={() => todoChangeHandler(_id, "update", isDone)}>
+        <button
+          className={`${BUTTON_STYLE} border-green-600`}
+          onClick={() => todoChangeHandler(_id, "update", isDone)}
+        >
           {isDone ? "취소" : "완료"}
         </button>
       </div>
