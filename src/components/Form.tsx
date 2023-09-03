@@ -1,14 +1,25 @@
 "use client";
 
+import { QueryContext } from "@/Context/QueryContextProvider";
+import { todoApi } from "@/service/api";
+import useUpdateFetch from "@/util/useUpdateFetch";
 import { useContext, useState } from "react";
-import { __postTodo } from "@/service/todo";
-import { TodoContext } from "@/Context/TodoContextProvider";
 
 const INPUT_STYLE = "rounded-lg h-8 px-3";
 
 export default function Form() {
+  const { setTotalData } = useContext(QueryContext);
   const [enteredTodo, setEnteredTodo] = useState({ title: "", contents: "" });
-  const { setTodos } = useContext(TodoContext);
+  const { mutate } = useUpdateFetch({
+    queryKey: "todo",
+    queryFn: (todo) => todoApi.postTodo(todo),
+    onSuccess: (data) => {
+      setTotalData((prev: any) => ({
+        ...prev,
+        todo: data,
+      }));
+    },
+  });
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -22,18 +33,17 @@ export default function Form() {
     const todo = {
       title: title,
       contents: contents,
+      isDone: false,
     };
-    try {
-      const data = await __postTodo(todo);
-      setTodos(data);
-    } catch (error) {
-      alert(error);
-    }
+    mutate(todo);
     setEnteredTodo({ title: "", contents: "" });
   };
 
   return (
-    <form className="flex items-center justify-between h-24 bg-slate-300 rounded-md px-5" onSubmit={onSubmitHandler}>
+    <form
+      className="flex items-center justify-between h-24 bg-slate-300 rounded-md px-5"
+      onSubmit={onSubmitHandler}
+    >
       <div className="flex items-center gap-3">
         <label className="font-bold" htmlFor="title">
           제목
@@ -59,7 +69,9 @@ export default function Form() {
           required
         />
       </div>
-      <button className="w-36 h-10 bg-teal-400 font-bold rounded-lg shadow-sm">추가하기</button>
+      <button className="w-36 h-10 bg-teal-400 font-bold rounded-lg shadow-sm">
+        추가하기
+      </button>
     </form>
   );
 }

@@ -39,11 +39,10 @@ const useGetFetch = <T>({
         }));
         setData(result);
         onSuccess && onSuccess(result);
-        setIsLoading(false);
       } catch (error) {
         setIsError(error);
-        setIsLoading(false);
       }
+      setIsLoading(false);
     };
     fetchData();
   }, []);

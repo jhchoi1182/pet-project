@@ -12,22 +12,24 @@ type TotalData = {
 };
 
 type QueryContext = {
-  totalData: TotalData | null;
-  setTotalData: React.Dispatch<React.SetStateAction<TotalData | null>>;
-  prevTotalData: TotalData | null;
-  setPrevTotalData: React.Dispatch<React.SetStateAction<TotalData | null>>;
+  totalData: TotalData | undefined;
+  setTotalData: React.Dispatch<React.SetStateAction<TotalData | undefined>>;
+  prevTotalData: TotalData | undefined;
+  setPrevTotalData: React.Dispatch<React.SetStateAction<TotalData | undefined>>;
 };
 
 export const QueryContext = createContext<QueryContext>({
-  totalData: null,
+  totalData: undefined,
   setTotalData: () => {},
-  prevTotalData: null,
+  prevTotalData: undefined,
   setPrevTotalData: () => {},
 });
 
 export default function QueryContextProvider({ children }: ChildrenProps) {
-  const [totalData, setTotalData] = useState<TotalData | null>(null);
-  const [prevTotalData, setPrevTotalData] = useState<TotalData | null>(null);
+  const [totalData, setTotalData] = useState<TotalData | undefined>(undefined);
+  const [prevTotalData, setPrevTotalData] = useState<TotalData | undefined>(
+    undefined,
+  );
 
   return (
     <QueryContext.Provider

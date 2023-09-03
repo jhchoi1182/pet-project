@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
     const collection = await connectToMongo();
     await collection.insertOne({ ...todo });
     const todos = await collection.find({}).toArray();
-    return new Response(JSON.stringify({ todos }));
+    return new Response(JSON.stringify([...todos]));
   } catch (error) {
     console.log("투두 POST :", error);
     return new Response(

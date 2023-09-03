@@ -1,53 +1,40 @@
-import { TodoContext } from "@/Context/TodoContextProvider";
-import {
-  __deleteTodo,
-  __getTodo,
-  __updateTodo,
-  responseTodo,
-} from "@/service/todo";
+import { QueryContext } from "@/Context/QueryContextProvider";
+import { Todo } from "@/app/types";
+import { todoApi } from "@/service/api";
+import useUpdateFetch from "@/util/useUpdateFetch";
 import Link from "next/link";
 import { useContext } from "react";
 
 type TodoCardProps = {
-  todo: responseTodo;
-  setTodos: React.Dispatch<React.SetStateAction<responseTodo[]>>;
+  todo: Todo;
 };
 
 const BUTTON_STYLE = "w-32 h-10 border-2 rounded-lg shadow-sm";
 
 export default function TodoCard({
   todo: { _id, title, contents, isDone },
-  // setTodos,
 }: TodoCardProps) {
-  const { todos, setTodos, prevTodos, setPrevTodos } = useContext(TodoContext);
-  const handleUpdateError = () => {
-    alert("투두 업데이트에 실패했습니다.");
-    setTodos(prevTodos);
-  };
+  const { totalData } = useContext(QueryContext);
 
-  const todoChangeHandler = (
-    id: string,
-    type: "update" | "delete",
-    isDone?: boolean,
-  ) => {
-    setPrevTodos(todos);
+  const updateTodos = totalData?.todo?.map((todo: Todo) =>
+    todo._id === _id ? { ...todo, isDone: !todo.isDone } : todo,
+  );
+  const deletedTodos = totalData?.todo?.filter(
+    (todo: Todo) => todo._id !== _id,
+  );
 
-    if (type === "delete") {
-      setTodos((todos) => todos.filter((todo) => todo._id !== id));
-      return __deleteTodo(id) //
-        .catch(handleUpdateError);
-    }
-
-    if (type === "update") {
-      setTodos((todos) =>
-        todos.map((todo) =>
-          todo._id === id ? { ...todo, isDone: !todo.isDone } : todo,
-        ),
-      );
-      return __updateTodo(id, isDone ?? false) //
-        .catch(handleUpdateError);
-    }
-  };
+  const { mutate: updateMutate } = useUpdateFetch({
+    queryKey: "todo",
+    queryFn: () => todoApi.updateTodo({ _id, isDone }),
+    optimisticUpdate: updateTodos,
+    rollbackOnFail: true,
+  });
+  const { mutate: deleteMutate } = useUpdateFetch({
+    queryKey: "todo",
+    queryFn: () => todoApi.deleteTodo(_id),
+    optimisticUpdate: deletedTodos,
+    rollbackOnFail: true,
+  });
 
   return (
     <li className="flex flex-col w-72 h-60 border-[3px] border-teal-500 rounded-xl pt-3 px-6 pb-6 hover:shadow-lg">
@@ -61,13 +48,13 @@ export default function TodoCard({
       <div className="flex gap-7 mt-auto pt-2">
         <button
           className={`${BUTTON_STYLE} border-red-500`}
-          onClick={() => todoChangeHandler(_id, "delete")}
+          onClick={() => deleteMutate({ _id, isDone })}
         >
           삭제하기
         </button>
         <button
           className={`${BUTTON_STYLE} border-green-600`}
-          onClick={() => todoChangeHandler(_id, "update", isDone)}
+          onClick={() => updateMutate(_id)}
         >
           {isDone ? "취소" : "완료"}
         </button>

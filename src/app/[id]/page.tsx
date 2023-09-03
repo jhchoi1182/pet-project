@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { __getTodo } from "@/service/todo";
-import { __getDetail } from "@/service/detail";
+import { getDetail, getTodo } from "@/service/service";
 
 type DetailPageProps = {
   params: {
@@ -9,7 +8,8 @@ type DetailPageProps = {
 };
 
 export default async function DetailPage({ params: { id } }: DetailPageProps) {
-  const todo = await __getDetail(id);
+  const todo = await getDetail(id);
+
   return (
     <section>
       <h1>제목: {todo.title}</h1>
@@ -20,6 +20,6 @@ export default async function DetailPage({ params: { id } }: DetailPageProps) {
 }
 
 export async function generateStaticParams() {
-  const todos = await __getTodo();
-  return todos.map((todo) => ({ id: todo._id }));
+  const todos = await getTodo();
+  return todos?.map((todo) => ({ id: todo._id }));
 }
