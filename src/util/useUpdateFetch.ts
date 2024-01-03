@@ -1,4 +1,4 @@
-import { QueryContext } from "@/Context/QueryContextProvider";
+import { TodoContext } from "@/Context/TodoContextProvider";
 import { useState, useContext } from "react";
 
 interface FetchResult<T> {
@@ -23,8 +23,8 @@ const useUpdateFetch = <T>({
   optimisticUpdate,
   rollbackOnFail,
 }: FetchOptions<T>): FetchResult<T> => {
-  const { totalData, setTotalData, prevTotalData, setPrevTotalData } =
-    useContext(QueryContext);
+  const { totalTodo, setTotalTodo, prevtotalTodo, setPrevtotalTodo } =
+    useContext(TodoContext);
   const [data, setData] = useState<T | any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState<unknown>(null);
@@ -51,8 +51,8 @@ const useUpdateFetch = <T>({
 
   const handleOptimisticUpdate = () => {
     if (optimisticUpdate) {
-      setPrevTotalData(totalData);
-      setTotalData((prev: any) => ({
+      setPrevtotalTodo(totalTodo);
+      setTotalTodo((prev: any) => ({
         ...prev,
         [queryKey]: optimisticUpdate,
       }));
@@ -61,7 +61,7 @@ const useUpdateFetch = <T>({
 
   const handleRollback = () => {
     if (rollbackOnFail) {
-      setTotalData(prevTotalData);
+      setTotalTodo(prevtotalTodo);
     }
   };
 

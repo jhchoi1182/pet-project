@@ -1,4 +1,4 @@
-import { QueryContext } from "@/Context/QueryContextProvider";
+import { TodoContext } from "@/Context/TodoContextProvider";
 import { Todo } from "@/app/types";
 import { todoApi } from "@/service/api";
 import useUpdateFetch from "@/util/useUpdateFetch";
@@ -14,23 +14,23 @@ const BUTTON_STYLE = "w-32 h-10 border-2 rounded-lg shadow-sm";
 export default function TodoCard({
   todo: { _id, title, contents, isDone },
 }: TodoCardProps) {
-  const { totalData } = useContext(QueryContext);
+  const { totalTodo } = useContext(TodoContext);
 
-  const updateTodos = totalData?.todo?.map((todo: Todo) =>
+  const updateTodos = totalTodo?.todos?.map((todo: Todo) =>
     todo._id === _id ? { ...todo, isDone: !todo.isDone } : todo,
   );
-  const deletedTodos = totalData?.todo?.filter(
+  const deletedTodos = totalTodo?.todos?.filter(
     (todo: Todo) => todo._id !== _id,
   );
 
   const { mutate: updateMutate } = useUpdateFetch({
-    queryKey: "todo",
+    queryKey: "todos",
     queryFn: () => todoApi.updateTodo({ _id, isDone }),
     optimisticUpdate: updateTodos,
     rollbackOnFail: true,
   });
   const { mutate: deleteMutate } = useUpdateFetch({
-    queryKey: "todo",
+    queryKey: "todos",
     queryFn: () => todoApi.deleteTodo(_id),
     optimisticUpdate: deletedTodos,
     rollbackOnFail: true,

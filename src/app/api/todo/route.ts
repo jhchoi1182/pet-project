@@ -13,7 +13,7 @@ const client = new MongoClient(uri, {
 export async function connectToMongo() {
   try {
     const mongo = await client.connect();
-    return mongo.db("todos").collection("todo");
+    return mongo.db("todos").collection("todos");
   } catch (error) {
     console.error("몽고DB 연결 실패:", error);
     throw new Error("몽고DB 연결 실패");

@@ -1,4 +1,4 @@
-import { QueryContext } from "@/Context/QueryContextProvider";
+import { TodoContext } from "@/Context/TodoContextProvider";
 import { useState, useEffect, useContext } from "react";
 
 interface FetchResult<T> {
@@ -18,7 +18,7 @@ const useGetFetch = <T>({
   queryFn,
   onSuccess,
 }: FetchOptions<T>): FetchResult<T> => {
-  const { setTotalData } = useContext(QueryContext);
+  const { setTotalTodo } = useContext(TodoContext);
   const [data, setData] = useState<T | any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState<unknown>(null);
@@ -33,7 +33,7 @@ const useGetFetch = <T>({
           throw new Error(error ?? "네트워크 요청 실패");
         }
         const result = await response.json();
-        setTotalData((prev: any) => ({
+        setTotalTodo((prev: any) => ({
           ...prev,
           [queryKey]: result,
         }));

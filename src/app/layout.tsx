@@ -4,7 +4,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
 import Form from "@/components/Form";
-import QueryContext from "@/Context/QueryContextProvider";
+import TodoContextProvider from "@/Context/TodoContextProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,10 +25,10 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body className="w-[1200px] mx-auto">
         <Header />
-        <QueryContext>
+        <TodoContextProvider>
           <Form />
           {children}
-        </QueryContext>
+        </TodoContextProvider>
       </body>
     </html>
   );

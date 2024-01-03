@@ -1,6 +1,6 @@
 "use client";
 
-import { QueryContext } from "@/Context/QueryContextProvider";
+import { TodoContext } from "@/Context/TodoContextProvider";
 import { todoApi } from "@/service/api";
 import useUpdateFetch from "@/util/useUpdateFetch";
 import { useContext, useState } from "react";
@@ -8,15 +8,15 @@ import { useContext, useState } from "react";
 const INPUT_STYLE = "rounded-lg h-8 px-3";
 
 export default function Form() {
-  const { setTotalData } = useContext(QueryContext);
+  const { setTotalTodo } = useContext(TodoContext);
   const [enteredTodo, setEnteredTodo] = useState({ title: "", contents: "" });
   const { mutate } = useUpdateFetch({
-    queryKey: "todo",
+    queryKey: "todos",
     queryFn: (todo) => todoApi.postTodo(todo),
     onSuccess: (data) => {
-      setTotalData((prev: any) => ({
+      setTotalTodo((prev: any) => ({
         ...prev,
-        todo: data,
+        todos: data,
       }));
     },
   });
