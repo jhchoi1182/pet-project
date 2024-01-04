@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { getDetail, getTodo } from "@/service/service";
+import Button from "@/components/base/Button";
+import TodoDetail from "@/components/TodoDetail";
 
 type DetailPageProps = {
   params: {
@@ -11,10 +13,8 @@ export default async function DetailPage({ params: { id } }: DetailPageProps) {
   const todo = await getDetail(id);
 
   return (
-    <section>
-      <h1>날짜: {todo.date}</h1>
-      <p>내용: {todo.contents}</p>
-      <Link href="/todo">뒤로가기</Link>
+    <section className="mt-10 flex justify-center">
+      <TodoDetail todo={todo} />
     </section>
   );
 }
