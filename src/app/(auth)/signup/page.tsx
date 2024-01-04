@@ -1,7 +1,7 @@
 "use client";
 
-import Button from "@/components/Button";
-import Input from "@/components/Input";
+import Button from "@/components/base/Button";
+import Input from "@/components/base/Input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";

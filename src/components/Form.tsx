@@ -5,8 +5,8 @@ import { Todos } from "@/model/todo";
 import { todoApi } from "@/service/api";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
 import { useContext, useState } from "react";
-import Button from "./Button";
-import Input from "./Input";
+import Button from "./base/Button";
+import Input from "./base/Input";
 
 export default function Form() {
   const { setTotalTodo } = useContext(TodoContext);
