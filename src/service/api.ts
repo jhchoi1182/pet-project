@@ -1,4 +1,4 @@
-import { TodoWithoutId } from "@/app/types";
+import { TodoWithoutId } from "@/model/todo";
 
 export const checkEnvironment = () => {
   let base_url =

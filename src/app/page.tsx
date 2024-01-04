@@ -2,17 +2,17 @@
 
 import TodoCard from "@/components/TodoCard";
 import { todoApi } from "@/service/api";
-import useGetFetch from "@/util/useGetFetch";
+import useGetFetch from "@/hooks/useGetFetch";
 import { useContext } from "react";
 import { TodoContext } from "@/Context/TodoContextProvider";
-import { Todo } from "./types";
+import { Todo, Todos } from "../model/todo";
 
 const FONT_STYLE = "text-2xl font-bold py-6";
 const TODOBOX_STYLE = "grid grid-cols-4 gap-5";
 
 export default function Home() {
   const { totalTodo } = useContext(TodoContext);
-  const { isLoading, isError } = useGetFetch<Todo[]>({
+  const { isLoading, isError } = useGetFetch<Todos>({
     queryKey: "todos",
     queryFn: todoApi.getTodo(),
   });

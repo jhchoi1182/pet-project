@@ -1,7 +1,7 @@
 import { TodoContext } from "@/Context/TodoContextProvider";
-import { Todo } from "@/app/types";
+import { Todo } from "@/model/todo";
 import { todoApi } from "@/service/api";
-import useUpdateFetch from "@/util/useUpdateFetch";
+import useUpdateFetch from "@/hooks/useUpdateFetch";
 import Link from "next/link";
 import { useContext } from "react";
 
