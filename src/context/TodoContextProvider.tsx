@@ -18,15 +18,9 @@ export const TodoContext = createContext<TodoContext>({
   setPrevtotalTodo: () => {},
 });
 
-export default function TodoContextProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function TodoContextProvider({ children }: { children: React.ReactNode }) {
   const [totalTodo, setTotalTodo] = useState<Todos | undefined>(undefined);
-  const [prevTotalTodo, setPrevTotalTodo] = useState<Todos | undefined>(
-    undefined,
-  );
+  const [prevTotalTodo, setPrevTotalTodo] = useState<Todos | undefined>(undefined);
 
   return (
     <TodoContext.Provider

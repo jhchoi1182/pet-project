@@ -23,8 +23,7 @@ const useUpdateFetch = <T>({
   optimisticUpdate,
   rollbackOnFail,
 }: FetchOptions<T>): FetchResult<T> => {
-  const { totalTodo, setTotalTodo, prevtotalTodo, setPrevtotalTodo } =
-    useContext(TodoContext);
+  const { totalTodo, setTotalTodo, prevtotalTodo, setPrevtotalTodo } = useContext(TodoContext);
   const [data, setData] = useState<T | any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState<unknown>(null);
@@ -54,7 +53,7 @@ const useUpdateFetch = <T>({
       setPrevtotalTodo(totalTodo);
       setTotalTodo((prev: any) => ({
         ...prev,
-        [queryKey]: optimisticUpdate,
+        [queryKey]: [...prev[queryKey], optimisticUpdate],
       }));
     }
   };
