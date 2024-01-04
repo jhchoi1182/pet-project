@@ -1,4 +1,4 @@
-import { TodoContext } from "@/Context/TodoContextProvider";
+import { TodoContext } from "@/context/TodoContextProvider";
 import { Todo } from "@/model/todo";
 import { todoApi } from "@/service/api";
 import useUpdateFetch from "@/hooks/useUpdateFetch";

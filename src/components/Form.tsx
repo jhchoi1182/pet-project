@@ -1,6 +1,6 @@
 "use client";
 
-import { TodoContext } from "@/Context/TodoContextProvider";
+import { TodoContext } from "@/context/TodoContextProvider";
 import { Todos } from "@/model/todo";
 import { todoApi } from "@/service/api";
 import useUpdateFetch from "@/hooks/useUpdateFetch";

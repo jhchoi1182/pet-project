@@ -4,7 +4,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
 import Form from "@/components/Form";
-import TodoContextProvider from "@/Context/TodoContextProvider";
+import TodoContextProvider from "@/context/TodoContextProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 

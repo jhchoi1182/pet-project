@@ -1,4 +1,4 @@
-import { TodoContext } from "@/Context/TodoContextProvider";
+import { TodoContext } from "@/context/TodoContextProvider";
 import { useState, useContext } from "react";
 
 interface FetchResult<T> {
