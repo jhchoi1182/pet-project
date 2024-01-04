@@ -2,6 +2,7 @@
 
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import InfoIcon from "@/components/icons/InfoIcon";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -27,8 +28,11 @@ function Login() {
         </Button>
       </div>
       <div className="flex justify-end mt-10">
-        <Link href="/todo" className="text-sky-500 font-bold">
-          게스트 로그인
+        <Link href="/todo" className="flex items-center gap-2 text-sky-500 font-bold">
+          <span>
+            <InfoIcon />
+          </span>
+          <span>게스트 로그인</span>
         </Link>
       </div>
     </form>
