@@ -6,8 +6,7 @@ import { todoApi } from "@/service/api";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
 import { useContext, useState } from "react";
 import Button from "./Button";
-
-const INPUT_STYLE = "rounded-lg h-8 px-3";
+import Input from "./Input";
 
 export default function Form() {
   const { setTotalTodo } = useContext(TodoContext);
@@ -58,30 +57,24 @@ export default function Form() {
       className="flex items-center justify-between h-24 bg-slate-300 rounded-md px-5"
       onSubmit={onSubmitHandler}
     >
-      <div className="flex items-center gap-3">
-        <label className="font-bold" htmlFor="contents">
-          내용
-        </label>
-        <input
-          className={INPUT_STYLE}
-          id="contents"
-          name="contents"
-          value={enteredTodo.contents}
-          onChange={onChangeHandler}
-          required
-        />
-        <label className="font-bold" htmlFor="date">
-          목표 날짜
-        </label>
-        <input
-          className={INPUT_STYLE}
-          type="date"
-          id="date"
-          name="date"
-          value={enteredTodo.date}
-          onChange={onChangeHandler}
-          required
-        />
+      <div className="flex items-center gap-10">
+        <Input variant="todo" label="내용" name="contents">
+          <Input.TextField
+            variant="todo"
+            value={enteredTodo.contents}
+            onChange={onChangeHandler}
+            required
+          />
+        </Input>
+        <Input variant="todo" label="목표 날짜" name="date">
+          <Input.TextField
+            variant="todo"
+            type="date"
+            value={enteredTodo.date}
+            onChange={onChangeHandler}
+            required
+          />
+        </Input>
       </div>
       <Button size="small">추가하기</Button>
     </form>
