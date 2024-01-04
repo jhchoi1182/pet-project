@@ -9,9 +9,9 @@ export default function TodoDetail({ todo }: { todo: Todo }) {
   const router = useRouter();
 
   return (
-    <div className="w-[80%] border-2 border-teal-500 p-10 rounded-xl">
-      <div className="flex justify-between items-center">
-        <h1 className="font-bold">날짜: {todo.date}</h1>
+    <section className="w-[80%] border-2 border-teal-500 p-10 rounded-xl">
+      <header className="flex justify-between items-center">
+        <time className="font-bold">날짜: {todo.date}</time>
         <div className="flex gap-7">
           <Button variant="update" size="small">
             수정
@@ -19,14 +19,14 @@ export default function TodoDetail({ todo }: { todo: Todo }) {
           <Button variant="delete" size="small">
             삭제
           </Button>
-          <Button size="small" onClick={() => router.back()}>
+          <Button size="small" onClick={() => router.push("/todo")}>
             뒤로가기
           </Button>
         </div>
-      </div>
-      <div className="mt-20 mb-10">
+      </header>
+      <article className="mt-20 mb-10">
         <p>{todo.contents}</p>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }

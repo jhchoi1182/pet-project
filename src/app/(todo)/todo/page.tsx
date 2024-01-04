@@ -6,6 +6,7 @@ import useGetFetch from "@/hooks/useGetFetch";
 import { useContext } from "react";
 import { TodoContext } from "@/context/TodoContextProvider";
 import { Todo, Todos } from "../../../model/todo";
+import Form from "@/components/Form";
 
 const FONT_STYLE = "text-2xl font-bold py-6";
 const TODOBOX_STYLE = "grid grid-cols-4 gap-5";
@@ -21,6 +22,7 @@ export default function Home() {
 
   return (
     <section>
+      <Form />
       {isLoading ? (
         <div className="text-center mt-24 text-3xl font-bold">로딩중...</div>
       ) : (

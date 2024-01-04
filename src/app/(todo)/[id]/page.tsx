@@ -1,7 +1,6 @@
-import Link from "next/link";
 import { getDetail, getTodo } from "@/service/service";
-import Button from "@/components/base/Button";
 import TodoDetail from "@/components/TodoDetail";
+import Comments from "@/components/Comments";
 
 type DetailPageProps = {
   params: {
@@ -13,8 +12,9 @@ export default async function DetailPage({ params: { id } }: DetailPageProps) {
   const todo = await getDetail(id);
 
   return (
-    <section className="mt-10 flex justify-center">
+    <section className="mt-10 flex flex-col items-center">
       <TodoDetail todo={todo} />
+      <Comments />
     </section>
   );
 }
