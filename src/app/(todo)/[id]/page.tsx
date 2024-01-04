@@ -14,7 +14,7 @@ export default async function DetailPage({ params: { id } }: DetailPageProps) {
     <section>
       <h1>날짜: {todo.date}</h1>
       <p>내용: {todo.contents}</p>
-      <Link href="/">뒤로가기</Link>
+      <Link href="/todo">뒤로가기</Link>
     </section>
   );
 }

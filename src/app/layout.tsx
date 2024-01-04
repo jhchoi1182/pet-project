@@ -1,10 +1,7 @@
 import React from "react";
-import Header from "@/components/Header";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
-import Form from "@/components/Form";
-import TodoContextProvider from "@/context/TodoContextProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,13 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <body className="w-[1200px] mx-auto">
-        <Header />
-        <TodoContextProvider>
-          <Form />
-          {children}
-        </TodoContextProvider>
-      </body>
+      <body className="w-[1200px] mx-auto h-screen">{children}</body>
     </html>
   );
 }

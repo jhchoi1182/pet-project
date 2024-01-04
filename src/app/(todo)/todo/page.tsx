@@ -5,7 +5,7 @@ import { todoApi } from "@/service/api";
 import useGetFetch from "@/hooks/useGetFetch";
 import { useContext } from "react";
 import { TodoContext } from "@/context/TodoContextProvider";
-import { Todo, Todos } from "../model/todo";
+import { Todo, Todos } from "../../../model/todo";
 
 const FONT_STYLE = "text-2xl font-bold py-6";
 const TODOBOX_STYLE = "grid grid-cols-4 gap-5";
