@@ -5,6 +5,7 @@ import { Todos } from "@/model/todo";
 import { todoApi } from "@/service/api";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
 import { useContext, useState } from "react";
+import Button from "./Button";
 
 const INPUT_STYLE = "rounded-lg h-8 px-3";
 
@@ -82,9 +83,7 @@ export default function Form() {
           required
         />
       </div>
-      <button className="w-36 h-10 bg-teal-400 font-bold rounded-lg shadow-sm">
-        추가하기
-      </button>
+      <Button size="small">추가하기</Button>
     </form>
   );
 }

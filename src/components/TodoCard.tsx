@@ -4,24 +4,19 @@ import { todoApi } from "@/service/api";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
 import Link from "next/link";
 import { useContext } from "react";
+import Button from "./Button";
 
 type TodoCardProps = {
   todo: Todo;
 };
 
-const BUTTON_STYLE = "w-32 h-10 border-2 rounded-lg shadow-sm";
-
-export default function TodoCard({
-  todo: { _id, contents, date, isDone },
-}: TodoCardProps) {
+export default function TodoCard({ todo: { _id, contents, date, isDone } }: TodoCardProps) {
   const { totalTodo } = useContext(TodoContext);
 
   const updateTodos = totalTodo?.todos?.map((todo: Todo) =>
     todo._id === _id ? { ...todo, isDone: !todo.isDone } : todo,
   );
-  const deletedTodos = totalTodo?.todos?.filter(
-    (todo: Todo) => todo._id !== _id,
-  );
+  const deletedTodos = totalTodo?.todos?.filter((todo: Todo) => todo._id !== _id);
 
   const { mutate: updateMutate } = useUpdateFetch({
     queryKey: "todos",
@@ -48,18 +43,12 @@ export default function TodoCard({
         <p className="pb-2 line-clamp-3">{contents}</p>
       </div>
       <div className="flex gap-7 mt-auto pt-2">
-        <button
-          className={`${BUTTON_STYLE} border-red-500`}
-          onClick={() => deleteMutate({ _id, isDone })}
-        >
+        <Button variant="delete" size="small" onClick={() => deleteMutate({ _id, isDone })}>
           삭제하기
-        </button>
-        <button
-          className={`${BUTTON_STYLE} border-green-600`}
-          onClick={() => updateMutate(_id)}
-        >
+        </Button>
+        <Button variant="update" size="small" onClick={() => updateMutate(_id)}>
           {isDone ? "취소" : "완료"}
-        </button>
+        </Button>
       </div>
     </li>
   );
