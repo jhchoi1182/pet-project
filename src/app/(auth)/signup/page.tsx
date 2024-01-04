@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-function Signup() {
+export default function Signup() {
   const router = useRouter();
 
   return (
@@ -41,5 +41,3 @@ function Signup() {
     </form>
   );
 }
-
-export default Signup;

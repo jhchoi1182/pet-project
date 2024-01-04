@@ -2,12 +2,14 @@
 
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import Tooltip from "@/components/Tooltip";
 import InfoIcon from "@/components/icons/InfoIcon";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 
-function Login() {
+export default function Login() {
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const router = useRouter();
 
   return (
@@ -27,16 +29,20 @@ function Login() {
           회원가입
         </Button>
       </div>
-      <div className="flex justify-end mt-10">
-        <Link href="/todo" className="flex items-center gap-2 text-sky-500 font-bold">
+      <div className="relative flex justify-end mt-10">
+        <Link
+          href="/todo"
+          className="flex items-center gap-2 text-sky-500 font-bold"
+          onMouseEnter={() => setIsTooltipVisible(true)}
+          onMouseLeave={() => setIsTooltipVisible(false)}
+        >
           <span>
             <InfoIcon />
           </span>
           <span>게스트 로그인</span>
         </Link>
+        {isTooltipVisible && <Tooltip text="데이터베이스 대신 로컬 스토리지를 사용합니다." />}
       </div>
     </form>
   );
 }
-
-export default Login;
