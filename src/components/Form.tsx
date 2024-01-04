@@ -10,7 +10,8 @@ const INPUT_STYLE = "rounded-lg h-8 px-3";
 
 export default function Form() {
   const { setTotalTodo } = useContext(TodoContext);
-  const [enteredTodo, setEnteredTodo] = useState({ title: "", contents: "" });
+  const [enteredTodo, setEnteredTodo] = useState({ contents: "", date: "" });
+
   const { mutate } = useUpdateFetch({
     queryKey: "todos",
     queryFn: (todo) => todoApi.postTodo(todo),
@@ -22,22 +23,33 @@ export default function Form() {
     },
   });
 
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setEnteredTodo((prev) => ({ ...prev, [name]: value }));
-  };
-
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (enteredTodo.title === "" || enteredTodo.contents === "") return null;
-    const { title, contents } = enteredTodo;
+    if (enteredTodo.contents === "" || enteredTodo.date === "") return;
+    const { contents, date } = enteredTodo;
     const todo = {
-      title: title,
       contents: contents,
+      date: date,
       isDone: false,
     };
     mutate(todo);
-    setEnteredTodo({ title: "", contents: "" });
+    setEnteredTodo({ contents: "", date: "" });
+  };
+
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (name === "date" && isPastDate(value)) {
+      alert("과거의 날짜는 선택할 수 없습니다.");
+    } else {
+      setEnteredTodo((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const isPastDate = (value: string) => {
+    const selectedDate = new Date(value);
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    return selectedDate < currentDate;
   };
 
   return (
@@ -46,18 +58,6 @@ export default function Form() {
       onSubmit={onSubmitHandler}
     >
       <div className="flex items-center gap-3">
-        <label className="font-bold" htmlFor="title">
-          제목
-        </label>
-        <input
-          className={INPUT_STYLE}
-          id="title"
-          type="text"
-          name="title"
-          value={enteredTodo.title}
-          onChange={onChangeHandler}
-          required
-        />
         <label className="font-bold" htmlFor="contents">
           내용
         </label>
@@ -66,6 +66,18 @@ export default function Form() {
           id="contents"
           name="contents"
           value={enteredTodo.contents}
+          onChange={onChangeHandler}
+          required
+        />
+        <label className="font-bold" htmlFor="date">
+          목표 날짜
+        </label>
+        <input
+          className={INPUT_STYLE}
+          type="date"
+          id="date"
+          name="date"
+          value={enteredTodo.date}
           onChange={onChangeHandler}
           required
         />

@@ -1,6 +1,6 @@
 export interface TodoWithoutId {
-  title: string;
   contents: string;
+  date: string;
   isDone: boolean;
 }
 

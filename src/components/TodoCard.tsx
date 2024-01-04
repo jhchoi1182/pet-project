@@ -12,7 +12,7 @@ type TodoCardProps = {
 const BUTTON_STYLE = "w-32 h-10 border-2 rounded-lg shadow-sm";
 
 export default function TodoCard({
-  todo: { _id, title, contents, isDone },
+  todo: { _id, contents, date, isDone },
 }: TodoCardProps) {
   const { totalTodo } = useContext(TodoContext);
 
@@ -39,10 +39,12 @@ export default function TodoCard({
   return (
     <li className="flex flex-col w-72 h-60 border-[3px] border-teal-500 rounded-xl pt-3 px-6 pb-6 hover:shadow-lg">
       <div>
-        <Link href={`/${_id}`} className="text-sky-600">
-          상세보기
-        </Link>
-        <h2 className="text-xl py-2 font-bold truncate">{title}</h2>
+        <div className="flex justify-between items-center">
+          <Link href={`/${_id}`} className="text-sky-600">
+            상세보기
+          </Link>
+          <h2 className="py-2 font-bold">{date}</h2>
+        </div>
         <p className="pb-2 line-clamp-3">{contents}</p>
       </div>
       <div className="flex gap-7 mt-auto pt-2">
