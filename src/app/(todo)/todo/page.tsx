@@ -1,7 +1,7 @@
 "use client";
 
 import TodoCard from "@/components/mainPage/TodoCard";
-import { todoApi } from "@/service/api";
+import { todoApi } from "@/api/api";
 import useGetFetch from "@/hooks/useGetFetch";
 import { useContext } from "react";
 import { TodoContext } from "@/context/TodoContextProvider";

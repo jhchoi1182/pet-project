@@ -2,7 +2,7 @@
 
 import { TodoContext } from "@/context/TodoContextProvider";
 import { Todos } from "@/model/todo";
-import { todoApi } from "@/service/api";
+import { todoApi } from "@/api/api";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
 import { useContext, useState } from "react";
 import Button from "../base/Button";
