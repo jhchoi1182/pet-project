@@ -13,7 +13,7 @@ type TodoCardProps = {
 export default function TodoCard({ todo: { _id, contents, date, isDone } }: TodoCardProps) {
   const { totalTodo } = useContext(TodoContext);
 
-  const updateTodos = totalTodo?.todos?.map((todo: Todo) =>
+  const updatedTodos = totalTodo?.todos?.map((todo: Todo) =>
     todo._id === _id ? { ...todo, isDone: !todo.isDone } : todo,
   );
   const deletedTodos = totalTodo?.todos?.filter((todo: Todo) => todo._id !== _id);
@@ -21,13 +21,13 @@ export default function TodoCard({ todo: { _id, contents, date, isDone } }: Todo
   const { mutate: updateMutate } = useUpdateFetch({
     queryKey: "todos",
     queryFn: () => todoApi.updateTodo({ _id, isDone }),
-    optimisticUpdate: updateTodos,
+    optimisticData: updatedTodos,
     rollbackOnFail: true,
   });
   const { mutate: deleteMutate } = useUpdateFetch({
     queryKey: "todos",
     queryFn: () => todoApi.deleteTodo(_id),
-    optimisticUpdate: deletedTodos,
+    optimisticData: deletedTodos,
     rollbackOnFail: true,
   });
 

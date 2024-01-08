@@ -12,7 +12,7 @@ interface FetchOptions<T> {
   queryKey: string;
   queryFn: (variables?: any) => Promise<Response>;
   onSuccess?: (data?: T | any, variables?: any) => void;
-  optimisticUpdate?: any;
+  optimisticData?: any;
   rollbackOnFail?: boolean;
 }
 
@@ -20,7 +20,7 @@ const useUpdateFetch = <T>({
   queryKey,
   queryFn,
   onSuccess,
-  optimisticUpdate,
+  optimisticData,
   rollbackOnFail,
 }: FetchOptions<T>): FetchResult<T> => {
   const { totalTodo, setTotalTodo, prevtotalTodo, setPrevtotalTodo } = useContext(TodoContext);
@@ -31,6 +31,7 @@ const useUpdateFetch = <T>({
   const fetchData = async (variables: any) => {
     setIsLoading(true);
     handleOptimisticUpdate();
+
     try {
       const response = await queryFn(variables);
       if (!response.ok) {
@@ -45,15 +46,16 @@ const useUpdateFetch = <T>({
       setIsError(error);
       handleRollback();
     }
+
     setIsLoading(false);
   };
 
   const handleOptimisticUpdate = () => {
-    if (optimisticUpdate) {
+    if (optimisticData) {
       setPrevtotalTodo(totalTodo);
       setTotalTodo((prev: any) => ({
         ...prev,
-        [queryKey]: [...prev[queryKey], optimisticUpdate],
+        [queryKey]: optimisticData,
       }));
     }
   };

@@ -13,11 +13,7 @@ interface FetchOptions<T> {
   onSuccess?: (data?: T | any) => void;
 }
 
-const useGetFetch = <T>({
-  queryKey,
-  queryFn,
-  onSuccess,
-}: FetchOptions<T>): FetchResult<T> => {
+const useGetFetch = <T>({ queryKey, queryFn, onSuccess }: FetchOptions<T>): FetchResult<T> => {
   const { setTotalTodo } = useContext(TodoContext);
   const [data, setData] = useState<T | any>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +21,7 @@ const useGetFetch = <T>({
 
   useEffect(() => {
     setIsLoading(true);
+
     const fetchData = async () => {
       try {
         const response = await queryFn;
@@ -44,6 +41,7 @@ const useGetFetch = <T>({
       }
       setIsLoading(false);
     };
+
     fetchData();
   }, []);
 
