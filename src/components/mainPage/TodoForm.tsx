@@ -2,7 +2,7 @@
 
 import { TodoContext } from "@/context/TodoContextProvider";
 import { Todos } from "@/model/todo";
-import { todoApi } from "@/api/api";
+import { todoApi } from "@/api/todoApi";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
 import { useContext, useState } from "react";
 import Button from "../base/Button";
@@ -11,6 +11,7 @@ import Input from "../base/Input";
 export default function TodoForm() {
   const { setTotalTodo } = useContext(TodoContext);
   const [enteredTodo, setEnteredTodo] = useState({ contents: "", date: "" });
+  const { contents, date } = enteredTodo;
 
   const { mutate } = useUpdateFetch({
     queryKey: "todos",
@@ -25,8 +26,7 @@ export default function TodoForm() {
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (enteredTodo.contents === "" || enteredTodo.date === "") return;
-    const { contents, date } = enteredTodo;
+    if (contents === "" || date === "") return;
     const todo = {
       contents: contents,
       date: date,
@@ -59,18 +59,13 @@ export default function TodoForm() {
     >
       <div className="flex items-center gap-10">
         <Input variant="todo" label="내용" name="contents">
-          <Input.TextField
-            variant="todo"
-            value={enteredTodo.contents}
-            onChange={onChangeHandler}
-            required
-          />
+          <Input.TextField variant="todo" value={contents} onChange={onChangeHandler} required />
         </Input>
         <Input variant="todo" label="목표 날짜" name="date">
           <Input.TextField
             variant="todo"
             type="date"
-            value={enteredTodo.date}
+            value={date}
             onChange={onChangeHandler}
             required
           />

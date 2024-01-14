@@ -1,5 +1,5 @@
 import { TodoWithoutId } from "@/model/todo";
-import { checkEnvironment } from "./config";
+import { checkEnvironment } from "./config/config";
 
 export const todoApi = {
   getTodo: () => fetch(checkEnvironment() + "api/todo"),

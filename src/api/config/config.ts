@@ -5,3 +5,5 @@ export const checkEnvironment = () => {
       : "https://next-todo-mu.vercel.app/";
   return base_url;
 };
+
+export const API_URL = process.env.NEXT_PUBLIC_SERVER_URL;
