@@ -15,7 +15,7 @@ export default function Input({ variant, label, name, children }: LabelWithInput
       </label>
       {React.cloneElement(children, {
         id: label,
-        name: name,
+        name,
         ...children.props,
       })}
     </div>

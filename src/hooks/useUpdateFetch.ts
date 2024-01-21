@@ -1,4 +1,5 @@
 import { TodoContext } from "@/context/TodoContextProvider";
+import { AxiosResponse } from "axios";
 import { useState, useContext } from "react";
 
 interface FetchResult<T> {
@@ -10,7 +11,7 @@ interface FetchResult<T> {
 
 interface FetchOptions<T> {
   queryKey: string;
-  queryFn: (variables?: any) => Promise<Response>;
+  queryFn: (variables?: any) => Promise<AxiosResponse<any, any>>;
   onSuccess?: (data?: T | any, variables?: any) => void;
   optimisticData?: any;
   rollbackOnFail?: boolean;
@@ -33,13 +34,7 @@ const useUpdateFetch = <T>({
     handleOptimisticUpdate();
 
     try {
-      const response = await queryFn(variables);
-      if (!response.ok) {
-        handleRollback();
-        const error = await response.json();
-        throw new Error(error.message ?? "네트워크 요청 실패");
-      }
-      const result = await response.json();
+      const { result } = (await queryFn(variables)).data;
       setData(result);
       onSuccess && onSuccess(result, variables);
     } catch (error) {

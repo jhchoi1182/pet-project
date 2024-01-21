@@ -15,10 +15,10 @@ export default function Home() {
   const { totalTodo } = useContext(TodoContext);
   const { isLoading, isError } = useGetFetch<Todos>({
     queryKey: "todos",
-    queryFn: todoApi.getTodo(),
+    queryFn: todoApi.get(),
   });
 
-  if (isError) return <div>DB 연결 실패</div>;
+  if (isError) return <div>{`${isError}`}</div>;
 
   return (
     <section>
@@ -30,13 +30,13 @@ export default function Home() {
           <h2 className={FONT_STYLE}>Working.. 🔥</h2>
           <ul className={TODOBOX_STYLE}>
             {totalTodo?.todos?.map((todo: Todo) => {
-              return !todo.isDone && <TodoCard key={todo._id} todo={todo} />;
+              return !todo.isDone && <TodoCard key={todo.todoId} todo={todo} />;
             })}
           </ul>
           <h2 className={FONT_STYLE}>Done..! 🎉</h2>
           <ul className={TODOBOX_STYLE}>
             {totalTodo?.todos?.map((todo: Todo) => {
-              return todo.isDone && <TodoCard key={todo._id} todo={todo} />;
+              return todo.isDone && <TodoCard key={todo.todoId} todo={todo} />;
             })}
           </ul>
         </>

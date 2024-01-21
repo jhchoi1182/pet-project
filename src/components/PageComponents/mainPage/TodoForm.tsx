@@ -10,12 +10,12 @@ import Input from "../../base/Input";
 
 export default function TodoForm() {
   const { setTotalTodo } = useContext(TodoContext);
-  const [enteredTodo, setEnteredTodo] = useState({ contents: "", date: "" });
-  const { contents, date } = enteredTodo;
+  const [enteredTodo, setEnteredTodo] = useState({ contents: "", dueDate: "" });
+  const { contents, dueDate } = enteredTodo;
 
   const { mutate } = useUpdateFetch({
     queryKey: "todos",
-    queryFn: (todo) => todoApi.postTodo(todo),
+    queryFn: ({ contents, dueDate }) => todoApi.post(contents, dueDate),
     onSuccess: (data) => {
       setTotalTodo((prev: Todos | undefined) => ({
         ...prev,
@@ -26,19 +26,18 @@ export default function TodoForm() {
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (contents === "" || date === "") return;
+    if (contents === "" || dueDate === "") return;
     const todo = {
-      contents: contents,
-      date: date,
-      isDone: false,
+      contents,
+      dueDate,
     };
     mutate(todo);
-    setEnteredTodo({ contents: "", date: "" });
+    setEnteredTodo({ contents: "", dueDate: "" });
   };
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (name === "date" && isPastDate(value)) {
+    if (name === "dueDate" && isPastDate(value)) {
       alert("과거의 날짜는 선택할 수 없습니다.");
     } else {
       setEnteredTodo((prev) => ({ ...prev, [name]: value }));
@@ -61,11 +60,11 @@ export default function TodoForm() {
         <Input variant="todo" label="내용" name="contents">
           <Input.TextField variant="todo" value={contents} onChange={onChangeHandler} required />
         </Input>
-        <Input variant="todo" label="목표 날짜" name="date">
+        <Input variant="todo" label="목표 날짜" name="dueDate">
           <Input.TextField
             variant="todo"
             type="date"
-            value={date}
+            value={dueDate}
             onChange={onChangeHandler}
             required
           />

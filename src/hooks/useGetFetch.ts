@@ -1,4 +1,5 @@
 import { TodoContext } from "@/context/TodoContextProvider";
+import { AxiosResponse } from "axios";
 import { useState, useEffect, useContext } from "react";
 
 interface FetchResult<T> {
@@ -9,7 +10,7 @@ interface FetchResult<T> {
 
 interface FetchOptions<T> {
   queryKey: string;
-  queryFn: Promise<Response>;
+  queryFn: Promise<AxiosResponse<any, any>>;
   onSuccess?: (data?: T | any) => void;
 }
 
@@ -24,12 +25,7 @@ const useGetFetch = <T>({ queryKey, queryFn, onSuccess }: FetchOptions<T>): Fetc
 
     const fetchData = async () => {
       try {
-        const response = await queryFn;
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error ?? "네트워크 요청 실패");
-        }
-        const result = await response.json();
+        const { result } = (await queryFn).data;
         setTotalTodo((prev: any) => ({
           ...prev,
           [queryKey]: result,

@@ -19,7 +19,7 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  config.headers["Authorization"] = getCookie();
+  config.headers["Authorization"] = `Bearer ${getCookie()}`;
   return config;
 });
 

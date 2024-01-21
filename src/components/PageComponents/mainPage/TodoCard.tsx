@@ -10,23 +10,23 @@ type TodoCardProps = {
   todo: Todo;
 };
 
-export default function TodoCard({ todo: { _id, contents, date, isDone } }: TodoCardProps) {
+export default function TodoCard({ todo: { todoId, contents, dueDate, isDone } }: TodoCardProps) {
   const { totalTodo } = useContext(TodoContext);
 
   const updatedTodos = totalTodo?.todos?.map((todo: Todo) =>
-    todo._id === _id ? { ...todo, isDone: !todo.isDone } : todo,
+    todo.todoId === todoId ? { ...todo, isDone: !todo.isDone } : todo,
   );
-  const deletedTodos = totalTodo?.todos?.filter((todo: Todo) => todo._id !== _id);
+  const deletedTodos = totalTodo?.todos?.filter((todo: Todo) => todo.todoId !== todoId);
 
   const { mutate: updateMutate } = useUpdateFetch({
     queryKey: "todos",
-    queryFn: () => todoApi.updateTodo({ _id, isDone }),
+    queryFn: () => todoApi.toggleIsDone(todoId),
     optimisticData: updatedTodos,
     rollbackOnFail: true,
   });
   const { mutate: deleteMutate } = useUpdateFetch({
     queryKey: "todos",
-    queryFn: () => todoApi.deleteTodo(_id),
+    queryFn: () => todoApi.delete(todoId),
     optimisticData: deletedTodos,
     rollbackOnFail: true,
   });
@@ -35,18 +35,18 @@ export default function TodoCard({ todo: { _id, contents, date, isDone } }: Todo
     <li className="flex flex-col w-72 h-60 border-[3px] border-teal-500 rounded-xl pt-3 px-6 pb-6 hover:shadow-lg">
       <div>
         <div className="flex justify-between items-center">
-          <Link href={`/${_id}`} className="text-sky-600">
+          <Link href={`/${todoId}`} className="text-sky-600">
             상세보기
           </Link>
-          <h2 className="py-2 font-bold">{date}</h2>
+          <h2 className="py-2 font-bold">{dueDate}</h2>
         </div>
         <p className="pb-2 line-clamp-3">{contents}</p>
       </div>
       <div className="flex gap-7 mt-auto pt-2">
-        <Button variant="delete" size="small" onClick={() => deleteMutate({ _id, isDone })}>
+        <Button variant="delete" size="small" onClick={() => deleteMutate({ todoId, isDone })}>
           삭제하기
         </Button>
-        <Button variant="update" size="small" onClick={() => updateMutate(_id)}>
+        <Button variant="update" size="small" onClick={() => updateMutate(todoId)}>
           {isDone ? "취소" : "완료"}
         </Button>
       </div>

@@ -1,26 +1,8 @@
-import { TodoWithoutId } from "@/types/model/todo";
-import { checkEnvironment } from "../config/axiosConfig";
+import { instance } from "../config/axiosConfig";
 
 export const todoApi = {
-  getTodo: () => fetch(checkEnvironment() + "api/todo"),
-  postTodo: (todo: TodoWithoutId) =>
-    fetch(checkEnvironment() + "api/todo", {
-      method: "POST",
-      body: JSON.stringify(todo),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }),
-  updateTodo: ({ _id, isDone }: { _id: string; isDone: boolean }) =>
-    fetch(checkEnvironment() + `api/todo/${_id}`, {
-      method: "PATCH",
-      body: JSON.stringify(isDone),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }),
-  deleteTodo: (id: string) =>
-    fetch(checkEnvironment() + `api/todo/${id}`, {
-      method: "DELETE",
-    }),
+  get: () => instance.get("/todo"),
+  post: (contents: String, dueDate: String) => instance.post("/todo", { contents, dueDate }),
+  toggleIsDone: (todoId: number) => instance.patch(`/todo/${todoId}`),
+  delete: (todoId: number) => instance.delete(`/todo/${todoId}`),
 };

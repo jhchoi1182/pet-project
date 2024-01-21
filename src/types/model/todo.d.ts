@@ -1,11 +1,8 @@
-export interface TodoWithoutId {
+export interface Todo {
+  todoId: number;
   contents: string;
-  date: string;
+  dueDate: string;
   isDone: boolean;
-}
-
-export interface Todo extends TodoWithoutId {
-  _id: string;
 }
 
 export interface Todos {
