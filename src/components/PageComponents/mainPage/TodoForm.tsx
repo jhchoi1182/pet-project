@@ -1,26 +1,22 @@
 "use client";
 
-import { TodoContext } from "@/context/TodoContextProvider";
-import { Todos } from "@/types/model/todo";
 import { todoApi } from "@/api/todoApi";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
 import { useContext, useState } from "react";
 import Button from "../../base/Button";
 import Input from "../../base/Input";
+import { QueryContext } from "@/context/QueryContextProvider";
 
 export default function TodoForm() {
-  const { setTotalTodo } = useContext(TodoContext);
+  const { setRefetch } = useContext(QueryContext);
   const [enteredTodo, setEnteredTodo] = useState({ contents: "", dueDate: "" });
   const { contents, dueDate } = enteredTodo;
 
   const { mutate } = useUpdateFetch({
     queryKey: "todos",
     queryFn: ({ contents, dueDate }) => todoApi.post(contents, dueDate),
-    onSuccess: (data) => {
-      setTotalTodo((prev: Todos | undefined) => ({
-        ...prev,
-        todos: data,
-      }));
+    onSuccess: async () => {
+      setRefetch((prev) => prev + 1);
     },
   });
 

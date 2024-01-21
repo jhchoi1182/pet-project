@@ -1,4 +1,4 @@
-import { TodoContext } from "@/context/TodoContextProvider";
+import { QueryContext } from "@/context/QueryContextProvider";
 import { AxiosResponse } from "axios";
 import { useState, useContext } from "react";
 
@@ -24,7 +24,7 @@ const useUpdateFetch = <T>({
   optimisticData,
   rollbackOnFail,
 }: FetchOptions<T>): FetchResult<T> => {
-  const { totalTodo, setTotalTodo, prevtotalTodo, setPrevtotalTodo } = useContext(TodoContext);
+  const { totalData, setTotalData, prevTotalData, setPrevTotalData } = useContext(QueryContext);
   const [data, setData] = useState<T | any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState<unknown>(null);
@@ -47,8 +47,8 @@ const useUpdateFetch = <T>({
 
   const handleOptimisticUpdate = () => {
     if (optimisticData) {
-      setPrevtotalTodo(totalTodo);
-      setTotalTodo((prev: any) => ({
+      setPrevTotalData(totalData);
+      setTotalData((prev: any) => ({
         ...prev,
         [queryKey]: optimisticData,
       }));
@@ -57,7 +57,7 @@ const useUpdateFetch = <T>({
 
   const handleRollback = () => {
     if (rollbackOnFail) {
-      setTotalTodo(prevtotalTodo);
+      setTotalData(prevTotalData);
     }
   };
 

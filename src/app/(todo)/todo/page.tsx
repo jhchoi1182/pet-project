@@ -4,7 +4,7 @@ import TodoCard from "@/components/PageComponents/mainPage/TodoCard";
 import { todoApi } from "@/api/todoApi";
 import useGetFetch from "@/hooks/useGetFetch";
 import { useContext } from "react";
-import { TodoContext } from "@/context/TodoContextProvider";
+import { QueryContext } from "@/context/QueryContextProvider";
 import { Todo, Todos } from "../../../types/model/todo";
 import TodoForm from "@/components/PageComponents/mainPage/TodoForm";
 
@@ -12,7 +12,7 @@ const FONT_STYLE = "text-2xl font-bold py-6";
 const TODOBOX_STYLE = "grid grid-cols-4 gap-5";
 
 export default function Home() {
-  const { totalTodo } = useContext(TodoContext);
+  const { totalData } = useContext(QueryContext);
   const { isLoading, isError } = useGetFetch<Todos>({
     queryKey: "todos",
     queryFn: todoApi.get(),
@@ -29,13 +29,13 @@ export default function Home() {
         <>
           <h2 className={FONT_STYLE}>Working.. 🔥</h2>
           <ul className={TODOBOX_STYLE}>
-            {totalTodo?.todos?.map((todo: Todo) => {
+            {totalData?.todos?.map((todo: Todo) => {
               return !todo.isDone && <TodoCard key={todo.todoId} todo={todo} />;
             })}
           </ul>
           <h2 className={FONT_STYLE}>Done..! 🎉</h2>
           <ul className={TODOBOX_STYLE}>
-            {totalTodo?.todos?.map((todo: Todo) => {
+            {totalData?.todos?.map((todo: Todo) => {
               return todo.isDone && <TodoCard key={todo.todoId} todo={todo} />;
             })}
           </ul>

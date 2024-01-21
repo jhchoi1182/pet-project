@@ -1,4 +1,4 @@
-import { TodoContext } from "@/context/TodoContextProvider";
+import { QueryContext } from "@/context/QueryContextProvider";
 import { Todo } from "@/types/model/todo";
 import { todoApi } from "@/api/todoApi";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
@@ -11,12 +11,12 @@ type TodoCardProps = {
 };
 
 export default function TodoCard({ todo: { todoId, contents, dueDate, isDone } }: TodoCardProps) {
-  const { totalTodo } = useContext(TodoContext);
+  const { totalData } = useContext(QueryContext);
 
-  const updatedTodos = totalTodo?.todos?.map((todo: Todo) =>
+  const updatedTodos = totalData?.todos?.map((todo: Todo) =>
     todo.todoId === todoId ? { ...todo, isDone: !todo.isDone } : todo,
   );
-  const deletedTodos = totalTodo?.todos?.filter((todo: Todo) => todo.todoId !== todoId);
+  const deletedTodos = totalData?.todos?.filter((todo: Todo) => todo.todoId !== todoId);
 
   const { mutate: updateMutate } = useUpdateFetch({
     queryKey: "todos",
