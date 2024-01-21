@@ -1,9 +1,8 @@
 "use client";
 
-import PasswordInput from "@/components/PageComponents/authPage/PasswordInput";
+import AuthInput from "@/components/PageComponents/authPage/AuthInput";
 import SignupIdInput from "@/components/PageComponents/authPage/SignupIdInput";
 import Button from "@/components/base/Button";
-import useAuthService from "@/service/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -16,7 +15,6 @@ export default function Signup() {
     passwordConfirm: "",
   });
   const router = useRouter();
-  const { handleSignup } = useAuthService(router);
 
   const { username, password, passwordConfirm } = enteredInfo;
 
@@ -27,6 +25,8 @@ export default function Signup() {
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const auth = (await import("@/service/auth")).default;
+    const { handleSignup } = auth(router);
     handleSignup({ isPassDuplication, username, password, passwordConfirm });
   };
 
@@ -42,11 +42,17 @@ export default function Signup() {
           onChangeHandler={onChangeHandler}
           setIsPassDuplication={setIsPassDuplication}
         />
-        <PasswordInput type="password" password={password} onChangeHandler={onChangeHandler} />
-        <PasswordInput
+        <AuthInput
+          variant="signup"
+          type="password"
+          value={password}
+          onChangeHandler={onChangeHandler}
+        />
+        <AuthInput
+          variant="signup"
           type="passwordConfirm"
+          value={passwordConfirm}
           password={password}
-          passwordConfirm={passwordConfirm}
           onChangeHandler={onChangeHandler}
         />
       </div>

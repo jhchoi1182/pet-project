@@ -23,7 +23,7 @@ export default function Input({ variant, label, name, children }: LabelWithInput
 }
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  variant: "login" | "todo";
+  variant: "login" | "signup" | "todo";
 }
 
 Input.TextField = function InputText({ variant, ...props }: InputProps) {
