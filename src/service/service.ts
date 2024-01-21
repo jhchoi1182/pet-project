@@ -1,5 +1,5 @@
 import { Todo } from "@/types/model/todo";
-import { checkEnvironment } from "../api/config/config";
+import { checkEnvironment } from "../api/config/axiosConfig";
 
 export async function getTodo(): Promise<Todo[] | []> {
   try {

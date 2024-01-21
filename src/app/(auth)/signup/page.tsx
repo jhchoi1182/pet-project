@@ -1,18 +1,20 @@
 "use client";
 
-import { authApi } from "@/api/authApi";
-import SignupIdInput from "@/components/authPage/SignupIdInput";
+import PasswordInput from "@/components/PageComponents/authPage/PasswordInput";
+import SignupIdInput from "@/components/PageComponents/authPage/SignupIdInput";
 import Button from "@/components/base/Button";
-import Input from "@/components/base/Input";
+import useAuthService from "@/service/useAuthService";
 import Link from "next/link";
 import React, { useState } from "react";
 
 export default function Signup() {
+  const [isPassDuplication, setIsPassDuplication] = useState(false);
   const [enteredInfo, setEnteredInfo] = useState({
     username: "",
     password: "",
     passwordConfirm: "",
   });
+  const { handleSignup } = useAuthService();
 
   const { username, password, passwordConfirm } = enteredInfo;
 
@@ -23,7 +25,7 @@ export default function Signup() {
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await authApi.signup(username, password, passwordConfirm);
+    handleSignup({ isPassDuplication, username, password, passwordConfirm });
   };
 
   return (
@@ -33,25 +35,18 @@ export default function Signup() {
     >
       <h1 className="flex justify-center mb-12 text-4xl font-bold">Todo</h1>
       <div className="flex flex-col items-start gap-10">
-        <SignupIdInput username={username} onChangeHandler={onChangeHandler} />
-        <Input variant="signup" label="비밀번호" name="password">
-          <Input.TextField
-            variant="login"
-            type="password"
-            value={password}
-            onChange={onChangeHandler}
-            required
-          />
-        </Input>
-        <Input variant="signup" label="비밀번호 확인" name="passwordConfirm">
-          <Input.TextField
-            variant="login"
-            type="password"
-            value={passwordConfirm}
-            onChange={onChangeHandler}
-            required
-          />
-        </Input>
+        <SignupIdInput
+          username={username}
+          onChangeHandler={onChangeHandler}
+          setIsPassDuplication={setIsPassDuplication}
+        />
+        <PasswordInput type="password" password={password} onChangeHandler={onChangeHandler} />
+        <PasswordInput
+          type="passwordConfirm"
+          password={password}
+          passwordConfirm={passwordConfirm}
+          onChangeHandler={onChangeHandler}
+        />
       </div>
       <div className="flex justify-end mt-10">
         <Button size="big">회원가입</Button>

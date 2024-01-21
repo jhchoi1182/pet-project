@@ -1,4 +1,4 @@
-import { API_URL, instance } from "./config/config";
+import { API_URL, instance } from "./config/axiosConfig";
 
 export const authApi = {
   checkId: (username: String) =>
@@ -6,12 +6,10 @@ export const authApi = {
       username,
     }),
   signup: (username: String, password: String, passwordConfirm: String) =>
-    fetch(`${API_URL}/user/signup`, {
-      method: "POST",
-      body: JSON.stringify({ username, password, passwordConfirm }),
-      headers: {
-        "Content-Type": "application/json",
-      },
+    instance.post("/user/signup", {
+      username,
+      password,
+      passwordConfirm,
     }),
   login: (username: String, password: String) =>
     fetch(`${API_URL}/user/login`, {

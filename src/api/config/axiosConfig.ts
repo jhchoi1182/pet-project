@@ -1,3 +1,4 @@
+import { ErrorResponse } from "@/types/response/errorResponse";
 import { cookieUtils } from "@/utils/cookieUtils";
 import axios from "axios";
 
@@ -9,7 +10,7 @@ export const checkEnvironment = () => {
   return base_url;
 };
 
-export const API_URL = process.env.NEXT_PUBLIC_SERVER_URL
+export const API_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const { getCookie } = cookieUtils();
 
@@ -25,7 +26,9 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use(
   (res) => res,
   (error) => {
-    // TODO: 인증 예외처리 로직
-    return Promise.reject(error);
+    const { status } = (error as ErrorResponse).response;
+    if (status === 500) {
+      alert("서버 연결에 실패했습니다.");
+    } else return Promise.reject(error);
   },
 );
