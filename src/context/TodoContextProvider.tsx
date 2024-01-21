@@ -1,6 +1,6 @@
 "use client";
 
-import { Todos } from "@/model/todo";
+import { Todos } from "@/types/model/todo";
 import { useState } from "react";
 import { createContext } from "react";
 

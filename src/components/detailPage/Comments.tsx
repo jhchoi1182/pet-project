@@ -20,7 +20,7 @@ export default function Comments() {
             className="w-[80%] border border-teal-500 rounded-lg py-5 px-10"
           >
             <div className="flex justify-between items-center">
-              <time>{comment.date}</time>
+              <time>{`작성날짜 : ${comment.date}`}</time>
               <div className="flex gap-10">
                 <Button variant="update" size="small">
                   수정

@@ -1,4 +1,4 @@
-import { Todo } from "@/model/todo";
+import { Todo } from "@/types/model/todo";
 import { checkEnvironment } from "../api/config/config";
 
 export async function getTodo(): Promise<Todo[] | []> {

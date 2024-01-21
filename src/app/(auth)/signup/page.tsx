@@ -1,6 +1,7 @@
 "use client";
 
 import { authApi } from "@/api/authApi";
+import SignupIdInput from "@/components/authPage/SignupIdInput";
 import Button from "@/components/base/Button";
 import Input from "@/components/base/Input";
 import Link from "next/link";
@@ -32,14 +33,7 @@ export default function Signup() {
     >
       <h1 className="flex justify-center mb-12 text-4xl font-bold">Todo</h1>
       <div className="flex flex-col items-start gap-10">
-        <div className="flex justify-between w-full">
-          <Input variant="signup" label="아이디" name="username">
-            <Input.TextField variant="login" value={username} onChange={onChangeHandler} required />
-          </Input>
-          <Button size="small" type="button" onClick={() => {}}>
-            중복 확인
-          </Button>
-        </div>
+        <SignupIdInput username={username} onChangeHandler={onChangeHandler} />
         <Input variant="signup" label="비밀번호" name="password">
           <Input.TextField
             variant="login"

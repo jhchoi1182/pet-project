@@ -1,4 +1,4 @@
-import { TodoWithoutId } from "@/model/todo";
+import { TodoWithoutId } from "@/types/model/todo";
 import { checkEnvironment } from "./config/config";
 
 export const todoApi = {

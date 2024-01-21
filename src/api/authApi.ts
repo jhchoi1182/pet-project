@@ -1,6 +1,10 @@
-import { API_URL } from "./config/config";
+import { API_URL, instance } from "./config/config";
 
 export const authApi = {
+  checkId: (username: String) =>
+    instance.post("/user/check-username", {
+      username,
+    }),
   signup: (username: String, password: String, passwordConfirm: String) =>
     fetch(`${API_URL}/user/signup`, {
       method: "POST",

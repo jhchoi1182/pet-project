@@ -1,7 +1,7 @@
 "use client";
 
 import { TodoContext } from "@/context/TodoContextProvider";
-import { Todos } from "@/model/todo";
+import { Todos } from "@/types/model/todo";
 import { todoApi } from "@/api/todoApi";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
 import { useContext, useState } from "react";
