@@ -4,7 +4,7 @@ import { todoApi } from "@/api/todoApi";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
 import Link from "next/link";
 import { useContext } from "react";
-import Button from "../base/Button";
+import Button from "../../base/Button";
 
 type TodoCardProps = {
   todo: Todo;

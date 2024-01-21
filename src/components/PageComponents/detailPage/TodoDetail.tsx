@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Button from "../base/Button";
+import Button from "../../base/Button";
 import { Todo } from "@/types/model/todo";
 import { useRouter } from "next/navigation";
 

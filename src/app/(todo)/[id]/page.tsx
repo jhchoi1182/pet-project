@@ -1,6 +1,6 @@
 import { getDetail, getTodo } from "@/service/service";
-import TodoDetail from "@/components/detailPage/TodoDetail";
-import Comments from "@/components/detailPage/Comments";
+import TodoDetail from "@/components/PageComponents/detailPage/TodoDetail";
+import Comments from "@/components/PageComponents/detailPage/Comments";
 
 type DetailPageProps = {
   params: {
