@@ -1,5 +1,5 @@
 import { TodoWithoutId } from "@/types/model/todo";
-import { checkEnvironment } from "./config/axiosConfig";
+import { checkEnvironment } from "../config/axiosConfig";
 
 export const todoApi = {
   getTodo: () => fetch(checkEnvironment() + "api/todo"),

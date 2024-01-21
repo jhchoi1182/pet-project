@@ -3,8 +3,9 @@
 import PasswordInput from "@/components/PageComponents/authPage/PasswordInput";
 import SignupIdInput from "@/components/PageComponents/authPage/SignupIdInput";
 import Button from "@/components/base/Button";
-import useAuthService from "@/service/useAuthService";
+import useAuthService from "@/service/auth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function Signup() {
@@ -14,7 +15,8 @@ export default function Signup() {
     password: "",
     passwordConfirm: "",
   });
-  const { handleSignup } = useAuthService();
+  const router = useRouter();
+  const { handleSignup } = useAuthService(router);
 
   const { username, password, passwordConfirm } = enteredInfo;
 

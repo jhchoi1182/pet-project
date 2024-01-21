@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
-import ValidationText from "../../ValidationText";
+import ValidationText from "./ValidationText";
 import { authApi } from "@/api/authApi";
 import { ErrorResponse } from "@/types/response/errorResponse";
 import { TextColor } from "@/types/type/textColor";

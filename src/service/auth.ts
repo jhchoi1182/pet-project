@@ -1,6 +1,6 @@
 import { authApi } from "@/api/authApi";
 import { ErrorResponse } from "@/types/response/errorResponse";
-import { useRouter } from "next/navigation";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 interface HandleSignupParametor {
   isPassDuplication: boolean;
@@ -9,9 +9,7 @@ interface HandleSignupParametor {
   passwordConfirm: string;
 }
 
-const useAuthService = () => {
-  const router = useRouter();
-
+const auth = (router: AppRouterInstance) => {
   const handleSignup = async ({
     isPassDuplication,
     username,
@@ -40,4 +38,4 @@ const useAuthService = () => {
   return { handleSignup };
 };
 
-export default useAuthService;
+export default auth;

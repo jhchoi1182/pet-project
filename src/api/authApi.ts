@@ -1,4 +1,4 @@
-import { API_URL, instance } from "./config/axiosConfig";
+import { API_URL, instance } from "../config/axiosConfig";
 
 export const authApi = {
   checkId: (username: String) =>
