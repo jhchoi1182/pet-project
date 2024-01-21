@@ -11,12 +11,10 @@ export const authApi = {
       password,
       passwordConfirm,
     }),
-  login: (username: String, password: String) =>
-    fetch(`${API_URL}/user/login`, {
-      method: "POST",
-      body: JSON.stringify({ username, password }),
-      headers: {
-        "Content-Type": "application/json",
-      },
+  userLogin: (username: String, password: String) =>
+    instance.post("/user/login?type=user", {
+      username,
+      password,
     }),
+  guestLogin: () => instance.post("/user/login?type=guest"),
 };
