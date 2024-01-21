@@ -6,7 +6,7 @@ export const cookieUtils = () => {
   const getCookie = (name: string = token) => {
     return Cookies.get(name);
   };
-  const setCookie = (value: string, name: string = token, option?: any) => {
+  const setCookie = (value: string, option?: any, name: string = token) => {
     return Cookies.set(name, value, { ...option });
   };
   const removeCookie = (name: string = token) => {

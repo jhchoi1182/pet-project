@@ -1,5 +1,6 @@
 import { authApi } from "@/api/authApi";
 import { ErrorResponse } from "@/types/response/errorResponse";
+import { cookieUtils } from "@/utils/cookieUtils";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 interface HandleLoginParametor {
@@ -12,6 +13,8 @@ interface HandleSignupParametor extends HandleLoginParametor {
   passwordConfirm: string;
 }
 
+const { setCookie } = cookieUtils();
+
 const auth = (router: AppRouterInstance) => {
   async function handleUserLogin({ username, password }: HandleLoginParametor) {
     const isLoginValid = username.length < 2 && password.length < 4;
@@ -19,7 +22,8 @@ const auth = (router: AppRouterInstance) => {
     if (isLoginValid) return alert("항목을 모두 확인해주세요.");
 
     try {
-      await authApi.userLogin(username, password);
+      const { data } = await authApi.userLogin(username, password);
+      setCookie(data.result.token, { expires: 7 });
       router.push("/todo");
     } catch (error) {
       const { status } = (error as ErrorResponse).response;
@@ -33,7 +37,8 @@ const auth = (router: AppRouterInstance) => {
 
   async function handleGuestLogin() {
     try {
-      await authApi.guestLogin();
+      const { data } = await authApi.guestLogin();
+      setCookie(data.result.token, { expires: 7 });
       router.push("/todo");
     } catch (error) {
       alert("잘못된 요청입니다.");
