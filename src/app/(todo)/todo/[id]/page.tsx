@@ -13,7 +13,7 @@ export default function DetailPage({ params: { id } }: DetailPageProps) {
   return (
     <section className="mt-10 flex flex-col items-center">
       <TodoDetail todoId={+id} />
-      <Comments />
+      <Comments todoId={+id} />
     </section>
   );
 }

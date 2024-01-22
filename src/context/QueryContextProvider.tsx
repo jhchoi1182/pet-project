@@ -10,8 +10,6 @@ type QueryContext = {
   setTotalData: React.Dispatch<React.SetStateAction<QueryData>>;
   prevTotalData: QueryData;
   setPrevTotalData: React.Dispatch<React.SetStateAction<QueryData>>;
-  refetch: number;
-  setRefetch: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export const QueryContext = createContext<QueryContext>({
@@ -19,14 +17,11 @@ export const QueryContext = createContext<QueryContext>({
   setTotalData: () => {},
   prevTotalData: {},
   setPrevTotalData: () => {},
-  refetch: 0,
-  setRefetch: () => {},
 });
 
 export default function QueryContextProvider({ children }: { children: React.ReactNode }) {
   const [totalData, setTotalData] = useState<QueryData>({});
   const [prevTotalData, setPrevTotalData] = useState<QueryData>({});
-  const [refetch, setRefetch] = useState(0);
 
   return (
     <QueryContext.Provider
@@ -35,8 +30,6 @@ export default function QueryContextProvider({ children }: { children: React.Rea
         setTotalData,
         prevTotalData,
         setPrevTotalData,
-        refetch,
-        setRefetch,
       }}
     >
       {children}

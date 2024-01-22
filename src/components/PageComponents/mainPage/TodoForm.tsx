@@ -9,7 +9,7 @@ import { QueryContext } from "@/context/QueryContextProvider";
 import useTodoFormDate from "@/hooks/useTodoFormDate";
 
 export default function TodoForm() {
-  const { setRefetch } = useContext(QueryContext);
+  const { setTotalData } = useContext(QueryContext);
   const [{ contents, dueDate }, setEnteredTodo] = useState({ contents: "", dueDate: "" });
   const { onChangeHandler } = useTodoFormDate(setEnteredTodo);
 
@@ -17,7 +17,11 @@ export default function TodoForm() {
     queryKey: "todos",
     queryFn: ({ contents, dueDate }) => todoApi.post(contents, dueDate),
     onSuccess: async () => {
-      setRefetch((prev) => prev + 1);
+      const { result } = (await todoApi.getTodos())?.data;
+      setTotalData((prev) => ({
+        ...prev,
+        ["todos"]: result,
+      }));
     },
   });
 
