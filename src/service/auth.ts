@@ -13,7 +13,7 @@ interface HandleSignupParametor extends HandleLoginParametor {
   passwordConfirm: string;
 }
 
-const { setCookie } = cookieUtils();
+const { setCookie, removeCookie } = cookieUtils();
 
 const auth = (router: AppRouterInstance) => {
   async function handleUserLogin({ username, password }: HandleLoginParametor) {
@@ -70,7 +70,19 @@ const auth = (router: AppRouterInstance) => {
     }
   }
 
-  return { handleUserLogin, handleGuestLogin, handleSignup };
+  async function handleWithdrawal() {
+    if (window.confirm("정말 탈퇴하시겠습니까?")) {
+      try {
+        await authApi.withdraw();
+        removeCookie();
+        router.push("/todo");
+      } catch (error) {
+        alert("잘못된 요청입니다.");
+      }
+    }
+  }
+
+  return { handleUserLogin, handleGuestLogin, handleSignup, handleWithdrawal };
 };
 
 export default auth;

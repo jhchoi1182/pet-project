@@ -17,4 +17,5 @@ export const authApi = {
       password,
     }),
   guestLogin: () => instance.post("/user/login?type=guest"),
+  withdraw: () => instance.delete("/user/delete"),
 };

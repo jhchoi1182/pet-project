@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CommentUpdateButton from "./CommentUpdateButton";
 import { Comment } from "@/types/model/comment";
-import Button from "@/components/base/Button";
 import CommentDeleteButton from "./CommentDeleteButton";
 
 interface CommentListProps {
