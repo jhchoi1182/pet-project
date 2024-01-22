@@ -12,9 +12,15 @@ interface FetchOptions<T> {
   queryKey: string;
   queryFn: Promise<AxiosResponse<any, any>>;
   onSuccess?: (data?: T | any) => void;
+  onError?: (error?: unknown) => void;
 }
 
-const useGetFetch = <T>({ queryKey, queryFn, onSuccess }: FetchOptions<T>): FetchResult<T> => {
+const useGetFetch = <T>({
+  queryKey,
+  queryFn,
+  onSuccess,
+  onError,
+}: FetchOptions<T>): FetchResult<T> => {
   const { setTotalData } = useContext(QueryContext);
   const [data, setData] = useState<T | any>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,6 +37,7 @@ const useGetFetch = <T>({ queryKey, queryFn, onSuccess }: FetchOptions<T>): Fetc
       onSuccess && onSuccess(result);
     } catch (error) {
       setIsError(error);
+      onError && onError(error);
     }
     setIsLoading(false);
   };

@@ -7,6 +7,7 @@ import Button from "../../base/Button";
 import Input from "../../base/Input";
 import { QueryContext } from "@/context/QueryContextProvider";
 import useTodoFormDate from "@/hooks/useTodoFormDate";
+import exception from "@/service/exception";
 
 export default function TodoForm() {
   const { setTotalData } = useContext(QueryContext);
@@ -22,6 +23,9 @@ export default function TodoForm() {
         ...prev,
         ["todos"]: result,
       }));
+    },
+    onError: (error) => {
+      exception(error);
     },
   });
 

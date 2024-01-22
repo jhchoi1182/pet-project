@@ -2,6 +2,7 @@ import { todoApi } from "@/api/todoApi";
 import Button from "@/components/base/Button";
 import { QueryContext } from "@/context/QueryContextProvider";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
+import exception from "@/service/exception";
 import React, { useContext } from "react";
 
 interface TodoUpdateButtonProps {
@@ -29,6 +30,9 @@ export default function TodoUpdateButton({
         ...prev,
         [`todo_${todoId}`]: data,
       }));
+    },
+    onError: (error) => {
+      exception(error);
     },
   });
 

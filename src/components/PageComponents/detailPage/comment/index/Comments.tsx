@@ -6,17 +6,19 @@ import { Comment } from "@/types/model/comment";
 import { commentApi } from "@/api/commentApi";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import CommentCard from "../elements/CommentCard";
+import exception from "@/service/exception";
 
 export default function Comments({ todoId }: { todoId: number }) {
   const { totalData } = useContext(QueryContext);
   const comments = totalData[`comment_${todoId}`];
 
-  const { isLoading, isError } = useGetFetch<Comment>({
+  const { isLoading } = useGetFetch<Comment>({
     queryKey: `comment_${todoId}`,
     queryFn: commentApi.get(+todoId),
+    onError: (error) => {
+      exception(error);
+    },
   });
-
-  if (isError) return <div>{`${isError}`}</div>;
 
   return (
     <>

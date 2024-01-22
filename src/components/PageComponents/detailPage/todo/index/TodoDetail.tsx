@@ -11,6 +11,7 @@ import { QueryContext } from "@/context/QueryContextProvider";
 import useGetFetch from "@/hooks/useGetFetch";
 import { todoApi } from "@/api/todoApi";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import exception from "@/service/exception";
 
 export default function TodoDetail({ todoId }: { todoId: number }) {
   const { totalData } = useContext(QueryContext);
@@ -23,11 +24,14 @@ export default function TodoDetail({ todoId }: { todoId: number }) {
   const [toggleEditMode, setToggleEditMode] = useState(false);
   const router = useRouter();
 
-  const { isLoading, isError } = useGetFetch<Todo>({
+  const { isLoading } = useGetFetch<Todo>({
     queryKey: `todo_${todoId}`,
     queryFn: todoApi.getTodo(+todoId),
     onSuccess: (data) => {
       setEditableTodo({ contents: data?.contents, dueDate: data?.dueDate });
+    },
+    onError: (error) => {
+      exception(error);
     },
   });
 
@@ -46,8 +50,6 @@ export default function TodoDetail({ todoId }: { todoId: number }) {
   };
 
   const { timeElement, articleElement } = TodoDetailContent({ ...TodoDetailContentProps });
-
-  if (isError) return <div>{`${isError}`}</div>;
 
   return (
     <>

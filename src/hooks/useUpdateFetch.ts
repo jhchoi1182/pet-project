@@ -1,4 +1,5 @@
 import { QueryContext } from "@/context/QueryContextProvider";
+import { ErrorResponse } from "@/types/response/errorResponse";
 import { AxiosResponse } from "axios";
 import { useState, useContext } from "react";
 
@@ -13,6 +14,7 @@ interface FetchOptions<T> {
   queryKey: string;
   queryFn: (variables?: any) => Promise<AxiosResponse<any, any>>;
   onSuccess?: (data?: T | any, variables?: any) => void;
+  onError?: (error?: unknown, variables?: any) => void;
   optimisticData?: any;
   rollbackOnFail?: boolean;
 }
@@ -21,6 +23,7 @@ const useUpdateFetch = <T>({
   queryKey,
   queryFn,
   onSuccess,
+  onError,
   optimisticData,
   rollbackOnFail,
 }: FetchOptions<T>): FetchResult<T> => {
@@ -39,6 +42,7 @@ const useUpdateFetch = <T>({
       onSuccess && onSuccess(result, variables);
     } catch (error) {
       setIsError(error);
+      onError && onError(error, variables);
       handleRollback();
     }
 

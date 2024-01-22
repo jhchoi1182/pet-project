@@ -2,6 +2,7 @@ import { commentApi } from "@/api/commentApi";
 import Button from "@/components/base/Button";
 import { QueryContext } from "@/context/QueryContextProvider";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
+import exception from "@/service/exception";
 import { Comment } from "@/types/model/comment";
 import React, { useContext } from "react";
 
@@ -20,6 +21,9 @@ export default function CommentDeleteButton({ todoId, commentId }: CommentDelete
     queryFn: () => commentApi.delete(todoId, commentId),
     optimisticData: deletedComments,
     rollbackOnFail: true,
+    onError: (error) => {
+      exception(error);
+    },
   });
 
   return (

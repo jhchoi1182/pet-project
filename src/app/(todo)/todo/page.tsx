@@ -8,18 +8,20 @@ import { QueryContext } from "@/context/QueryContextProvider";
 import { Todo, Todos } from "../../../types/model/todo";
 import TodoForm from "@/components/PageComponents/mainPage/TodoForm";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import exception from "@/service/exception";
 
 const FONT_STYLE = "text-2xl font-bold py-6";
 const TODOBOX_STYLE = "grid grid-cols-4 gap-5";
 
 export default function Home() {
   const { totalData } = useContext(QueryContext);
-  const { isLoading, isError } = useGetFetch<Todos>({
+  const { isLoading } = useGetFetch<Todos>({
     queryKey: "todos",
     queryFn: todoApi.getTodos(),
+    onError: (error) => {
+      exception(error);
+    },
   });
-
-  if (isError) return <div>{`${isError}`}</div>;
 
   const { todos } = totalData;
 
