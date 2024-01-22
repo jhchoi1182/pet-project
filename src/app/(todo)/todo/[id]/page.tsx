@@ -2,8 +2,8 @@
 
 import { todoApi } from "@/api/todoApi";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import Comments from "@/components/PageComponents/detailPage/Comments";
-import TodoDetail from "@/components/PageComponents/detailPage/TodoDetail";
+import Comments from "@/components/PageComponents/detailPage/comment/Comments";
+import TodoDetail from "@/components/PageComponents/detailPage/todo/index/TodoDetail";
 import { QueryContext } from "@/context/QueryContextProvider";
 import useGetFetch from "@/hooks/useGetFetch";
 import { Todo } from "@/types/model/todo";
