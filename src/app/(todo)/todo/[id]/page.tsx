@@ -1,6 +1,6 @@
 "use client";
 
-import Comments from "@/components/PageComponents/detailPage/comment/Comments";
+import Comments from "@/components/PageComponents/detailPage/comment/index/Comments";
 import TodoDetail from "@/components/PageComponents/detailPage/todo/index/TodoDetail";
 
 type DetailPageProps = {

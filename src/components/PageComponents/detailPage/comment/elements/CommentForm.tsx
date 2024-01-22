@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import Button from "../../../base/Button";
+import Button from "../../../../base/Button";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
 import { QueryContext } from "@/context/QueryContextProvider";
 import { commentApi } from "@/api/commentApi";
