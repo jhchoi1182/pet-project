@@ -10,6 +10,8 @@ const comments = [
 ];
 
 export default function Comments() {
+  console.log(1);
+
   return (
     <section className="w-full flex flex-col">
       <CommentForm />

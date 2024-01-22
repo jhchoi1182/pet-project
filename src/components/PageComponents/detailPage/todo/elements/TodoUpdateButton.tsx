@@ -33,6 +33,7 @@ export default function TodoUpdateButton({
   });
 
   const handleUpdate = () => {
+    if (editableContents === "" || editableDueDate === "") return;
     updateMutate();
     setToggleEditMode(false);
   };
