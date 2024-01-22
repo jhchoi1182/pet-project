@@ -6,13 +6,13 @@ import { useContext, useState } from "react";
 import Button from "../../base/Button";
 import Input from "../../base/Input";
 import { QueryContext } from "@/context/QueryContextProvider";
-import useTodoFormDate from "@/hooks/useTodoFormDate";
-import exception from "@/service/exception";
+import useTodoInputHandler from "@/hooks/useTodoInputHandler";
+import exceptionService from "@/service/exceptionService";
 
 export default function TodoForm() {
   const { setTotalData } = useContext(QueryContext);
   const [{ contents, dueDate }, setEnteredTodo] = useState({ contents: "", dueDate: "" });
-  const { onChangeHandler } = useTodoFormDate(setEnteredTodo);
+  const { onChangeHandler } = useTodoInputHandler(setEnteredTodo);
 
   const { mutate } = useUpdateFetch({
     queryKey: "todos",
@@ -25,7 +25,7 @@ export default function TodoForm() {
       }));
     },
     onError: (error) => {
-      exception(error);
+      exceptionService(error);
     },
   });
 

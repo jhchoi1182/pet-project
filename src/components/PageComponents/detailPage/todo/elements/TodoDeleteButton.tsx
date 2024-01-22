@@ -1,7 +1,7 @@
 import { todoApi } from "@/api/todoApi";
 import Button from "@/components/base/Button";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
-import exception from "@/service/exception";
+import exceptionService from "@/service/exceptionService";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -15,7 +15,7 @@ export default function TodoDeleteButton({ todoId }: { todoId: number }) {
       router.push("/todo");
     },
     onError: (error) => {
-      exception(error);
+      exceptionService(error);
     },
   });
 

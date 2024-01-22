@@ -3,7 +3,7 @@ import Button from "../../../../base/Button";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
 import { QueryContext } from "@/context/QueryContextProvider";
 import { commentApi } from "@/api/commentApi";
-import exception from "@/service/exception";
+import exceptionService from "@/service/exceptionService";
 
 export default function CommentForm({ todoId }: { todoId: number }) {
   const { setTotalData } = useContext(QueryContext);
@@ -20,7 +20,7 @@ export default function CommentForm({ todoId }: { todoId: number }) {
       }));
     },
     onError: (error) => {
-      exception(error);
+      exceptionService(error);
     },
   });
 

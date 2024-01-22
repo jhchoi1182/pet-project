@@ -25,7 +25,7 @@ export default function Signup() {
 
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const auth = (await import("@/service/auth")).default;
+    const auth = (await import("@/service/authService")).default;
     const { handleSignup } = auth(router);
     handleSignup({ isPassDuplication, username, password, passwordConfirm });
   };

@@ -1,6 +1,6 @@
 import React from "react";
 
-const useTodoFormDate = (
+const useTodoInputHandler = (
   setTodoInput: React.Dispatch<
     React.SetStateAction<{
       contents: string;
@@ -26,4 +26,4 @@ const useTodoFormDate = (
   return { onChangeHandler };
 };
 
-export default useTodoFormDate;
+export default useTodoInputHandler;

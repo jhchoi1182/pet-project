@@ -5,7 +5,7 @@ import useUpdateFetch from "@/hooks/useUpdateFetch";
 import Link from "next/link";
 import { useContext } from "react";
 import Button from "../../base/Button";
-import exception from "@/service/exception";
+import exceptionService from "@/service/exceptionService";
 
 type TodoCardProps = {
   todo: Todo;
@@ -25,7 +25,7 @@ export default function TodoCard({ todo: { todoId, contents, dueDate, isDone } }
     optimisticData: updatedTodos,
     rollbackOnFail: true,
     onError: (error) => {
-      exception(error);
+      exceptionService(error);
     },
   });
   const { mutate: deleteMutate } = useUpdateFetch({
@@ -34,7 +34,7 @@ export default function TodoCard({ todo: { todoId, contents, dueDate, isDone } }
     optimisticData: deletedTodos,
     rollbackOnFail: true,
     onError: (error) => {
-      exception(error);
+      exceptionService(error);
     },
   });
 

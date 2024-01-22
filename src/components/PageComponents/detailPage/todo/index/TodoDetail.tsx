@@ -11,7 +11,7 @@ import { QueryContext } from "@/context/QueryContextProvider";
 import useGetFetch from "@/hooks/useGetFetch";
 import { todoApi } from "@/api/todoApi";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import exception from "@/service/exception";
+import exceptionService from "@/service/exceptionService";
 
 export default function TodoDetail({ todoId }: { todoId: number }) {
   const { totalData } = useContext(QueryContext);
@@ -31,7 +31,7 @@ export default function TodoDetail({ todoId }: { todoId: number }) {
       setEditableTodo({ contents: data?.contents, dueDate: data?.dueDate });
     },
     onError: (error) => {
-      exception(error);
+      exceptionService(error);
     },
   });
 

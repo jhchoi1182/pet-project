@@ -1,4 +1,4 @@
-import useTodoFormDate from "@/hooks/useTodoFormDate";
+import useTodoInputHandler from "@/hooks/useTodoInputHandler";
 import React from "react";
 
 interface TodoDetailContentProps {
@@ -19,7 +19,7 @@ function TodoDetailContent({
   setEditableTodo,
   toggleEditMode,
 }: TodoDetailContentProps) {
-  const { onChangeHandler } = useTodoFormDate(setEditableTodo);
+  const { onChangeHandler } = useTodoInputHandler(setEditableTodo);
 
   const timeElement = (
     <time className="font-bold">

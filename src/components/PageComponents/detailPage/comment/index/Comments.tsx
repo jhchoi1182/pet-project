@@ -6,7 +6,7 @@ import { Comment } from "@/types/model/comment";
 import { commentApi } from "@/api/commentApi";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import CommentCard from "../elements/CommentCard";
-import exception from "@/service/exception";
+import exceptionService from "@/service/exceptionService";
 
 export default function Comments({ todoId }: { todoId: number }) {
   const { totalData } = useContext(QueryContext);
@@ -16,7 +16,7 @@ export default function Comments({ todoId }: { todoId: number }) {
     queryKey: `comment_${todoId}`,
     queryFn: commentApi.get(+todoId),
     onError: (error) => {
-      exception(error);
+      exceptionService(error);
     },
   });
 

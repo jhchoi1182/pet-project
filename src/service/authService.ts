@@ -1,7 +1,7 @@
 import { authApi } from "@/api/authApi";
 import { cookieUtils } from "@/utils/cookieUtils";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import exception from "./exception";
+import exceptionService from "./exceptionService";
 
 interface HandleLoginParametor {
   username: string;
@@ -15,7 +15,7 @@ interface HandleSignupParametor extends HandleLoginParametor {
 
 const { setCookie, removeCookie } = cookieUtils();
 
-const auth = (router: AppRouterInstance) => {
+const authService = (router: AppRouterInstance) => {
   async function handleUserLogin({ username, password }: HandleLoginParametor) {
     const isLoginValid = username.length < 2 && password.length < 4;
 
@@ -26,7 +26,7 @@ const auth = (router: AppRouterInstance) => {
       setCookie(data.result.token, { expires: 7 });
       router.push("/todo");
     } catch (error) {
-      exception(error);
+      exceptionService(error);
     }
   }
 
@@ -36,7 +36,7 @@ const auth = (router: AppRouterInstance) => {
       setCookie(data.result.token, { expires: 7 });
       router.push("/todo");
     } catch (error) {
-      exception(error);
+      exceptionService(error);
     }
   }
 
@@ -59,7 +59,7 @@ const auth = (router: AppRouterInstance) => {
       alert("회원가입 성공!");
       router.push("/login");
     } catch (error) {
-      exception(error);
+      exceptionService(error);
     }
   }
 
@@ -70,7 +70,7 @@ const auth = (router: AppRouterInstance) => {
         removeCookie();
         router.push("/todo");
       } catch (error) {
-        exception(error);
+        exceptionService(error);
       }
     }
   }
@@ -78,4 +78,4 @@ const auth = (router: AppRouterInstance) => {
   return { handleUserLogin, handleGuestLogin, handleSignup, handleWithdrawal };
 };
 
-export default auth;
+export default authService;

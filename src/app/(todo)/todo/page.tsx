@@ -8,7 +8,7 @@ import { QueryContext } from "@/context/QueryContextProvider";
 import { Todo, Todos } from "../../../types/model/todo";
 import TodoForm from "@/components/PageComponents/mainPage/TodoForm";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import exception from "@/service/exception";
+import exceptionService from "@/service/exceptionService";
 
 const FONT_STYLE = "text-2xl font-bold py-6";
 const TODOBOX_STYLE = "grid grid-cols-4 gap-5";
@@ -19,7 +19,7 @@ export default function Home() {
     queryKey: "todos",
     queryFn: todoApi.getTodos(),
     onError: (error) => {
-      exception(error);
+      exceptionService(error);
     },
   });
 

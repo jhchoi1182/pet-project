@@ -1,6 +1,6 @@
 import { ErrorResponse } from "@/types/response/errorResponse";
 
-const exception = (error: unknown) => {
+const exceptionService = (error: unknown) => {
   if (!error) return;
 
   const { resultCode } = (error as ErrorResponse)?.response?.data;
@@ -35,4 +35,4 @@ const exception = (error: unknown) => {
   }
 };
 
-export default exception;
+export default exceptionService;

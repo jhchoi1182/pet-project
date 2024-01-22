@@ -4,13 +4,13 @@ import React from "react";
 import Button from "./base/Button";
 import { cookieUtils } from "@/utils/cookieUtils";
 import { useRouter } from "next/navigation";
-import auth from "@/service/auth";
+import authService from "@/service/authService";
 
 const { removeCookie } = cookieUtils();
 
 export default function Header() {
   const router = useRouter();
-  const { handleWithdrawal } = auth(router);
+  const { handleWithdrawal } = authService(router);
 
   const handleLogout = () => {
     removeCookie();

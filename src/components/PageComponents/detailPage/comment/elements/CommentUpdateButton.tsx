@@ -2,7 +2,7 @@ import { commentApi } from "@/api/commentApi";
 import Button from "@/components/base/Button";
 import { QueryContext } from "@/context/QueryContextProvider";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
-import exception from "@/service/exception";
+import exceptionService from "@/service/exceptionService";
 import { Comment } from "@/types/model/comment";
 import React, { useContext } from "react";
 
@@ -38,7 +38,7 @@ export default function CommentUpdateButton({
       }));
     },
     onError: (error) => {
-      exception(error);
+      exceptionService(error);
     },
   });
 

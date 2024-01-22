@@ -2,7 +2,7 @@ import { todoApi } from "@/api/todoApi";
 import Button from "@/components/base/Button";
 import { QueryContext } from "@/context/QueryContextProvider";
 import useUpdateFetch from "@/hooks/useUpdateFetch";
-import exception from "@/service/exception";
+import exceptionService from "@/service/exceptionService";
 import React, { useContext } from "react";
 
 interface TodoUpdateButtonProps {
@@ -32,7 +32,7 @@ export default function TodoUpdateButton({
       }));
     },
     onError: (error) => {
-      exception(error);
+      exceptionService(error);
     },
   });
 

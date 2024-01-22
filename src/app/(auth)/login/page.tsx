@@ -3,7 +3,7 @@
 import Button from "@/components/base/Button";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import auth from "@/service/auth";
+import authService from "@/service/authService";
 import AuthInput from "@/components/PageComponents/authPage/AuthInput";
 import GuestLoginText from "@/components/PageComponents/authPage/GuestLoginText";
 
@@ -14,7 +14,7 @@ export default function Login() {
   });
 
   const router = useRouter();
-  const { handleUserLogin, handleGuestLogin } = auth(router);
+  const { handleUserLogin, handleGuestLogin } = authService(router);
 
   const { username, password } = enteredInfo;
 
