@@ -4,7 +4,6 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const currentUser = request.cookies.get("ACCESS_TOKEN")?.value;
-
   if ((pathname === "/login" || pathname === "/signup") && currentUser) {
     return NextResponse.redirect(new URL("/todo", request.url));
   }
@@ -14,5 +13,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: "/:path*",
+  matcher: ["/login", "/signup", "/todo/:path*"],
 };

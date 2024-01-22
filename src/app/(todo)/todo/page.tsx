@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { QueryContext } from "@/context/QueryContextProvider";
 import { Todo, Todos } from "../../../types/model/todo";
 import TodoForm from "@/components/PageComponents/mainPage/TodoForm";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const FONT_STYLE = "text-2xl font-bold py-6";
 const TODOBOX_STYLE = "grid grid-cols-4 gap-5";
@@ -15,7 +16,7 @@ export default function Home() {
   const { totalData } = useContext(QueryContext);
   const { isLoading, isError } = useGetFetch<Todos>({
     queryKey: "todos",
-    queryFn: todoApi.get(),
+    queryFn: todoApi.getTodos(),
   });
 
   if (isError) return <div>{`${isError}`}</div>;
@@ -24,7 +25,9 @@ export default function Home() {
     <section>
       <TodoForm />
       {isLoading ? (
-        <div className="text-center mt-24 text-3xl font-bold">로딩중...</div>
+        <div className="flex justify-center items-center h-[70vh]">
+          <LoadingSpinner />
+        </div>
       ) : (
         <>
           <h2 className={FONT_STYLE}>Working.. 🔥</h2>

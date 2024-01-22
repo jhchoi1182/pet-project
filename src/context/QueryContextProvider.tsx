@@ -3,9 +3,7 @@
 import { useState } from "react";
 import { createContext } from "react";
 
-type QueryData = {
-  [key: string]: any[];
-};
+type QueryData = Record<string, any>;
 
 type QueryContext = {
   totalData: QueryData | undefined;

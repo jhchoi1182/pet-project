@@ -11,7 +11,7 @@ export default function TodoDetail({ todo }: { todo: Todo }) {
   return (
     <section className="w-[80%] border-2 border-teal-500 p-10 rounded-xl">
       <header className="flex justify-between items-center">
-        <time className="font-bold">목표 날짜: {todo.date}</time>
+        <time className="font-bold">목표 날짜: {todo?.dueDate}</time>
         <div className="flex gap-7">
           <Button variant="update" size="small">
             수정
@@ -25,7 +25,7 @@ export default function TodoDetail({ todo }: { todo: Todo }) {
         </div>
       </header>
       <article className="mt-20 mb-10">
-        <p>{todo.contents}</p>
+        <p>{todo?.contents}</p>
       </article>
     </section>
   );
