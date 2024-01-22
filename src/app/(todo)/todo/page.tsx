@@ -21,10 +21,12 @@ export default function Home() {
 
   if (isError) return <div>{`${isError}`}</div>;
 
+  const { todos } = totalData;
+
   return (
     <section>
       <TodoForm />
-      {isLoading ? (
+      {isLoading || !todos ? (
         <div className="flex justify-center items-center h-[70vh]">
           <LoadingSpinner />
         </div>
@@ -32,13 +34,13 @@ export default function Home() {
         <>
           <h2 className={FONT_STYLE}>Working.. 🔥</h2>
           <ul className={TODOBOX_STYLE}>
-            {totalData?.todos?.map((todo: Todo) => {
+            {todos?.map((todo: Todo) => {
               return !todo.isDone && <TodoCard key={todo.todoId} todo={todo} />;
             })}
           </ul>
           <h2 className={FONT_STYLE}>Done..! 🎉</h2>
           <ul className={TODOBOX_STYLE}>
-            {totalData?.todos?.map((todo: Todo) => {
+            {todos?.map((todo: Todo) => {
               return todo.isDone && <TodoCard key={todo.todoId} todo={todo} />;
             })}
           </ul>

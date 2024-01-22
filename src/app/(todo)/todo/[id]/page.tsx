@@ -24,11 +24,11 @@ export default function DetailPage({ params: { id } }: DetailPageProps) {
 
   if (isError) return <div>{`${isError}`}</div>;
 
-  const todo = totalData && totalData[`todo_${id}`];
+  const todo = totalData[`todo_${id}`];
 
   return (
     <section className="mt-10 flex flex-col items-center">
-      {isLoading ? (
+      {isLoading || !todo ? (
         <div className="flex items-center h-[80vh]">
           <LoadingSpinner />
         </div>

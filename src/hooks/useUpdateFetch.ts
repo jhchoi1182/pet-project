@@ -6,7 +6,7 @@ interface FetchResult<T> {
   data: T | any;
   isLoading: boolean;
   isError: unknown;
-  mutate: (variables: any) => void;
+  mutate: (variables?: any) => void;
 }
 
 interface FetchOptions<T> {
@@ -48,7 +48,7 @@ const useUpdateFetch = <T>({
   const handleOptimisticUpdate = () => {
     if (optimisticData) {
       setPrevTotalData(totalData);
-      setTotalData((prev: any) => ({
+      setTotalData((prev) => ({
         ...prev,
         [queryKey]: optimisticData,
       }));

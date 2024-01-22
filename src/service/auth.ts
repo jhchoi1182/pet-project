@@ -1,7 +1,7 @@
 import { authApi } from "@/api/authApi";
 import { ErrorResponse } from "@/types/response/errorResponse";
 import { cookieUtils } from "@/utils/cookieUtils";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 interface HandleLoginParametor {
   username: string;

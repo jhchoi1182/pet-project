@@ -6,26 +6,26 @@ import { createContext } from "react";
 type QueryData = Record<string, any>;
 
 type QueryContext = {
-  totalData: QueryData | undefined;
-  setTotalData: React.Dispatch<React.SetStateAction<QueryData | undefined>>;
-  prevTotalData: QueryData | undefined;
-  setPrevTotalData: React.Dispatch<React.SetStateAction<QueryData | undefined>>;
+  totalData: QueryData;
+  setTotalData: React.Dispatch<React.SetStateAction<QueryData>>;
+  prevTotalData: QueryData;
+  setPrevTotalData: React.Dispatch<React.SetStateAction<QueryData>>;
   refetch: number;
   setRefetch: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export const QueryContext = createContext<QueryContext>({
-  totalData: undefined,
+  totalData: {},
   setTotalData: () => {},
-  prevTotalData: undefined,
+  prevTotalData: {},
   setPrevTotalData: () => {},
   refetch: 0,
   setRefetch: () => {},
 });
 
 export default function QueryContextProvider({ children }: { children: React.ReactNode }) {
-  const [totalData, setTotalData] = useState<QueryData | undefined>(undefined);
-  const [prevTotalData, setPrevTotalData] = useState<QueryData | undefined>(undefined);
+  const [totalData, setTotalData] = useState<QueryData>({});
+  const [prevTotalData, setPrevTotalData] = useState<QueryData>({});
   const [refetch, setRefetch] = useState(0);
 
   return (

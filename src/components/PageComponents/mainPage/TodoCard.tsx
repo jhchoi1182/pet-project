@@ -40,10 +40,10 @@ export default function TodoCard({ todo: { todoId, contents, dueDate, isDone } }
           </Link>
           <h2 className="py-2 font-bold">{dueDate}</h2>
         </div>
-        <p className="mt-3 pb-0 line-clamp-3">{contents}</p>
+        <p className="mt-3 pb-0 line-clamp-3 whitespace-pre-wrap">{contents}</p>
       </div>
       <div className="flex gap-7 mt-auto pt-2">
-        <Button variant="delete" size="small" onClick={() => deleteMutate({ todoId, isDone })}>
+        <Button variant="delete" size="small" onClick={() => deleteMutate(todoId)}>
           삭제하기
         </Button>
         <Button variant="update" size="small" onClick={() => updateMutate(todoId)}>

@@ -6,11 +6,12 @@ import { useContext, useState } from "react";
 import Button from "../../base/Button";
 import Input from "../../base/Input";
 import { QueryContext } from "@/context/QueryContextProvider";
+import useTodoFormDate from "@/hooks/useTodoFormDate";
 
 export default function TodoForm() {
   const { setRefetch } = useContext(QueryContext);
-  const [enteredTodo, setEnteredTodo] = useState({ contents: "", dueDate: "" });
-  const { contents, dueDate } = enteredTodo;
+  const [{ contents, dueDate }, setEnteredTodo] = useState({ contents: "", dueDate: "" });
+  const { onChangeHandler } = useTodoFormDate(setEnteredTodo);
 
   const { mutate } = useUpdateFetch({
     queryKey: "todos",
@@ -29,22 +30,6 @@ export default function TodoForm() {
     };
     mutate(todo);
     setEnteredTodo({ contents: "", dueDate: "" });
-  };
-
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    if (name === "dueDate" && isPastDate(value)) {
-      alert("과거의 날짜는 선택할 수 없습니다.");
-    } else {
-      setEnteredTodo((prev) => ({ ...prev, [name]: value }));
-    }
-  };
-
-  const isPastDate = (value: string) => {
-    const selectedDate = new Date(value);
-    const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0);
-    return selectedDate < currentDate;
   };
 
   return (
