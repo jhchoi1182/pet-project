@@ -1,9 +1,6 @@
 import { commentApi } from "@/api/commentApi";
 import Button from "@/components/base/Button";
-import { QueryContext } from "@/context/QueryContextProvider";
-import useUpdateFetch from "@/hooks/useUpdateFetch";
-import exceptionService from "@/service/exceptionService";
-import { Comment } from "@/types/model/comment";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useContext } from "react";
 
 interface CommentUpdateButtonProps {
@@ -21,30 +18,17 @@ export default function CommentUpdateButton({
   toggleEditMode,
   setToggleEditMode,
 }: CommentUpdateButtonProps) {
-  const { totalData, setTotalData } = useContext(QueryContext);
-  const comments = totalData[`comment_${todoId}`];
-
-  const updatedComments = comments?.map((comment: Comment) =>
-    comment.commentId === commentId ? { ...comment, comment: commentContents } : comment,
-  );
-
-  const { mutate: updateMutate } = useUpdateFetch({
-    queryKey: `comment_${todoId}`,
-    queryFn: () => commentApi.update(todoId, commentId, commentContents),
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: () => commentApi.update(todoId, commentId, commentContents),
     onSuccess: () => {
-      setTotalData((prev) => ({
-        ...prev,
-        [`comment_${todoId}`]: updatedComments,
-      }));
-    },
-    onError: (error) => {
-      exceptionService(error);
+      queryClient.invalidateQueries({ queryKey: ["comment", todoId] });
     },
   });
 
   const handleUpdate = () => {
     if (commentContents === "") return;
-    updateMutate();
+    mutate();
     setToggleEditMode(false);
   };
 

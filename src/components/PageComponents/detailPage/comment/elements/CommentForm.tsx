@@ -1,26 +1,16 @@
-import React, { useContext, useState } from "react";
+import { useState } from "react";
 import Button from "../../../../base/Button";
-import useUpdateFetch from "@/hooks/useUpdateFetch";
-import { QueryContext } from "@/context/QueryContextProvider";
 import { commentApi } from "@/api/commentApi";
-import exceptionService from "@/service/exceptionService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function CommentForm({ todoId }: { todoId: number }) {
-  const { setTotalData } = useContext(QueryContext);
   const [comment, setComment] = useState("");
 
-  const { mutate } = useUpdateFetch({
-    queryKey: `comment_${todoId}`,
-    queryFn: (comment) => commentApi.post(todoId, comment),
-    onSuccess: async () => {
-      const { result } = (await commentApi.get(+todoId))?.data;
-      setTotalData((prev) => ({
-        ...prev,
-        [`comment_${todoId}`]: result,
-      }));
-    },
-    onError: (error) => {
-      exceptionService(error);
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: (comment: string) => commentApi.post(todoId, comment),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["comment", todoId] });
     },
   });
 

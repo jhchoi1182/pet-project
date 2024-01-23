@@ -1,40 +1,26 @@
-import { QueryContext } from "@/context/QueryContextProvider";
 import { Todo } from "@/types/model/todo";
 import { todoApi } from "@/api/todoApi";
-import useUpdateFetch from "@/hooks/useUpdateFetch";
 import Link from "next/link";
-import { useContext } from "react";
 import Button from "../../base/Button";
-import exceptionService from "@/service/exceptionService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type TodoCardProps = {
   todo: Todo;
 };
 
 export default function TodoCard({ todo: { todoId, contents, dueDate, isDone } }: TodoCardProps) {
-  const { totalData } = useContext(QueryContext);
 
-  const updatedTodos = totalData?.todos?.map((todo: Todo) =>
-    todo.todoId === todoId ? { ...todo, isDone: !todo.isDone } : todo,
-  );
-  const deletedTodos = totalData?.todos?.filter((todo: Todo) => todo.todoId !== todoId);
-
-  const { mutate: updateMutate } = useUpdateFetch({
-    queryKey: "todos",
-    queryFn: () => todoApi.toggleIsDone(todoId),
-    optimisticData: updatedTodos,
-    rollbackOnFail: true,
-    onError: (error) => {
-      exceptionService(error);
+  const queryClient = useQueryClient();
+  const { mutate: updateMutate } = useMutation({
+    mutationFn: () => todoApi.toggleIsDone(todoId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
-  const { mutate: deleteMutate } = useUpdateFetch({
-    queryKey: "todos",
-    queryFn: () => todoApi.delete(todoId),
-    optimisticData: deletedTodos,
-    rollbackOnFail: true,
-    onError: (error) => {
-      exceptionService(error);
+  const { mutate: deleteMutate } = useMutation({
+    mutationFn: () => todoApi.delete(todoId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
 
@@ -50,10 +36,10 @@ export default function TodoCard({ todo: { todoId, contents, dueDate, isDone } }
         <p className="mt-3 pb-0 line-clamp-3 whitespace-pre-wrap">{contents}</p>
       </div>
       <div className="flex gap-7 mt-auto pt-2">
-        <Button variant="delete" size="small" onClick={() => deleteMutate(todoId)}>
+        <Button variant="delete" size="small" onClick={() => deleteMutate()}>
           삭제하기
         </Button>
-        <Button variant="update" size="small" onClick={() => updateMutate(todoId)}>
+        <Button variant="update" size="small" onClick={() => updateMutate()}>
           {isDone ? "취소" : "완료"}
         </Button>
       </div>

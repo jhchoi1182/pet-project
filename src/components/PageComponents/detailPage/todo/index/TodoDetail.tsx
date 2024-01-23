@@ -1,59 +1,49 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../../../base/Button";
 import { Todo } from "@/types/model/todo";
 import { useRouter } from "next/navigation";
 import TodoUpdateButton from "../elements/TodoUpdateButton";
 import TodoDeleteButton from "../elements/TodoDeleteButton";
 import TodoDetailContent from "../elements/TodoDetailContent";
-import { QueryContext } from "@/context/QueryContextProvider";
-import useGetFetch from "@/hooks/useGetFetch";
 import { todoApi } from "@/api/todoApi";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import exceptionService from "@/service/exceptionService";
+import { useQuery } from "@tanstack/react-query";
 
 export default function TodoDetail({ todoId }: { todoId: number }) {
-  const { totalData } = useContext(QueryContext);
-  const todo = totalData[`todo_${todoId}`];
-
-  const [{ contents: editableContents, dueDate: editableDueDate }, setEditableTodo] = useState({
-    contents: todo?.contents,
-    dueDate: todo?.dueDate,
+  const { data, isLoading } = useQuery<Todo>({
+    queryKey: ["todo", todoId],
+    queryFn: () => todoApi.getTodo(+todoId),
   });
+  const { contents, dueDate } = data ?? { contents: "", dueDate: "" };
+
+  const [editableTodo, setEditableTodo] = useState({ contents, dueDate });
   const [toggleEditMode, setToggleEditMode] = useState(false);
   const router = useRouter();
 
-  const { isLoading } = useGetFetch<Todo>({
-    queryKey: `todo_${todoId}`,
-    queryFn: todoApi.getTodo(+todoId),
-    onSuccess: ({ contents, dueDate }) => {
-      setEditableTodo({ contents, dueDate });
-    },
-    onError: (error) => {
-      exceptionService(error);
-    },
-  });
-
   const TodoUpdateButtonProps = {
     todoId,
-    editableContents,
-    editableDueDate,
+    editableTodo,
     toggleEditMode,
     setToggleEditMode,
   };
   const TodoDetailContentProps = {
-    editableContents,
-    editableDueDate,
+    editableTodo,
     setEditableTodo,
     toggleEditMode,
   };
+  console.log(contents);
 
   const { timeElement, articleElement } = TodoDetailContent({ ...TodoDetailContentProps });
 
+  useEffect(() => {
+    setEditableTodo({ contents, dueDate });
+  }, [contents]);
+
   return (
     <>
-      {isLoading || !todo ? (
+      {isLoading ? (
         <div className="flex justify-center items-center h-[40vh]">
           <LoadingSpinner />
         </div>

@@ -2,8 +2,10 @@ import useTodoInputHandler from "@/hooks/useTodoInputHandler";
 import React from "react";
 
 interface TodoDetailContentProps {
-  editableContents: string;
-  editableDueDate: string;
+  editableTodo: {
+    contents: string;
+    dueDate: string;
+  };
   setEditableTodo: React.Dispatch<
     React.SetStateAction<{
       contents: string;
@@ -14,8 +16,7 @@ interface TodoDetailContentProps {
 }
 
 function TodoDetailContent({
-  editableContents,
-  editableDueDate,
+  editableTodo: { contents, dueDate },
   setEditableTodo,
   toggleEditMode,
 }: TodoDetailContentProps) {
@@ -26,9 +27,9 @@ function TodoDetailContent({
       <span>목표 날짜:</span>
       <div>
         {toggleEditMode ? (
-          <input type="date" name="dueDate" value={editableDueDate} onChange={onChangeHandler} />
+          <input type="date" name="dueDate" value={dueDate} onChange={onChangeHandler} />
         ) : (
-          editableDueDate
+          dueDate
         )}
       </div>
     </time>
@@ -40,12 +41,12 @@ function TodoDetailContent({
         <textarea
           className="border w-full h-32"
           name="contents"
-          value={editableContents}
+          value={contents}
           onChange={onChangeHandler}
           required
         />
       ) : (
-        <p className="whitespace-pre-wrap">{editableContents}</p>
+        <p className="whitespace-pre-wrap">{contents}</p>
       )}
     </article>
   );

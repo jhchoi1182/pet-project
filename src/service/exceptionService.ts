@@ -1,9 +1,10 @@
-import { ErrorResponse } from "@/types/response/errorResponse";
+import { AxiosError } from "axios";
 
-const exceptionService = (error: unknown) => {
+const exceptionService = (error: AxiosError<any, any>) => {
   if (!error) return;
 
-  const { resultCode } = (error as ErrorResponse)?.response?.data;
+  const { resultCode } = error?.response?.data;
+
   switch (resultCode) {
     case "PASSWORDS_NOT_MATCHING":
       alert("비밀번호가 일치하지 않습니다.");

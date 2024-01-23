@@ -1,10 +1,6 @@
 import { commentApi } from "@/api/commentApi";
 import Button from "@/components/base/Button";
-import { QueryContext } from "@/context/QueryContextProvider";
-import useUpdateFetch from "@/hooks/useUpdateFetch";
-import exceptionService from "@/service/exceptionService";
-import { Comment } from "@/types/model/comment";
-import React, { useContext } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface CommentDeleteButtonProps {
   todoId: number;
@@ -12,17 +8,11 @@ interface CommentDeleteButtonProps {
 }
 
 export default function CommentDeleteButton({ todoId, commentId }: CommentDeleteButtonProps) {
-  const { totalData } = useContext(QueryContext);
-  const comments = totalData[`comment_${todoId}`];
-  const deletedComments = comments?.filter((comment: Comment) => comment.commentId !== commentId);
-
-  const { mutate } = useUpdateFetch({
-    queryKey: `comment_${todoId}`,
-    queryFn: () => commentApi.delete(todoId, commentId),
-    optimisticData: deletedComments,
-    rollbackOnFail: true,
-    onError: (error) => {
-      exceptionService(error);
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: () => commentApi.delete(todoId, commentId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["comment", todoId] });
     },
   });
 

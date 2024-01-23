@@ -1,31 +1,22 @@
 "use client";
 
 import { todoApi } from "@/api/todoApi";
-import useUpdateFetch from "@/hooks/useUpdateFetch";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Button from "../../base/Button";
 import Input from "../../base/Input";
-import { QueryContext } from "@/context/QueryContextProvider";
 import useTodoInputHandler from "@/hooks/useTodoInputHandler";
-import exceptionService from "@/service/exceptionService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { TodoWithoutId } from "@/types/model/todo";
 
 export default function TodoForm() {
-  const { setTotalData } = useContext(QueryContext);
   const [{ contents, dueDate }, setEnteredTodo] = useState({ contents: "", dueDate: "" });
   const { onChangeHandler } = useTodoInputHandler(setEnteredTodo);
 
-  const { mutate } = useUpdateFetch({
-    queryKey: "todos",
-    queryFn: ({ contents, dueDate }) => todoApi.post(contents, dueDate),
-    onSuccess: async () => {
-      const { result } = (await todoApi.getTodos())?.data;
-      setTotalData((prev) => ({
-        ...prev,
-        ["todos"]: result,
-      }));
-    },
-    onError: (error) => {
-      exceptionService(error);
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: ({ contents, dueDate }: TodoWithoutId) => todoApi.post(contents, dueDate),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
 

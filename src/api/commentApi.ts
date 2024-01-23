@@ -1,10 +1,20 @@
 import { instance } from "../config/axiosConfig";
 
 export const commentApi = {
-  get: (todoId: number) => instance.get(`/todo/${todoId}/comment`),
-  post: (todoId: number, comment: String) => instance.post(`/todo/${todoId}/comment`, { comment }),
-  update: (todoId: number, commentId: number, comment: String) =>
-    instance.patch(`/todo/${todoId}/comment/${commentId}`, { comment }),
-  delete: (todoId: number, commentId: number) =>
-    instance.delete(`/todo/${todoId}/comment/${commentId}`),
+  get: async (todoId: number) => {
+    const { data } = await instance.get(`/todo/${todoId}/comment`);
+    return data?.result;
+  },
+  post: async (todoId: number, comment: String) => {
+    const data = await instance.post(`/todo/${todoId}/comment`, { comment });
+    return data;
+  },
+  update: async (todoId: number, commentId: number, comment: String) => {
+    const data = await instance.patch(`/todo/${todoId}/comment/${commentId}`, { comment });
+    return data;
+  },
+  delete: async (todoId: number, commentId: number) => {
+    const data = await instance.delete(`/todo/${todoId}/comment/${commentId}`);
+    return data;
+  },
 };

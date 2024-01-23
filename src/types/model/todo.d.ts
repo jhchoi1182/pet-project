@@ -1,7 +1,10 @@
-export interface Todo {
-  todoId: number;
+export interface TodoWithoutId {
   contents: string;
   dueDate: string;
+}
+
+export interface Todo extends TodoWithoutId {
+  todoId: number;
   isDone: boolean;
 }
 
