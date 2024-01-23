@@ -27,8 +27,8 @@ export default function TodoDetail({ todoId }: { todoId: number }) {
   const { isLoading } = useGetFetch<Todo>({
     queryKey: `todo_${todoId}`,
     queryFn: todoApi.getTodo(+todoId),
-    onSuccess: (data) => {
-      setEditableTodo({ contents: data?.contents, dueDate: data?.dueDate });
+    onSuccess: ({ contents, dueDate }) => {
+      setEditableTodo({ contents, dueDate });
     },
     onError: (error) => {
       exceptionService(error);

@@ -2,6 +2,7 @@ import React from "react";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
+import PrivateRouteConfig from "@/config/PrivateRouteConfig";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,14 +14,12 @@ export const metadata: Metadata = {
   description: "필사즉생 필생즉사 스터디 모임 과제",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={inter.className}>
-      <body className="w-[1200px] mx-auto h-screen">{children}</body>
+      <body className="w-[1200px] mx-auto h-screen">
+        <PrivateRouteConfig>{children}</PrivateRouteConfig>
+      </body>
     </html>
   );
 }
