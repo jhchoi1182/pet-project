@@ -21,6 +21,9 @@ function exceptionService(error: AxiosError<any, any>) {
     case "USER_NOT_FOUND":
       alert("사용자를 찾을 수 없습니다.");
       break;
+    case "USER_REMOVED":
+      alert("탈퇴한 계정입니다.");
+      break;
     case "TODO_NOT_FOUND":
       alert("Todo를 찾을 수 없습니다.");
       break;
