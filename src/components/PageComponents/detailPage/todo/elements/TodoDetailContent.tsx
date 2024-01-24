@@ -1,4 +1,4 @@
-import useTodoInputHandler from "@/hooks/useTodoInputHandler";
+import todoService from "@/service/todoService";
 import React from "react";
 
 interface TodoDetailContentProps {
@@ -20,7 +20,11 @@ function TodoDetailContent({
   setEditableTodo,
   toggleEditMode,
 }: TodoDetailContentProps) {
-  const { onChangeHandler } = useTodoInputHandler(setEditableTodo);
+  const { handleInputChange } = todoService();
+
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    handleInputChange(event, setEditableTodo);
+  };
 
   const timeElement = (
     <time className="font-bold">

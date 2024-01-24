@@ -1,6 +1,6 @@
-import { todoApi } from "@/api/todoApi";
 import Button from "@/components/base/Button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useTodoContentsUpdate from "@/hooks/todoController/useTodoContentsUpdate";
+import todoService from "@/service/todoService";
 
 interface TodoUpdateButtonProps {
   todoId: number;
@@ -14,28 +14,21 @@ interface TodoUpdateButtonProps {
 
 export default function TodoUpdateButton({
   todoId,
-  editableTodo: { contents, dueDate },
+  editableTodo,
   toggleEditMode,
   setToggleEditMode,
 }: TodoUpdateButtonProps) {
-  const queryClient = useQueryClient();
-  const { mutate } = useMutation({
-    mutationFn: () => todoApi.modify(todoId, contents, dueDate),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todo", todoId] });
-    },
-  });
-
-  const handleUpdate = () => {
-    if (contents === "" || dueDate === "") return;
-    mutate();
-    setToggleEditMode(false);
-  };
-
+  const { contents, dueDate } = editableTodo;
+  const { mutate } = useTodoContentsUpdate(todoId, contents, dueDate);
+  const { handleUpdate } = todoService();
   return (
     <>
       {toggleEditMode ? (
-        <Button variant="update" size="small" onClick={handleUpdate}>
+        <Button
+          variant="update"
+          size="small"
+          onClick={() => handleUpdate({ editableTodo, mutate, setToggleEditMode })}
+        >
           완료
         </Button>
       ) : (

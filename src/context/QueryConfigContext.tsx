@@ -11,9 +11,6 @@ export default function QueryConfigContext({ children }: { children: React.React
     queryCache: new QueryCache({
       onError: (error) => {
         if (axios.isAxiosError(error)) {
-          const { resultCode } = error?.response?.data;
-          console.log(resultCode);
-
           exceptionService(error);
         } else {
           console.error("An error occurred:", error.message);

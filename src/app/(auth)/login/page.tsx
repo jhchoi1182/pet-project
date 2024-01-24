@@ -2,7 +2,7 @@
 
 import Button from "@/components/base/Button";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import authService from "@/service/authService";
 import AuthInput from "@/components/PageComponents/authPage/AuthInput";
 import GuestLoginText from "@/components/PageComponents/authPage/GuestLoginText";

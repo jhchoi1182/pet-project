@@ -2,20 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Button from "../../../../base/Button";
-import { Todo } from "@/types/model/todo";
 import { useRouter } from "next/navigation";
 import TodoUpdateButton from "../elements/TodoUpdateButton";
 import TodoDeleteButton from "../elements/TodoDeleteButton";
 import TodoDetailContent from "../elements/TodoDetailContent";
-import { todoApi } from "@/api/todoApi";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { useQuery } from "@tanstack/react-query";
+import useTodo from "@/hooks/todoController/useTodo";
 
 export default function TodoDetail({ todoId }: { todoId: number }) {
-  const { data, isLoading } = useQuery<Todo>({
-    queryKey: ["todo", todoId],
-    queryFn: () => todoApi.getTodo(+todoId),
-  });
+  const { data, isLoading } = useTodo(todoId);
   const { contents, dueDate } = data ?? { contents: "", dueDate: "" };
 
   const [editableTodo, setEditableTodo] = useState({ contents, dueDate });
@@ -33,7 +28,6 @@ export default function TodoDetail({ todoId }: { todoId: number }) {
     setEditableTodo,
     toggleEditMode,
   };
-  console.log(contents);
 
   const { timeElement, articleElement } = TodoDetailContent({ ...TodoDetailContentProps });
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { cookieUtils } from "@/utils/cookieUtils";
+import { cookieUtils } from "@/util/cookieUtils";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const { getCookie } = cookieUtils();
 

@@ -1,6 +1,5 @@
-import { commentApi } from "@/api/commentApi";
 import Button from "@/components/base/Button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useCommentDelete from "@/hooks/commentController/useCommentDelete";
 
 interface CommentDeleteButtonProps {
   todoId: number;
@@ -8,13 +7,7 @@ interface CommentDeleteButtonProps {
 }
 
 export default function CommentDeleteButton({ todoId, commentId }: CommentDeleteButtonProps) {
-  const queryClient = useQueryClient();
-  const { mutate } = useMutation({
-    mutationFn: () => commentApi.delete(todoId, commentId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["comment", todoId] });
-    },
-  });
+  const { mutate } = useCommentDelete(todoId, commentId);
 
   return (
     <Button variant="delete" size="small" onClick={() => mutate()}>

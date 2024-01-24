@@ -1,28 +1,16 @@
 import { Todo } from "@/types/model/todo";
-import { todoApi } from "@/api/todoApi";
 import Link from "next/link";
 import Button from "../../base/Button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useTodoDelete from "@/hooks/todoController/useTodoDelete";
+import useTodoToggleIsDone from "@/hooks/todoController/useTodoToggleIsDone";
 
 type TodoCardProps = {
   todo: Todo;
 };
 
 export default function TodoCard({ todo: { todoId, contents, dueDate, isDone } }: TodoCardProps) {
-
-  const queryClient = useQueryClient();
-  const { mutate: updateMutate } = useMutation({
-    mutationFn: () => todoApi.toggleIsDone(todoId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
-    },
-  });
-  const { mutate: deleteMutate } = useMutation({
-    mutationFn: () => todoApi.delete(todoId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
-    },
-  });
+  const { mutate: updateMutate } = useTodoToggleIsDone(todoId);
+  const { mutate: deleteMutate } = useTodoDelete(todoId, "refetch");
 
   return (
     <li className="flex flex-col w-72 h-60 border-[3px] border-teal-500 rounded-xl pt-3 px-6 pb-6 hover:shadow-lg">

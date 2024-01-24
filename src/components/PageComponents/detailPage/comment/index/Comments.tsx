@@ -1,15 +1,11 @@
 import CommentForm from "../elements/CommentForm";
 import { Comment } from "@/types/model/comment";
-import { commentApi } from "@/api/commentApi";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import CommentCard from "../elements/CommentCard";
-import { useQuery } from "@tanstack/react-query";
+import useComments from "@/hooks/commentController/useComments";
 
 export default function Comments({ todoId }: { todoId: number }) {
-  const { data, isLoading } = useQuery<Comment[]>({
-    queryKey: ["comment", todoId],
-    queryFn: () => commentApi.get(+todoId),
-  });
+  const { data, isLoading } = useComments(todoId);
 
   return (
     <>

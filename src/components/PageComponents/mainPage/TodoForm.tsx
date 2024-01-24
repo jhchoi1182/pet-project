@@ -1,40 +1,33 @@
 "use client";
 
-import { todoApi } from "@/api/todoApi";
 import { useState } from "react";
 import Button from "../../base/Button";
 import Input from "../../base/Input";
-import useTodoInputHandler from "@/hooks/useTodoInputHandler";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { TodoWithoutId } from "@/types/model/todo";
+
+import useTodoPost from "@/hooks/todoController/useTodoPost";
+import todoService from "@/service/todoService";
 
 export default function TodoForm() {
-  const [{ contents, dueDate }, setEnteredTodo] = useState({ contents: "", dueDate: "" });
-  const { onChangeHandler } = useTodoInputHandler(setEnteredTodo);
+  const [enteredTodo, setEnteredTodo] = useState({ contents: "", dueDate: "" });
+  const { handleInputChange } = todoService();
+  const { mutate } = useTodoPost();
 
-  const queryClient = useQueryClient();
-  const { mutate } = useMutation({
-    mutationFn: ({ contents, dueDate }: TodoWithoutId) => todoApi.post(contents, dueDate),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
-    },
-  });
+  const { handlePost } = todoService();
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    handleInputChange(event, setEnteredTodo);
+  };
 
-  const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (contents === "" || dueDate === "") return;
-    const todo = {
-      contents,
-      dueDate,
-    };
-    mutate(todo);
-    setEnteredTodo({ contents: "", dueDate: "" });
+  const { contents, dueDate } = enteredTodo;
+  const handlePostParametor = {
+    enteredTodo,
+    setEnteredTodo,
+    mutate,
   };
 
   return (
     <form
       className="flex items-center justify-between h-24 bg-slate-300 rounded-md px-5"
-      onSubmit={onSubmitHandler}
+      onSubmit={(event) => handlePost({ ...handlePostParametor, event })}
     >
       <div className="flex items-center gap-10">
         <Input variant="todo" label="내용" name="contents">

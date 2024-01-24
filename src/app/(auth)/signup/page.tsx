@@ -5,7 +5,7 @@ import SignupIdInput from "@/components/PageComponents/authPage/SignupIdInput";
 import Button from "@/components/base/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function Signup() {
   const [isPassDuplication, setIsPassDuplication] = useState(false);

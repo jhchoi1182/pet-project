@@ -2,7 +2,7 @@
 
 import React from "react";
 import Button from "./base/Button";
-import { cookieUtils } from "@/utils/cookieUtils";
+import { cookieUtils } from "@/util/cookieUtils";
 import { useRouter } from "next/navigation";
 import authService from "@/service/authService";
 

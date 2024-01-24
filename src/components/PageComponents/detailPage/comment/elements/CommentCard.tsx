@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CommentUpdateButton from "./CommentUpdateButton";
 import { Comment } from "@/types/model/comment";
 import CommentDeleteButton from "./CommentDeleteButton";
+import commentService from "@/service/commentService";
 
 interface CommentListProps {
   todoId: number;
@@ -15,17 +16,14 @@ export default function CommentCard({
   const [editableComment, setEditableComment] = useState(comment);
   const [toggleEditMode, setToggleEditMode] = useState(false);
 
+  const { handleInputChange } = commentService();
+
   const CommentUpdateButtonProps = {
     todoId,
     commentId,
     commentContents: editableComment,
     toggleEditMode,
     setToggleEditMode,
-  };
-
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setEditableComment(value);
   };
 
   return (
@@ -42,7 +40,7 @@ export default function CommentCard({
           className="my-5 w-full border border-teal-500 rounded-lg"
           name="comment"
           value={editableComment}
-          onChange={onChangeHandler}
+          onChange={(event) => handleInputChange(event, setEditableComment)}
         />
       ) : (
         <p className="my-5">{comment}</p>

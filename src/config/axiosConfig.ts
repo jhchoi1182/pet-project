@@ -1,4 +1,4 @@
-import { cookieUtils } from "@/utils/cookieUtils";
+import { cookieUtils } from "@/util/cookieUtils";
 import axios from "axios";
 
 const { getCookie, removeCookie } = cookieUtils();

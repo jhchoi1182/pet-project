@@ -1,7 +1,6 @@
-import { commentApi } from "@/api/commentApi";
 import Button from "@/components/base/Button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import useCommentUpdate from "@/hooks/commentController/useCommentUpdate";
+import commentService from "@/service/commentService";
 
 interface CommentUpdateButtonProps {
   todoId: number;
@@ -18,24 +17,18 @@ export default function CommentUpdateButton({
   toggleEditMode,
   setToggleEditMode,
 }: CommentUpdateButtonProps) {
-  const queryClient = useQueryClient();
-  const { mutate } = useMutation({
-    mutationFn: () => commentApi.update(todoId, commentId, commentContents),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["comment", todoId] });
-    },
-  });
+  const { mutate } = useCommentUpdate(todoId, commentId, commentContents);
 
-  const handleUpdate = () => {
-    if (commentContents === "") return;
-    mutate();
-    setToggleEditMode(false);
-  };
+  const { handleUpdate } = commentService();
 
   return (
     <>
       {toggleEditMode ? (
-        <Button variant="update" size="small" onClick={handleUpdate}>
+        <Button
+          variant="update"
+          size="small"
+          onClick={() => handleUpdate({ commentContents, mutate, setToggleEditMode })}
+        >
           완료
         </Button>
       ) : (

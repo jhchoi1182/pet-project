@@ -1,6 +1,6 @@
 import Tooltip from "@/components/Tooltip";
 import InfoIcon from "@/components/icons/InfoIcon";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function GuestLoginText({
   handleGuestLogin,

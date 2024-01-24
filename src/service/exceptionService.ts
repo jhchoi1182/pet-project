@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 
-const exceptionService = (error: AxiosError<any, any>) => {
+function exceptionService(error: AxiosError<any, any>) {
   if (!error) return;
 
   const { resultCode } = error?.response?.data;
@@ -34,6 +34,6 @@ const exceptionService = (error: AxiosError<any, any>) => {
       alert("알 수 없는 오류가 발생했습니다.");
       break;
   }
-};
+}
 
 export default exceptionService;

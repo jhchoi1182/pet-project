@@ -1,26 +1,12 @@
-import { todoApi } from "@/api/todoApi";
 import Button from "@/components/base/Button";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import useTodoDelete from "@/hooks/todoController/useTodoDelete";
+import todoService from "@/service/todoService";
 
 export default function TodoDeleteButton({ todoId }: { todoId: number }) {
-  const router = useRouter();
-
-  const { mutate } = useMutation({
-    mutationFn: () => todoApi.delete(todoId),
-    onSuccess: () => {
-      router.push("/todo");
-    },
-  });
-
-  const handleDelete = () => {
-    if (window.confirm("삭제하시겠습니까?")) {
-      mutate();
-    }
-  };
-
+  const { mutate } = useTodoDelete(todoId, "push");
+  const { handleDelete } = todoService();
   return (
-    <Button variant="delete" size="small" onClick={handleDelete}>
+    <Button variant="delete" size="small" onClick={() => handleDelete(mutate)}>
       삭제
     </Button>
   );
