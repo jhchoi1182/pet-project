@@ -3,21 +3,15 @@ import { cookieUtils } from "@/util/cookieUtils";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import exceptionService from "./exceptionService";
 import axios from "axios";
-
-interface HandleLoginParametor {
-  username: string;
-  password: string;
-}
-
-interface HandleSignupParametor extends HandleLoginParametor {
-  isPassDuplication: boolean;
-  passwordConfirm: string;
-}
+import {
+  HandleLoginParameter,
+  HandleSignupParameter,
+} from "@/types/parameter/authServiceParameter";
 
 const { setCookie, removeCookie } = cookieUtils();
 
 function authService(router: AppRouterInstance) {
-  const handleUserLogin = async ({ username, password }: HandleLoginParametor) => {
+  const handleUserLogin = async ({ username, password }: HandleLoginParameter) => {
     const isLoginValid = username.length < 2 && password.length < 4;
 
     if (isLoginValid) return alert("항목을 모두 확인해주세요.");
@@ -46,7 +40,7 @@ function authService(router: AppRouterInstance) {
     username,
     password,
     passwordConfirm,
-  }: HandleSignupParametor) => {
+  }: HandleSignupParameter) => {
     const isSignupValid =
       !isPassDuplication ||
       username.length < 2 ||

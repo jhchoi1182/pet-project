@@ -18,7 +18,7 @@ export default function TodoForm() {
   };
 
   const { contents, dueDate } = enteredTodo;
-  const handlePostParametor = {
+  const handlePostParameter = {
     enteredTodo,
     setEnteredTodo,
     mutate,
@@ -27,7 +27,7 @@ export default function TodoForm() {
   return (
     <form
       className="flex items-center justify-between h-24 bg-slate-300 rounded-md px-5"
-      onSubmit={(event) => handlePost({ ...handlePostParametor, event })}
+      onSubmit={(event) => handlePost({ ...handlePostParameter, event })}
     >
       <div className="flex items-center gap-10">
         <Input variant="todo" label="내용" name="contents">

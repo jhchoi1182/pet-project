@@ -1,27 +1,9 @@
-import { TodoWithoutId } from "@/types/model/todo";
-import { UseMutateFunction } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
-import React from "react";
-
-type InputEvent = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
-type SetStateTodoInput = React.Dispatch<React.SetStateAction<TodoWithoutId>>;
-type Mutate = UseMutateFunction<AxiosResponse<any, any>, Error, void, unknown>;
-interface HandlePostParametor {
-  enteredTodo: TodoWithoutId;
-  setEnteredTodo: React.Dispatch<
-    React.SetStateAction<{
-      contents: string;
-      dueDate: string;
-    }>
-  >;
-  mutate: UseMutateFunction<AxiosResponse<any, any>, Error, TodoWithoutId, unknown>;
-  event: React.FormEvent<HTMLFormElement>;
-}
-interface HandleUpdateParametor {
-  editableTodo: TodoWithoutId;
-  mutate: Mutate;
-  setToggleEditMode: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import {
+  HandlePostParameter,
+  HandleUpdateParameter,
+  SetStateTodoInput,
+} from "@/types/parameter/todoServiceParameter";
+import { InputEvent, MutateVoid } from "@/types/type/utilityTypes";
 
 function todoService() {
   const handlePost = async ({
@@ -29,7 +11,7 @@ function todoService() {
     setEnteredTodo,
     mutate,
     event,
-  }: HandlePostParametor) => {
+  }: HandlePostParameter) => {
     event.preventDefault();
     if (contents === "" || dueDate === "") return;
     const todo = {
@@ -40,14 +22,14 @@ function todoService() {
     setEnteredTodo({ contents: "", dueDate: "" });
   };
 
-  const handleUpdate = ({ editableTodo, mutate, setToggleEditMode }: HandleUpdateParametor) => {
+  const handleUpdate = ({ editableTodo, mutate, setToggleEditMode }: HandleUpdateParameter) => {
     const { contents, dueDate } = editableTodo;
     if (contents === "" || dueDate === "") return;
     mutate();
     setToggleEditMode(false);
   };
 
-  const handleDelete = (mutate: Mutate) => {
+  const handleDelete = (mutate: MutateVoid) => {
     if (window.confirm("삭제하시겠습니까?")) {
       mutate();
     }

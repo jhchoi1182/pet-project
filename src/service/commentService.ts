@@ -1,24 +1,11 @@
-import { UseMutateFunction } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
-import React from "react";
-
-type InputEvent = React.ChangeEvent<HTMLInputElement>;
-type SetStateString = React.Dispatch<React.SetStateAction<string>>;
-type SetStateBoolean = React.Dispatch<React.SetStateAction<boolean>>;
-interface HandlePostParametor {
-  event: React.FormEvent<HTMLFormElement>;
-  mutate: UseMutateFunction<AxiosResponse<any, any>, Error, string, unknown>;
-  comment: string;
-  setComment: SetStateString;
-}
-interface HandleUpdateParametor {
-  mutate: UseMutateFunction<AxiosResponse<any, any>, Error, void, unknown>;
-  commentContents: string;
-  setToggleEditMode: SetStateBoolean;
-}
+import {
+  HandlePostParameter,
+  HandleUpdateParameter,
+} from "@/types/parameter/commentServiceParameter";
+import { InputEvent, SetStateString } from "@/types/type/utilityTypes";
 
 function commentService() {
-  const handlePost = ({ event, mutate, comment, setComment }: HandlePostParametor) => {
+  const handlePost = ({ event, mutate, comment, setComment }: HandlePostParameter) => {
     event.preventDefault();
     if (comment === "") return;
     mutate(comment);
@@ -30,7 +17,7 @@ function commentService() {
     setComment(value);
   };
 
-  const handleUpdate = ({ commentContents, mutate, setToggleEditMode }: HandleUpdateParametor) => {
+  const handleUpdate = ({ commentContents, mutate, setToggleEditMode }: HandleUpdateParameter) => {
     if (commentContents === "") return;
     mutate();
     setToggleEditMode(false);

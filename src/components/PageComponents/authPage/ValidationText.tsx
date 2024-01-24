@@ -1,4 +1,4 @@
-import { TextColor } from "@/types/type/textColor";
+import { TextColor } from "@/constant/textColor";
 import React from "react";
 
 interface ValidationTextProps {
