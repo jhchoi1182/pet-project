@@ -15,6 +15,8 @@ Next.js를 연습하며 만들뒀었던 Todo 프로젝트에 Spring Boot 서버 
 * 서버사이드에서 Mongo DB를 이용하던 방식에서 Spring Boot 서버 API로 마이그레이션
   * 렌더링 속도 46% 개선
 * MVC 패턴 적용
+* ~~React-Query와 SWR 기능을 결합한 커스텀훅 개발~~
+  * ~~Context API를 이용한 Optimistic Updates를 통해 리렌더링 속도 46.76% 개선~~
 
 <br>
 
