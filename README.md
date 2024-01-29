@@ -3,20 +3,23 @@
 ![image](https://github.com/jhchoi1182/next-todo/assets/116577489/c959ef3f-656d-4d22-b713-34fcf3006a44)
 
 ## 🎉소개
-Next.js를 연습하며 만들뒀었던 Todo 프로젝트에 Spring Boot 서버 API를 연결하고 로그인, 상세페이지, 댓글 등 게시판 기능을 추가한 프로젝트
+이 프로젝트는 배운 기술을 실제로 적용하며 점진적으로 기능을 추가해 나가는 것을 목표로 진행되고 있는 개인 프로젝트입니다.   
+
 <br>
-<br>
-백엔드 코드 : https://github.com/jhchoi1182/todo-server
+
+현재 기능 - Todo 게시판   
+백엔드 코드 - https://github.com/jhchoi1182/todo-server
 
 <br>
 
 ## ✨특징
+* Todo 게시판 프로젝트
+  * 로컬 로그인/회원가입 기능
+  * todo(contents, dueDate, isDone)
+  * Next.js 14버전을 이용해 각 todo 상세 페이지와 댓글 기능 구현
 * Next.js + 스프링 부트 풀스택 개발
-* 서버사이드에서 Mongo DB를 이용하던 방식에서 Spring Boot 서버 API로 마이그레이션
-  * 렌더링 속도 46% 개선
+* Mongo DB를 Spring Boot 서버 API로 마이그레이션한 결과 렌더링 속도 46.22% 개선
 * MVC 패턴 적용
-* ~~React-Query와 SWR 기능을 결합한 커스텀훅 개발~~
-  * ~~Context API를 이용한 Optimistic Updates를 통해 리렌더링 속도 46.76% 개선~~
 
 <br>
 
