@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Input from "../../base/Input";
-import Button from "../../base/Button";
+import Input from "../../atoms/base/Input";
+import Button from "../../atoms/base/Button";
 import ValidationText from "./ValidationText";
 import { authApi } from "@/api/authApi";
 import { TextColor } from "@/styles/textColor";

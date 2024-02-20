@@ -1,4 +1,4 @@
-import Button from "@/components/base/Button";
+import Button from "@/components/atoms/base/Button";
 import useCommentDelete from "@/hooks/commentController/useCommentDelete";
 
 interface CommentDeleteButtonProps {
@@ -6,7 +6,10 @@ interface CommentDeleteButtonProps {
   commentId: number;
 }
 
-export default function CommentDeleteButton({ todoId, commentId }: CommentDeleteButtonProps) {
+export default function CommentDeleteButton({
+  todoId,
+  commentId,
+}: CommentDeleteButtonProps) {
   const { mutate } = useCommentDelete(todoId, commentId);
 
   return (

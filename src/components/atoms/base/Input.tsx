@@ -62,7 +62,7 @@ Input.TextArea = function InputText({ variant, ...props }: TextareaProps) {
 
 const LABEL_VARIANTS = {
   login: `w-36`,
-  signup: `w-36`,
+  signup: `w-[184px]`,
   post: `mr-auto mb-6`,
 };
 

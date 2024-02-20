@@ -1,4 +1,4 @@
-import Button from "@/components/base/Button";
+import Button from "@/components/atoms/base/Button";
 import useCommentUpdate from "@/hooks/commentController/useCommentUpdate";
 import commentService from "@/service/commentService";
 
@@ -27,12 +27,18 @@ export default function CommentUpdateButton({
         <Button
           variant="update"
           size="small"
-          onClick={() => handleUpdate({ commentContents, mutate, setToggleEditMode })}
+          onClick={() =>
+            handleUpdate({ commentContents, mutate, setToggleEditMode })
+          }
         >
           완료
         </Button>
       ) : (
-        <Button variant="update" size="small" onClick={() => setToggleEditMode(true)}>
+        <Button
+          variant="update"
+          size="small"
+          onClick={() => setToggleEditMode(true)}
+        >
           수정
         </Button>
       )}

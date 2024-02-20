@@ -1,4 +1,4 @@
-import Button from "@/components/base/Button";
+import Button from "@/components/atoms/base/Button";
 import useTodoDelete from "@/hooks/todoController/useTodoDelete";
 import todoService from "@/service/todoService";
 

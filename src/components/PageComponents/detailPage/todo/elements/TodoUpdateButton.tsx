@@ -1,4 +1,4 @@
-import Button from "@/components/base/Button";
+import Button from "@/components/atoms/base/Button";
 import useTodoContentsUpdate from "@/hooks/todoController/useTodoContentsUpdate";
 import todoService from "@/service/todoService";
 
@@ -27,12 +27,18 @@ export default function TodoUpdateButton({
         <Button
           variant="update"
           size="small"
-          onClick={() => handleUpdate({ editableTodo, mutate, setToggleEditMode })}
+          onClick={() =>
+            handleUpdate({ editableTodo, mutate, setToggleEditMode })
+          }
         >
           완료
         </Button>
       ) : (
-        <Button variant="update" size="small" onClick={() => setToggleEditMode(true)}>
+        <Button
+          variant="update"
+          size="small"
+          onClick={() => setToggleEditMode(true)}
+        >
           수정
         </Button>
       )}

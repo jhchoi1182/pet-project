@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Button from "../../base/Button";
-import Input from "../../base/Input";
+import Button from "../../atoms/base/Button";
+import Input from "../../atoms/base/Input";
 
 import useTodoPost from "@/hooks/todoController/useTodoPost";
 import todoService from "@/service/todoService";
@@ -13,7 +13,9 @@ export default function TodoForm() {
   const { mutate } = useTodoPost();
 
   const { handlePost } = todoService();
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const onChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     handleInputChange(event, setEnteredTodo);
   };
 
@@ -31,7 +33,12 @@ export default function TodoForm() {
     >
       <div className="flex items-center gap-10">
         <Input variant="todo" label="내용" name="contents">
-          <Input.TextField variant="todo" value={contents} onChange={onChangeHandler} required />
+          <Input.TextField
+            variant="todo"
+            value={contents}
+            onChange={onChangeHandler}
+            required
+          />
         </Input>
         <Input variant="todo" label="목표 날짜" name="dueDate">
           <Input.TextField

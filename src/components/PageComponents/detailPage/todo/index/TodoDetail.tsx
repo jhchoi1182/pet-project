@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Button from "../../../../base/Button";
+import Button from "../../../../atoms/base/Button";
 import { useRouter } from "next/navigation";
 import TodoUpdateButton from "../elements/TodoUpdateButton";
 import TodoDeleteButton from "../elements/TodoDeleteButton";
 import TodoDetailContent from "../elements/TodoDetailContent";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 import useTodo from "@/hooks/todoController/useTodo";
 
 export default function TodoDetail({ todoId }: { todoId: number }) {
@@ -29,7 +29,9 @@ export default function TodoDetail({ todoId }: { todoId: number }) {
     toggleEditMode,
   };
 
-  const { timeElement, articleElement } = TodoDetailContent({ ...TodoDetailContentProps });
+  const { timeElement, articleElement } = TodoDetailContent({
+    ...TodoDetailContentProps,
+  });
 
   useEffect(() => {
     setEditableTodo({ contents, dueDate });

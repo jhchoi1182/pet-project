@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../../../../base/Button";
+import Button from "../../../../atoms/base/Button";
 import useCommentPost from "@/hooks/commentController/useCommentPost";
 import commentService from "@/service/commentService";
 

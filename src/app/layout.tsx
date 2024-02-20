@@ -2,9 +2,9 @@ import React from "react";
 import "../styles/globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
-import QueryConfigContext from "@/context/QueryConfigContext";
 import { BG_COLOR } from "@/styles/colors";
 import Sidebar from "@/components/Sidebar";
+import StudySyncProvider from "@/provider/StudySyncProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,9 +23,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${BG_COLOR.navy} ${inter.className}`}>
-      <body className="w-full h-screen min-w-[1920px] min-h-[800px] py-[76px]">
-        <Sidebar />
-        <QueryConfigContext>{children}</QueryConfigContext>
+      <body className="flex w-full h-screen min-w-[1920px] min-h-[800px] py-[76px]">
+        <StudySyncProvider>
+          <Sidebar />
+          {children}
+        </StudySyncProvider>
       </body>
     </html>
   );

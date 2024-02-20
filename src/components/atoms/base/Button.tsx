@@ -5,13 +5,13 @@ import { FONT_VARIANTS } from "@/styles/fonts";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "timer";
   color?: "primary" | "red";
-  size: "small" | "medium" | "timer";
+  size?: "small" | "medium" | "timer";
 }
 
 export default function Button({
   variant = "primary",
   color = "primary",
-  size,
+  size = "medium",
   className = "",
   ...props
 }: ButtonProps) {

@@ -1,5 +1,5 @@
 import ValidationText from "@/components/PageComponents/authPage/ValidationText";
-import Input from "@/components/base/Input";
+import Input from "@/components/atoms/base/Input";
 import { TextColor } from "@/styles/textColor";
 import { useEffect, useState } from "react";
 

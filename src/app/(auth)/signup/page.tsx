@@ -2,7 +2,7 @@
 
 import AuthInput from "@/components/PageComponents/authPage/AuthInput";
 import SignupIdInput from "@/components/PageComponents/authPage/SignupIdInput";
-import Button from "@/components/base/Button";
+import Button from "@/components/atoms/base/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

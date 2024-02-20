@@ -1,6 +1,6 @@
 import { Todo } from "@/types/model/todo";
 import Link from "next/link";
-import Button from "../../base/Button";
+import Button from "../../atoms/base/Button";
 import useTodoDelete from "@/hooks/todoController/useTodoDelete";
 import useTodoToggleIsDone from "@/hooks/todoController/useTodoToggleIsDone";
 
@@ -8,7 +8,9 @@ type TodoCardProps = {
   todo: Todo;
 };
 
-export default function TodoCard({ todo: { todoId, contents, dueDate, isDone } }: TodoCardProps) {
+export default function TodoCard({
+  todo: { todoId, contents, dueDate, isDone },
+}: TodoCardProps) {
   const { mutate: updateMutate } = useTodoToggleIsDone(todoId);
   const { mutate: deleteMutate } = useTodoDelete(todoId, "refetch");
 
