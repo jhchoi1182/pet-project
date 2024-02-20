@@ -1,6 +1,6 @@
 import ValidationText from "@/components/PageComponents/authPage/ValidationText";
 import Input from "@/components/base/Input";
-import { TextColor } from "@/constant/textColor";
+import { TextColor } from "@/styles/textColor";
 import { useEffect, useState } from "react";
 
 interface AuthInputProps {
@@ -63,11 +63,17 @@ export default function AuthInput({
 
   function changeValidationTextColor() {
     if (type === "username" && value.length > 0) {
-      setValidationTextColor(value.length >= 2 ? TextColor.TRANS : TextColor.RED);
+      setValidationTextColor(
+        value.length >= 2 ? TextColor.TRANS : TextColor.RED,
+      );
     } else if (type === "password" && value.length > 0) {
-      setValidationTextColor(value.length >= 4 ? TextColor.TRANS : TextColor.RED);
+      setValidationTextColor(
+        value.length >= 4 ? TextColor.TRANS : TextColor.RED,
+      );
     } else if (type === "passwordConfirm") {
-      setValidationTextColor(password === value ? TextColor.TRANS : TextColor.RED);
+      setValidationTextColor(
+        password === value ? TextColor.TRANS : TextColor.RED,
+      );
     }
   }
 }

@@ -3,7 +3,7 @@ import Input from "../../base/Input";
 import Button from "../../base/Button";
 import ValidationText from "./ValidationText";
 import { authApi } from "@/api/authApi";
-import { TextColor } from "@/constant/textColor";
+import { TextColor } from "@/styles/textColor";
 import axios from "axios";
 import { ErrorResponse } from "@/types/response/ErrorResponse";
 
@@ -18,7 +18,9 @@ export default function SignupIdInput({
   onChangeHandler,
   setIsPassDuplication,
 }: SignupIdInputProps) {
-  const [validationTextColor, setValidationTextColor] = useState(TextColor.BLACK);
+  const [validationTextColor, setValidationTextColor] = useState(
+    TextColor.BLACK,
+  );
   const [checkResultText, setCheckResultText] = useState("");
 
   const validationText = "최소 2글자 이상 입력해주세요.";
@@ -35,13 +37,16 @@ export default function SignupIdInput({
       setValidationTextColor(TextColor.RED);
       setIsPassDuplication(false);
       if (status === 400) return setCheckResultText("잘못된 입력값입니다.");
-      if (status === 409) return setCheckResultText("이미 사용 중인 아이디입니다.");
+      if (status === 409)
+        return setCheckResultText("이미 사용 중인 아이디입니다.");
     }
   };
 
   useEffect(() => {
     if (username.length > 0) {
-      setValidationTextColor(username.length >= 2 ? TextColor.TRANS : TextColor.RED);
+      setValidationTextColor(
+        username.length >= 2 ? TextColor.TRANS : TextColor.RED,
+      );
     }
   }, [username]);
 
@@ -49,9 +54,19 @@ export default function SignupIdInput({
     <div className="relative w-full">
       <div className="flex justify-between">
         <Input variant="signup" label="아이디" name="username">
-          <Input.TextField variant="login" value={username} onChange={onChangeHandler} required />
+          <Input.TextField
+            variant="login"
+            value={username}
+            onChange={onChangeHandler}
+            required
+          />
         </Input>
-        <Button size="small" type="button" className="-mt-[2px]" onClick={checkDuplication}>
+        <Button
+          size="small"
+          type="button"
+          className="-mt-[2px]"
+          onClick={checkDuplication}
+        >
           중복 확인
         </Button>
       </div>

@@ -1,9 +1,11 @@
-import { Electrolize } from "next/font/google";
+import { Electrolize, Ubuntu } from "next/font/google";
 
-const electrolize = Electrolize({ weight: "400", preload: false });
+const electrolize = Electrolize({ weight: "400", subsets: ["latin"] });
+const ubuntu = Ubuntu({ weight: "500", subsets: ["latin"] });
 
 const font = {
   elec: electrolize.className,
+  ubuntu: ubuntu.className,
 };
 
 const fontWeight = {
@@ -12,6 +14,7 @@ const fontWeight = {
 };
 
 export const FONT_VARIANTS = {
+  logo: `text-[42px] ${font.ubuntu}`,
   body01: `text-[24px]`,
   body02: `text-[24px] ${fontWeight.semi}`,
   body03: `text-[16px]`,

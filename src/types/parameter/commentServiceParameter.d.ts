@@ -1,5 +1,3 @@
-
-
 export interface HandlePostParameter {
   event: React.FormEvent<HTMLFormElement>;
   mutate: UseMutateFunction<AxiosResponse<any, any>, Error, string, unknown>;

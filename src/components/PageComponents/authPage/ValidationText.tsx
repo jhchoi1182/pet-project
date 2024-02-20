@@ -1,4 +1,4 @@
-import { TextColor } from "@/constant/textColor";
+import { TextColor } from "@/styles/textColor";
 import React from "react";
 
 interface ValidationTextProps {
@@ -13,7 +13,9 @@ export default function ValidationText({
   exceptionalText,
 }: ValidationTextProps) {
   return (
-    <div className={`absolute top-10 left-36 select-none ${validationTextColor}`}>
+    <div
+      className={`absolute top-10 left-36 select-none ${validationTextColor}`}
+    >
       {exceptionalText ? exceptionalText : primaryText}
     </div>
   );

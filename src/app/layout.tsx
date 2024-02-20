@@ -1,8 +1,10 @@
 import React from "react";
-import "./globals.css";
+import "../styles/globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
-import PrivateRouteConfig from "@/config/PrivateRouteConfig";
+import QueryConfigContext from "@/context/QueryConfigContext";
+import { BG_COLOR } from "@/styles/colors";
+import Sidebar from "@/components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +16,16 @@ export const metadata: Metadata = {
   description: "필사즉생 필생즉사 스터디 모임 과제",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={inter.className}>
-      <body className="w-[1200px] mx-auto h-screen">
-        <PrivateRouteConfig>{children}</PrivateRouteConfig>
+    <html lang="en" className={`${BG_COLOR.navy} ${inter.className}`}>
+      <body className="w-full h-screen min-w-[1920px] min-h-[800px] py-[76px]">
+        <Sidebar />
+        <QueryConfigContext>{children}</QueryConfigContext>
       </body>
     </html>
   );
