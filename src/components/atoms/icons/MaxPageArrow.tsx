@@ -14,14 +14,14 @@ export default function MaxPageArrow({ isMin = false }: { isMin?: boolean }) {
         <path
           d="M0.874023 1.04639L9.33316 9.50552L0.874023 17.9647"
           stroke="#FBC531"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M9.37549 1.04639L17.8346 9.50552L9.37549 17.9647"
           stroke="#FBC531"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </button>

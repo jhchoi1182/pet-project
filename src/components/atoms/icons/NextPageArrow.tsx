@@ -18,8 +18,8 @@ export default function NextPageArrow({
         <path
           d="M1 1L9.47682 9.47682L1 17.9536"
           stroke="#FBC531"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </button>

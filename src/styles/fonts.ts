@@ -26,6 +26,6 @@ export const FONT_VARIANTS = {
   time03: `text-[60px] ${font.elec}`,
   time04: `text-[16px] ${fontWeight.mid}`,
   selectInput: `text-[20px] ${fontWeight.semi}`,
-  info: `text-[16px] ${fontWeight.mid}`,
+  info: `text-[16px] ${font.elec}`,
   days: `text-[26px] ${fontWeight.mid}`,
 };
