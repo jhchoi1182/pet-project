@@ -3,7 +3,7 @@
 import Button from "@/components/atoms/base/Button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import authService from "@/service/authService";
+import authService from "@/service/useAuthService";
 import AuthInput from "@/components/PageComponents/authPage/AuthInput";
 import GuestLoginText from "@/components/PageComponents/authPage/GuestLoginText";
 

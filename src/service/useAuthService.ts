@@ -7,16 +7,11 @@ import { TEXT_COLOR } from "@/styles/colors";
 import { SetStateString } from "@/types/type/utilityTypes";
 import { AuthInputType } from "@/components/loginSignup/atom/ValidationText";
 import { ErrorResponse } from "@/types/response/ErrorResponse";
+import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
 
-const isValidUsernameOrNickname = (value: string) =>
-  value.length >= 2 && value.length <= 16;
-const isValidEmail = (value: string) =>
-  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
-const isValidPassword = (value: string) =>
-  /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,20}$/.test(value);
 const { setCookie, removeCookie } = cookieUtils();
 
-function authService() {
+function useAuthService() {
   async function handleUserLogin({ username, password }: HandleLoginParameter) {
     const isLoginValid = username.length < 2 && password.length < 4;
 
@@ -39,6 +34,22 @@ function authService() {
         handleExecptionError(error);
       }
     }
+  }
+
+  function valideSignupInput(
+    { username, nickname, email, password, passwordConfirm }: EnteredInfoType,
+    isUsernameAvailable: boolean,
+    isNicknameAvailable: boolean,
+  ) {
+    const isValid =
+      isValidUsernameOrNickname(username) &&
+      isValidUsernameOrNickname(nickname) &&
+      isValidEmail(email) &&
+      isValidPassword(password) &&
+      password === passwordConfirm &&
+      isUsernameAvailable &&
+      isNicknameAvailable;
+    return isValid ? true : false;
   }
 
   function changeValidationTextColor(
@@ -102,10 +113,24 @@ function authService() {
 
   return {
     handleUserLogin,
+    handleWithdrawal,
+    valideSignupInput,
     changeValidationTextColor,
     handleErrorResponse,
-    handleWithdrawal,
+    handleExecptionError,
   };
 }
 
-export default authService;
+export default useAuthService;
+
+function isValidUsernameOrNickname(value: string) {
+  return value.length >= 2 && value.length <= 16;
+}
+function isValidEmail(value: string) {
+  return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
+}
+function isValidPassword(value: string) {
+  return /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,20}$/.test(
+    value,
+  );
+}

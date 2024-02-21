@@ -2,7 +2,7 @@ import Input from "@/components/atoms/base/Input";
 import { TEXT_COLOR } from "@/styles/colors";
 import React, { useEffect, useState } from "react";
 import ValidationText from "../atom/ValidationText";
-import authService from "@/service/authService";
+import useAuthService from "@/service/useAuthService";
 
 export type EmailPasswordType = "email" | "password" | "passwordConfirm";
 interface EmailPasswordInputProps {
@@ -28,7 +28,7 @@ export default function EmailPasswordInput({
     type === "password" ? TEXT_COLOR.inverse : TEXT_COLOR.trans,
   );
 
-  const { changeValidationTextColor } = authService();
+  const { changeValidationTextColor } = useAuthService();
 
   useEffect(() => {
     changeValidationTextColor(type, value, setValidationTextColor, password);

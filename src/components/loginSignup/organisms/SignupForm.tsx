@@ -1,12 +1,19 @@
-import { BG_COLOR, TEXT_COLOR } from "@/styles/colors";
+import { BG_COLOR } from "@/styles/colors";
 import React, { useState } from "react";
 import Logo from "../../atoms/Logo";
 import Button from "../../atoms/base/Button";
 import CloseButton from "../molecules/CloseButton";
-import NameInput, { NameInputType } from "../molecules/NameInput";
-import useNameDuplicationCheckController from "@/controller/authController/useNameDuplicationCheckController";
+import NameInput from "../molecules/NameInput";
 import EmailPasswordInput from "../molecules/EmailPasswordInput";
+import useSignupController from "@/controller/authController/useSignupController";
 
+export type EnteredInfoType = {
+  username: string;
+  nickname: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+};
 interface SignupModalProps {
   setToggleLoginSignup: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -14,7 +21,7 @@ interface SignupModalProps {
 export default function SignupModal({
   setToggleLoginSignup,
 }: SignupModalProps) {
-  const [enteredInfo, setEnteredInfo] = useState({
+  const [enteredInfo, setEnteredInfo] = useState<EnteredInfoType>({
     username: "",
     nickname: "",
     email: "",
@@ -24,8 +31,7 @@ export default function SignupModal({
   const [isUsernameAvailable, setIsUsernameAvailable] = useState(false);
   const [isNicknameAvailable, setIsNicknameAvailable] = useState(false);
 
-  // const { handleSignup } = authService();
-  // handleSignup({ isPassDuplication, username, password, passwordConfirm });
+  const { handleSignup } = useSignupController();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -34,7 +40,12 @@ export default function SignupModal({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setToggleLoginSignup(true);
+    handleSignup({
+      enteredInfo,
+      isUsernameAvailable,
+      isNicknameAvailable,
+      setToggleLoginSignup,
+    });
   };
 
   return (
@@ -51,11 +62,13 @@ export default function SignupModal({
           type="username"
           value={enteredInfo.username}
           handleInputChange={handleInputChange}
+          setIsNameAvailable={setIsUsernameAvailable}
         />
         <NameInput
           type="nickname"
           value={enteredInfo.nickname}
           handleInputChange={handleInputChange}
+          setIsNameAvailable={setIsNicknameAvailable}
         />
         <EmailPasswordInput
           type="email"

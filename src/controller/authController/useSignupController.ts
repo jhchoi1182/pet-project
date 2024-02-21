@@ -1,40 +1,38 @@
 import { authApi } from "@/api/authApi";
-import { modalAtom } from "@/stateStore/commonAtom";
-import authService from "@/service/authService";
-import { useSetRecoilState } from "recoil";
+import useAuthService from "@/service/useAuthService";
+import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
+import { SetStateBoolean } from "@/types/type/utilityTypes";
 
-interface HandleLoginParameter {
-  username: string;
-  password: string;
-}
-interface HandleSignupParameter extends HandleLoginParameter {
-  isPassDuplication: boolean;
-  passwordConfirm: string;
+interface SignupControllerParemeter {
+  enteredInfo: EnteredInfoType;
+  isUsernameAvailable: boolean;
+  isNicknameAvailable: boolean;
+  setToggleLoginSignup: SetStateBoolean;
 }
 
-function useSignupController({
-  username,
-  nickname,
-  email,
-  password,
-  passwordConfirm,
-}: HandleSignupParameter) {
-  const setActiveLoginModal = useSetRecoilState(modalAtom);
-  const { handleError } = authService();
+function useSignupController() {
+  const { valideSignupInput, handleExecptionError } = useAuthService();
 
-  const handleSignup = async () => {
-    // 유효성 검사
-
+  async function handleSignup({
+    enteredInfo,
+    isUsernameAvailable,
+    isNicknameAvailable,
+    setToggleLoginSignup,
+  }: SignupControllerParemeter) {
+    if (
+      !valideSignupInput(enteredInfo, isUsernameAvailable, isNicknameAvailable)
+    )
+      return alert("항목을 다시 확인해주세요.");
     try {
-      await authApi.signup(username, password, passwordConfirm);
+      await authApi.signup(enteredInfo);
       alert("회원가입 성공!");
-      setActiveLoginModal(true);
+      setToggleLoginSignup(true);
     } catch (error) {
-      handleError(error);
+      handleExecptionError(error);
     }
-  };
+  }
 
-  return handleSignup;
+  return { handleSignup };
 }
 
 export default useSignupController;
