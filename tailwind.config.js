@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       animation: {
         changeColor: "changeColor 0.8s steps(1, end) infinite",
@@ -21,8 +22,8 @@ module.exports = {
     },
   },
   plugins: [
-    function ({ addComponents }) {
-      const tooltip = {
+    function ({ addUtilities }) {
+      const newUtilities = {
         ".tooltipTail::after": {
           content: '""',
           position: "absolute",
@@ -32,8 +33,14 @@ module.exports = {
           borderWidth: "15px",
           borderColor: "white transparent transparent transparent",
         },
+        ".h-nav": {
+          height: "59px",
+        },
+        ".h-board": {
+          height: "calc(100% - 119px)",
+        },
       };
-      addComponents(tooltip);
+      addUtilities(newUtilities);
     },
   ],
 };

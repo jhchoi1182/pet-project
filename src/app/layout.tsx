@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { BG_COLOR } from "@/styles/colors";
 import Sidebar from "@/components/Sidebar";
 import StudySyncProvider from "@/provider/StudySyncProvider";
+import { FONT_VARIANTS } from "@/styles/fonts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${BG_COLOR.navy} ${inter.className}`}>
-      <body className="flex w-full h-screen min-w-[1920px] min-h-[800px] py-[76px]">
+      <body
+        className={`flex w-full h-screen min-w-[1920px] min-h-[800px] py-[76px] ${FONT_VARIANTS.body01}`}
+      >
         <StudySyncProvider>
           <Sidebar />
           {children}
