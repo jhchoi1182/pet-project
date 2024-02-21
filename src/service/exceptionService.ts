@@ -1,6 +1,17 @@
-import { AxiosError } from "axios";
+import { ErrorResponse } from "@/types/response/ErrorResponse";
+import axios, { AxiosError } from "axios";
 
-function exceptionService(error: AxiosError<any, any>) {
+export function handleExecptionError(error: unknown) {
+  const { response } = error as ErrorResponse;
+  if (!response) return alert("서버 점검중입니다.");
+  if (axios.isAxiosError(error)) {
+    exceptionService(error);
+  } else {
+    console.error("An error occurred:", error);
+  }
+}
+
+export function exceptionService(error: AxiosError<any, any>) {
   if (!error) return;
 
   const { resultCode } = error?.response?.data;
@@ -53,5 +64,3 @@ function exceptionService(error: AxiosError<any, any>) {
       break;
   }
 }
-
-export default exceptionService;

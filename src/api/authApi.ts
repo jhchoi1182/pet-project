@@ -24,7 +24,7 @@ export const authApi = {
       password,
       passwordConfirm,
     }),
-  userLogin: (username: String, password: String) =>
+  login: (username: String, password: String) =>
     instance.post("/user/login?type=user", {
       username,
       password,

@@ -1,30 +1,15 @@
 import { authApi } from "@/api/authApi";
 import { cookieUtils } from "@/util/cookieUtils";
-import exceptionService from "./exceptionService";
-import axios from "axios";
-import { HandleLoginParameter } from "@/types/parameter/authServiceParameter";
 import { TEXT_COLOR } from "@/styles/colors";
 import { SetStateString } from "@/types/type/utilityTypes";
 import { AuthInputType } from "@/components/loginSignup/atom/ValidationText";
 import { ErrorResponse } from "@/types/response/ErrorResponse";
 import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
+import { handleExecptionError } from "./exceptionService";
 
-const { setCookie, removeCookie } = cookieUtils();
+const { removeCookie } = cookieUtils();
 
 function useAuthService() {
-  async function handleUserLogin({ username, password }: HandleLoginParameter) {
-    const isLoginValid = username.length < 2 && password.length < 4;
-
-    if (isLoginValid) return alert("항목을 모두 확인해주세요.");
-
-    try {
-      const { data } = await authApi.userLogin(username, password);
-      setCookie(data.result.token, { expires: 7 });
-    } catch (error) {
-      handleExecptionError(error);
-    }
-  }
-
   async function handleWithdrawal() {
     if (window.confirm("정말 탈퇴하시겠습니까?")) {
       try {
@@ -103,21 +88,11 @@ function useAuthService() {
     }
   }
 
-  function handleExecptionError(error: unknown) {
-    if (axios.isAxiosError(error)) {
-      exceptionService(error);
-    } else {
-      console.error("An error occurred:", error);
-    }
-  }
-
   return {
-    handleUserLogin,
     handleWithdrawal,
     valideSignupInput,
     changeValidationTextColor,
     handleErrorResponse,
-    handleExecptionError,
   };
 }
 

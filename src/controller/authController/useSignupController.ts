@@ -2,6 +2,7 @@ import { authApi } from "@/api/authApi";
 import useAuthService from "@/service/useAuthService";
 import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
+import { handleExecptionError } from "@/service/exceptionService";
 
 interface SignupControllerParemeter {
   enteredInfo: EnteredInfoType;
@@ -11,7 +12,7 @@ interface SignupControllerParemeter {
 }
 
 function useSignupController() {
-  const { valideSignupInput, handleExecptionError } = useAuthService();
+  const { valideSignupInput } = useAuthService();
 
   async function handleSignup({
     enteredInfo,
@@ -22,7 +23,7 @@ function useSignupController() {
     if (
       !valideSignupInput(enteredInfo, isUsernameAvailable, isNicknameAvailable)
     )
-      return alert("항목을 다시 확인해주세요.");
+      return alert("항목을 모두 확인해주세요.");
     try {
       await authApi.signup(enteredInfo);
       alert("회원가입 성공!");
