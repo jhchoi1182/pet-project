@@ -25,10 +25,9 @@ export const authApi = {
       passwordConfirm,
     }),
   login: (username: String, password: String) =>
-    instance.post("/user/login?type=user", {
+    instance.post("/user/login", {
       username,
       password,
     }),
-  guestLogin: () => instance.post("/user/login?type=guest"),
   withdraw: () => instance.delete("/user/delete"),
 };
