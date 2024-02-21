@@ -18,15 +18,8 @@ const label = {
   passwordConfirm: "비밀번호 확인",
 };
 
-export default function EmailPasswordInput({
-  type,
-  value,
-  password,
-  handleInputChange,
-}: EmailPasswordInputProps) {
-  const [validationTextColor, setValidationTextColor] = useState(
-    type === "password" ? TEXT_COLOR.inverse : TEXT_COLOR.trans,
-  );
+export default function EmailPasswordInput({ type, value, password, handleInputChange }: EmailPasswordInputProps) {
+  const [validationTextColor, setValidationTextColor] = useState(type === "password" ? TEXT_COLOR.inverse : TEXT_COLOR.trans);
 
   const { changeValidationTextColor } = useAuthService();
 
@@ -38,12 +31,7 @@ export default function EmailPasswordInput({
     <>
       <div className="relative">
         <Input variant="signup" label={label[type]} name={type}>
-          <Input.TextField
-            variant="signup"
-            type={type === "passwordConfirm" ? "password" : type}
-            onChange={handleInputChange}
-            required
-          />
+          <Input.TextField variant="signup" type={type === "passwordConfirm" ? "password" : type} onChange={handleInputChange} required />
         </Input>
         <ValidationText type={type} validationTextColor={validationTextColor} />
       </div>

@@ -16,10 +16,7 @@ interface handleUserLoginParameter {
 function useLoginController() {
   const setActiveLoginModal = useSetRecoilState(modalAtom);
 
-  async function handleUserLogin(
-    { username, password }: handleUserLoginParameter,
-    setValidationTextColor: SetStateString,
-  ) {
+  async function handleUserLogin({ username, password }: handleUserLoginParameter, setValidationTextColor: SetStateString) {
     try {
       const { data } = await authApi.login(username, password);
       alert("로그인 성공!");

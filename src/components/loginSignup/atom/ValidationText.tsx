@@ -1,11 +1,6 @@
 import React from "react";
 
-export type AuthInputType =
-  | "username"
-  | "nickname"
-  | "email"
-  | "password"
-  | "passwordConfirm";
+export type AuthInputType = "username" | "nickname" | "email" | "password" | "passwordConfirm";
 interface ValidationTextProps {
   validationTextColor: string;
   type: AuthInputType;
@@ -20,15 +15,9 @@ const validationText = {
   passwordConfirm: "비밀번호와 일치하지 않습니다.",
 };
 
-export default function ValidationText({
-  validationTextColor,
-  type,
-  exceptionText,
-}: ValidationTextProps) {
+export default function ValidationText({ validationTextColor, type, exceptionText }: ValidationTextProps) {
   return (
-    <div
-      className={`absolute top-14 ml-[184px] select-none ${validationTextColor}`}
-    >
+    <div className={`absolute top-14 ml-[184px] select-none ${validationTextColor}`}>
       <span>{exceptionText ? exceptionText : validationText[type]}</span>
     </div>
   );

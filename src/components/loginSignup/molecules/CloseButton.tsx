@@ -7,11 +7,7 @@ export default function CloseButton() {
   const setActiveLoginModal = useSetRecoilState(modalAtom);
 
   return (
-    <button
-      className={`absolute top-5 right-5`}
-      type="button"
-      onClick={() => setActiveLoginModal(false)}
-    >
+    <button className={`absolute top-5 right-5`} type="button" onClick={() => setActiveLoginModal(false)}>
       <Close />
     </button>
   );

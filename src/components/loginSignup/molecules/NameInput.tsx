@@ -20,28 +20,15 @@ const label = {
   nickname: "닉네임",
 };
 
-export default function NameInput({
-  type,
-  value,
-  handleInputChange,
-  setIsNameAvailable,
-}: NameInputProps) {
-  const [validationTextColor, setValidationTextColor] = useState(
-    TEXT_COLOR.trans,
-  );
+export default function NameInput({ type, value, handleInputChange, setIsNameAvailable }: NameInputProps) {
+  const [validationTextColor, setValidationTextColor] = useState(TEXT_COLOR.trans);
   const [exceptionText, setExceptionText] = useState("");
 
   const { changeValidationTextColor } = useAuthService();
   const { checkDuplication } = useNameDuplicationCheckController();
 
   const handleNameDuplicationCheck = (type: NameInputType) => {
-    checkDuplication(
-      type,
-      value,
-      setExceptionText,
-      setValidationTextColor,
-      setIsNameAvailable,
-    );
+    checkDuplication(type, value, setExceptionText, setValidationTextColor, setIsNameAvailable);
   };
 
   useEffect(() => {
@@ -52,25 +39,13 @@ export default function NameInput({
     <div className={`relative`}>
       <div className={`flex gap-[22px]`}>
         <Input variant="signup" label={label[type]} name={type}>
-          <Input.TextField
-            variant="signup"
-            onChange={handleInputChange}
-            required
-          />
+          <Input.TextField variant="signup" onChange={handleInputChange} required />
         </Input>
-        <Button
-          size="small"
-          type="button"
-          onClick={() => handleNameDuplicationCheck(type)}
-        >
+        <Button size="small" type="button" onClick={() => handleNameDuplicationCheck(type)}>
           중복 확인
         </Button>
       </div>
-      <ValidationText
-        type={type}
-        validationTextColor={validationTextColor}
-        exceptionText={exceptionText}
-      />
+      <ValidationText type={type} validationTextColor={validationTextColor} exceptionText={exceptionText} />
     </div>
   );
 }

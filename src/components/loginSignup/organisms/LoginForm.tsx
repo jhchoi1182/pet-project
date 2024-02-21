@@ -12,19 +12,12 @@ interface LoginModalProps {
   setToggleLoginSignup: SetStateBoolean;
 }
 
-const inputInfo = [
-  { label: "아이디", name: "username" },
-  { label: "비밀번호", name: "password" },
-];
-
 export default function LoginModal({ setToggleLoginSignup }: LoginModalProps) {
   const [enteredInfo, setEnteredInfo] = useState({
     username: "",
     password: "",
   });
-  const [validationTextColor, setValidationTextColor] = useState(
-    TEXT_COLOR.trans,
-  );
+  const [validationTextColor, setValidationTextColor] = useState(TEXT_COLOR.trans);
 
   const { handleUserLogin } = useLoginController();
 
@@ -39,33 +32,22 @@ export default function LoginModal({ setToggleLoginSignup }: LoginModalProps) {
   };
 
   return (
-    <form
-      className={`flex flex-col items-center w-[689px] h-[474px] ${BG_COLOR.navy} rounded-[10px] shadow-xl`}
-      onSubmit={handleSubmit}
-    >
+    <form className={`flex flex-col items-center w-[689px] h-[474px] ${BG_COLOR.navy} rounded-[10px] shadow-xl`} onSubmit={handleSubmit}>
       <CloseButton />
       <div className={`mt-11`}>
         <Logo />
       </div>
       <div className={`flex flex-col gap-[53px] mt-[55px]`}>
-        {inputInfo.map(({ label, name }, i) => (
-          <Input key={i} variant="login" label={label} name={name}>
-            <Input.TextField
-              variant="login"
-              type={name}
-              onChange={handleInputChange}
-              required
-            />
-          </Input>
-        ))}
+        <Input variant="login" label="아이디" name="username">
+          <Input.TextField variant="login" onChange={handleInputChange} required />
+        </Input>
+        <Input variant="login" label="비밀번호" name="password">
+          <Input.TextField variant="login" type="password" onChange={handleInputChange} required />
+        </Input>
       </div>
       <div className="relative flex justify-center">
         <div className={`absolute top-5`}>
-          <span
-            className={`${FONT_VARIANTS.body03} ${validationTextColor} select-none`}
-          >
-            아이디 또는 비밀번호를 다시 확인해주세요.
-          </span>
+          <span className={`${FONT_VARIANTS.body03} ${validationTextColor} select-none`}>아이디 또는 비밀번호를 다시 확인해주세요.</span>
         </div>
         <div className={`flex gap-9 mt-[63px]`}>
           <Button>로그인</Button>

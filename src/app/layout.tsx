@@ -17,16 +17,10 @@ export const metadata: Metadata = {
   description: "필사즉생 필생즉사 스터디 모임 과제",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${BG_COLOR.navy} ${inter.className}`}>
-      <body
-        className={`flex w-full h-screen min-w-[1920px] min-h-[800px] py-[76px]`}
-      >
+      <body className={`flex w-full h-screen min-w-[1920px] min-h-[800px] py-[76px]`}>
         <StudySyncProvider>
           <Sidebar />
           {children}

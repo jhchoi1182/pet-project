@@ -7,22 +7,13 @@ import { SetStateBoolean, SetStateString } from "@/types/type/utilityTypes";
 function useNameDuplicationCheckController() {
   const { handleErrorResponse } = useAuthService();
 
-  async function checkDuplication(
-    type: NameInputType,
-    value: string,
-    setExceptionText: SetStateString,
-    setValidationTextColor: SetStateString,
-    setIsNameAvailable: SetStateBoolean,
-  ) {
+  async function checkDuplication(type: NameInputType, value: string, setExceptionText: SetStateString, setValidationTextColor: SetStateString, setIsNameAvailable: SetStateBoolean) {
     try {
-      const checkApi =
-        type === "username" ? authApi.checkUsername : authApi.checkNickname;
+      const checkApi = type === "username" ? authApi.checkUsername : authApi.checkNickname;
       await checkApi(value);
 
       setIsNameAvailable(true);
-      setExceptionText(
-        `사용 가능한 ${type === "username" ? "아이디" : "닉네임"}입니다.`,
-      );
+      setExceptionText(`사용 가능한 ${type === "username" ? "아이디" : "닉네임"}입니다.`);
       setValidationTextColor(TEXT_COLOR.blue);
     } catch (error) {
       setIsNameAvailable(false);

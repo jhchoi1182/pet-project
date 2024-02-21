@@ -4,10 +4,7 @@ import axios from "axios";
 const { getCookie, removeCookie } = cookieUtils();
 
 export const instance = axios.create({
-  baseURL:
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:8080/api"
-      : process.env.NEXT_PUBLIC_SERVER_URL,
+  baseURL: process.env.NODE_ENV === "development" ? "http://localhost:8080/api" : process.env.NEXT_PUBLIC_SERVER_URL,
 });
 
 instance.interceptors.request.use((config) => {

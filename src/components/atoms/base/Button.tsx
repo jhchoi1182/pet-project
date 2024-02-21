@@ -8,19 +8,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "small" | "medium" | "timer";
 }
 
-export default function Button({
-  variant = "primary",
-  color = "primary",
-  size = "medium",
-  className = "",
-  ...props
-}: ButtonProps) {
-  return (
-    <button
-      className={`${TYPE_VARIANTS[variant]} ${COLOR_VARIANTS[color]} ${SIZE_VARIANTS[size]} rounded-full shadow-sm ${className}`}
-      {...props}
-    />
-  );
+export default function Button({ variant = "primary", color = "primary", size = "medium", className = "", ...props }: ButtonProps) {
+  return <button className={`${TYPE_VARIANTS[variant]} ${COLOR_VARIANTS[color]} ${SIZE_VARIANTS[size]} rounded-full shadow-sm ${className}`} {...props} />;
 }
 
 const TYPE_VARIANTS = {

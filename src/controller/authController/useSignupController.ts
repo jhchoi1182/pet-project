@@ -14,16 +14,8 @@ interface SignupControllerParemeter {
 function useSignupController() {
   const { valideSignupInput } = useAuthService();
 
-  async function handleSignup({
-    enteredInfo,
-    isUsernameAvailable,
-    isNicknameAvailable,
-    setToggleLoginSignup,
-  }: SignupControllerParemeter) {
-    if (
-      !valideSignupInput(enteredInfo, isUsernameAvailable, isNicknameAvailable)
-    )
-      return alert("항목을 모두 확인해주세요.");
+  async function handleSignup({ enteredInfo, isUsernameAvailable, isNicknameAvailable, setToggleLoginSignup }: SignupControllerParemeter) {
+    if (!valideSignupInput(enteredInfo, isUsernameAvailable, isNicknameAvailable)) return alert("항목을 모두 확인해주세요.");
     try {
       await authApi.signup(enteredInfo);
       alert("회원가입 성공!");

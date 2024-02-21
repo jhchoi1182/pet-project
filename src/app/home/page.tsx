@@ -79,55 +79,33 @@ export default function Home() {
     <main className="w-[72%] min-w-[1098px] h-full">
       <nav className={`h-nav ${FONT_VARIANTS.body02}`}>
         <ul className={`h-full`}>
-          <li
-            className={`flex justify-center items-center w-[12%] h-full rounded-t-[20px] ${BG_COLOR.inverse}`}
-          >
-            쉼터
-          </li>
+          <li className={`flex justify-center items-center w-[12%] h-full rounded-t-[20px] ${BG_COLOR.inverse}`}>쉼터</li>
         </ul>
       </nav>
-      <section
-        className={`w-[80%] h-board rounded-tr-[20px] rounded-b-[20px] ${BG_COLOR.inverse} ${FONT_VARIANTS.body03}`}
-      >
-        <header
-          className={`flex items-center w-full h-[10%] font-semibold border-b-[1px] border-black`}
-        >
+      <section className={`w-[80%] h-board rounded-tr-[20px] rounded-b-[20px] ${BG_COLOR.inverse} ${FONT_VARIANTS.body03}`}>
+        <header className={`flex items-center w-full h-[10%] font-semibold border-b-[1px] border-black`}>
           <div className={`w-[70%] text-center`}>제목</div>
           <div className={`w-[15%] text-center`}>작성자</div>
           <div className={`w-[15%] text-center`}>작성일</div>
         </header>
         <ul className={`w-full h-full`}>
-          {posts.map(
-            ({ postId, title, nickname, commentsCount, registeredAt }, i) => (
-              <li
-                key={postId}
-                className={`flex items-center w-full h-[10%] ${
-                  i % 2 === 1 ? "" : BG_COLOR.gray400
-                } ${i === posts.length - 1 ? "rounded-b-[20px]" : ""}`}
-              >
-                <div
-                  className={`w-[70%] text-center`}
-                >{`${title} [${commentsCount}]`}</div>
-                <div className={`w-[15%] text-center`}>{nickname}</div>
-                <div className={`w-[15%] text-center`}>{registeredAt}</div>
-              </li>
-            ),
-          )}
+          {posts.map(({ postId, title, nickname, commentsCount, registeredAt }, i) => (
+            <li key={postId} className={`flex items-center w-full h-[10%] ${i % 2 === 1 ? "" : BG_COLOR.gray400} ${i === posts.length - 1 ? "rounded-b-[20px]" : ""}`}>
+              <div className={`w-[70%] text-center`}>{`${title} [${commentsCount}]`}</div>
+              <div className={`w-[15%] text-center`}>{nickname}</div>
+              <div className={`w-[15%] text-center`}>{registeredAt}</div>
+            </li>
+          ))}
         </ul>
       </section>
-      <div
-        className={`flex justify-between items-end w-[80%] h-[60px] px-10 ${TEXT_COLOR.yellow}`}
-      >
+      <div className={`flex justify-between items-end w-[80%] h-[60px] px-10 ${TEXT_COLOR.yellow}`}>
         <div className={`flex gap-5`}>
           <MaxPageArrow isMin />
           <NextPageArrow isPrev />
         </div>
         <ul className={`flex gap-12`}>
           {pages.map((v, i) => (
-            <li
-              key={i}
-              className={`${currentPage === i + 1 ? "font-bold" : ""}`}
-            >
+            <li key={i} className={`${currentPage === i + 1 ? "font-bold" : ""}`}>
               <button>{v}</button>
             </li>
           ))}

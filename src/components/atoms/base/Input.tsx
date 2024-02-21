@@ -10,21 +10,10 @@ interface LabelWithInputProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactElement;
 }
 
-export default function Input({
-  variant,
-  label,
-  name,
-  isPost = false,
-  children,
-}: LabelWithInputProps) {
+export default function Input({ variant, label, name, isPost = false, children }: LabelWithInputProps) {
   return (
-    <div
-      className={`flex items-center ${isPost ? "flex-col w-full h-full" : ""}`}
-    >
-      <label
-        htmlFor={label}
-        className={`${LABEL_VARIANTS[variant]} ${FONT_VARIANTS.body02} ${TEXT_COLOR.inverse}`}
-      >
+    <div className={`flex items-center ${isPost ? "flex-col w-full h-full" : ""}`}>
+      <label htmlFor={label} className={`${LABEL_VARIANTS[variant]} ${FONT_VARIANTS.body02} ${TEXT_COLOR.inverse}`}>
         {label}
       </label>
       {React.cloneElement(children, {
@@ -41,12 +30,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 Input.TextField = function InputText({ variant, ...props }: InputProps) {
-  return (
-    <input
-      className={`${INPUT_VARIANTS[variant]} outline-none rounded-lg`}
-      {...props}
-    />
-  );
+  return <input className={`${INPUT_VARIANTS[variant]} outline-none rounded-lg`} {...props} />;
 };
 
 interface TextareaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
@@ -54,12 +38,7 @@ interface TextareaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
 }
 
 Input.TextArea = function InputText({ variant, ...props }: TextareaProps) {
-  return (
-    <textarea
-      className={`p-3 w-full h-full outline-none rounded-lg`}
-      {...props}
-    />
-  );
+  return <textarea className={`p-3 w-full h-full outline-none rounded-lg`} {...props} />;
 };
 
 const LABEL_VARIANTS = {

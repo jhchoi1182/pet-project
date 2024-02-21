@@ -10,13 +10,7 @@ export const authApi = {
     instance.post("/user/check-nickname", {
       nickname,
     }),
-  signup: ({
-    username,
-    nickname,
-    email,
-    password,
-    passwordConfirm,
-  }: EnteredInfoType) =>
+  signup: ({ username, nickname, email, password, passwordConfirm }: EnteredInfoType) =>
     instance.post("/user/signup", {
       username,
       nickname,
