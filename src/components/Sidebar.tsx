@@ -6,7 +6,7 @@ import Link from "next/link";
 import Input from "./atoms/base/Input";
 import { useRecoilState } from "recoil";
 import { modalAtom } from "@/libs/atom";
-import AuthModal from "./loginSignup/AuthModal";
+import AuthModal from "./loginSignup/template/AuthModal";
 import Logo from "./atoms/Logo";
 
 export default function Sidebar() {
@@ -20,14 +20,14 @@ export default function Sidebar() {
       <div className={`mt-[60px]`}>
         <Button onClick={() => setActiveLoginModal(true)}>로그인</Button>
       </div>
-      <form className={`flex flex-col h-full mt-20`}>
-        <div>
+      <form className={`flex flex-col w-[70%] h-full mt-20`}>
+        <div className="w-full">
           <Input variant="post" label="제목" name="title" isPost>
             <Input.TextField variant="post" />
           </Input>
         </div>
-        <div className={`flex flex-col h-full`}>
-          <div className={`mt-10 h-full`}>
+        <div className={`flex flex-col w-full h-full`}>
+          <div className={`mt-10 w-full h-full`}>
             <Input variant="post" label="내용" name="contents" isPost>
               <Input.TextArea variant="post" />
             </Input>

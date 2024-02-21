@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${BG_COLOR.navy} ${inter.className}`}>
       <body
-        className={`flex w-full h-screen min-w-[1920px] min-h-[800px] py-[76px] ${FONT_VARIANTS.body01}`}
+        className={`flex w-full h-screen min-w-[1920px] min-h-[800px] py-[76px]`}
       >
         <StudySyncProvider>
           <Sidebar />

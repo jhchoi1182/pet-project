@@ -76,18 +76,18 @@ const posts = [
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   return (
-    <div className="w-[1098px] min-w-[1098px] h-full">
+    <main className="w-[72%] min-w-[1098px] h-full">
       <nav className={`h-nav ${FONT_VARIANTS.body02}`}>
         <ul className={`h-full`}>
           <li
-            className={`flex justify-center items-center w-[161px] h-full rounded-t-[20px] ${BG_COLOR.inverse}`}
+            className={`flex justify-center items-center w-[12%] h-full rounded-t-[20px] ${BG_COLOR.inverse}`}
           >
             쉼터
           </li>
         </ul>
       </nav>
       <section
-        className={`w-[1098px] h-board rounded-tr-[20px] rounded-b-[20px] ${BG_COLOR.inverse} ${FONT_VARIANTS.body03}`}
+        className={`w-[80%] h-board rounded-tr-[20px] rounded-b-[20px] ${BG_COLOR.inverse} ${FONT_VARIANTS.body03}`}
       >
         <header
           className={`flex items-center w-full h-[10%] font-semibold border-b-[1px] border-black`}
@@ -116,7 +116,7 @@ export default function Home() {
         </ul>
       </section>
       <div
-        className={`flex justify-between items-end h-[60px] px-10 ${TEXT_COLOR.yellow}`}
+        className={`flex justify-between items-end w-[80%] h-[60px] px-10 ${TEXT_COLOR.yellow}`}
       >
         <div className={`flex gap-5`}>
           <MaxPageArrow isMin />
@@ -137,6 +137,6 @@ export default function Home() {
           <MaxPageArrow />
         </div>
       </div>
-    </div>
+    </main>
   );
 }

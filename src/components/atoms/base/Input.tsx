@@ -18,7 +18,9 @@ export default function Input({
   children,
 }: LabelWithInputProps) {
   return (
-    <div className={`flex items-center ${isPost ? "flex-col h-full" : ""}`}>
+    <div
+      className={`flex items-center ${isPost ? "flex-col w-full h-full" : ""}`}
+    >
       <label
         htmlFor={label}
         className={`${LABEL_VARIANTS[variant]} ${FONT_VARIANTS.body02} ${TEXT_COLOR.inverse}`}
@@ -54,7 +56,7 @@ interface TextareaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
 Input.TextArea = function InputText({ variant, ...props }: TextareaProps) {
   return (
     <textarea
-      className={`p-3 w-[370px] h-full outline-none rounded-lg`}
+      className={`p-3 w-full h-full outline-none rounded-lg`}
       {...props}
     />
   );
@@ -69,5 +71,5 @@ const LABEL_VARIANTS = {
 const INPUT_VARIANTS = {
   login: `px-3 w-[324px] h-[47px]`,
   signup: `px-3 w-[283px] h-[47px]`,
-  post: `px-3 w-[370px] h-[47px]`,
+  post: `px-3 w-full h-[47px]`,
 };
