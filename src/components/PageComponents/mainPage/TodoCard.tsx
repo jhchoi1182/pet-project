@@ -1,8 +1,8 @@
 import { Todo } from "@/types/model/todo";
 import Link from "next/link";
 import Button from "../../atoms/base/Button";
-import useTodoDelete from "@/hooks/todoController/useTodoDelete";
-import useTodoToggleIsDone from "@/hooks/todoController/useTodoToggleIsDone";
+import useTodoDelete from "@/controller/todoController/useTodoDelete";
+import useTodoToggleIsDone from "@/controller/todoController/useTodoToggleIsDone";
 
 type TodoCardProps = {
   todo: Todo;

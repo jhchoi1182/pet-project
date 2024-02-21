@@ -2,7 +2,7 @@ import CommentForm from "../elements/CommentForm";
 import { Comment } from "@/types/model/comment";
 import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 import CommentCard from "../elements/CommentCard";
-import useComments from "@/hooks/commentController/useComments";
+import useComments from "@/controller/commentController/useComments";
 
 export default function Comments({ todoId }: { todoId: number }) {
   const { data, isLoading } = useComments(todoId);

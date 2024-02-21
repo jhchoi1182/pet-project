@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "../../atoms/base/Button";
 import Input from "../../atoms/base/Input";
 
-import useTodoPost from "@/hooks/todoController/useTodoPost";
+import useTodoPost from "@/controller/todoController/useTodoPost";
 import todoService from "@/service/todoService";
 
 export default function TodoForm() {

@@ -1,5 +1,5 @@
 import Button from "@/components/atoms/base/Button";
-import useTodoDelete from "@/hooks/todoController/useTodoDelete";
+import useTodoDelete from "@/controller/todoController/useTodoDelete";
 import todoService from "@/service/todoService";
 
 export default function TodoDeleteButton({ todoId }: { todoId: number }) {

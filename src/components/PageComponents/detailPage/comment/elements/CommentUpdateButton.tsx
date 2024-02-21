@@ -1,5 +1,5 @@
 import Button from "@/components/atoms/base/Button";
-import useCommentUpdate from "@/hooks/commentController/useCommentUpdate";
+import useCommentUpdate from "@/controller/commentController/useCommentUpdate";
 import commentService from "@/service/commentService";
 
 interface CommentUpdateButtonProps {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ModalPortal from "../atoms/base/ModalPortal";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
+import ModalPortal from "../../atoms/base/ModalPortal";
+import LoginForm from "../organisms/LoginForm";
+import SignupForm from "../organisms/SignupForm";
 
 export default function AuthModal() {
   const [toggleLoginSignup, setToggleLoginSignup] = useState(true);

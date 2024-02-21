@@ -8,6 +8,7 @@ export const TEXT_COLOR = {
   red500: "text-[#FF0000]",
   red600: "text-[#D63031]",
   blue: "text-[#0984E3]",
+  trans: "text-transparent",
 };
 
 export const BG_COLOR = {

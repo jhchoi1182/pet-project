@@ -1,5 +1,5 @@
 import Button from "@/components/atoms/base/Button";
-import useCommentDelete from "@/hooks/commentController/useCommentDelete";
+import useCommentDelete from "@/controller/commentController/useCommentDelete";
 
 interface CommentDeleteButtonProps {
   todoId: number;

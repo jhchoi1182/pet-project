@@ -5,7 +5,7 @@ import Button from "./atoms/base/Button";
 import Link from "next/link";
 import Input from "./atoms/base/Input";
 import { useRecoilState } from "recoil";
-import { modalAtom } from "@/libs/atom";
+import { modalAtom } from "@/stateStore/commonAtom";
 import AuthModal from "./loginSignup/template/AuthModal";
 import Logo from "./atoms/Logo";
 

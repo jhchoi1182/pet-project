@@ -1,5 +1,5 @@
 import Button from "@/components/atoms/base/Button";
-import useTodoContentsUpdate from "@/hooks/todoController/useTodoContentsUpdate";
+import useTodoContentsUpdate from "@/controller/todoController/useTodoContentsUpdate";
 import todoService from "@/service/todoService";
 
 interface TodoUpdateButtonProps {

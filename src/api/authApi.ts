@@ -1,9 +1,13 @@
 import { instance } from "../config/axiosConfig";
 
 export const authApi = {
-  checkId: (username: String) =>
+  checkUsername: (username: String) =>
     instance.post("/user/check-username", {
       username,
+    }),
+  checkNickname: (nickname: String) =>
+    instance.post("/user/check-nickname", {
+      nickname,
     }),
   signup: (username: String, password: String, passwordConfirm: String) =>
     instance.post("/user/signup", {

@@ -1,7 +1,7 @@
 import React from "react";
-import Close from "../atoms/icons/Close";
+import Close from "../../atoms/icons/Close";
 import { useSetRecoilState } from "recoil";
-import { modalAtom } from "@/libs/atom";
+import { modalAtom } from "@/stateStore/commonAtom";
 
 export default function CloseButton() {
   const setActiveLoginModal = useSetRecoilState(modalAtom);

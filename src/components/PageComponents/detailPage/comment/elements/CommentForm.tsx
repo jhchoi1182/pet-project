@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "../../../../atoms/base/Button";
-import useCommentPost from "@/hooks/commentController/useCommentPost";
+import useCommentPost from "@/controller/commentController/useCommentPost";
 import commentService from "@/service/commentService";
 
 export default function CommentForm({ todoId }: { todoId: number }) {

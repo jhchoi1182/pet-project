@@ -1,11 +1,10 @@
-import { BG_COLOR } from "@/styles/colors";
+import { BG_COLOR, TEXT_COLOR } from "@/styles/colors";
 import React from "react";
-import Logo from "../atoms/Logo";
-import Input from "../atoms/base/Input";
-import Button from "../atoms/base/Button";
-import { useSetRecoilState } from "recoil";
-import { modalAtom } from "@/libs/atom";
-import CloseButton from "./CloseButton";
+import Logo from "../../atoms/Logo";
+import Input from "../../atoms/base/Input";
+import Button from "../../atoms/base/Button";
+import CloseButton from "../molecules/CloseButton";
+import { FONT_VARIANTS } from "@/styles/fonts";
 
 interface LoginModalProps {
   setToggleLoginSignup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,7 +13,7 @@ interface LoginModalProps {
 export default function LoginModal({ setToggleLoginSignup }: LoginModalProps) {
   return (
     <form
-      className={`flex flex-col items-center w-[689px] h-[464px] ${BG_COLOR.navy} rounded-[10px] shadow-xl`}
+      className={`flex flex-col items-center w-[689px] h-[474px] ${BG_COLOR.navy} rounded-[10px] shadow-xl`}
     >
       <CloseButton />
       <div className={`mt-11`}>
@@ -28,7 +27,14 @@ export default function LoginModal({ setToggleLoginSignup }: LoginModalProps) {
           <Input.TextField variant="login" />
         </Input>
       </div>
-      <div className={`flex gap-9 mt-[52px]`}>
+      <div className={`mt-[25px]`}>
+        <span
+          className={`${FONT_VARIANTS.body03} ${TEXT_COLOR.red500} select-none`}
+        >
+          아이디 또는 비밀번호를 다시 확인해주세요.
+        </span>
+      </div>
+      <div className={`flex gap-9 mt-[25px]`}>
         <Button>로그인</Button>
         <Button onClick={() => setToggleLoginSignup(false)}>회원가입</Button>
       </div>
