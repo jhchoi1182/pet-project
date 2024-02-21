@@ -9,7 +9,7 @@ import { handleExecptionError } from "./exceptionService";
 
 const { removeCookie } = cookieUtils();
 
-function useAuthService() {
+function authService() {
   async function handleWithdrawal() {
     if (window.confirm("정말 탈퇴하시겠습니까?")) {
       try {
@@ -79,7 +79,7 @@ function useAuthService() {
   };
 }
 
-export default useAuthService;
+export default authService;
 
 function isValidUsernameOrNickname(value: string) {
   return value.length >= 2 && value.length <= 16;

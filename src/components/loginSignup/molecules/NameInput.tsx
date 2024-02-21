@@ -3,8 +3,8 @@ import Input from "@/components/atoms/base/Input";
 import React, { useEffect, useState } from "react";
 import ValidationText from "../atom/ValidationText";
 import { TEXT_COLOR } from "@/styles/colors";
-import useAuthService from "@/service/useAuthService";
-import useNameDuplicationCheckController from "@/controller/authController/useNameDuplicationCheckController";
+import authService from "@/service/authService";
+import nameDuplicationCheckController from "@/controller/authController/nameDuplicationCheckController";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 
 export type NameInputType = "username" | "nickname";
@@ -20,12 +20,12 @@ const label = {
   nickname: "닉네임",
 };
 
+const { changeValidationTextColor } = authService();
+const { checkDuplication } = nameDuplicationCheckController();
+
 export default function NameInput({ type, value, handleInputChange, setIsNameAvailable }: NameInputProps) {
   const [validationTextColor, setValidationTextColor] = useState(TEXT_COLOR.trans);
   const [exceptionText, setExceptionText] = useState("");
-
-  const { changeValidationTextColor } = useAuthService();
-  const { checkDuplication } = useNameDuplicationCheckController();
 
   const handleNameDuplicationCheck = (type: NameInputType) => {
     checkDuplication(type, value, setExceptionText, setValidationTextColor, setIsNameAvailable);

@@ -2,7 +2,7 @@ import Input from "@/components/atoms/base/Input";
 import { TEXT_COLOR } from "@/styles/colors";
 import React, { useEffect, useState } from "react";
 import ValidationText from "../atom/ValidationText";
-import useAuthService from "@/service/useAuthService";
+import authService from "@/service/authService";
 
 export type EmailPasswordType = "email" | "password" | "passwordConfirm";
 interface EmailPasswordInputProps {
@@ -18,10 +18,10 @@ const label = {
   passwordConfirm: "비밀번호 확인",
 };
 
+const { changeValidationTextColor } = authService();
+
 export default function EmailPasswordInput({ type, value, password, handleInputChange }: EmailPasswordInputProps) {
   const [validationTextColor, setValidationTextColor] = useState(type === "password" ? TEXT_COLOR.inverse : TEXT_COLOR.trans);
-
-  const { changeValidationTextColor } = useAuthService();
 
   useEffect(() => {
     changeValidationTextColor(type, value, setValidationTextColor, password);

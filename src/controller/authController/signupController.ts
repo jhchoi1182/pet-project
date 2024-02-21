@@ -1,8 +1,9 @@
 import { authApi } from "@/api/authApi";
-import useAuthService from "@/service/useAuthService";
+import useAuthService from "@/service/authService";
 import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 import { handleExecptionError } from "@/service/exceptionService";
+import authService from "@/service/authService";
 
 interface SignupControllerParemeter {
   enteredInfo: EnteredInfoType;
@@ -10,10 +11,9 @@ interface SignupControllerParemeter {
   isNicknameAvailable: boolean;
   setToggleLoginSignup: SetStateBoolean;
 }
+const { valideSignupInput } = authService();
 
-function useSignupController() {
-  const { valideSignupInput } = useAuthService();
-
+function signupController() {
   async function handleSignup({ enteredInfo, isUsernameAvailable, isNicknameAvailable, setToggleLoginSignup }: SignupControllerParemeter) {
     if (!valideSignupInput(enteredInfo, isUsernameAvailable, isNicknameAvailable)) return alert("항목을 모두 확인해주세요.");
     try {
@@ -28,4 +28,4 @@ function useSignupController() {
   return { handleSignup };
 }
 
-export default useSignupController;
+export default signupController;
