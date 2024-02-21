@@ -1,63 +1,46 @@
 import { authApi } from "@/api/authApi";
 import { NameInputType } from "@/components/loginSignup/molecules/NameInput";
-import { nameDuplicationAtom } from "@/stateStore/authAtom";
-import { ErrorResponse } from "@/types/response/ErrorResponse";
-import axios from "axios";
+import authService from "@/service/authService";
+import {
+  nicknameDuplicationAtom,
+  usernameDuplicationAtom,
+} from "@/stateStore/authAtom";
+import { TEXT_COLOR } from "@/styles/colors";
+import { SetStateString } from "@/types/type/utilityTypes";
 import { useSetRecoilState } from "recoil";
 
-interface NameDuplicationCheckControllerParameter {
-  type: NameInputType;
-  username: string;
-  nickname: string;
-}
-
 function useNameDuplicationCheckController() {
-  const setNameDuplication = useSetRecoilState(nameDuplicationAtom);
-  const checkDuplication = async ({
-    type,
-    username,
-    nickname,
-  }: NameDuplicationCheckControllerParameter) => {
-    if (type === "username") {
-      try {
-        await authApi.checkUsername(username);
-        setNameDuplication((prevState) => ({
-          ...prevState,
-          isUsernameAvailable: true,
-        }));
-      } catch (error) {
-        if (!axios.isAxiosError(error)) return console.error(error);
-        const { status } = (error as ErrorResponse).response;
-        // setValidationTextColor(TextColor.RED);
-        setNameDuplication((prevState) => ({
-          ...prevState,
-          isUsernameAvailable: false,
-        }));
-        // if (status === 400) return setCheckResultText("잘못된 입력값입니다.");
-        // if (status === 409)
-        //   return setCheckResultText("이미 사용 중인 아이디입니다.");
-      }
-    } else {
-      try {
-        await authApi.checkNickname(nickname);
-        setNameDuplication((prevState) => ({
-          ...prevState,
-          isNicknameAvailable: true,
-        }));
-      } catch (error) {
-        if (!axios.isAxiosError(error)) return console.error(error);
-        const { status } = (error as ErrorResponse).response;
-        // setValidationTextColor(TextColor.RED);
-        setNameDuplication((prevState) => ({
-          ...prevState,
-          isNicknameAvailable: false,
-        }));
-        // if (status === 400) return setCheckResultText("잘못된 입력값입니다.");
-        // if (status === 409)
-        //   return setCheckResultText("이미 사용 중인 아이디입니다.");
-      }
+  const setUsernameDuplication = useSetRecoilState(usernameDuplicationAtom);
+  const setNicknameDuplication = useSetRecoilState(nicknameDuplicationAtom);
+  const { handleErrorResponse } = authService();
+
+  async function checkDuplication(
+    type: NameInputType,
+    value: string,
+    setExceptionText: SetStateString,
+    setValidationTextColor: SetStateString,
+  ) {
+    try {
+      const checkApi =
+        type === "username" ? authApi.checkUsername : authApi.checkNickname;
+      await checkApi(value);
+
+      const setDuplication =
+        type === "username" ? setUsernameDuplication : setNicknameDuplication;
+      setDuplication(true);
+      setExceptionText(
+        `사용 가능한 ${type === "username" ? "아이디" : "닉네임"}입니다.`,
+      );
+      setValidationTextColor(TEXT_COLOR.blue);
+    } catch (error) {
+      const setDuplication =
+        type === "username" ? setUsernameDuplication : setNicknameDuplication;
+      setDuplication(false);
+      setValidationTextColor(TEXT_COLOR.red500);
+      handleErrorResponse(error, setExceptionText);
     }
-  };
+  }
+
   return { checkDuplication };
 }
 

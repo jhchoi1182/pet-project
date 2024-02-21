@@ -24,23 +24,12 @@ export default function SignupModal({
   const [isUsernameAvailable, setIsUsernameAvailable] = useState(false);
   const [isNicknameAvailable, setIsNicknameAvailable] = useState(false);
 
-  const { checkDuplication } = useNameDuplicationCheckController();
-
   // const { handleSignup } = authService();
   // handleSignup({ isPassDuplication, username, password, passwordConfirm });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setEnteredInfo((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleNameDuplicationCheck = (type: NameInputType) => {
-    const { username, nickname } = enteredInfo;
-    checkDuplication({
-      type,
-      username,
-      nickname,
-    });
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -62,13 +51,11 @@ export default function SignupModal({
           type="username"
           value={enteredInfo.username}
           handleInputChange={handleInputChange}
-          handleNameDuplicationCheck={handleNameDuplicationCheck}
         />
         <NameInput
           type="nickname"
           value={enteredInfo.nickname}
           handleInputChange={handleInputChange}
-          handleNameDuplicationCheck={handleNameDuplicationCheck}
         />
         <EmailPasswordInput
           type="email"

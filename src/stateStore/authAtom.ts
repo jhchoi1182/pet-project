@@ -1,9 +1,10 @@
 import { atom } from "recoil";
 
-export const nameDuplicationAtom = atom({
+export const usernameDuplicationAtom = atom({
   key: "nameDuplication",
-  default: {
-    isUsernameAvailable: false,
-    isNicknameAvailable: false,
-  },
+  default: false,
+});
+export const nicknameDuplicationAtom = atom({
+  key: "nameDuplication",
+  default: false,
 });

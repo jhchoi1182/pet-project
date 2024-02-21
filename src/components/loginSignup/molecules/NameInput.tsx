@@ -4,13 +4,13 @@ import React, { useEffect, useState } from "react";
 import ValidationText from "../atom/ValidationText";
 import { TEXT_COLOR } from "@/styles/colors";
 import authService from "@/service/authService";
+import useNameDuplicationCheckController from "@/controller/authController/useNameDuplicationCheckController";
 
 export type NameInputType = "username" | "nickname";
 interface NameInputProps {
   type: NameInputType;
   value: string;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleNameDuplicationCheck: (type: NameInputType) => void;
 }
 
 const label = {
@@ -22,13 +22,18 @@ export default function NameInput({
   type,
   value,
   handleInputChange,
-  handleNameDuplicationCheck,
 }: NameInputProps) {
   const [validationTextColor, setValidationTextColor] = useState(
     TEXT_COLOR.trans,
   );
+  const [exceptionText, setExceptionText] = useState("");
 
   const { changeValidationTextColor } = authService();
+  const { checkDuplication } = useNameDuplicationCheckController();
+
+  const handleNameDuplicationCheck = (type: NameInputType) => {
+    checkDuplication(type, value, setExceptionText, setValidationTextColor);
+  };
 
   useEffect(() => {
     changeValidationTextColor(type, value, setValidationTextColor);
@@ -52,7 +57,11 @@ export default function NameInput({
           중복 확인
         </Button>
       </div>
-      <ValidationText type={type} validationTextColor={validationTextColor} />
+      <ValidationText
+        type={type}
+        validationTextColor={validationTextColor}
+        exceptionText={exceptionText}
+      />
     </div>
   );
 }
