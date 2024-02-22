@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/globals.css";
+import "../styles/reset.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
 import { BG_COLOR } from "@/styles/colors";
