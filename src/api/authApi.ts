@@ -23,5 +23,9 @@ export const authApi = {
       username,
       password,
     }),
+  getUserInfo: async () => {
+    const { data } = await instance.get("/user");
+    return data?.result;
+  },
   withdraw: () => instance.delete("/user/delete"),
 };

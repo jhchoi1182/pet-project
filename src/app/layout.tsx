@@ -3,9 +3,8 @@ import "../styles/globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next";
 import { BG_COLOR } from "@/styles/colors";
-import Sidebar from "@/components/Sidebar";
-import StudySyncProvider from "@/provider/StudySyncProvider";
-import { FONT_VARIANTS } from "@/styles/fonts";
+import Sidebar from "@/components/sidebar/template/Sidebar";
+import AppProvider from "@/provider/AppProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +20,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${BG_COLOR.navy} ${inter.className}`}>
       <body className={`flex w-full h-screen min-w-[1920px] min-h-[800px] py-[76px]`}>
-        <StudySyncProvider>
+        <AppProvider>
           <Sidebar />
           {children}
-        </StudySyncProvider>
+        </AppProvider>
       </body>
     </html>
   );

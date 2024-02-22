@@ -98,21 +98,23 @@ export default function Home() {
           ))}
         </ul>
       </section>
-      <div className={`flex justify-between items-end w-[80%] h-[60px] px-10 ${TEXT_COLOR.yellow}`}>
-        <div className={`flex gap-5`}>
-          <MaxPageArrow isMin />
-          <NextPageArrow isPrev />
-        </div>
-        <ul className={`flex gap-12`}>
-          {pages.map((v, i) => (
-            <li key={i} className={`${currentPage === i + 1 ? "font-bold" : ""}`}>
-              <button>{v}</button>
-            </li>
-          ))}
-        </ul>
-        <div className={`flex gap-5`}>
-          <NextPageArrow />
-          <MaxPageArrow />
+      <div className={`flex items-end w-[80%] h-[60px] px-10 ${TEXT_COLOR.yellow}`}>
+        <div className={`flex justify-between w-full`}>
+          <div className={`flex gap-5`}>
+            <MaxPageArrow isMin />
+            <NextPageArrow isPrev />
+          </div>
+          <ul className={`flex gap-12`}>
+            {pages.map((v, i) => (
+              <li key={i} className={`${currentPage === i + 1 ? "font-bold" : ""}`}>
+                <button>{v}</button>
+              </li>
+            ))}
+          </ul>
+          <div className={`flex gap-5`}>
+            <NextPageArrow />
+            <MaxPageArrow />
+          </div>
         </div>
       </div>
     </main>

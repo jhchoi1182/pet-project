@@ -1,26 +1,25 @@
 "use client";
 
 import React from "react";
-import Button from "./atoms/base/Button";
+import Button from "../../atoms/base/Button";
 import Link from "next/link";
-import Input from "./atoms/base/Input";
-import { useRecoilState } from "recoil";
-import { modalAtom } from "@/stateStore/commonAtom";
-import AuthModal from "./loginSignup/template/AuthModal";
-import Logo from "./atoms/Logo";
+import Input from "../../atoms/base/Input";
+import { useRecoilValue } from "recoil";
+import { loginModalAtom } from "@/stateStore/commonAtom";
+import AuthModal from "../../loginSignup/template/AuthModal";
+import Logo from "../../atoms/Logo";
+import UsernameOrLoginButton from "../molecules/UsernameOrLoginButton";
 
 export default function Sidebar() {
-  const [activeLoginModal, setActiveLoginModal] = useRecoilState(modalAtom);
+  const activeLoginModal = useRecoilValue(loginModalAtom);
 
   return (
     <section className={`flex flex-col items-center w-[28%] h-full`}>
       <Link href={`/home`} className="mt-16">
         <Logo />
       </Link>
-      <div className={`mt-[60px]`}>
-        <Button onClick={() => setActiveLoginModal(true)}>로그인</Button>
-      </div>
-      <form className={`flex flex-col w-[70%] h-full mt-20`}>
+      <UsernameOrLoginButton />
+      <form className={`flex flex-col w-[70%] h-full`}>
         <div className="w-full">
           <Input variant="post" label="제목" name="title" isPost>
             <Input.TextField variant="post" />
