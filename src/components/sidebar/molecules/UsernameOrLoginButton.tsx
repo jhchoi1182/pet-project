@@ -2,7 +2,6 @@
 
 import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 import Button from "@/components/atoms/base/Button";
-import DownArrow from "@/components/atoms/icons/DownArrow";
 import useAuthController from "@/controller/authController/useAuthController";
 import { loginModalAtom, usernameAtom } from "@/stateStore/commonAtom";
 import { TEXT_COLOR } from "@/styles/colors";
@@ -10,6 +9,7 @@ import { FONT_VARIANTS } from "@/styles/fonts";
 import { cookieUtils } from "@/util/cookieUtils";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import UserOptionsDropdown from "./UserOptionsDropdown";
 
 const { getCookie } = cookieUtils();
 const token = getCookie();
@@ -41,9 +41,7 @@ export default function UsernameOrLoginButton() {
             </span>
             <p>환영합니다!</p>
           </div>
-          <button>
-            <DownArrow />
-          </button>
+          <UserOptionsDropdown />
         </div>
       ) : !isLogin ? (
         <Button onClick={() => setActiveLoginModal(true)}>로그인</Button>
