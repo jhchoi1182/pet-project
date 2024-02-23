@@ -10,17 +10,6 @@ import { handleExecptionError } from "./exceptionService";
 const { removeCookie } = cookieUtils();
 
 function authService() {
-  async function handleWithdrawal() {
-    if (window.confirm("정말 탈퇴하시겠습니까?")) {
-      try {
-        await authApi.withdraw();
-        removeCookie();
-      } catch (error) {
-        handleExecptionError(error);
-      }
-    }
-  }
-
   function valideSignupInput({ username, nickname, email, password, passwordConfirm }: EnteredInfoType, isUsernameAvailable: boolean, isNicknameAvailable: boolean) {
     const isValid =
       isValidUsernameOrNickname(username) &&
@@ -72,7 +61,6 @@ function authService() {
   }
 
   return {
-    handleWithdrawal,
     valideSignupInput,
     changeValidationTextColor,
     handleErrorResponse,

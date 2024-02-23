@@ -2,7 +2,7 @@
 
 import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 import Button from "@/components/atoms/base/Button";
-import useAuthController from "@/controller/authController/useAuthController";
+import useAuthenticationController from "@/controller/authController/useAuthenticationController";
 import { loginModalAtom, usernameAtom } from "@/stateStore/commonAtom";
 import { TEXT_COLOR } from "@/styles/colors";
 import { FONT_VARIANTS } from "@/styles/fonts";
@@ -19,7 +19,7 @@ export default function UsernameOrLoginButton() {
   const setActiveLoginModal = useSetRecoilState(loginModalAtom);
   const [username, setUsername] = useRecoilState(usernameAtom);
 
-  const { data, isError } = useAuthController(token);
+  const { data, isError } = useAuthenticationController(token);
 
   useEffect(() => {
     if (!token) return setIsLogin(false);
@@ -32,7 +32,7 @@ export default function UsernameOrLoginButton() {
 
   return (
     <div className={`h-52 mt-[60px] ${FONT_VARIANTS.body02}`}>
-      {data || username ? (
+      {username ? (
         <div className={`flex gap-2 ml-[10.4px] ${TEXT_COLOR.inverse}`}>
           <div className={`flex flex-col gap-3 items-center`}>
             <span className={`flex items-center`}>
@@ -43,7 +43,7 @@ export default function UsernameOrLoginButton() {
           </div>
           <UserOptionsDropdown />
         </div>
-      ) : !isLogin ? (
+      ) : !isLogin || data !== undefined ? (
         <Button onClick={() => setActiveLoginModal(true)}>로그인</Button>
       ) : (
         <div className="mt-6">

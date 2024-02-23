@@ -2,7 +2,7 @@ import { authApi } from "@/api/authApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
 import { useQuery } from "@tanstack/react-query";
 
-function useAuthController(token: string | undefined) {
+function useAuthenticationController(token: string | undefined) {
   return useQuery({
     queryKey: [QUERY_KEY.username],
     queryFn: () => authApi.getUserInfo(),
@@ -10,4 +10,4 @@ function useAuthController(token: string | undefined) {
   });
 }
 
-export default useAuthController;
+export default useAuthenticationController;
