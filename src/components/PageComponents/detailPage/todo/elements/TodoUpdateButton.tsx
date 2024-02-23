@@ -1,5 +1,5 @@
 import Button from "@/components/atoms/base/Button";
-import useTodoContentsUpdate from "@/controller/todoController/useTodoContentsUpdate";
+import useTodoContentsUpdate from "@/controller/posrController/useTodoContentsUpdate";
 import todoService from "@/service/todoService";
 
 interface TodoUpdateButtonProps {
@@ -12,33 +12,18 @@ interface TodoUpdateButtonProps {
   setToggleEditMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function TodoUpdateButton({
-  todoId,
-  editableTodo,
-  toggleEditMode,
-  setToggleEditMode,
-}: TodoUpdateButtonProps) {
+export default function TodoUpdateButton({ todoId, editableTodo, toggleEditMode, setToggleEditMode }: TodoUpdateButtonProps) {
   const { contents, dueDate } = editableTodo;
   const { mutate } = useTodoContentsUpdate(todoId, contents, dueDate);
   const { handleUpdate } = todoService();
   return (
     <>
       {toggleEditMode ? (
-        <Button
-          variant="update"
-          size="small"
-          onClick={() =>
-            handleUpdate({ editableTodo, mutate, setToggleEditMode })
-          }
-        >
+        <Button variant="update" size="small" onClick={() => handleUpdate({ editableTodo, mutate, setToggleEditMode })}>
           완료
         </Button>
       ) : (
-        <Button
-          variant="update"
-          size="small"
-          onClick={() => setToggleEditMode(true)}
-        >
+        <Button variant="update" size="small" onClick={() => setToggleEditMode(true)}>
           수정
         </Button>
       )}

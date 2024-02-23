@@ -9,7 +9,7 @@ import { FONT_VARIANTS } from "@/styles/fonts";
 import { cookieUtils } from "@/util/cookieUtils";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import UserOptionsDropdown from "./UserOptionsDropdown";
+import UserOptionsDropdown from "../molecules/UserOptionsDropdown";
 
 const { getCookie } = cookieUtils();
 const token = getCookie();

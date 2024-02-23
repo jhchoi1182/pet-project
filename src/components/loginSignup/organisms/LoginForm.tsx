@@ -18,7 +18,6 @@ export default function LoginModal({ setToggleLoginSignup }: LoginModalProps) {
     password: "",
   });
   const [validationTextColor, setValidationTextColor] = useState(TEXT_COLOR.trans);
-
   const { handleUserLogin } = useLoginController();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

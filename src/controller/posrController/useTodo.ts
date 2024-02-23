@@ -1,5 +1,5 @@
-import { todoApi } from "@/api/todoApi";
-import { Todo } from "@/types/model/todo";
+import { todoApi } from "@/api/postApi";
+import { Todo } from "@/types/model/post";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 

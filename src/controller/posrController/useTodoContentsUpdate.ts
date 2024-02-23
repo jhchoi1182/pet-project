@@ -1,4 +1,4 @@
-import { todoApi } from "@/api/todoApi";
+import { todoApi } from "@/api/postApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function useTodoContentsUpdate(todoId: number, contents: string, dueDate: string) {
