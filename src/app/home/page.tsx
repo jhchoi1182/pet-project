@@ -26,7 +26,7 @@ export default function Home() {
           <div className={`w-[15%] text-center`}>작성자</div>
           <div className={`w-[15%] text-center`}>작성일</div>
         </header>
-        <PostList posts={content} />
+        {isLoading ? <BoardLoadingSpinner /> : <PostList posts={content} />}
       </section>
       <PaginationNumGroup currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
     </main>
