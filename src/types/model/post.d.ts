@@ -1,8 +1,11 @@
-export interface Post {
+export interface PostWithoutContents {
   postId: number;
   title: string;
-  contents: string;
   nickname: string;
   commentsCount: number;
-  registeredAt: string;
+  createdAt: string;
+}
+
+export interface Post extends PostWithoutContents {
+  contents: string;
 }

@@ -1,12 +1,12 @@
 import { postApi } from "@/api/postApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
-import { Post } from "@/types/model/post";
+import { PostsResponse } from "@/types/response/postsResponse";
 import { useQuery } from "@tanstack/react-query";
 
-function usePostsController() {
-  return useQuery<Post[]>({
-    queryKey: [QUERY_KEY.posts],
-    queryFn: () => postApi.getPosts(),
+function usePostsController(currentPage: number) {
+  return useQuery<PostsResponse>({
+    queryKey: [QUERY_KEY.posts, currentPage],
+    queryFn: () => postApi.getPosts(currentPage),
   });
 }
 

@@ -1,17 +1,15 @@
 "use client";
 
-import MaxPageArrow from "@/components/atoms/icons/MaxPageArrow";
-import NextPageArrow from "@/components/atoms/icons/NextPageArrow";
+import PaginationNumGroup from "@/components/postBoard/molecules/PaginationNumGroup";
 import usePostsController from "@/controller/posrController/usePostsController";
-import { BG_COLOR, TEXT_COLOR } from "@/styles/colors";
+import { BG_COLOR } from "@/styles/colors";
 import { FONT_VARIANTS } from "@/styles/fonts";
 import { useState } from "react";
 
-const pages = Array.from({ length: 13 }, (_, i) => i + 1);
-
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data } = usePostsController();
+  const { data } = usePostsController(currentPage - 1);
+  const { content, totalPages = 0 } = data ?? {};
 
   return (
     <main className={`w-[72%] min-w-[1098px] h-full`}>
@@ -27,34 +25,16 @@ export default function Home() {
           <div className={`w-[15%] text-center`}>작성일</div>
         </header>
         <ul className={`w-full h-full`}>
-          {data?.map(({ postId, title, nickname, commentsCount, registeredAt }, i) => (
-            <li key={postId} className={`flex items-center w-full h-[10%] ${i % 2 === 1 ? "" : BG_COLOR.gray400} ${i === data?.length - 1 ? "rounded-b-[20px]" : ""}`}>
+          {content?.map(({ postId, title, nickname, commentsCount, createdAt }, i) => (
+            <li key={postId} className={`flex items-center w-full h-[10%] ${i % 2 === 1 ? "" : BG_COLOR.gray400} ${i === content?.length - 1 ? "rounded-b-[20px]" : ""}`}>
               <div className={`w-[70%] text-center`}>{`${title} ${commentsCount !== 0 ? `[${commentsCount}]` : ``}`}</div>
               <div className={`w-[15%] text-center`}>{nickname}</div>
-              <div className={`w-[15%] text-center`}>{registeredAt}</div>
+              <div className={`w-[15%] text-center`}>{createdAt}</div>
             </li>
           ))}
         </ul>
       </section>
-      <div className={`flex items-end w-[80%] h-[60px] px-10 ${TEXT_COLOR.yellow}`}>
-        <div className={`flex justify-between w-full`}>
-          <div className={`flex gap-5`}>
-            <MaxPageArrow isMin />
-            <NextPageArrow isPrev />
-          </div>
-          <ul className={`flex gap-12`}>
-            {pages.map((v, i) => (
-              <li key={i} className={`${currentPage === i + 1 ? "font-bold" : ""}`}>
-                <button>{v}</button>
-              </li>
-            ))}
-          </ul>
-          <div className={`flex gap-5`}>
-            <NextPageArrow />
-            <MaxPageArrow />
-          </div>
-        </div>
-      </div>
+      <PaginationNumGroup currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
     </main>
   );
 }

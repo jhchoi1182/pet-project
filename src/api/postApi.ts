@@ -1,8 +1,8 @@
 import { instance } from "../config/axiosConfig";
 
 export const postApi = {
-  getPosts: async () => {
-    const { data } = await instance.get("/post");
+  getPosts: async (page: number, size: number = 9) => {
+    const { data } = await instance.get(`/post?page=${page}&size=${size}&sort=createdAt,desc`);
     return data?.result;
   },
   getPost: async (postId: number) => {
