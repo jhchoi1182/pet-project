@@ -9,28 +9,26 @@ import { useSetRecoilState } from "recoil";
 const { removeCookie } = cookieUtils();
 
 export default function UserOptionsDropdown() {
-  const [toggleModal, setToggleModal] = useState(false);
+  const [toggleDropdown, setToggleDropdown] = useState(false);
   const setUsername = useSetRecoilState(usernameAtom);
 
   const handleLogout = () => {
     removeCookie();
-    setToggleModal(false);
+    setToggleDropdown(false);
     setUsername(null);
   };
 
   const handleWithdraw = () => {
-    withdrawController()();
-    setToggleModal(false);
-    setUsername(null);
+    withdrawController()({ setToggleDropdown, setUsername });
   };
 
   return (
     <div className={`relative flex`}>
-      <button onClick={() => setToggleModal(true)}>
+      <button onClick={() => setToggleDropdown(true)}>
         <DownArrow />
       </button>
-      {toggleModal && (
-        <Dropdown setToggleModal={setToggleModal}>
+      {toggleDropdown && (
+        <Dropdown setToggleDropdown={setToggleDropdown}>
           <Dropdown.li first onClick={handleLogout}>
             로그아웃
           </Dropdown.li>

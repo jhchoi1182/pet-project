@@ -3,14 +3,14 @@ import { SetStateBoolean } from "@/types/type/utilityTypes";
 import React from "react";
 
 interface DropdownProps {
-  setToggleModal: SetStateBoolean;
+  setToggleDropdown: SetStateBoolean;
   children: React.ReactNode;
 }
 
-export function Dropdown({ setToggleModal, children }: DropdownProps) {
+export function Dropdown({ setToggleDropdown, children }: DropdownProps) {
   return (
     <>
-      <div className={`backdrop`} onClick={() => setToggleModal(false)} />
+      <div className={`backdrop`} onClick={() => setToggleDropdown(false)} />
       <div className={`absolute top-5 -right-0 z-20 ${TEXT_COLOR.primary}`}>
         <ul>{children}</ul>
       </div>
