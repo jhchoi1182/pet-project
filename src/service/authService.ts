@@ -1,13 +1,9 @@
-import { authApi } from "@/api/authApi";
-import { cookieUtils } from "@/util/cookieUtils";
 import { TEXT_COLOR } from "@/styles/colors";
 import { SetStateString } from "@/types/type/utilityTypes";
 import { AuthInputType } from "@/components/loginSignup/atom/ValidationText";
 import { ErrorResponse } from "@/types/response/ErrorResponse";
 import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
 import { handleExecptionError } from "./exceptionService";
-
-const { removeCookie } = cookieUtils();
 
 function authService() {
   function valideSignupInput({ username, nickname, email, password, passwordConfirm }: EnteredInfoType, isUsernameAvailable: boolean, isNicknameAvailable: boolean) {
