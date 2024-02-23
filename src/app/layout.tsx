@@ -11,10 +11,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "Next.js TODO 리스트 만들기",
-    template: "Next.js TODO 리스트 만들기 | %s",
+    default: "진화 중...",
+    template: "진화 중... | %s",
   },
-  description: "필사즉생 필생즉사 스터디 모임 과제",
+  description: "배운 기술을 실제로 적용하며 점진적으로 기능을 추가해 나가는 것을 목표로 진행되고 있는 개인 프로젝트.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
