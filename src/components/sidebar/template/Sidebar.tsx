@@ -1,14 +1,13 @@
 "use client";
 
 import React from "react";
-import Button from "../../atoms/base/Button";
 import Link from "next/link";
-import Input from "../../atoms/base/Input";
 import { useRecoilValue } from "recoil";
 import { loginModalAtom } from "@/stateStore/commonAtom";
 import AuthModal from "../../loginSignup/template/AuthModal";
 import Logo from "../../atoms/Logo";
-import UsernameOrLoginButton from "../molecules/UsernameOrLoginButton";
+import UsernameOrLoginButton from "../organisms/UsernameOrLoginButton";
+import PostForm from "../molecules/PostForm";
 
 export default function Sidebar() {
   const activeLoginModal = useRecoilValue(loginModalAtom);
@@ -19,23 +18,7 @@ export default function Sidebar() {
         <Logo />
       </Link>
       <UsernameOrLoginButton />
-      <form className={`flex flex-col w-[70%] h-full`}>
-        <div className="w-full">
-          <Input variant="post" label="제목" name="title" isPost>
-            <Input.TextField variant="post" />
-          </Input>
-        </div>
-        <div className={`flex flex-col w-full h-full`}>
-          <div className={`mt-10 w-full h-full`}>
-            <Input variant="post" label="내용" name="contents" isPost>
-              <Input.TextArea variant="post" />
-            </Input>
-          </div>
-          <div className={`pt-14 self-end mt-auto mb-[14px]`}>
-            <Button>작성하기</Button>
-          </div>
-        </div>
-      </form>
+      <PostForm />
       {activeLoginModal && <AuthModal />}
     </section>
   );

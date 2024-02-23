@@ -9,11 +9,11 @@ interface CreatePostParameter {
 
 function useCreatePostController() {
   const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: ({ title, contents }: CreatePostParameter) => postApi.create(title, contents),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.post] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.posts] });
+      alert("작성한 글이 게시되었습니다.");
     },
   });
 }
