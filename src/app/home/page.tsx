@@ -6,12 +6,17 @@ import PostList from "@/components/postBoard/molecules/PostList";
 import usePostsController from "@/controller/posrController/usePostsController";
 import { BG_COLOR } from "@/styles/colors";
 import { FONT_VARIANTS } from "@/styles/fonts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, isLoading } = usePostsController(currentPage - 1);
   const { content = [], totalPages = 0 } = data ?? {};
+
+  useEffect(() => {
+    const savedCurrentPage = Number(sessionStorage.getItem("currentPage"));
+    if (savedCurrentPage) return setCurrentPage(savedCurrentPage);
+  }, []);
 
   return (
     <main className={`w-[72%] min-w-[1098px] h-full`}>

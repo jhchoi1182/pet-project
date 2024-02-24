@@ -18,6 +18,7 @@ export const FONT_VARIANTS = {
   body01: `text-[24px]`,
   body02: `text-[24px] ${fontWeight.semi}`,
   body03: `text-[16px]`,
+  body04: `text-[16px] ${fontWeight.semi}`,
   btn01: `text-[28px] ${fontWeight.mid}`,
   btn02: `text-[20px] ${fontWeight.semi}`,
   btn03: `text-[26px] ${font.elec}`,
@@ -28,4 +29,5 @@ export const FONT_VARIANTS = {
   selectInput: `text-[20px] ${fontWeight.semi}`,
   info: `text-[16px] ${font.elec}`,
   days: `text-[26px] ${fontWeight.mid}`,
+  charCount: `text-[12px]`,
 };

@@ -16,6 +16,7 @@ function usePagination({ currentPage, setCurrentPage, totalPages }: PaginationNu
 
   const movePage = (page: number) => {
     setCurrentPage(page);
+    sessionStorage.setItem("currentPage", page + "");
   };
 
   useEffect(() => {
