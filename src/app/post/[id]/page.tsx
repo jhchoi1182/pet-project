@@ -22,9 +22,9 @@ export default function PostDetail({ params: { id } }: Params) {
   const router = useRouter();
 
   return (
-    <main className={`w-[72%] min-w-[1098px] h-full`}>
+    <main className={`relative w-[72%] min-w-[1098px] h-full`}>
       <BoardTab />
-      <article className={`w-[80%] h-board rounded-tr-[20px] rounded-b-[20px] px-[56px] py-[67px] ${BG_COLOR.inverse} ${FONT_VARIANTS.body03}`}>
+      <article className={`w-[80%] h-board rounded-tr-[20px] rounded-b-[20px] px-[56px] py-[67px] ${BG_COLOR.inverse} ${FONT_VARIANTS.body03} overflow-auto`}>
         {isLoading ? (
           <div className={`flex justify-center items-center h-full`}>
             <LoadingSpinner />
