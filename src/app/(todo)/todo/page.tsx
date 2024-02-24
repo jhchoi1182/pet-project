@@ -4,7 +4,7 @@ import TodoCard from "@/components/PageComponents/mainPage/TodoCard";
 import { Todo } from "../../../types/model/post";
 import TodoForm from "@/components/PageComponents/mainPage/TodoForm";
 import LoadingSpinner from "@/components/atoms/LoadingSpinner";
-import useTodos from "@/controller/posrController/usePostsController";
+import useTodos from "@/controller/postController/useGetPostsController";
 
 const FONT_STYLE = "text-2xl font-bold py-6";
 const TODOBOX_STYLE = "grid grid-cols-4 gap-5";

@@ -1,6 +1,6 @@
 import Button from "@/components/atoms/base/Button";
 import Input from "@/components/atoms/base/Input";
-import useCreatePostController from "@/controller/posrController/useCreatePostController";
+import useCreatePostController from "@/controller/postController/useCreatePostController";
 import React, { useState } from "react";
 
 export default function PostForm() {

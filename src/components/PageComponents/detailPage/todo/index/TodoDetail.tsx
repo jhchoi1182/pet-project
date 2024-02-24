@@ -7,7 +7,7 @@ import TodoUpdateButton from "../elements/TodoUpdateButton";
 import TodoDeleteButton from "../elements/TodoDeleteButton";
 import TodoDetailContent from "../elements/TodoDetailContent";
 import LoadingSpinner from "@/components/atoms/LoadingSpinner";
-import useTodo from "@/controller/posrController/useTodo";
+import useTodo from "@/controller/postController/useTodo";
 
 export default function TodoDetail({ todoId }: { todoId: number }) {
   const { data, isLoading } = useTodo(todoId);
