@@ -37,8 +37,8 @@ interface TextareaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   variant: "login" | "signup" | "post";
 }
 
-Input.TextArea = function InputText({ variant, ...props }: TextareaProps) {
-  return <textarea className={`p-3 w-full h-full outline-none rounded-lg`} {...props} />;
+Input.TextArea = function TextAreaText({ variant, ...props }: TextareaProps) {
+  return <textarea className={`p-3 w-full h-full outline-none rounded-lg leading-6`} {...props} />;
 };
 
 const LABEL_VARIANTS = {

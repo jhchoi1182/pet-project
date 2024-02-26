@@ -4,18 +4,19 @@ import BoardTab from "@/components/atoms/BoardTab";
 import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 import CommentSection from "@/components/postDetail/organisms/CommentSection";
 import PostDetailSection from "@/components/postDetail/organisms/PostDetailSection";
+import { QUERY_KEY } from "@/config/queyKeyConfig";
 import useGetPostController from "@/controller/postController/useGetPostController";
 import { BG_COLOR } from "@/styles/colors";
 import { FONT_VARIANTS } from "@/styles/fonts";
 
 interface Params {
   params: {
-    id: number;
+    id: string;
   };
 }
 
 export default function PostDetail({ params: { id } }: Params) {
-  const { data, isLoading } = useGetPostController(id);
+  const { data, isLoading } = useGetPostController(+id);
 
   return (
     <main className={`relative w-[72%] min-w-[1098px] h-full`}>
@@ -28,7 +29,7 @@ export default function PostDetail({ params: { id } }: Params) {
         ) : (
           <>
             <PostDetailSection post={data} />
-            <CommentSection postId={id} />
+            <CommentSection postId={+id} />
           </>
         )}
       </article>

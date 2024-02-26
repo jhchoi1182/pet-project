@@ -13,8 +13,8 @@ export const postApi = {
     const data = await instance.post("/post", { title, contents });
     return data;
   },
-  update: async (postId: number, contents: string, dueDate: string) => {
-    const data = await instance.put(`/post/${postId}`, { contents, dueDate });
+  update: async (postId: number, title: string, contents: string) => {
+    const data = await instance.patch(`/post/${postId}`, { title, contents });
     return data;
   },
   delete: async (postId: number) => {
