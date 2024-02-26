@@ -1,4 +1,4 @@
-import { TodoWithoutId } from "../model/todo";
+import { TodoWithoutId } from "../model/post";
 import { MutateVoid } from "../type/utilityTypes";
 
 export type SetStateTodoInput = React.Dispatch<React.SetStateAction<TodoWithoutId>>;

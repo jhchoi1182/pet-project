@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .backdrop {
+    @apply fixed w-full h-screen inset-0 z-10;
+  }
+}

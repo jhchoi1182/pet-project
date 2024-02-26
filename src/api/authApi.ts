@@ -1,21 +1,31 @@
+import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
 import { instance } from "../config/axiosConfig";
 
 export const authApi = {
-  checkId: (username: String) =>
+  checkUsername: (username: String) =>
     instance.post("/user/check-username", {
       username,
     }),
-  signup: (username: String, password: String, passwordConfirm: String) =>
+  checkNickname: (nickname: String) =>
+    instance.post("/user/check-nickname", {
+      nickname,
+    }),
+  signup: ({ username, nickname, email, password, passwordConfirm }: EnteredInfoType) =>
     instance.post("/user/signup", {
       username,
+      nickname,
+      email,
       password,
       passwordConfirm,
     }),
-  userLogin: (username: String, password: String) =>
-    instance.post("/user/login?type=user", {
+  login: (username: String, password: String) =>
+    instance.post("/user/login", {
       username,
       password,
     }),
-  guestLogin: () => instance.post("/user/login?type=guest"),
+  getUserInfo: async () => {
+    const { data } = await instance.get("/user");
+    return data?.result;
+  },
   withdraw: () => instance.delete("/user/delete"),
 };
