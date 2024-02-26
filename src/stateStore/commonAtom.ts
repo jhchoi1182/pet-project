@@ -8,7 +8,7 @@ export const loginModalAtom = atom<boolean>({
   default: false,
 });
 
-export const usernameAtom = atom<string | null>({
-  key: "username",
+export const loggedInNicknameAtom = atom<string | null>({
+  key: "loggedInNickname",
   default: null,
 });

@@ -7,7 +7,7 @@ interface PostDetailButtonProps {
 
 export default function PostDetailButton({ onClick, children }: PostDetailButtonProps) {
   return (
-    <button className={`border border-[#8C8C8C] px-4 py-2`} onClick={onClick}>
+    <button className={`border border-[#D9D9D9] px-4 py-2`} onClick={onClick}>
       {children}
     </button>
   );

@@ -7,18 +7,18 @@ import { SetterOrUpdater } from "recoil";
 
 interface WithdrawControllerParameter {
   setToggleDropdown: SetStateBoolean;
-  setUsername: SetterOrUpdater<string | null>;
+  setLoggedInNickname: SetterOrUpdater<string | null>;
 }
 
 const { removeCookie } = cookieUtils();
 
 function withdrawController() {
-  async function handleWithdraw({ setToggleDropdown, setUsername }: WithdrawControllerParameter) {
+  async function handleWithdraw({ setToggleDropdown, setLoggedInNickname }: WithdrawControllerParameter) {
     if (!window.confirm("정말 탈퇴하시겠습니까?")) return;
     try {
       await authApi.withdraw();
       alert("정상적으로 탈퇴되었습니다.");
-      setUsername(null);
+      setLoggedInNickname(null);
       setToggleDropdown(false);
       removeCookie();
     } catch (error) {

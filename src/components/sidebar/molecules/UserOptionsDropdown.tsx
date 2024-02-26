@@ -1,7 +1,7 @@
 import { Dropdown } from "@/components/atoms/base/Dropdown";
 import DownArrow from "@/components/atoms/icons/DownArrow";
 import withdrawController from "@/controller/authController/withdrawController";
-import { usernameAtom } from "@/stateStore/commonAtom";
+import { loggedInNicknameAtom } from "@/stateStore/commonAtom";
 import { cookieUtils } from "@/util/cookieUtils";
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
@@ -10,16 +10,16 @@ const { removeCookie } = cookieUtils();
 
 export default function UserOptionsDropdown() {
   const [toggleDropdown, setToggleDropdown] = useState(false);
-  const setUsername = useSetRecoilState(usernameAtom);
+  const setLoggedInNickname = useSetRecoilState(loggedInNicknameAtom);
 
   const handleLogout = () => {
     removeCookie();
     setToggleDropdown(false);
-    setUsername(null);
+    setLoggedInNickname(null);
   };
 
   const handleWithdraw = () => {
-    withdrawController()({ setToggleDropdown, setUsername });
+    withdrawController()({ setToggleDropdown, setLoggedInNickname });
   };
 
   return (

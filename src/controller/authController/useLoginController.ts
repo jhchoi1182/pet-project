@@ -1,5 +1,5 @@
 import { authApi } from "@/api/authApi";
-import { loginModalAtom, usernameAtom } from "@/stateStore/commonAtom";
+import { loginModalAtom, loggedInNicknameAtom } from "@/stateStore/commonAtom";
 import { TEXT_COLOR } from "@/styles/colors";
 import { SetStateString } from "@/types/type/utilityTypes";
 import { cookieUtils } from "@/util/cookieUtils";
@@ -14,7 +14,7 @@ interface handleUserLoginParameter {
 
 function useLoginController() {
   const setActiveLoginModal = useSetRecoilState(loginModalAtom);
-  const setUsername = useSetRecoilState(usernameAtom);
+  const setLoggedInNickname = useSetRecoilState(loggedInNicknameAtom);
 
   async function handleUserLogin({ username, password }: handleUserLoginParameter, setValidationTextColor: SetStateString) {
     try {
@@ -22,7 +22,7 @@ function useLoginController() {
       const { token, username: name } = data?.result;
       setCookie(token, { expires: 7 });
       alert("로그인 성공!");
-      setUsername(name);
+      setLoggedInNickname(name);
       setActiveLoginModal(false);
     } catch (error) {
       setValidationTextColor(TEXT_COLOR.red500);
