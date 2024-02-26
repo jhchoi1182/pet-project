@@ -8,21 +8,27 @@ export default function PostList({ posts }: { posts: PostWithoutContents[] }) {
 
   return (
     <ul className={`w-full h-full`}>
-      {postSlots.map((post, i) => (
-        <li key={i} className={`flex items-center w-full h-[10%] ${i % 2 === 1 ? "" : BG_COLOR.gray400} ${i === postSlots.length - 1 ? "rounded-b-[20px]" : ""}`}>
-          {post ? (
-            <>
-              <Link className={`w-[70%]`} href={`/post/${post.postId}`}>
-                <div className={`text-center`}>{`${post.title} ${post.commentsCount !== 0 ? `[${post.commentsCount}]` : ``}`}</div>
-              </Link>
-              <div className={`w-[15%] text-center`}>{post.nickname}</div>
-              <div className={`w-[15%] text-center`}>{post.createdAt}</div>
-            </>
-          ) : (
-            <></>
-          )}
-        </li>
-      ))}
+      {postSlots.map((post, i) => {
+        const title = `${post.title} ${post.commentsCount !== 0 ? `[${post.commentsCount}]` : ``}`;
+        return (
+          <li key={i} className={`flex items-center w-full h-[10%] ${i % 2 === 1 ? "" : BG_COLOR.gray400} ${i === postSlots.length - 1 ? "rounded-b-[20px]" : ""}`}>
+            {post ? (
+              <>
+                <div className={`w-[70%]`}>
+                  <div className={`w-full truncate px-3 text-center`}>
+                    <Link href={`/post/${post.postId}`}>{title}</Link>
+                  </div>
+                </div>
+
+                <div className={`w-[15%] text-center`}>{post.nickname}</div>
+                <div className={`w-[15%] text-center`}>{post.createdAt}</div>
+              </>
+            ) : (
+              <></>
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 }
