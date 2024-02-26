@@ -39,7 +39,7 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
         </div>
       </section>
       <hr className={`mt-9 ${BG_COLOR.primary}`} />
-      <section className={`mt-[75px]`}>{contents}</section>
+      <section className={`mt-[75px] leading-6`}>{contents}</section>
     </>
   );
 }

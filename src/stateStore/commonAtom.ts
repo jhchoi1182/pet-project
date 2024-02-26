@@ -1,7 +1,4 @@
-"use client";
-
-import { cookieUtils } from "@/util/cookieUtils";
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
 
 export const loginModalAtom = atom<boolean>({
   key: "loginModal",

@@ -1,10 +1,20 @@
 import Button from "@/components/atoms/base/Button";
 import useCreatComment from "@/controller/commentController/useCreatComment";
+import { openCommentEditorAtom } from "@/stateStore/commentAtom";
+import { UseMutateFunction } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 import React, { FormEvent, useState } from "react";
+import { useSetRecoilState } from "recoil";
 
-export default function CommentForm({ postId }: { postId: number }) {
-  const [comment, setComment] = useState("");
-  const { mutate } = useCreatComment(postId);
+interface CommentFormProps {
+  type: "create" | "update";
+  onSubmit: (comment: string) => void;
+  initialComment?: string;
+}
+
+export default function CommentForm({ type, onSubmit, initialComment }: CommentFormProps) {
+  const [comment, setComment] = useState(initialComment ?? "");
+  const setOpenCommentEditor = useSetRecoilState(openCommentEditorAtom);
 
   const handleTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
@@ -17,8 +27,10 @@ export default function CommentForm({ postId }: { postId: number }) {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    if (comment.length === 0) return alert("내용을 입력해주세요.");
     if (comment.length > 200) return;
-    mutate(comment);
+    onSubmit(comment);
+    setComment("");
   };
 
   return (
@@ -26,7 +38,16 @@ export default function CommentForm({ postId }: { postId: number }) {
       <textarea className={`w-full h-[120px] p-3 rounded-[10px] border border-black`} name="comment" value={comment} onChange={handleTextareaChange} placeholder="댓글을 입력해주세요." />
       <div className={`flex justify-between mt-2`}>
         <span>{`글자 수 (${comment.length}/200)`}</span>
-        <Button size="tiny">작성하기</Button>
+        {type === "create" ? (
+          <Button size="tiny">작성하기</Button>
+        ) : (
+          <div className={`flex gap-3`}>
+            <Button size="tiny">수정하기</Button>
+            <Button size="tiny" onClick={() => setOpenCommentEditor(null)}>
+              취소
+            </Button>
+          </div>
+        )}
       </div>
     </form>
   );
