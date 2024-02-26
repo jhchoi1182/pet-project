@@ -11,10 +11,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "진화 중...",
-    template: "진화 중... | %s",
+    default: "StudySync",
+    template: "[StudySync] | %s",
   },
-  description: "배운 기술을 실제로 적용하며 점진적으로 기능을 추가해 나가는 것을 목표로 진행되고 있는 개인 프로젝트.",
+  description: "공부를 주제로 잡다한 이야기를 나누는 커뮤니티.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

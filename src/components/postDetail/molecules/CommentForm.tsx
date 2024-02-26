@@ -1,8 +1,5 @@
 import Button from "@/components/atoms/base/Button";
-import useCreatCommentController from "@/controller/commentController/useCreatCommentController";
 import { openCommentEditorAtom } from "@/stateStore/commentAtom";
-import { UseMutateFunction } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
 import React, { FormEvent, useState } from "react";
 import { useSetRecoilState } from "recoil";
 

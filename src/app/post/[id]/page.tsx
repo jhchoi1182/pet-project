@@ -4,7 +4,6 @@ import BoardTab from "@/components/atoms/BoardTab";
 import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 import CommentSection from "@/components/postDetail/organisms/CommentSection";
 import PostDetailSection from "@/components/postDetail/organisms/PostDetailSection";
-import { QUERY_KEY } from "@/config/queyKeyConfig";
 import useGetPostController from "@/controller/postController/useGetPostController";
 import { BG_COLOR } from "@/styles/colors";
 import { FONT_VARIANTS } from "@/styles/fonts";
