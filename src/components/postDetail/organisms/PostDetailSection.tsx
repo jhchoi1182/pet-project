@@ -7,6 +7,7 @@ import { BG_COLOR } from "@/styles/colors";
 import { useRecoilValue } from "recoil";
 import { loggedInNicknameAtom } from "@/stateStore/commonAtom";
 import useUpdatePostController from "@/controller/postController/useUpdatePostController";
+import useDeletePostController from "@/controller/postController/useDeletePostController";
 
 interface PostDetailSectionProps {
   post: Post | undefined;
@@ -22,7 +23,8 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
   const [isEditMode, setIsEditMode] = useState(false);
   const loggedInNickname = useRecoilValue(loggedInNicknameAtom);
   const router = useRouter();
-  const { mutate } = useUpdatePostController(postId ?? 0);
+  const { mutate: updateMutate } = useUpdatePostController(postId ?? 0);
+  const { mutate: deleteMutate } = useDeletePostController(postId ?? 0);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -30,8 +32,13 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
   };
 
   const updatePost = () => {
-    mutate(postInfoForEditing);
+    updateMutate(postInfoForEditing);
     setIsEditMode(false);
+  };
+
+  const deletePost = () => {
+    if (!window.confirm("게시글을 삭제하시겠습니까?")) return;
+    deleteMutate();
   };
 
   return (
@@ -62,7 +69,7 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
               ) : (
                 <>
                   <PostDetailButton onClick={() => setIsEditMode(true)}>수정</PostDetailButton>
-                  <PostDetailButton onClick={() => {}}>삭제</PostDetailButton>
+                  <PostDetailButton onClick={deletePost}>삭제</PostDetailButton>
                 </>
               )}
             </div>
