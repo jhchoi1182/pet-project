@@ -6,15 +6,14 @@ import { useRouter } from "next/navigation";
 import { BG_COLOR } from "@/styles/colors";
 import { useRecoilValue } from "recoil";
 import { loggedInNicknameAtom } from "@/stateStore/commonAtom";
-import useUpdatePostController from "@/controller/postController/useUpdatePostController";
-import useDeletePostController from "@/controller/postController/useDeletePostController";
+import PostUpdateDeleteButtons from "../molecules/PostUpdateDeleteButtons";
 
 interface PostDetailSectionProps {
   post: Post | undefined;
 }
 
 export default function PostDetailSection({ post }: PostDetailSectionProps) {
-  const { postId, title, nickname, createdAt, contents } = post ?? {};
+  const { title, nickname, createdAt, contents } = post ?? {};
 
   const [postInfoForEditing, setPostInfoForEditing] = useState({
     title: title ?? "",
@@ -23,22 +22,10 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
   const [isEditMode, setIsEditMode] = useState(false);
   const loggedInNickname = useRecoilValue(loggedInNicknameAtom);
   const router = useRouter();
-  const { mutate: updateMutate } = useUpdatePostController(postId ?? 0);
-  const { mutate: deleteMutate } = useDeletePostController(postId ?? 0);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setPostInfoForEditing((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const updatePost = () => {
-    updateMutate(postInfoForEditing);
-    setIsEditMode(false);
-  };
-
-  const deletePost = () => {
-    if (!window.confirm("게시글을 삭제하시겠습니까?")) return;
-    deleteMutate();
   };
 
   return (
@@ -59,21 +46,7 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
           <div className={`flex ml-auto`}>
             <PostDetailButton onClick={() => router.back()}>뒤로가기</PostDetailButton>
           </div>
-          {loggedInNickname === nickname && (
-            <div className={`flex gap-[10px] mt-4 ${FONT_VARIANTS.body03}`}>
-              {isEditMode ? (
-                <>
-                  <PostDetailButton onClick={updatePost}>확인</PostDetailButton>
-                  <PostDetailButton onClick={() => setIsEditMode(false)}>취소</PostDetailButton>
-                </>
-              ) : (
-                <>
-                  <PostDetailButton onClick={() => setIsEditMode(true)}>수정</PostDetailButton>
-                  <PostDetailButton onClick={deletePost}>삭제</PostDetailButton>
-                </>
-              )}
-            </div>
-          )}
+          {loggedInNickname === nickname && <PostUpdateDeleteButtons isEditMode={isEditMode} setIsEditMode={setIsEditMode} postInfoForEditing={postInfoForEditing} />}
         </div>
       </section>
       <hr className={`mt-9 ${BG_COLOR.primary}`} />
