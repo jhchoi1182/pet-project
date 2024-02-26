@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Button from "../../../../atoms/base/Button";
-import useCreatComment from "@/controller/commentController/useCreatComment";
+import useCreatCommentController from "@/controller/commentController/useCreatCommentController";
 import commentService from "@/service/commentService";
 
 export default function CommentForm({ todoId }: { todoId: number }) {
   const [comment, setComment] = useState("");
-  const { mutate } = useCreatComment(todoId);
+  const { mutate } = useCreatCommentController(todoId);
 
   const { handleInputChange, handlePost } = commentService();
 

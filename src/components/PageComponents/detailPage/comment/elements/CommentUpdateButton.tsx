@@ -1,5 +1,5 @@
 import Button from "@/components/atoms/base/Button";
-import useUpdateComment from "@/controller/commentController/useUpdateComment";
+import useUpdateCommentController from "@/controller/commentController/useUpdateCommentController";
 import commentService from "@/service/commentService";
 
 interface CommentUpdateButtonProps {
@@ -11,7 +11,7 @@ interface CommentUpdateButtonProps {
 }
 
 export default function CommentUpdateButton({ todoId, commentId, commentContents, toggleEditMode, setToggleEditMode }: CommentUpdateButtonProps) {
-  const { mutate } = useUpdateComment(todoId, commentId, commentContents);
+  const { mutate } = useUpdateCommentController(todoId, commentId, commentContents);
 
   const { handleUpdate } = commentService();
 

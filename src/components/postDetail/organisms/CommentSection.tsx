@@ -7,14 +7,14 @@ import { useRecoilValue } from "recoil";
 import { loggedInNicknameAtom } from "@/stateStore/commonAtom";
 import { BG_COLOR } from "@/styles/colors";
 import CommentItem from "../atom/CommentItem";
-import useCreatComment from "@/controller/commentController/useCreatComment";
+import useCreatCommentController from "@/controller/commentController/useCreatCommentController";
 
 interface CommentSectionProps {
   postId: number;
 }
 
 export default function CommentSection({ postId }: CommentSectionProps) {
-  const { mutate } = useCreatComment(postId);
+  const { mutate } = useCreatCommentController(postId);
   const { data } = useGetCommentsController(postId);
   const loggedInNickname = useRecoilValue(loggedInNicknameAtom);
 

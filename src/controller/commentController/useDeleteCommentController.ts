@@ -2,14 +2,14 @@ import { commentApi } from "@/api/commentApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-function useUpdateComment(postId: number, commentId: number) {
+function useDeleteCommentController(postId: number, commentId: number) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (commentContents: string) => commentApi.update(postId, commentId, commentContents),
+    mutationFn: () => commentApi.delete(postId, commentId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.comments, postId] });
     },
   });
 }
 
-export default useUpdateComment;
+export default useDeleteCommentController;

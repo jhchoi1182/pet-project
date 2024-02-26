@@ -2,7 +2,6 @@ import { authApi } from "@/api/authApi";
 import { handleExecptionError } from "@/service/exceptionService";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 import { cookieUtils } from "@/util/cookieUtils";
-import React from "react";
 import { SetterOrUpdater } from "recoil";
 
 interface WithdrawControllerParameter {

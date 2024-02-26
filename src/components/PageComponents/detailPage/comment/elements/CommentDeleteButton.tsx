@@ -1,16 +1,13 @@
 import Button from "@/components/atoms/base/Button";
-import useCommentDelete from "@/controller/commentController/useCommentDelete";
+import useDeleteCommentController from "@/controller/commentController/useDeleteCommentController";
 
 interface CommentDeleteButtonProps {
   todoId: number;
   commentId: number;
 }
 
-export default function CommentDeleteButton({
-  todoId,
-  commentId,
-}: CommentDeleteButtonProps) {
-  const { mutate } = useCommentDelete(todoId, commentId);
+export default function CommentDeleteButton({ todoId, commentId }: CommentDeleteButtonProps) {
+  const { mutate } = useDeleteCommentController(todoId, commentId);
 
   return (
     <Button variant="delete" size="small" onClick={() => mutate()}>
