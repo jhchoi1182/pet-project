@@ -5,7 +5,7 @@ import { ErrorResponse } from "@/types/response/ErrorResponse";
 import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
 import { handleExecptionError } from "./exceptionService";
 
-function authService() {
+function validationService() {
   function valideSignupInput({ username, nickname, email, password, passwordConfirm }: EnteredInfoType, isUsernameAvailable: boolean, isNicknameAvailable: boolean) {
     const isValid =
       isValidUsernameOrNickname(username) &&
@@ -63,7 +63,7 @@ function authService() {
   };
 }
 
-export default authService;
+export default validationService;
 
 function isValidUsernameOrNickname(value: string) {
   return value.length >= 2 && value.length <= 16;

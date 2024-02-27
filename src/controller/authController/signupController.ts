@@ -1,9 +1,8 @@
 import { authApi } from "@/api/authApi";
-import useAuthService from "@/service/authService";
 import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 import { handleExecptionError } from "@/service/exceptionService";
-import authService from "@/service/authService";
+import validationService from "@/service/validationService";
 
 interface SignupControllerParemeter {
   enteredInfo: EnteredInfoType;
@@ -11,7 +10,7 @@ interface SignupControllerParemeter {
   isNicknameAvailable: boolean;
   setToggleLoginSignup: SetStateBoolean;
 }
-const { valideSignupInput } = authService();
+const { valideSignupInput } = validationService();
 
 function signupController() {
   async function handleSignup({ enteredInfo, isUsernameAvailable, isNicknameAvailable, setToggleLoginSignup }: SignupControllerParemeter) {

@@ -1,10 +1,10 @@
 import { authApi } from "@/api/authApi";
 import { NameInputType } from "@/components/loginSignup/molecules/NameInput";
-import authService from "@/service/authService";
+import validationService from "@/service/validationService";
 import { TEXT_COLOR } from "@/styles/colors";
 import { SetStateBoolean, SetStateString } from "@/types/type/utilityTypes";
 
-const { handleErrorResponse } = authService();
+const { handleErrorResponse } = validationService();
 
 function nameDuplicationCheckController() {
   async function checkDuplication(type: NameInputType, value: string, setExceptionText: SetStateString, setValidationTextColor: SetStateString, setIsNameAvailable: SetStateBoolean) {

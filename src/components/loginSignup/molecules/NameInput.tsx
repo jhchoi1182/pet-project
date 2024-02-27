@@ -3,7 +3,7 @@ import Input from "@/components/atoms/base/Input";
 import React, { useEffect, useState } from "react";
 import ValidationText from "../atom/ValidationText";
 import { TEXT_COLOR } from "@/styles/colors";
-import authService from "@/service/authService";
+import validationService from "@/service/validationService";
 import nameDuplicationCheckController from "@/controller/authController/nameDuplicationCheckController";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 
@@ -20,7 +20,7 @@ const label = {
   nickname: "닉네임",
 };
 
-const { changeValidationTextColor } = authService();
+const { changeValidationTextColor } = validationService();
 const { checkDuplication } = nameDuplicationCheckController();
 
 export default function NameInput({ type, value, handleInputChange, setIsNameAvailable }: NameInputProps) {
