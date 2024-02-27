@@ -8,21 +8,13 @@ const googleURL =
   `redirect_uri=${googleRedirectURI}&` +
   `client_id=${googleClientId}&` +
   `response_type=code&` +
-  `scope=${["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"].join(" ")}`;
-const kakaoURL = `https://kauth.kakao.com/oauth/authorize?` + `client_id=${""}&` + `redirect_uri=${""}&` + `response_type=code&`;
-const githubURL = `https://github.com/login/oauth/authorize?` + `client_id=${""}&`;
+  `scope=https://www.googleapis.com/auth/userinfo.email`;
 
 export default function SocialLoginIcons() {
   return (
     <div className={`flex justify-center gap-14 mt-10`}>
-      <Link href={kakaoURL}>
-        <ImageIcon name="kakao" />
-      </Link>
       <Link href={googleURL}>
         <ImageIcon name="google" />
-      </Link>
-      <Link href={githubURL}>
-        <ImageIcon name="github" />
       </Link>
     </div>
   );
