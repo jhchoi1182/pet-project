@@ -1,16 +1,15 @@
 import Cookies from "js-cookie";
-import { cookies } from "next/headers";
 
 export const cookieUtils = () => {
-  const token = "ACCESS_TOKEN";
+  const nickname = "nickname";
 
-  const getCookie = (name: string = token) => {
+  const getCookie = (name: string = nickname) => {
     return Cookies.get(name);
   };
-  const setCookie = (value: string, option?: any, name: string = token) => {
+  const setCookie = (value: string, option?: any, name: string = nickname) => {
     return Cookies.set(name, value, { ...option });
   };
-  const removeCookie = (name: string = token) => {
+  const removeCookie = (name: string = nickname) => {
     return Cookies.remove(name);
   };
 
