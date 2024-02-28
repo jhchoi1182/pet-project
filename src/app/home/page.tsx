@@ -4,10 +4,11 @@ import BoardLoadingSpinner from "@/components/atoms/BoardLoadingSpinner";
 import BoardTab from "@/components/atoms/BoardTab";
 import PaginationNumGroup from "@/components/postBoard/molecules/PaginationNumGroup";
 import PostList from "@/components/postBoard/molecules/PostList";
-import useGetPostsController from "@/controller/postController/useGetPostsController";
+import { useGetPostsController } from "@/controller/postController/useGetPostsController";
 import { paginationAtom } from "@/stateStore/postAtom";
 import { BG_COLOR } from "@/styles/colors";
 import { FONT_VARIANTS } from "@/styles/fonts";
+import { Post } from "@/types/model/post";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 

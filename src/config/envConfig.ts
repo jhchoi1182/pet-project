@@ -4,5 +4,6 @@ export const kakaoRedirectURI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
 export const kakaoRestApiKey = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
 export const githubRedirectURI = process.env.NEXT_PUBLIC_GITHUB_REDIRECT_URI;
 export const githubClientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID;
-export const isDevelopment = process.env.NODE_ENV === "development";
-export const serverURL = process.env.NEXT_PUBLIC_SERVER_URL;
+export const isDevelopmentEnv = process.env.NODE_ENV === "development";
+// export const studySyncServerURL = isDevelopmentEnv ? "https://localhost:8443/api" : process.env.NEXT_PUBLIC_SERVER_URL;
+export const studySyncServerURL = isDevelopmentEnv ? "http://localhost:8080/api" : process.env.NEXT_PUBLIC_SERVER_URL;

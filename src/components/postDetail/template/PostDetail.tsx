@@ -5,12 +5,13 @@ import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 import React from "react";
 import PostDetailSection from "../organisms/PostDetailSection";
 import CommentSection from "../organisms/CommentSection";
-import useGetPostController from "@/controller/postController/useGetPostController";
+import { useGetPostController } from "@/controller/postController/useGetPostController";
 import { BG_COLOR } from "@/styles/colors";
 import { FONT_VARIANTS } from "@/styles/fonts";
 
 export default function PostDetail({ id }: { id: string }) {
   const { data, isLoading } = useGetPostController(+id);
+
   return (
     <>
       <BoardTab />
