@@ -15,8 +15,6 @@ export default function UsernameOrLoginButton() {
   const loggedInNickname = useRecoilValue(loggedInNicknameAtom);
 
   const { isLoading, isLogin } = useAuthenticationController();
-  console.log("loggedInNickname ::", loggedInNickname);
-  console.log("isLogin ::", isLogin);
 
   return (
     <div className={`h-52 mt-[60px] ${FONT_VARIANTS.body02}`}>

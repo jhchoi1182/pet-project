@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { authApi } from "@/api/authApi";
-import { handleExecptionError } from "@/service/exceptionService";
+import useHandleError from "@/service/useHandleError";
 import { useSetRecoilState } from "recoil";
 import { loggedInNicknameAtom } from "@/stateStore/commonAtom";
 
@@ -17,6 +17,7 @@ const SnsLoginpage = ({ params: { snsType } }: snsTypeProps) => {
   const setLoggedInNickname = useSetRecoilState(loggedInNicknameAtom);
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { handleError } = useHandleError();
   const acceptedTypes = ["google", "github", "kakao"];
   const isSocialParams = acceptedTypes.includes(snsType);
 
@@ -41,7 +42,7 @@ const SnsLoginpage = ({ params: { snsType } }: snsTypeProps) => {
           }
         }
       } catch (error) {
-        handleExecptionError(error);
+        handleError(error);
       }
     };
     fetchSocialLogin();

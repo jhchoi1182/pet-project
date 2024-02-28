@@ -1,11 +1,11 @@
 import { isLoginAtom, loggedInNicknameAtom } from "@/stateStore/commonAtom";
 import { cookieUtils } from "@/util/cookieUtils";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 const { setCookie, removeCookie } = cookieUtils();
 
 function useAuthService() {
-  const [loggedInNickname, setLoggedInNickname] = useRecoilState(loggedInNicknameAtom);
+  const setLoggedInNickname = useSetRecoilState(loggedInNicknameAtom);
   const setIsLogin = useSetRecoilState(isLoginAtom);
 
   function setNickname(nickname: string) {

@@ -5,13 +5,15 @@ import BoardTab from "@/components/atoms/BoardTab";
 import PaginationNumGroup from "@/components/postBoard/molecules/PaginationNumGroup";
 import PostList from "@/components/postBoard/molecules/PostList";
 import useGetPostsController from "@/controller/postController/useGetPostsController";
+import { paginationAtom } from "@/stateStore/postAtom";
 import { BG_COLOR } from "@/styles/colors";
 import { FONT_VARIANTS } from "@/styles/fonts";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
 export default function Home() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading } = useGetPostsController(currentPage - 1);
+  const [currentPage, setCurrentPage] = useRecoilState(paginationAtom);
+  const { data, isLoading } = useGetPostsController(currentPage);
   const { content = [], totalPages = 0 } = data ?? {};
 
   useEffect(() => {
@@ -30,7 +32,7 @@ export default function Home() {
         </header>
         {isLoading ? <BoardLoadingSpinner /> : <PostList posts={content} />}
       </section>
-      <PaginationNumGroup currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
+      <PaginationNumGroup currentPage={currentPage} totalPages={totalPages} />
     </main>
   );
 }

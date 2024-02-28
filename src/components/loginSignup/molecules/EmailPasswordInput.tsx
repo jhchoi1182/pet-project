@@ -2,7 +2,7 @@ import Input from "@/components/atoms/base/Input";
 import { TEXT_COLOR } from "@/styles/colors";
 import React, { useEffect, useState } from "react";
 import ValidationText from "../atom/ValidationText";
-import validationService from "@/service/validationService";
+import { validationService } from "@/service/validationService";
 
 export type EmailPasswordType = "email" | "password" | "passwordConfirm";
 interface EmailPasswordInputProps {

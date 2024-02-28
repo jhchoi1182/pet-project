@@ -7,12 +7,12 @@ import { RecoilRoot } from "recoil";
 export default function AppProvider({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <ReactQueryProvider>
-        <RecoilRoot>
+      <RecoilRoot>
+        <ReactQueryProvider>
           {children}
           <div id="portal"></div>
-        </RecoilRoot>
-      </ReactQueryProvider>
+        </ReactQueryProvider>
+      </RecoilRoot>
     </>
   );
 }

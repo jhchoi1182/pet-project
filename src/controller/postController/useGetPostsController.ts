@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 function useGetPostsController(currentPage: number) {
   return useQuery<PostsResponse>({
     queryKey: [QUERY_KEY.posts, currentPage],
-    queryFn: () => postApi.getPosts(currentPage),
+    queryFn: () => postApi.getPosts(currentPage - 1),
   });
 }
 
