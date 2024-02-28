@@ -1,4 +1,4 @@
-import ImageIcon from "@/components/atoms/icons/ImageIcon";
+import Google from "@/components/atoms/icons/Google";
 import { googleClientId, googleRedirectURI } from "@/config/envConfig";
 import Link from "next/link";
 import React from "react";
@@ -14,7 +14,7 @@ export default function SocialLoginIcons() {
   return (
     <div className={`flex justify-center gap-14 mt-10`}>
       <Link href={googleURL}>
-        <ImageIcon name="google" />
+        <Google />
       </Link>
     </div>
   );
