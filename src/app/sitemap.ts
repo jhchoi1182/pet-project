@@ -3,7 +3,7 @@ import { fetchPostsServerSide } from "@/controller/postController/useGetPostsCon
 export default async function sitemap() {
   const posts = await fetchPostsServerSide();
   const pages = posts.map((post) => ({
-    url: `https://study-sync-mu.vercel.app/post/${post.postId}`,
+    url: `https://www.studysync.store/post/${post.postId}`,
     lastModified: new Date(),
     changeFrequency: "daily",
     priority: 0.5,
@@ -11,7 +11,7 @@ export default async function sitemap() {
 
   return [
     {
-      url: "https://study-sync-mu.vercel.app/home/",
+      url: "https://www.studysync.store/home",
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1,
