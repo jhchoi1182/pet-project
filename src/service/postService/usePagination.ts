@@ -1,10 +1,13 @@
 import { PaginationNumGroupProps } from "@/components/postBoard/molecules/PaginationNumGroup";
+import { paginationAtom } from "@/stateStore/postAtom";
 import { useEffect, useState } from "react";
+import { useSetRecoilState } from "recoil";
 
 const pagesPerGroup = 13;
 
-function usePagination({ currentPage, setCurrentPage, totalPages }: PaginationNumGroupProps) {
+function usePagination({ currentPage, totalPages }: PaginationNumGroupProps) {
   const [pageGroupStart, setPageGroupStart] = useState(1);
+  const setCurrentPage = useSetRecoilState(paginationAtom);
 
   const pageGroupEnd = calculatePageGroupEnd(pageGroupStart);
   const pages = Array.from({ length: pageGroupEnd - pageGroupStart + 1 }, (_, index) => pageGroupStart + index);

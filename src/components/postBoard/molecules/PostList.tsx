@@ -15,11 +15,10 @@ export default function PostList({ posts }: { posts: PostWithoutContents[] }) {
             {post ? (
               <>
                 <div className={`w-[70%]`}>
-                  <div className={`w-full truncate px-3 text-center`}>
+                  <div className={`w-full truncate p-3 text-center`}>
                     <Link href={`/post/${post.postId}`}>{title}</Link>
                   </div>
                 </div>
-
                 <div className={`w-[15%] text-center`}>{post.nickname}</div>
                 <div className={`w-[15%] text-center`}>{post.createdAt}</div>
               </>

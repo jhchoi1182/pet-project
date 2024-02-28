@@ -7,12 +7,11 @@ import usePagination from "@/service/postService/usePagination";
 
 export interface PaginationNumGroupProps {
   currentPage: number;
-  setCurrentPage: SetStateNumber;
   totalPages: number;
 }
 
-export default function PaginationNumGroup({ currentPage, setCurrentPage, totalPages }: PaginationNumGroupProps) {
-  const { pages, movePage } = usePagination({ currentPage, setCurrentPage, totalPages });
+export default function PaginationNumGroup({ currentPage, totalPages }: PaginationNumGroupProps) {
+  const { pages, movePage } = usePagination({ currentPage, totalPages });
 
   return (
     <div className={`flex items-end w-[80%] h-[60px] px-10 ${TEXT_COLOR.yellow}`}>

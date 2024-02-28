@@ -1,12 +1,11 @@
 import { authApi } from "@/api/authApi";
 import { NameInputType } from "@/components/loginSignup/molecules/NameInput";
-import authService from "@/service/authService";
+import { useHandleExceptionText } from "@/service/validationService";
 import { TEXT_COLOR } from "@/styles/colors";
 import { SetStateBoolean, SetStateString } from "@/types/type/utilityTypes";
 
-const { handleErrorResponse } = authService();
-
-function nameDuplicationCheckController() {
+function useNameDuplicationCheckController() {
+  const { handleExceptionText } = useHandleExceptionText();
   async function checkDuplication(type: NameInputType, value: string, setExceptionText: SetStateString, setValidationTextColor: SetStateString, setIsNameAvailable: SetStateBoolean) {
     try {
       const checkApi = type === "username" ? authApi.checkUsername : authApi.checkNickname;
@@ -18,11 +17,11 @@ function nameDuplicationCheckController() {
     } catch (error) {
       setIsNameAvailable(false);
       setValidationTextColor(TEXT_COLOR.red500);
-      handleErrorResponse(error, setExceptionText);
+      handleExceptionText(error, setExceptionText);
     }
   }
 
   return { checkDuplication };
 }
 
-export default nameDuplicationCheckController;
+export default useNameDuplicationCheckController;
