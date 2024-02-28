@@ -8,7 +8,7 @@ import useGetPostsController from "@/controller/postController/useGetPostsContro
 import { paginationAtom } from "@/stateStore/postAtom";
 import { BG_COLOR } from "@/styles/colors";
 import { FONT_VARIANTS } from "@/styles/fonts";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 export default function Home() {

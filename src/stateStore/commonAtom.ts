@@ -15,3 +15,8 @@ export const isLoginAtom = atom<string | undefined>({
   key: "isLogin",
   default: undefined,
 });
+
+export const isLoadingAtom = atom({
+  key: "isLoading",
+  default: true,
+});

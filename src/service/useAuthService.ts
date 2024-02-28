@@ -17,7 +17,6 @@ function useAuthService() {
     setLoggedInNickname(undefined);
     setIsLogin(undefined);
     removeCookie();
-    console.log("삭제?");
   }
 
   return { setNickname, removeNickname };

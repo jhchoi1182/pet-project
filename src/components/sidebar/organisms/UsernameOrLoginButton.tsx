@@ -3,7 +3,7 @@
 import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 import Button from "@/components/atoms/base/Button";
 import useAuthenticationController from "@/controller/authController/useAuthenticationController";
-import { loginModalAtom, loggedInNicknameAtom } from "@/stateStore/commonAtom";
+import { loginModalAtom, loggedInNicknameAtom, isLoadingAtom } from "@/stateStore/commonAtom";
 import { TEXT_COLOR } from "@/styles/colors";
 import { FONT_VARIANTS } from "@/styles/fonts";
 import React from "react";
@@ -13,8 +13,9 @@ import UserOptionsDropdown from "../molecules/UserOptionsDropdown";
 export default function UsernameOrLoginButton() {
   const setActiveLoginModal = useSetRecoilState(loginModalAtom);
   const loggedInNickname = useRecoilValue(loggedInNicknameAtom);
+  const isLoading = useRecoilValue(isLoadingAtom);
 
-  const { isLoading, isLogin } = useAuthenticationController();
+  const { isLogin } = useAuthenticationController();
 
   return (
     <div className={`h-52 mt-[60px] ${FONT_VARIANTS.body02}`}>
