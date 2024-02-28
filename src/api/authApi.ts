@@ -37,5 +37,6 @@ export const authApi = {
     const { data } = await instance.get("/user");
     return data?.result;
   },
+  logout: () => instance.post("/user/logout"),
   withdraw: () => instance.delete("/user/delete"),
 };

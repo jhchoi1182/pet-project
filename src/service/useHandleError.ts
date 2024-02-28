@@ -5,7 +5,7 @@ import useAuthService from "./useAuthService";
 function useHandleError() {
   const { removeNickname } = useAuthService();
 
-  function handleError(error: unknown) {
+  function handleError(error: unknown, skipNameRemove: boolean = false) {
     const { response } = error as ErrorResponse;
 
     if (!response) return alert("서버 점검중입니다.");
@@ -32,7 +32,7 @@ function useHandleError() {
         case "INVALID_PERMISSION":
         case "INVALID_TOKEN":
         case "AUTHENTICATION_ERROR":
-          removeNickname();
+          !skipNameRemove && removeNickname();
           alert("사용자 권한이 유효하지 않습니다.");
           break;
         case "USER_NOT_FOUND":
