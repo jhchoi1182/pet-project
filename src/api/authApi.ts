@@ -25,13 +25,13 @@ export const authApi = {
       password,
     }),
   googleLogin: (code: string) => {
-    return instance.post("/user/google", { code, uri: googleRedirectURI });
+    return instance.post("/user/google", { code });
   },
   githubLogin: (code: string | null) => {
-    return instance.post("/user/github", { code, uri: githubRedirectURI });
+    return instance.post("/user/github", { code });
   },
   kakaoLogin: (code: string | null) => {
-    return instance.post("/user/kakao", { code, uri: kakaoRedirectURI });
+    return instance.post("/user/kakao", { code });
   },
   getUserInfo: async () => {
     const { data } = await instance.get("/user");

@@ -5,7 +5,7 @@ import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { authApi } from "@/api/authApi";
 import useHandleError from "@/service/useHandleError";
 import { useSetRecoilState } from "recoil";
-import { isLoadingAtom, loggedInNicknameAtom } from "@/stateStore/commonAtom";
+import { isLoadingAtom } from "@/stateStore/commonAtom";
 import useAuthService from "@/service/useAuthService";
 
 interface snsTypeProps {
@@ -14,8 +14,7 @@ interface snsTypeProps {
   };
 }
 
-const SnsLoginpage = ({ params: { snsType } }: snsTypeProps) => {
-  const setLoggedInNickname = useSetRecoilState(loggedInNicknameAtom);
+export default function SnsLoginpage({ params: { snsType } }: snsTypeProps) {
   const setIsLoading = useSetRecoilState(isLoadingAtom);
   const { setNickname } = useAuthService();
   const { handleError } = useHandleError();
@@ -29,21 +28,12 @@ const SnsLoginpage = ({ params: { snsType } }: snsTypeProps) => {
     if (!isSocialParams) return notFound();
     const fetchSocialLogin = async () => {
       const code = searchParams.get("code");
+      if (!code) return;
       try {
-        if (code) {
-          if (snsType === "google") {
-            const { data } = await authApi.googleLogin(code);
-            const { nickname } = data?.result;
-            setNickname(nickname);
-          }
-          if (snsType === "github") {
-            const { data } = await authApi.githubLogin(code);
-            setLoggedInNickname(data?.nickname);
-          }
-          if (snsType === "kakao") {
-            const { data } = await authApi.kakaoLogin(code);
-            setLoggedInNickname(data?.nickname);
-          }
+        if (snsType === "google") {
+          const { data } = await authApi.googleLogin(code);
+          const { nickname } = data?.result;
+          setNickname(nickname);
         }
       } catch (error) {
         handleError(error);
@@ -56,6 +46,4 @@ const SnsLoginpage = ({ params: { snsType } }: snsTypeProps) => {
   }, []);
 
   return <></>;
-};
-
-export default SnsLoginpage;
+}

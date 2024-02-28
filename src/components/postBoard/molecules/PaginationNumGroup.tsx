@@ -2,7 +2,6 @@ import React from "react";
 import MaxPageArrow from "@/components/atoms/icons/MaxPageArrow";
 import NextPageArrow from "@/components/atoms/icons/NextPageArrow";
 import { TEXT_COLOR } from "@/styles/colors";
-import { SetStateNumber } from "@/types/type/utilityTypes";
 import usePagination from "@/service/postService/usePagination";
 
 export interface PaginationNumGroupProps {

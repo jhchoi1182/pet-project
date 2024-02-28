@@ -3,8 +3,9 @@ import useHandleError from "@/service/useHandleError";
 import useAuthService from "@/service/useAuthService";
 import { isLoadingAtom, isLoginAtom } from "@/stateStore/commonAtom";
 import { cookieUtils } from "@/util/cookieUtils";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { usePathname } from "next/navigation";
 
 const { getCookie } = cookieUtils();
 
@@ -13,6 +14,8 @@ function useAuthenticationController() {
   const setIsLoading = useSetRecoilState(isLoadingAtom);
   const { setNickname } = useAuthService();
   const { handleError } = useHandleError();
+
+  const isSocialLoginInProgress = usePathname().startsWith("/login/callback");
 
   useEffect(() => {
     const fetchAuth = async () => {
@@ -24,6 +27,7 @@ function useAuthenticationController() {
       } catch (error) {
         handleError(error);
       } finally {
+        if (isSocialLoginInProgress) return;
         setIsLoading(false);
       }
     };
