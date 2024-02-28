@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "https://study-sync-mu.vercel.app/sitemap.xml",
+    sitemap: "https://www.studysync.store/sitemap.xml",
   };
 }
