@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/globals.css";
 import "../styles/reset.css";
 import { Inter } from "next/font/google";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { BG_COLOR } from "@/styles/colors";
 import Sidebar from "@/components/sidebar/template/Sidebar";
 import AppProvider from "@/provider/AppProvider";
@@ -10,11 +10,20 @@ import AppProvider from "@/provider/AppProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  applicationName: "StudySync",
   title: {
     default: "StudySync",
     template: "[StudySync] | %s",
   },
-  description: "공부를 주제로 잡다한 이야기를 나누는 커뮤니티.",
+  description: "공부를 주제로 잡다한 이야기를 나누는 커뮤니티",
+  manifest: "/manifest.json",
+  formatDetection: {
+    telephone: false,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#FFFFFF",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
