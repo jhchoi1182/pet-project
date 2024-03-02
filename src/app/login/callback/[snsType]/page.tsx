@@ -5,7 +5,7 @@ import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { authApi } from "@/api/authApi";
 import useHandleError from "@/service/useHandleError";
 import { useSetRecoilState } from "recoil";
-import { isLoadingAtom } from "@/stateStore/commonAtom";
+import { isSocialLoginInProgressAtom } from "@/stateStore/commonAtom";
 import useAuthService from "@/service/useAuthService";
 
 interface snsTypeProps {
@@ -15,7 +15,7 @@ interface snsTypeProps {
 }
 
 export default function SnsLoginpage({ params: { snsType } }: snsTypeProps) {
-  const setIsLoading = useSetRecoilState(isLoadingAtom);
+  const isSocialLoginInProgress = useSetRecoilState(isSocialLoginInProgressAtom);
   const { setNickname } = useAuthService();
   const { handleError } = useHandleError();
   const searchParams = useSearchParams();
@@ -29,6 +29,7 @@ export default function SnsLoginpage({ params: { snsType } }: snsTypeProps) {
     const fetchSocialLogin = async () => {
       const code = searchParams.get("code");
       if (!code) return;
+      isSocialLoginInProgress(() => true);
       try {
         if (snsType === "google") {
           const { data } = await authApi.googleLogin(code);
@@ -38,7 +39,7 @@ export default function SnsLoginpage({ params: { snsType } }: snsTypeProps) {
       } catch (error) {
         handleError(error);
       } finally {
-        setIsLoading(false);
+        isSocialLoginInProgress(() => false);
       }
     };
     fetchSocialLogin();

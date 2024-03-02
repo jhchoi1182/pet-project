@@ -1,4 +1,3 @@
-import { cookieUtils } from "@/util/cookieUtils";
 import { atom } from "recoil";
 
 export const loginModalAtom = atom<boolean>({
@@ -11,12 +10,17 @@ export const loggedInNicknameAtom = atom<string | undefined>({
   default: undefined,
 });
 
-export const isLoginAtom = atom<string | undefined>({
-  key: "isLogin",
-  default: undefined,
+export const isSocialLoginInProgressAtom = atom({
+  key: "isSocialLoginInProgress",
+  default: false,
 });
 
 export const isLoadingAtom = atom({
   key: "isLoading",
   default: true,
+});
+
+export const isRemovedNicknameCookieAtom = atom({
+  key: "isRemovedNicknameCookieAtom",
+  default: false,
 });
