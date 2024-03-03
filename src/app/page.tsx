@@ -35,13 +35,13 @@ export default function Home() {
           <h2 className={FONT_STYLE}>Working.. 🔥</h2>
           <ul className={TODOBOX_STYLE}>
             {todos?.map((todo) => {
-              return !todo.isDone && <TodoCard key={todo._id} todo={todo} />;
+              return !todo.isDone && <TodoCard key={todo.id} todo={todo} />;
             })}
           </ul>
           <h2 className={FONT_STYLE}>Done..! 🎉</h2>
           <ul className={TODOBOX_STYLE}>
             {todos?.map((todo) => {
-              return todo.isDone && <TodoCard key={todo._id} todo={todo} />;
+              return todo.isDone && <TodoCard key={todo.id} todo={todo} />;
             })}
           </ul>
         </>

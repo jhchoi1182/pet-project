@@ -4,12 +4,12 @@ export interface requestTodo {
 }
 
 export interface responseTodo extends requestTodo {
-  _id: string;
+  id: string;
   isDone: boolean;
 }
 
 export const checkEnvironment = () => {
-  let base_url = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://next-todo-mu.vercel.app/";
+  let base_url = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "http://localhost:3000";
   return base_url;
 };
 

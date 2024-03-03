@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useState } from "react";
-import { __postTodo } from "@/service/todo";
+import { __getTodo, __postTodo } from "@/service/todo";
 import { TodoContext } from "@/Context/TodoContextProvider";
 
 const INPUT_STYLE = "rounded-lg h-8 px-3";
@@ -24,7 +24,8 @@ export default function Form() {
       contents: contents,
     };
     try {
-      const data = await __postTodo(todo);
+      await __postTodo(todo);
+      const data = await __getTodo();
       setTodos(data);
     } catch (error) {
       alert(error);
@@ -38,26 +39,11 @@ export default function Form() {
         <label className="font-bold" htmlFor="title">
           제목
         </label>
-        <input
-          className={INPUT_STYLE}
-          id="title"
-          type="text"
-          name="title"
-          value={enteredTodo.title}
-          onChange={onChangeHandler}
-          required
-        />
+        <input className={INPUT_STYLE} id="title" type="text" name="title" value={enteredTodo.title} onChange={onChangeHandler} required />
         <label className="font-bold" htmlFor="contents">
           내용
         </label>
-        <input
-          className={INPUT_STYLE}
-          id="contents"
-          name="contents"
-          value={enteredTodo.contents}
-          onChange={onChangeHandler}
-          required
-        />
+        <input className={INPUT_STYLE} id="contents" name="contents" value={enteredTodo.contents} onChange={onChangeHandler} required />
       </div>
       <button className="w-36 h-10 bg-teal-400 font-bold rounded-lg shadow-sm">추가하기</button>
     </form>
