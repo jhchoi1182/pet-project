@@ -1,5 +1,4 @@
 import { BG_COLOR } from "@/styles/colors";
-import { FONT_VARIANTS } from "@/styles/fonts";
 import { Comment } from "@/types/model/comment";
 import React from "react";
 import PostDetailButton from "./PostDetailButton";
@@ -35,7 +34,7 @@ export default function CommentItem({ postId, comment: { commentId, nickname, cr
         {openCommentEditor !== commentId && <PostDetailButton onClick={() => setOpenCommentEditor(commentId)}>수정</PostDetailButton>}
         <PostDetailButton onClick={deleteComment}>삭제</PostDetailButton>
       </div>
-      <div className={`flex gap-5 mt-6 ${FONT_VARIANTS.body04}`}>
+      <div className={`flex gap-5 mt-6 text-body04`}>
         <span>{nickname}</span>
         <span>{createdAt}</span>
       </div>

@@ -1,4 +1,3 @@
-import { FONT_VARIANTS } from "@/styles/fonts";
 import { Post } from "@/types/model/post";
 import React, { useState } from "react";
 import PostDetailButton from "../atom/PostDetailButton";
@@ -35,9 +34,9 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
           {isEditMode ? (
             <input className={`w-full px-3 py-1 border border-black rounded-md`} name="title" value={postInfoForEditing.title} onChange={handleOnChange} placeholder="제목을 입력해주세요." />
           ) : (
-            <h1 className={`${FONT_VARIANTS.body02}`}>{title}</h1>
+            <h1 className={`text-body02`}>{title}</h1>
           )}
-          <div className={`flex gap-[55px] mt-[30px] ${FONT_VARIANTS.body04}`}>
+          <div className={`flex gap-[55px] mt-[30px] text-body04`}>
             <span>{nickname}</span>
             <span>{createdAt}</span>
           </div>

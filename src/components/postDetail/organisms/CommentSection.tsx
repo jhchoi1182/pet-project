@@ -1,6 +1,4 @@
-import Button from "@/components/atoms/base/Button";
 import useGetCommentsController from "@/controller/commentController/useGetCommentsController";
-import { FONT_VARIANTS } from "@/styles/fonts";
 import React from "react";
 import CommentForm from "../molecules/CommentForm";
 import { useRecoilValue } from "recoil";
@@ -24,7 +22,7 @@ export default function CommentSection({ postId }: CommentSectionProps) {
 
   return (
     <section className={`mt-36`}>
-      <div className={`${FONT_VARIANTS.body04}`}>{`댓글 수 (${data?.length})`}</div>
+      <div className={`text-body04`}>{`댓글 수 (${data?.length})`}</div>
       {loggedInNickname ? <CommentForm type="create" onSubmit={createComment} /> : <></>}
       <hr className={`mt-[60px] ${BG_COLOR.primary}`} />
       <div className={``}>

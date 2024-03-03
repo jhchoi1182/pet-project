@@ -7,14 +7,13 @@ import PostDetailSection from "../organisms/PostDetailSection";
 import CommentSection from "../organisms/CommentSection";
 import { useGetPostController } from "@/controller/postController/useGetPostController";
 import { BG_COLOR } from "@/styles/colors";
-import { FONT_VARIANTS } from "@/styles/fonts";
 
 export default function PostDetail({ id }: { id: string }) {
   const { data, isLoading } = useGetPostController(+id);
   return (
     <>
       <BoardTab />
-      <article className={`w-[80%] h-board rounded-tr-[20px] rounded-b-[20px] px-[56px] py-[67px] ${BG_COLOR.inverse} ${FONT_VARIANTS.body03} overflow-auto`}>
+      <article className={`w-[80%] h-board rounded-tr-[20px] rounded-b-[20px] px-[56px] py-[67px] ${BG_COLOR.inverse} text-body03 overflow-auto`}>
         {isLoading ? (
           <div className={`flex justify-center items-center h-full`}>
             <LoadingSpinner />

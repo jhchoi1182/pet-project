@@ -1,6 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
 import { BG_COLOR, TEXT_COLOR } from "@/styles/colors";
-import { FONT_VARIANTS } from "@/styles/fonts";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "timer";
@@ -23,8 +22,8 @@ const COLOR_VARIANTS = {
 };
 
 const SIZE_VARIANTS = {
-  tiny: `w-[96px] h-8 ${FONT_VARIANTS.body03}`,
-  small: `w-[109px] h-[48px] ${FONT_VARIANTS.btn02}`,
-  medium: `w-[144px] h-[48px] ${FONT_VARIANTS.btn01}`,
-  timer: `w-[108px] h-[52px] ${FONT_VARIANTS.btn03}`,
+  tiny: `w-[96px] h-8 text-body03`,
+  small: `w-[109px] h-[48px] text-btn02`,
+  medium: `w-[144px] h-[48px] text-btn01`,
+  timer: `w-[108px] h-[52px] text-btn03`,
 };
