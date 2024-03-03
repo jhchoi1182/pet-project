@@ -1,8 +1,9 @@
-import { fetchPostsServerSide } from "@/controller/postController/useGetPostsController";
+import { postApi } from "@/api/postApi";
+import { Post } from "@/types/model/post";
 
 export default async function sitemap() {
-  const posts = await fetchPostsServerSide();
-  const pages = posts.map((post) => ({
+  const data = await postApi.getAllPost();
+  const pages = data.map((post: Post) => ({
     url: `https://www.studysync.store/post/${post.postId}`,
     lastModified: new Date(),
     changeFrequency: "daily",

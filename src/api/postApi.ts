@@ -1,6 +1,10 @@
 import { instance } from "../config/axiosConfig";
 
 export const postApi = {
+  getAllPost: async () => {
+    const { data } = await instance.get(`/post/all`);
+    return data?.result;
+  },
   getPosts: async (page: number, size: number = 9) => {
     const { data } = await instance.get(`/post?page=${page}&size=${size}&sort=createdAt,desc`);
     return data?.result;

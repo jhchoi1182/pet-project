@@ -15,7 +15,7 @@ define(['exports'], (function (exports) { 'use strict';
       // Don't overwrite this value if it's already set.
       // See https://github.com/GoogleChrome/workbox/pull/2284#issuecomment-560470923
       if (!('__WB_DISABLE_DEV_LOGS' in globalThis)) {
-        self.__WB_DISABLE_DEV_LOGS = false;
+        self.__WB_DISABLE_DEV_LOGS = true;
       }
       let inGroup = false;
       const methodToColorMap = {

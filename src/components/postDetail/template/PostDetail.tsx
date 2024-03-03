@@ -11,7 +11,6 @@ import { FONT_VARIANTS } from "@/styles/fonts";
 
 export default function PostDetail({ id }: { id: string }) {
   const { data, isLoading } = useGetPostController(+id);
-
   return (
     <>
       <BoardTab />

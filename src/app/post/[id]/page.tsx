@@ -1,6 +1,8 @@
+import { postApi } from "@/api/postApi";
 import PostDetail from "@/components/postDetail/template/PostDetail";
 import { fetchPostServerSide } from "@/controller/postController/useGetPostController";
 import { fetchPostsServerSide } from "@/controller/postController/useGetPostsController";
+import { Post } from "@/types/model/post";
 import { Metadata } from "next";
 
 interface Params {
@@ -10,10 +12,10 @@ interface Params {
 }
 
 export async function generateMetadata({ params: { id } }: Params): Promise<Metadata> {
-  const { title, contents } = await fetchPostServerSide(id);
+  const data = await postApi.getPost(+id);
   return {
-    title,
-    description: contents,
+    title: data.title,
+    description: data.contents,
   };
 }
 
@@ -26,6 +28,6 @@ export default function Detail({ params: { id } }: Params) {
 }
 
 export async function generateStaticParams() {
-  const posts = await fetchPostsServerSide();
-  return posts?.map((post) => ({ id: post.postId + "" }));
+  const data = await postApi.getAllPost();
+  return data?.map((post: Post) => ({ id: post.postId + "" }));
 }
