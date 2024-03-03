@@ -8,7 +8,6 @@ import { useGetPostsController } from "@/controller/postController/useGetPostsCo
 import { paginationAtom } from "@/stateStore/postAtom";
 import { BG_COLOR } from "@/styles/colors";
 import { FONT_VARIANTS } from "@/styles/fonts";
-import { Post } from "@/types/model/post";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 

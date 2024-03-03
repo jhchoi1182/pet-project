@@ -1,7 +1,5 @@
 import { postApi } from "@/api/postApi";
 import PostDetail from "@/components/postDetail/template/PostDetail";
-import { fetchPostServerSide } from "@/controller/postController/useGetPostController";
-import { fetchPostsServerSide } from "@/controller/postController/useGetPostsController";
 import { Post } from "@/types/model/post";
 import { Metadata } from "next";
 

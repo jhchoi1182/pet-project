@@ -1,5 +1,4 @@
 import { postApi } from "@/api/postApi";
-import { studySyncServerURL } from "@/config/envConfig";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
 import { Post } from "@/types/model/post";
 import { useQuery } from "@tanstack/react-query";
