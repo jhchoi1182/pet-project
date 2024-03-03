@@ -10,17 +10,3 @@ export function useGetPostController(postId: number) {
     queryFn: () => postApi.getPost(postId),
   });
 }
-
-export async function fetchPostServerSide(id: string): Promise<Post> {
-  try {
-    const response = await fetch(studySyncServerURL + `/post/${id}`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch posts");
-    }
-    const { result } = await response.json();
-    return result;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Failed to fetch posts");
-  }
-}
