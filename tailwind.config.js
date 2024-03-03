@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        ubuntu: ["var(--font-ubuntu)"],
         electrolize: ["var(--font-electrolize)"],
       },
       colors: {
@@ -18,6 +19,7 @@ module.exports = {
         blue: "#0984E3",
       },
       fontSize: {
+        logo: ["42px", { fontFamily: "var(--font-ubuntu)" }],
         body01: ["24px", { lineHeight: "1.5" }],
         body02: ["24px", { lineHeight: "1.5", fontWeight: "600" }],
         body03: ["16px", { lineHeight: "1.4" }],
