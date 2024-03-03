@@ -1,7 +1,6 @@
 import React from "react";
 import MaxPageArrow from "@/components/atoms/icons/MaxPageArrow";
 import NextPageArrow from "@/components/atoms/icons/NextPageArrow";
-import { TEXT_COLOR } from "@/styles/colors";
 import usePagination from "@/service/postService/usePagination";
 
 export interface PaginationNumGroupProps {
@@ -13,7 +12,7 @@ export default function PaginationNumGroup({ currentPage, totalPages }: Paginati
   const { pages, movePage } = usePagination({ currentPage, totalPages });
 
   return (
-    <div className={`flex items-end w-[80%] h-[60px] px-10 ${TEXT_COLOR.yellow}`}>
+    <div className={`flex items-end w-[80%] h-[60px] px-10 text-yellow`}>
       <div className={`flex justify-between w-full`}>
         <div className={`flex gap-5`}>
           <div className={`w-5`}>{currentPage > 1 && <MaxPageArrow isMin onClick={() => movePage(1)} />}</div>
