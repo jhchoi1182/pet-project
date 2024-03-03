@@ -1,4 +1,3 @@
-import { BG_COLOR } from "@/styles/colors";
 import React, { useState } from "react";
 import Logo from "../../atoms/Logo";
 import Button from "../../atoms/base/Button";
@@ -46,7 +45,7 @@ export default function SignupModal({ setToggleLoginSignup }: SignupModalProps) 
   };
 
   return (
-    <form className={`flex flex-col items-center w-[689px] h-[710px] ${BG_COLOR.navy} rounded-[10px] shadow-xl`} onSubmit={handleSubmit}>
+    <form className={`flex flex-col items-center w-[689px] h-[710px] bg-navy rounded-[10px] shadow-xl`} onSubmit={handleSubmit}>
       <CloseButton />
       <div className={`mt-11`}>
         <Logo />

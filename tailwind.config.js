@@ -6,6 +6,17 @@ module.exports = {
       fontFamily: {
         electrolize: ["var(--font-electrolize)"],
       },
+      colors: {
+        primary: "#000000",
+        inverse: "#FFFFFF",
+        navy: "#2C3E50",
+        yellow: "#FBC531",
+        gray400: "#D9D9D9",
+        gray500: "#8C8C8C",
+        red500: "#FF0000",
+        red600: "#D63031",
+        blue: "#0984E3",
+      },
       fontSize: {
         body01: ["24px", { lineHeight: "1.5" }],
         body02: ["24px", { lineHeight: "1.5", fontWeight: "600" }],

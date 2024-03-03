@@ -1,4 +1,3 @@
-import { BG_COLOR, TEXT_COLOR } from "@/styles/colors";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 import React from "react";
 
@@ -11,7 +10,7 @@ export function Dropdown({ setToggleDropdown, children }: DropdownProps) {
   return (
     <>
       <div className={`backdrop`} onClick={() => setToggleDropdown(false)} />
-      <div className={`absolute top-5 -right-0 z-20 ${TEXT_COLOR.primary}`}>
+      <div className={`absolute top-5 -right-0 z-20 text-primary`}>
         <ul>{children}</ul>
       </div>
     </>
@@ -30,8 +29,8 @@ Dropdown.li = function DropdownList({ textColor = "primary", first = false, end 
   return (
     <li>
       <button
-        className={`flex justify-center items-center border border-black w-[226px] h-[60px] ${first ? "rounded-t-[10px]" : ""} ${end ? "rounded-b-[10px]" : ""} ${BG_COLOR.inverse} ${
-          textColor === "red" ? TEXT_COLOR.red500 : ""
+        className={`flex justify-center items-center border border-black w-[226px] h-[60px] ${first ? "rounded-t-[10px]" : ""} ${end ? "rounded-b-[10px]" : ""} bg-inverse ${
+          textColor === "red" ? "text-red500" : ""
         }`}
         onClick={onClick}
       >

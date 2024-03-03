@@ -1,5 +1,4 @@
 import { ButtonHTMLAttributes } from "react";
-import { BG_COLOR, TEXT_COLOR } from "@/styles/colors";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "timer";
@@ -12,13 +11,13 @@ export default function Button({ variant = "primary", color = "primary", size = 
 }
 
 const TYPE_VARIANTS = {
-  primary: `${BG_COLOR.yellow}`,
-  timer: `border border-1 ${BG_COLOR.inverse}`,
+  primary: `bg-yellow`,
+  timer: `border border-1 bg-inverse`,
 };
 
 const COLOR_VARIANTS = {
-  primary: `${TEXT_COLOR.primary}`,
-  red: `${TEXT_COLOR.red500}`,
+  primary: `text-primary`,
+  red: `text-red500`,
 };
 
 const SIZE_VARIANTS = {

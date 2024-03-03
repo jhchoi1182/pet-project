@@ -1,4 +1,3 @@
-import { BG_COLOR } from "@/styles/colors";
 import React from "react";
 
 const circleCount = 3;
@@ -10,7 +9,7 @@ export default function LoadingSpinner() {
       {Array.from({ length: circleCount }).map((_, index) => (
         <div
           key={index}
-          className={`${size} ${BG_COLOR.yellow} rounded-full animate-bounce`}
+          className={`${size} bg-yellow rounded-full animate-bounce`}
           style={{
             animationDelay: `${index * 0.1}s`,
           }}

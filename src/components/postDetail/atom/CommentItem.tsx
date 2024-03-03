@@ -1,4 +1,3 @@
-import { BG_COLOR } from "@/styles/colors";
 import { Comment } from "@/types/model/comment";
 import React from "react";
 import PostDetailButton from "./PostDetailButton";
@@ -39,7 +38,7 @@ export default function CommentItem({ postId, comment: { commentId, nickname, cr
         <span>{createdAt}</span>
       </div>
       <div className={`mt-10 ml-[6px] leading-6`}>{openCommentEditor === commentId ? <CommentForm type="update" onSubmit={editComment} initialComment={comment} /> : <span>{comment}</span>}</div>
-      <hr className={`mt-10 ${BG_COLOR.primary}`} />
+      <hr className={`mt-10 bg-primary`} />
     </div>
   );
 }

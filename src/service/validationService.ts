@@ -1,4 +1,3 @@
-import { TEXT_COLOR } from "@/styles/colors";
 import { SetStateString } from "@/types/type/utilityTypes";
 import { AuthInputType } from "@/components/loginSignup/atom/ValidationText";
 import { ErrorResponse } from "@/types/response/ErrorResponse";
@@ -37,7 +36,7 @@ export function validationService() {
   }
 
   function changeValidationTextColor(type: AuthInputType, value: string, setValidationTextColor: SetStateString, password?: string) {
-    if (value.length === 0) return setValidationTextColor(TEXT_COLOR.trans);
+    if (value.length === 0) return setValidationTextColor("text-transparent");
 
     let isValid = false;
 
@@ -58,7 +57,7 @@ export function validationService() {
       default:
         isValid = false;
     }
-    setValidationTextColor(isValid ? TEXT_COLOR.trans : TEXT_COLOR.red500);
+    setValidationTextColor(isValid ? "text-transparent" : "text-red500");
   }
 
   return {

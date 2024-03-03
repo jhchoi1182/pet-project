@@ -2,7 +2,6 @@ import { Post } from "@/types/model/post";
 import React, { useState } from "react";
 import PostDetailButton from "../atom/PostDetailButton";
 import { useRouter } from "next/navigation";
-import { BG_COLOR } from "@/styles/colors";
 import { useRecoilValue } from "recoil";
 import { loggedInNicknameAtom } from "@/stateStore/commonAtom";
 import PostUpdateDeleteButtons from "../molecules/PostUpdateDeleteButtons";
@@ -48,7 +47,7 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
           {loggedInNickname === nickname && <PostUpdateDeleteButtons isEditMode={isEditMode} setIsEditMode={setIsEditMode} postInfoForEditing={postInfoForEditing} />}
         </div>
       </section>
-      <hr className={`mt-9 ${BG_COLOR.primary}`} />
+      <hr className={`mt-9 bg-primary`} />
       {isEditMode ? (
         <textarea
           className={`w-full h-[300px] mt-[75px] p-3 leading-6 border border-black rounded-[10px]`}

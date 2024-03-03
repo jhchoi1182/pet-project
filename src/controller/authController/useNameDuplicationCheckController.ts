@@ -1,7 +1,6 @@
 import { authApi } from "@/api/authApi";
 import { NameInputType } from "@/components/loginSignup/molecules/NameInput";
 import { useHandleExceptionText } from "@/service/validationService";
-import { TEXT_COLOR } from "@/styles/colors";
 import { SetStateBoolean, SetStateString } from "@/types/type/utilityTypes";
 
 function useNameDuplicationCheckController() {
@@ -13,10 +12,10 @@ function useNameDuplicationCheckController() {
 
       setIsNameAvailable(true);
       setExceptionText(`사용 가능한 ${type === "username" ? "아이디" : "닉네임"}입니다.`);
-      setValidationTextColor(TEXT_COLOR.blue);
+      setValidationTextColor("text-blue");
     } catch (error) {
       setIsNameAvailable(false);
-      setValidationTextColor(TEXT_COLOR.red500);
+      setValidationTextColor("text-red500");
       handleExceptionText(error, setExceptionText);
     }
   }

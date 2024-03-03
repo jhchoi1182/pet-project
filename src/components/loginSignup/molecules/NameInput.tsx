@@ -2,7 +2,6 @@ import Button from "@/components/atoms/base/Button";
 import Input from "@/components/atoms/base/Input";
 import React, { useEffect, useState } from "react";
 import ValidationText from "../atom/ValidationText";
-import { TEXT_COLOR } from "@/styles/colors";
 import { validationService } from "@/service/validationService";
 import useNameDuplicationCheckController from "@/controller/authController/useNameDuplicationCheckController";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
@@ -23,7 +22,7 @@ const label = {
 const { changeValidationTextColor } = validationService();
 
 export default function NameInput({ type, value, handleInputChange, setIsNameAvailable }: NameInputProps) {
-  const [validationTextColor, setValidationTextColor] = useState(TEXT_COLOR.trans);
+  const [validationTextColor, setValidationTextColor] = useState("text-transparent");
   const [exceptionText, setExceptionText] = useState("");
   const { checkDuplication } = useNameDuplicationCheckController();
 

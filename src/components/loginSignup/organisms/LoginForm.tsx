@@ -1,4 +1,3 @@
-import { BG_COLOR, TEXT_COLOR } from "@/styles/colors";
 import React, { useState } from "react";
 import Logo from "../../atoms/Logo";
 import Input from "../../atoms/base/Input";
@@ -17,7 +16,7 @@ export default function LoginModal({ setToggleLoginSignup }: LoginModalProps) {
     username: "",
     password: "",
   });
-  const [validationTextColor, setValidationTextColor] = useState(TEXT_COLOR.trans);
+  const [validationTextColor, setValidationTextColor] = useState("text-transparent");
   const { handleUserLogin } = useLoginController();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +30,7 @@ export default function LoginModal({ setToggleLoginSignup }: LoginModalProps) {
   };
 
   return (
-    <form className={`flex flex-col items-center w-[689px] h-[534px] ${BG_COLOR.navy} rounded-[10px] shadow-xl`} onSubmit={handleSubmit}>
+    <form className={`flex flex-col items-center w-[689px] h-[534px] bg-navy rounded-[10px] shadow-xl`} onSubmit={handleSubmit}>
       <CloseButton />
       <div className={`mt-11`}>
         <Logo />
