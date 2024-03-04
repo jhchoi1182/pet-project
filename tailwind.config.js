@@ -19,7 +19,7 @@ module.exports = {
         blue: "#0984E3",
       },
       fontSize: {
-        logo: ["42px", { fontFamily: "var(--font-ubuntu)" }],
+        logo: ["42px", { fontFamily: "var(--font-ubuntu)", fontWeight: "500" }],
         body01: ["24px", { lineHeight: "1.5" }],
         body02: ["24px", { lineHeight: "1.5", fontWeight: "600" }],
         body03: ["16px", { lineHeight: "1.4" }],
