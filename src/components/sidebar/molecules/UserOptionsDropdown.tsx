@@ -17,7 +17,7 @@ export default function UserOptionsDropdown() {
 
   return (
     <div className={`relative flex`}>
-      <button onClick={() => setToggleDropdown(true)}>
+      <button aria-label="사용자 옵션 열기" onClick={() => setToggleDropdown(true)}>
         <DownArrow />
       </button>
       {toggleDropdown && (

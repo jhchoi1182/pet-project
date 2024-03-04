@@ -1,6 +1,5 @@
 import React from "react";
 import PostDetailButton from "../atom/PostDetailButton";
-import { FONT_VARIANTS } from "@/styles/fonts";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 import useUpdatePostController from "@/controller/postController/useUpdatePostController";
 import useDeletePostController from "@/controller/postController/useDeletePostController";
@@ -31,7 +30,7 @@ export default function PostUpdateDeleteButtons({ isEditMode, setIsEditMode, pos
     deleteMutate();
   };
   return (
-    <div className={`flex gap-[10px] mt-4 ${FONT_VARIANTS.body03}`}>
+    <div className={`flex gap-[10px] mt-4 text-body03`}>
       {isEditMode ? (
         <>
           <PostDetailButton onClick={updatePost}>확인</PostDetailButton>

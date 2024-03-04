@@ -1,10 +1,8 @@
-import { BG_COLOR, TEXT_COLOR } from "@/styles/colors";
 import React, { useState } from "react";
 import Logo from "../../atoms/Logo";
 import Input from "../../atoms/base/Input";
 import Button from "../../atoms/base/Button";
 import CloseButton from "../molecules/CloseButton";
-import { FONT_VARIANTS } from "@/styles/fonts";
 import useLoginController from "@/controller/authController/useLoginController";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 import SocialLoginIcons from "../molecules/SocialLoginIcons";
@@ -18,7 +16,7 @@ export default function LoginModal({ setToggleLoginSignup }: LoginModalProps) {
     username: "",
     password: "",
   });
-  const [validationTextColor, setValidationTextColor] = useState(TEXT_COLOR.trans);
+  const [validationTextColor, setValidationTextColor] = useState("text-transparent");
   const { handleUserLogin } = useLoginController();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +30,7 @@ export default function LoginModal({ setToggleLoginSignup }: LoginModalProps) {
   };
 
   return (
-    <form className={`flex flex-col items-center w-[689px] h-[534px] ${BG_COLOR.navy} rounded-[10px] shadow-xl`} onSubmit={handleSubmit}>
+    <form className={`flex flex-col items-center w-[689px] h-[534px] bg-navy rounded-[10px] shadow-xl`} onSubmit={handleSubmit}>
       <CloseButton />
       <div className={`mt-11`}>
         <Logo />
@@ -47,7 +45,7 @@ export default function LoginModal({ setToggleLoginSignup }: LoginModalProps) {
       </div>
       <div className={`relative flex flex-col justify-center`}>
         <div className={`absolute top-5`}>
-          <span className={`${FONT_VARIANTS.body03} ${validationTextColor} select-none`}>아이디 또는 비밀번호를 다시 확인해주세요.</span>
+          <span className={`text-body03 ${validationTextColor} select-none`}>아이디 또는 비밀번호를 다시 확인해주세요.</span>
         </div>
         <div className={`flex gap-9 mt-[63px]`}>
           <Button>로그인</Button>

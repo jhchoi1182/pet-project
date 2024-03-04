@@ -1,9 +1,7 @@
 import { authApi } from "@/api/authApi";
 import useAuthService from "@/service/useAuthService";
-import { loginModalAtom, loggedInNicknameAtom } from "@/stateStore/commonAtom";
-import { TEXT_COLOR } from "@/styles/colors";
+import { loginModalAtom } from "@/stateStore/commonAtom";
 import { SetStateString } from "@/types/type/utilityTypes";
-import { cookieUtils } from "@/util/cookieUtils";
 import { useSetRecoilState } from "recoil";
 
 interface handleUserLoginParameter {
@@ -23,7 +21,7 @@ function useLoginController() {
       setNickname(nickname);
       setActiveLoginModal(false);
     } catch (error) {
-      setValidationTextColor(TEXT_COLOR.red500);
+      setValidationTextColor("text-red500");
     }
   }
   return { handleUserLogin };

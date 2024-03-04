@@ -1,5 +1,3 @@
-import { TEXT_COLOR } from "@/styles/colors";
-import { FONT_VARIANTS } from "@/styles/fonts";
 import React from "react";
 
 interface LabelWithInputProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -13,7 +11,7 @@ interface LabelWithInputProps extends React.HTMLAttributes<HTMLDivElement> {
 export default function Input({ variant, label, name, isPost = false, children }: LabelWithInputProps) {
   return (
     <div className={`flex items-center ${isPost ? "flex-col w-full h-full" : ""}`}>
-      <label htmlFor={label} className={`${LABEL_VARIANTS[variant]} ${FONT_VARIANTS.body02} ${TEXT_COLOR.inverse}`}>
+      <label htmlFor={label} className={`${LABEL_VARIANTS[variant]} text-body02 text-inverse`}>
         {label}
       </label>
       {React.cloneElement(children, {

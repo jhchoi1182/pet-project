@@ -1,13 +1,14 @@
 import React from "react";
 import "../styles/globals.css";
 import "../styles/reset.css";
-import { Inter } from "next/font/google";
+import { Electrolize, Inter, Ubuntu } from "next/font/google";
 import { Metadata, Viewport } from "next";
-import { BG_COLOR } from "@/styles/colors";
 import Sidebar from "@/components/sidebar/template/Sidebar";
 import AppProvider from "@/provider/AppProvider";
 
 const inter = Inter({ subsets: ["latin"] });
+const ubuntu = Ubuntu({ weight: "500", subsets: ["latin"], variable: "--font-ubuntu" });
+const electrolize = Electrolize({ weight: "400", subsets: ["latin"], variable: "--font-electrolize" });
 
 export const metadata: Metadata = {
   applicationName: "StudySync",
@@ -28,7 +29,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${BG_COLOR.navy} ${inter.className}`}>
+    <html lang="en" className={`bg-navy ${inter.className} ${electrolize.variable} ${ubuntu.variable}`}>
       <body className={`flex w-full h-screen min-w-[1920px] min-h-[800px] py-[76px]`}>
         <AppProvider>
           <Sidebar />

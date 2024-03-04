@@ -9,7 +9,6 @@ import Logo from "../../atoms/Logo";
 import PostForm from "../molecules/PostForm";
 import dynamic from "next/dynamic";
 import LoadingSpinner from "@/components/atoms/LoadingSpinner";
-import { FONT_VARIANTS } from "@/styles/fonts";
 const UsernameOrLoginButton = dynamic(() => import("../organisms/UsernameOrLoginButton"), { ssr: false });
 
 export default function Sidebar() {
@@ -22,7 +21,7 @@ export default function Sidebar() {
       <Link href={`/home`} className="mt-16">
         <Logo />
       </Link>
-      <div className={`h-52 mt-[60px] ${FONT_VARIANTS.body02}`}>
+      <div className={`h-52 mt-[60px] text-body02`}>
         {isLoading && (
           <div className="mt-6">
             <LoadingSpinner />

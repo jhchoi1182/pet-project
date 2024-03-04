@@ -1,5 +1,4 @@
 import Input from "@/components/atoms/base/Input";
-import { TEXT_COLOR } from "@/styles/colors";
 import React, { useEffect, useState } from "react";
 import ValidationText from "../atom/ValidationText";
 import { validationService } from "@/service/validationService";
@@ -21,7 +20,7 @@ const label = {
 const { changeValidationTextColor } = validationService();
 
 export default function EmailPasswordInput({ type, value, password, handleInputChange }: EmailPasswordInputProps) {
-  const [validationTextColor, setValidationTextColor] = useState(type === "password" ? TEXT_COLOR.inverse : TEXT_COLOR.trans);
+  const [validationTextColor, setValidationTextColor] = useState(type === "password" ? "text-inverse" : "text-transparent");
 
   useEffect(() => {
     changeValidationTextColor(type, value, setValidationTextColor, password);
