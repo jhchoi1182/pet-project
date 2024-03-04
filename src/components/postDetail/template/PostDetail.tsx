@@ -6,9 +6,12 @@ import React from "react";
 import PostDetailSection from "../organisms/PostDetailSection";
 import CommentSection from "../organisms/CommentSection";
 import { useGetPostController } from "@/controller/postController/useGetPostController";
+import useGetCommentsController from "@/controller/commentController/useGetCommentsController";
 
 export default function PostDetail({ id }: { id: string }) {
-  const { data, isLoading } = useGetPostController(+id);
+  const { post, isLoading } = useGetPostController(+id);
+  const { comments } = useGetCommentsController(+id);
+
   return (
     <>
       <BoardTab />
@@ -19,8 +22,8 @@ export default function PostDetail({ id }: { id: string }) {
           </div>
         ) : (
           <>
-            <PostDetailSection post={data} />
-            <CommentSection postId={+id} />
+            <PostDetailSection post={post} />
+            <CommentSection postId={+id} comments={comments} />
           </>
         )}
       </article>

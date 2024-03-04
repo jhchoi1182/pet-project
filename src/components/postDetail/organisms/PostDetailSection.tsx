@@ -1,5 +1,5 @@
 import { Post } from "@/types/model/post";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PostDetailButton from "../atom/PostDetailButton";
 import { useRouter } from "next/navigation";
 import { useRecoilValue } from "recoil";
@@ -25,6 +25,10 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
     const { name, value } = event.target;
     setPostInfoForEditing((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    setPostInfoForEditing({ title: title ?? "", contents: contents ?? "" });
+  }, [post]);
 
   return (
     <>
