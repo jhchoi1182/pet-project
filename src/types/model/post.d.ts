@@ -4,6 +4,7 @@ export interface PostWithoutContents {
   nickname: string;
   commentsCount: number;
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface Post extends PostWithoutContents {
