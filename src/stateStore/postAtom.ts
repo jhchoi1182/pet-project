@@ -15,5 +15,6 @@ export const postAtom = atom<Post>({
     nickname: "",
     commentsCount: 0,
     createdAt: "",
+    updatedAt: "",
   },
 });
