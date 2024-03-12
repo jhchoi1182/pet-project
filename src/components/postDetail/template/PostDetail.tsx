@@ -1,10 +1,10 @@
 "use client";
 
 import BoardTab from "@/components/atoms/BoardTab";
-import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 import React from "react";
 import PostDetailSection from "../organisms/PostDetailSection";
 import CommentSection from "../organisms/CommentSection";
+import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 import { useGetPostController } from "@/controller/postController/useGetPostController";
 import useGetCommentsController from "@/controller/commentController/useGetCommentsController";
 

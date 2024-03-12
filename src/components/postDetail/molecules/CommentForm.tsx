@@ -32,7 +32,13 @@ export default function CommentForm({ type, onSubmit, initialComment }: CommentF
 
   return (
     <form className={`mt-6`} onSubmit={handleSubmit}>
-      <textarea className={`w-full h-[120px] p-3 rounded-[10px] border border-black`} name="comment" value={comment} onChange={handleTextareaChange} placeholder="댓글을 입력해주세요." />
+      <textarea
+        className={`w-full h-[120px] p-3 rounded-[10px] border border-black`}
+        name="comment"
+        value={comment}
+        onChange={handleTextareaChange}
+        placeholder="댓글을 입력해주세요."
+      />
       <div className={`flex justify-between mt-2`}>
         <span>{`글자 수 (${comment.length}/200)`}</span>
         {type === "create" ? (
