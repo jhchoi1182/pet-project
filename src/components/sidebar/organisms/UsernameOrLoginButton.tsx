@@ -1,8 +1,8 @@
 "use client";
 
 import Button from "@/components/atoms/base/Button";
-import { loginModalAtom, loggedInNicknameAtom, isLoadingAtom, isRemovedNicknameCookieAtom } from "@/stateStore/commonAtom";
-import React, { useEffect } from "react";
+import { loginModalAtom, loggedInNicknameAtom, isRemovedNicknameCookieAtom, isSocialLoginInProgressAtom } from "@/stateStore/commonAtom";
+import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import UserOptionsDropdown from "../molecules/UserOptionsDropdown";
 import { cookieUtils } from "@/util/cookieUtils";
@@ -12,8 +12,9 @@ import LoadingSpinner from "@/components/atoms/LoadingSpinner";
 const { getCookie } = cookieUtils();
 
 export default function UsernameOrLoginButton() {
+  const [isLoading, setIsLoading] = useState(true);
   const [loggedInNickname, setLoggedInNickname] = useRecoilState(loggedInNicknameAtom);
-  const [isLoading, setIsLoading] = useRecoilState(isLoadingAtom);
+  const isSocialLoginInProgress = useRecoilValue(isSocialLoginInProgressAtom);
   const isRemovedNicknameCookie = useRecoilValue(isRemovedNicknameCookieAtom);
   const setActiveLoginModal = useSetRecoilState(loginModalAtom);
 
@@ -31,7 +32,7 @@ export default function UsernameOrLoginButton() {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading || isSocialLoginInProgress ? (
         <div className="mt-6">
           <LoadingSpinner />
         </div>

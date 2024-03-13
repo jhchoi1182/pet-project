@@ -15,11 +15,6 @@ export const isSocialLoginInProgressAtom = atom({
   default: false,
 });
 
-export const isLoadingAtom = atom({
-  key: "isLoading",
-  default: true,
-});
-
 export const isRemovedNicknameCookieAtom = atom({
   key: "isRemovedNicknameCookieAtom",
   default: false,

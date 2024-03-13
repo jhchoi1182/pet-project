@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/components/atoms/base/Button";
 import Input from "@/components/atoms/base/Input";
 import useCreatePostController from "@/controller/postController/useCreatePostController";
