@@ -21,8 +21,8 @@ function useMutationService(postId: number) {
   }
 
   function replaceFreshTitleCacheForPagination({ title }: { title: string }) {
-    const currentPage = Number(sessionStorage.getItem("currentPage")) ?? 1;
-    const prevPosts = queryClient.getQueryData<PostsResponse>([QUERY_KEY.posts, currentPage]);
+    const currentPage = sessionStorage.getItem("currentPage") ?? 1;
+    const prevPosts = queryClient.getQueryData<PostsResponse>([QUERY_KEY.posts, +currentPage]);
     const updatedPosts = prevPosts?.content?.map((post) => (post.postId === postId ? { ...post, title } : post));
     queryClient.setQueryData([QUERY_KEY.posts, currentPage], { ...prevPosts, content: updatedPosts });
   }
