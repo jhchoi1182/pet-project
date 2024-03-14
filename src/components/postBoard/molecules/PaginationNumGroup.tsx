@@ -1,15 +1,26 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import MaxPageArrow from "@/components/atoms/icons/MaxPageArrow";
 import NextPageArrow from "@/components/atoms/icons/NextPageArrow";
 import usePagination from "@/service/postService/usePagination";
+import { SetterOrUpdater } from "recoil";
 
-export interface PaginationNumGroupProps {
+export interface PaginationNumGroupParameter {
   currentPage: number;
   totalPages: number;
 }
+interface PaginationNumGroupProps extends PaginationNumGroupParameter {
+  setCurrentPage: SetterOrUpdater<number>;
+}
 
-export default function PaginationNumGroup({ currentPage, totalPages }: PaginationNumGroupProps) {
+export default function PaginationNumGroup({ currentPage, totalPages, setCurrentPage }: PaginationNumGroupProps) {
   const { pages, movePage } = usePagination({ currentPage, totalPages });
+
+  useEffect(() => {
+    const savedCurrentPage = Number(sessionStorage.getItem("currentPage"));
+    if (savedCurrentPage) return setCurrentPage(savedCurrentPage);
+  }, []);
 
   return (
     <div className={`flex items-end w-[80%] h-[60px] px-10 text-yellow`}>

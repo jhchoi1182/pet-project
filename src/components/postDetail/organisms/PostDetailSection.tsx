@@ -35,7 +35,13 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
       <section className={`flex justify-between`}>
         <div className={`w-[75%]`}>
           {isEditMode ? (
-            <input className={`w-full px-3 py-1 border border-black rounded-md`} name="title" value={postInfoForEditing.title} onChange={handleOnChange} placeholder="제목을 입력해주세요." />
+            <input
+              className={`w-full px-3 py-1 border border-black rounded-md`}
+              name="title"
+              value={postInfoForEditing.title}
+              onChange={handleOnChange}
+              placeholder="제목을 입력해주세요."
+            />
           ) : (
             <h1 className={`text-body02`}>{title}</h1>
           )}
@@ -48,7 +54,9 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
           <div className={`flex ml-auto`}>
             <PostDetailButton onClick={() => router.back()}>뒤로가기</PostDetailButton>
           </div>
-          {loggedInNickname === nickname && <PostUpdateDeleteButtons isEditMode={isEditMode} setIsEditMode={setIsEditMode} postInfoForEditing={postInfoForEditing} />}
+          {loggedInNickname === nickname && (
+            <PostUpdateDeleteButtons isEditMode={isEditMode} setIsEditMode={setIsEditMode} postInfoForEditing={postInfoForEditing} />
+          )}
         </div>
       </section>
       <hr className={`mt-9 bg-primary`} />

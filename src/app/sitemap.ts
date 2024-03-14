@@ -5,9 +5,9 @@ export default async function sitemap() {
   const data = await postApi.getAllPost();
   const pages = data.map((post: Post) => ({
     url: `https://www.studysync.store/post/${post.postId}`,
-    lastModified: new Date(),
+    lastModified: post.updatedAt ?? new Date(),
     changeFrequency: "daily",
-    priority: 0.5,
+    priority: 1,
   }));
 
   return [

@@ -1,4 +1,3 @@
-import useGetCommentsController from "@/controller/commentController/useGetCommentsController";
 import React from "react";
 import CommentForm from "../molecules/CommentForm";
 import { useRecoilValue } from "recoil";

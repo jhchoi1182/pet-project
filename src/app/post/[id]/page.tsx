@@ -9,6 +9,8 @@ interface Params {
   };
 }
 
+export const revalidate = 3600;
+
 export async function generateMetadata({ params: { id } }: Params): Promise<Metadata> {
   const data = await postApi.getPost(+id);
   return {

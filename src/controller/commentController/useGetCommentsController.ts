@@ -9,7 +9,7 @@ import { useRecoilState } from "recoil";
 function useGetCommentsController(postId: number) {
   const [comments, setComments] = useRecoilState(commentsAtom);
 
-  const { data } = useQuery<Comment[]>({
+  const { data, isLoading } = useQuery<Comment[]>({
     queryKey: [QUERY_KEY.comments, postId],
     queryFn: () => commentApi.get(postId),
   });
@@ -19,7 +19,7 @@ function useGetCommentsController(postId: number) {
     setComments(data);
   }, [data]);
 
-  return { comments };
+  return { comments, isLoading };
 }
 
 export default useGetCommentsController;
