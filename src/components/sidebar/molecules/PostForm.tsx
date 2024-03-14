@@ -10,7 +10,7 @@ export default function PostForm() {
     title: "",
     contents: "",
   });
-  const { mutate } = useCreatePostController();
+  const { mutate } = useCreatePostController(setEnteredValue);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -27,13 +27,13 @@ export default function PostForm() {
     <form className={`flex flex-col w-[70%] h-full`} onSubmit={handleSubmit}>
       <div className="w-full">
         <Input variant="post" label="제목" name="title" isPost>
-          <Input.TextField variant="post" onChange={handleInputChange} required />
+          <Input.TextField variant="post" value={enteredValue.title} onChange={handleInputChange} required />
         </Input>
       </div>
       <div className={`flex flex-col w-full h-full`}>
         <div className={`mt-10 w-full h-full`}>
           <Input variant="post" label="내용" name="contents" isPost>
-            <Input.TextArea variant="post" onChange={handleInputChange} required />
+            <Input.TextArea variant="post" value={enteredValue.contents} onChange={handleInputChange} required />
           </Input>
         </div>
         <div className={`pt-14 self-end mt-auto mb-[14px]`}>
