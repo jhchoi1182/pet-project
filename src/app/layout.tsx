@@ -11,13 +11,13 @@ const ubuntu = Ubuntu({ weight: "500", subsets: ["latin"], variable: "--font-ubu
 const electrolize = Electrolize({ weight: "400", subsets: ["latin"], variable: "--font-electrolize" });
 
 export const metadata: Metadata = {
-  applicationName: "StudySync",
+  applicationName: "StudySync [스터디씽크]",
   title: {
-    default: "StudySync",
-    template: "[StudySync] | %s",
+    default: "StudySync [스터디씽크]",
+    template: "StudySync [스터디씽크] | %s",
   },
-  description: "공부를 주제로 잡다한 이야기를 나누는 커뮤니티",
-  manifest: "/manifest.json",
+  description: "[StudySync-스터디씽크] 공부를 주제로 잡다한 이야기를 나누는 커뮤니티",
+  manifest: "../../public/manifest.json",
   formatDetection: {
     telephone: false,
   },
