@@ -8,11 +8,11 @@ function useCreatCommentController(postId: number) {
   return useMutation({
     mutationFn: (comment: string) => commentApi.post(postId, comment),
     onSuccess: () => {
-      const currentPage = Number(sessionStorage.getItem("currentPage")) ?? 1;
-      const prevPosts = queryClient.getQueryData<PostsResponse>([QUERY_KEY.posts, currentPage]);
-      const updatedPosts = prevPosts?.content?.map((post) => (post.postId === postId ? { ...post, commentsCount: post.commentsCount + 1 } : post));
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.comments, postId] });
-      queryClient.setQueryData([QUERY_KEY.posts, currentPage], { ...prevPosts, content: updatedPosts });
+      const currentPage = sessionStorage.getItem("currentPage") ?? 1;
+      const prevPosts = queryClient.getQueryData<PostsResponse>([QUERY_KEY.posts, +currentPage]);
+      const updatedPosts = prevPosts?.content?.map((post) => (post.postId === postId ? { ...post, commentsCount: post.commentsCount + 1 } : post));
+      queryClient.setQueryData([QUERY_KEY.posts, +currentPage], { ...prevPosts, content: updatedPosts });
     },
   });
 }
