@@ -1,13 +1,15 @@
 import { commentApi } from "@/api/commentApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
-import { commentsAtom } from "@/stateStore/commentAtom";
+import { setComments } from "@/redux/modules/commentSlice";
+import { RootState } from "@/redux/store/store";
 import { Comment } from "@/types/model/comment";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useDispatch, useSelector } from "react-redux";
 
 function useGetCommentsController(postId: number) {
-  const [comments, setComments] = useRecoilState(commentsAtom);
+  const comments = useSelector(({ commentSlice }: RootState) => commentSlice.comments);
+  const dispatch = useDispatch();
 
   const { data, isLoading } = useQuery<Comment[]>({
     queryKey: [QUERY_KEY.comments, postId],
@@ -16,7 +18,7 @@ function useGetCommentsController(postId: number) {
 
   useEffect(() => {
     if (!data) return;
-    setComments(data);
+    dispatch(setComments(data));
   }, [data]);
 
   return { comments, isLoading };
