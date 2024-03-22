@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: "StudySync [스터디씽크] | %s",
   },
   description: "[StudySync-스터디씽크] 공부를 주제로 잡다한 이야기를 나누는 커뮤니티",
-  manifest: "../../public/manifest.json",
+  manifest: "/manifest.json",
   formatDetection: {
     telephone: false,
   },
