@@ -1,8 +1,8 @@
 import { authApi } from "@/api/authApi";
+import { setIsOpenLoginModal } from "@/redux/modules/authSlice";
 import useAuthService from "@/service/useAuthService";
-import { loginModalAtom } from "@/stateStore/commonAtom";
 import { SetStateString } from "@/types/type/utilityTypes";
-import { useSetRecoilState } from "recoil";
+import { useDispatch } from "react-redux";
 
 interface handleUserLoginParameter {
   username: string;
@@ -10,7 +10,7 @@ interface handleUserLoginParameter {
 }
 
 function useLoginController() {
-  const setActiveLoginModal = useSetRecoilState(loginModalAtom);
+  const dispatch = useDispatch();
   const { setNickname } = useAuthService();
 
   async function handleUserLogin({ username, password }: handleUserLoginParameter, setValidationTextColor: SetStateString) {
@@ -19,7 +19,7 @@ function useLoginController() {
       const { nickname } = data?.result;
       alert("로그인 성공!");
       setNickname(nickname);
-      setActiveLoginModal(false);
+      dispatch(setIsOpenLoginModal(false));
     } catch (error) {
       setValidationTextColor("text-red500");
     }

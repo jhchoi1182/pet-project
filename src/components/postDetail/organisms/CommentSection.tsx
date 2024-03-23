@@ -1,10 +1,10 @@
 import React from "react";
 import CommentForm from "../molecules/CommentForm";
-import { useRecoilValue } from "recoil";
-import { loggedInNicknameAtom } from "@/stateStore/commonAtom";
 import CommentItem from "../atom/CommentItem";
 import useCreatCommentController from "@/controller/commentController/useCreatCommentController";
 import { Comment } from "@/types/model/comment";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
 
 interface CommentSectionProps {
   postId: number;
@@ -13,7 +13,7 @@ interface CommentSectionProps {
 
 export default function CommentSection({ postId, comments }: CommentSectionProps) {
   const { mutate } = useCreatCommentController(postId);
-  const loggedInNickname = useRecoilValue(loggedInNicknameAtom);
+  const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
 
   const createComment = (comment: string) => {
     mutate(comment);

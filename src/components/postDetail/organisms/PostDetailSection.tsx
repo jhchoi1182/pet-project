@@ -2,9 +2,9 @@ import { Post } from "@/types/model/post";
 import React, { useEffect, useState } from "react";
 import PostDetailButton from "../atom/PostDetailButton";
 import { useRouter } from "next/navigation";
-import { useRecoilValue } from "recoil";
-import { loggedInNicknameAtom } from "@/stateStore/commonAtom";
 import PostUpdateDeleteButtons from "../molecules/PostUpdateDeleteButtons";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
 
 interface PostDetailSectionProps {
   post: Post | undefined;
@@ -18,7 +18,7 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
     contents: contents ?? "",
   });
   const [isEditMode, setIsEditMode] = useState(false);
-  const loggedInNickname = useRecoilValue(loggedInNicknameAtom);
+  const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
   const router = useRouter();
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
