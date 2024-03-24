@@ -29,7 +29,7 @@ export default function SnsLoginpage({ params: { snsType } }: snsTypeProps) {
     const fetchSocialLogin = async () => {
       const code = searchParams.get("code");
       if (!code) return;
-      dispatch(setIsSocialLoginInProgress(() => true));
+      dispatch(setIsSocialLoginInProgress(true));
       try {
         if (snsType === "google") {
           const { data } = await authApi.googleLogin(code);
@@ -39,7 +39,7 @@ export default function SnsLoginpage({ params: { snsType } }: snsTypeProps) {
       } catch (error) {
         handleError(error);
       } finally {
-        dispatch(setIsSocialLoginInProgress(() => false));
+        dispatch(setIsSocialLoginInProgress(false));
       }
     };
     fetchSocialLogin();

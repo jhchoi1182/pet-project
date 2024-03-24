@@ -1,4 +1,7 @@
+import { cookieUtils } from "@/util/cookieUtils";
 import { createSlice } from "@reduxjs/toolkit";
+
+const { getCookie } = cookieUtils();
 
 export interface AuthSliceState {
   isOpenLoginModal: boolean;
@@ -11,7 +14,7 @@ const initialState: AuthSliceState = {
   isOpenLoginModal: false,
   isSocialLoginInProgress: false,
   isRemovedNicknameCookie: false,
-  loggedInNickname: undefined,
+  loggedInNickname: getCookie(),
 };
 
 export const authSlice = createSlice({
