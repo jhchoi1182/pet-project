@@ -1,17 +1,17 @@
 import { QUERY_KEY } from "@/config/queyKeyConfig";
-import { postAtom } from "@/stateStore/postAtom";
+import { optimisticUpdatePost, setPost } from "@/redux/modules/postSlice";
 import { Post } from "@/types/model/post";
 import { PostsResponse } from "@/types/response/postsResponse";
 import { useQueryClient } from "@tanstack/react-query";
-import { useSetRecoilState } from "recoil";
+import { useDispatch } from "react-redux";
 
 function useMutationService(postId: number) {
   const queryClient = useQueryClient();
-  const setPost = useSetRecoilState(postAtom);
+  const dispatch = useDispatch();
 
   function handleOptimisticUpdate({ title, contents }: { title: string; contents: string }) {
     const prevPost = queryClient.getQueryData<Post>([QUERY_KEY.post, postId]);
-    setPost((prev) => ({ ...prev, title, contents }));
+    dispatch(optimisticUpdatePost({ title, contents }));
     queryClient.setQueryData([QUERY_KEY.post, postId], {
       ...prevPost,
       title,
@@ -31,7 +31,7 @@ function useMutationService(postId: number) {
     if (!context) return;
     if (context?.prevPost) {
       queryClient.setQueryData([QUERY_KEY.post, postId], context.prevPost);
-      setPost(context.prevPost);
+      dispatch(setPost(context.prevPost));
     }
   }
 

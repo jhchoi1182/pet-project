@@ -4,22 +4,22 @@ import React, { useEffect } from "react";
 import MaxPageArrow from "@/components/atoms/icons/MaxPageArrow";
 import NextPageArrow from "@/components/atoms/icons/NextPageArrow";
 import usePagination from "@/service/postService/usePagination";
-import { SetterOrUpdater } from "recoil";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
+import { setCurrentPage } from "@/redux/modules/postSlice";
 
-export interface PaginationNumGroupParameter {
-  currentPage: number;
+interface PaginationNumGroupProps {
   totalPages: number;
 }
-interface PaginationNumGroupProps extends PaginationNumGroupParameter {
-  setCurrentPage: SetterOrUpdater<number>;
-}
 
-export default function PaginationNumGroup({ currentPage, totalPages, setCurrentPage }: PaginationNumGroupProps) {
-  const { pages, movePage } = usePagination({ currentPage, totalPages });
+export default function PaginationNumGroup({ totalPages }: PaginationNumGroupProps) {
+  const currentPage = useSelector(({ postSlice }: RootState) => postSlice.currentPage);
+  const dispatch = useDispatch();
+  const { pages, movePage } = usePagination(currentPage, totalPages);
 
   useEffect(() => {
     const savedCurrentPage = Number(sessionStorage.getItem("currentPage"));
-    if (savedCurrentPage) return setCurrentPage(savedCurrentPage);
+    if (savedCurrentPage) dispatch(setCurrentPage(savedCurrentPage));
   }, []);
 
   return (

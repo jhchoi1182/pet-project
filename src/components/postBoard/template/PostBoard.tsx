@@ -2,15 +2,12 @@
 
 import BoardLoadingSpinner from "@/components/atoms/BoardLoadingSpinner";
 import { useGetPostsController } from "@/controller/postController/useGetPostsController";
-import { paginationAtom } from "@/stateStore/postAtom";
 import React from "react";
-import { useRecoilState } from "recoil";
 import PostList from "../molecules/PostList";
 import PaginationNumGroup from "../molecules/PaginationNumGroup";
 
 export default function PostBoard() {
-  const [currentPage, setCurrentPage] = useRecoilState(paginationAtom);
-  const { data, isLoading } = useGetPostsController(currentPage);
+  const { data, isLoading } = useGetPostsController();
   const { content = [], totalPages = 0 } = data ?? {};
 
   return (
@@ -23,7 +20,7 @@ export default function PostBoard() {
         </header>
         {!isLoading ? <PostList posts={content} /> : <BoardLoadingSpinner />}
       </section>
-      <PaginationNumGroup currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
+      <PaginationNumGroup totalPages={totalPages} />
     </>
   );
 }
