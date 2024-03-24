@@ -15,11 +15,11 @@ export const commentSlice = createSlice({
   name: "comments",
   initialState,
   reducers: {
-    setOpenCommentEditor: ({ openCommentEditor }, { payload }) => {
-      openCommentEditor = payload;
+    setOpenCommentEditor: (state, { payload }) => {
+      state.openCommentEditor = payload;
     },
-    setComments: ({ comments }, { payload }) => {
-      comments = payload;
+    setComments: (state, { payload }) => {
+      state.comments = payload;
     },
   },
 });

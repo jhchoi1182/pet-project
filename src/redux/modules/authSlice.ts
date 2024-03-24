@@ -18,17 +18,17 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setIsOpenLoginModal: ({ isOpenLoginModal }, { payload }) => {
-      isOpenLoginModal = payload;
+    setIsOpenLoginModal: (state, { payload }) => {
+      state.isOpenLoginModal = payload;
     },
-    setIsSocialLoginInProgress: ({ isSocialLoginInProgress }, { payload }) => {
-      isSocialLoginInProgress = payload;
+    setIsSocialLoginInProgress: (state, { payload }) => {
+      state.isSocialLoginInProgress = payload;
     },
-    setIsRemovedNicknameCookie: ({ isRemovedNicknameCookie }, { payload }) => {
-      isRemovedNicknameCookie = payload;
+    setIsRemovedNicknameCookie: (state, { payload }) => {
+      state.isRemovedNicknameCookie = payload;
     },
-    setLoggedInNickname: ({ loggedInNickname }, { payload }) => {
-      loggedInNickname = payload;
+    setLoggedInNickname: (state, { payload }) => {
+      state.loggedInNickname = payload;
     },
   },
 });
