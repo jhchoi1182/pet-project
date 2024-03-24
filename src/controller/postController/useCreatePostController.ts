@@ -1,8 +1,8 @@
 import { postApi } from "@/api/postApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
-import { paginationAtom } from "@/stateStore/postAtom";
+import { RootState } from "@/redux/store/store";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRecoilValue } from "recoil";
+import { useSelector } from "react-redux";
 
 interface CreatePostParameter {
   title: string;
@@ -18,7 +18,7 @@ function useCreatePostController(
   >,
 ) {
   const queryClient = useQueryClient();
-  const currentPage = useRecoilValue(paginationAtom);
+  const currentPage = useSelector(({ postSlice }: RootState) => postSlice.currentPage);
   return useMutation({
     mutationFn: ({ title, contents }: CreatePostParameter) => postApi.create(title, contents),
     onSuccess: () => {

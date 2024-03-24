@@ -1,16 +1,17 @@
 "use client";
 
+import { setIsRemovedNicknameCookie } from "@/redux/modules/authSlice";
+import { RootState } from "@/redux/store/store";
 import useHandleError from "@/service/useHandleError";
-import { isRemovedNicknameCookieAtom, loggedInNicknameAtom } from "@/stateStore/commonAtom";
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import React, { useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ReactQueryProvider({ children }: { children: React.ReactNode }) {
   const { handleError } = useHandleError();
-  const loggedInNickname = useRecoilValue(loggedInNicknameAtom);
-  const isRemovedNicknameCookie = useSetRecoilState(isRemovedNicknameCookieAtom);
+  const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
+  const dispatch = useDispatch();
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -22,7 +23,7 @@ export default function ReactQueryProvider({ children }: { children: React.React
         mutationCache: new MutationCache({
           onSuccess: (_) => {
             if (loggedInNickname) return;
-            isRemovedNicknameCookie(true);
+            dispatch(setIsRemovedNicknameCookie(true));
           },
           onError: (error) => {
             handleError(error);

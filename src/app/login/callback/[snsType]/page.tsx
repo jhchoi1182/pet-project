@@ -4,9 +4,9 @@ import React, { useEffect } from "react";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { authApi } from "@/api/authApi";
 import useHandleError from "@/service/useHandleError";
-import { useSetRecoilState } from "recoil";
-import { isSocialLoginInProgressAtom } from "@/stateStore/commonAtom";
 import useAuthService from "@/service/useAuthService";
+import { useDispatch } from "react-redux";
+import { setIsSocialLoginInProgress } from "@/redux/modules/authSlice";
 
 interface snsTypeProps {
   params: {
@@ -15,7 +15,7 @@ interface snsTypeProps {
 }
 
 export default function SnsLoginpage({ params: { snsType } }: snsTypeProps) {
-  const isSocialLoginInProgress = useSetRecoilState(isSocialLoginInProgressAtom);
+  const dispatch = useDispatch();
   const { setNickname } = useAuthService();
   const { handleError } = useHandleError();
   const searchParams = useSearchParams();
@@ -29,7 +29,7 @@ export default function SnsLoginpage({ params: { snsType } }: snsTypeProps) {
     const fetchSocialLogin = async () => {
       const code = searchParams.get("code");
       if (!code) return;
-      isSocialLoginInProgress(() => true);
+      dispatch(setIsSocialLoginInProgress(true));
       try {
         if (snsType === "google") {
           const { data } = await authApi.googleLogin(code);
@@ -39,7 +39,7 @@ export default function SnsLoginpage({ params: { snsType } }: snsTypeProps) {
       } catch (error) {
         handleError(error);
       } finally {
-        isSocialLoginInProgress(() => false);
+        dispatch(setIsSocialLoginInProgress(false));
       }
     };
     fetchSocialLogin();

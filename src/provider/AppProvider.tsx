@@ -2,17 +2,18 @@
 
 import React from "react";
 import ReactQueryProvider from "./ReactQueryProvider";
-import { RecoilRoot } from "recoil";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store/store";
 
 export default function AppProvider({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <RecoilRoot>
+      <Provider store={store}>
         <ReactQueryProvider>
           {children}
           <div id="portal"></div>
         </ReactQueryProvider>
-      </RecoilRoot>
+      </Provider>
     </>
   );
 }

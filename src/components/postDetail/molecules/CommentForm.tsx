@@ -1,7 +1,7 @@
 import Button from "@/components/atoms/base/Button";
-import { openCommentEditorAtom } from "@/stateStore/commentAtom";
+import { setOpenCommentEditor } from "@/redux/modules/commentSlice";
 import React, { FormEvent, useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useDispatch } from "react-redux";
 
 interface CommentFormProps {
   type: "create" | "update";
@@ -11,7 +11,7 @@ interface CommentFormProps {
 
 export default function CommentForm({ type, onSubmit, initialComment }: CommentFormProps) {
   const [comment, setComment] = useState(initialComment ?? "");
-  const setOpenCommentEditor = useSetRecoilState(openCommentEditorAtom);
+  const dispatch = useDispatch();
 
   const handleTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
@@ -46,7 +46,7 @@ export default function CommentForm({ type, onSubmit, initialComment }: CommentF
         ) : (
           <div className={`flex gap-3`}>
             <Button size="tiny">수정하기</Button>
-            <Button size="tiny" onClick={() => setOpenCommentEditor(null)}>
+            <Button size="tiny" onClick={() => dispatch(setOpenCommentEditor(null))}>
               취소
             </Button>
           </div>

@@ -1,12 +1,12 @@
 import { commentApi } from "@/api/commentApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
-import { commentsAtom } from "@/stateStore/commentAtom";
+import { setComments } from "@/redux/modules/commentSlice";
 import { Comment } from "@/types/model/comment";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useSetRecoilState } from "recoil";
+import { useDispatch } from "react-redux";
 
 function useUpdateCommentController(postId: number, commentId: number) {
-  const setComments = useSetRecoilState(commentsAtom);
+  const dispatch = useDispatch();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (commentContents: string) => commentApi.update(postId, commentId, commentContents),
@@ -14,7 +14,7 @@ function useUpdateCommentController(postId: number, commentId: number) {
       const prevComments = queryClient.getQueryData<Comment[]>([QUERY_KEY.comments, postId]) ?? [];
       const updatedComments = prevComments?.map((data) => (data.commentId === commentId ? { ...data, comment: variables } : data));
 
-      setComments(updatedComments);
+      dispatch(setComments(updatedComments));
       queryClient.setQueryData([QUERY_KEY.comments, postId], updatedComments);
       return { prevComments };
     },
@@ -22,7 +22,7 @@ function useUpdateCommentController(postId: number, commentId: number) {
       if (!context) return;
       if (context?.prevComments) {
         queryClient.setQueryData([QUERY_KEY.post, postId], context?.prevComments);
-        setComments(context?.prevComments);
+        dispatch(setComments(context?.prevComments));
       }
     },
   });

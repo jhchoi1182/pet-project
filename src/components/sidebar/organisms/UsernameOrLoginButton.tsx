@@ -1,27 +1,29 @@
 "use client";
 
 import Button from "@/components/atoms/base/Button";
-import { loginModalAtom, loggedInNicknameAtom, isRemovedNicknameCookieAtom, isSocialLoginInProgressAtom } from "@/stateStore/commonAtom";
 import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import UserOptionsDropdown from "../molecules/UserOptionsDropdown";
-import { cookieUtils } from "@/util/cookieUtils";
 import useAuthenticationController from "@/controller/authController/useAuthenticationController";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsOpenLoginModal, setLoggedInNickname } from "@/redux/modules/authSlice";
+import { RootState } from "@/redux/store/store";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { cookieUtils } from "@/util/cookieUtils";
 import LoadingSpinner from "@/components/atoms/LoadingSpinner";
+import Username from "../molecules/Username";
+import { usePathname } from "next/navigation";
 
 const { getCookie } = cookieUtils();
 
-export default function UsernameOrLoginButton() {
+export default function UsernameOrLoginButton({ nickname }: { nickname: RequestCookie | undefined }) {
+  const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
-  const [loggedInNickname, setLoggedInNickname] = useRecoilState(loggedInNicknameAtom);
-  const isSocialLoginInProgress = useRecoilValue(isSocialLoginInProgressAtom);
-  const isRemovedNicknameCookie = useRecoilValue(isRemovedNicknameCookieAtom);
-  const setActiveLoginModal = useSetRecoilState(loginModalAtom);
+  const { loggedInNickname, isSocialLoginInProgress, isRemovedNicknameCookie } = useSelector(({ authSlice }: RootState) => authSlice);
+  const dispatch = useDispatch();
 
   const { fetchAuth } = useAuthenticationController();
 
   useEffect(() => {
-    setLoggedInNickname(getCookie());
+    dispatch(setLoggedInNickname(getCookie()));
     setIsLoading(false);
   }, []);
 
@@ -32,23 +34,16 @@ export default function UsernameOrLoginButton() {
 
   return (
     <>
-      {isLoading || isSocialLoginInProgress ? (
+      {pathname === "/login/callback/google" || isSocialLoginInProgress ? (
         <div className="mt-6">
           <LoadingSpinner />
         </div>
-      ) : loggedInNickname ? (
-        <div className={`flex gap-2 ml-[10.4px] text-inverse`}>
-          <div className={`flex flex-col gap-3 items-center`}>
-            <span className={`flex items-center`}>
-              <span className={`text-yellow`}>{loggedInNickname}</span>
-              <span className={`ml-2`}>님</span>
-            </span>
-            <p>환영합니다!</p>
-          </div>
-          <UserOptionsDropdown />
-        </div>
+      ) : isLoading && nickname ? (
+        <Username nickname={nickname.value} />
+      ) : !isLoading && loggedInNickname ? (
+        <Username nickname={loggedInNickname} />
       ) : (
-        <Button onClick={() => setActiveLoginModal(true)}>로그인</Button>
+        <Button onClick={() => dispatch(setIsOpenLoginModal(true))}>로그인</Button>
       )}
     </>
   );

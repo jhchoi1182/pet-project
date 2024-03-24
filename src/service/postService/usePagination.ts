@@ -1,13 +1,12 @@
-import { PaginationNumGroupParameter } from "@/components/postBoard/molecules/PaginationNumGroup";
-import { paginationAtom } from "@/stateStore/postAtom";
+import { setCurrentPage } from "@/redux/modules/postSlice";
 import { useEffect, useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useDispatch } from "react-redux";
 
 const pagesPerGroup = 13;
 
-function usePagination({ currentPage, totalPages }: PaginationNumGroupParameter) {
+function usePagination(currentPage: number, totalPages: number) {
   const [pageGroupStart, setPageGroupStart] = useState(1);
-  const setCurrentPage = useSetRecoilState(paginationAtom);
+  const dispatch = useDispatch();
 
   const pageGroupEnd = calculatePageGroupEnd(pageGroupStart);
   const pages = Array.from({ length: pageGroupEnd - pageGroupStart + 1 }, (_, index) => pageGroupStart + index);
@@ -18,7 +17,7 @@ function usePagination({ currentPage, totalPages }: PaginationNumGroupParameter)
   }
 
   const movePage = (page: number) => {
-    setCurrentPage(page);
+    dispatch(setCurrentPage(page));
     sessionStorage.setItem("currentPage", page + "");
   };
 
