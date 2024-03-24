@@ -1,8 +1,6 @@
-
 import { setLoggedInNickname } from "@/redux/modules/authSlice";
 import { cookieUtils } from "@/util/cookieUtils";
 import { useDispatch } from "react-redux";
-import { useSetRecoilState } from "recoil";
 
 const { setCookie, removeCookie } = cookieUtils();
 
