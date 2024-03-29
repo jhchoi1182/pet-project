@@ -18,6 +18,7 @@ export default function PostForm({ setIsLoading }: { setIsLoading: SetStateBoole
     const contents = replaceImgTagWithTempTag(ckEditorData);
     const images = extractImages(ckEditorData);
     if (!window.confirm("글을 게시하시겠습니까?")) return;
+    if (title === "" || ckEditorData === "") return alert("내용을 다시 확인해주세요.");
     mutate({ title, contents, images });
   };
 
