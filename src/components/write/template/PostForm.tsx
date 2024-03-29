@@ -1,30 +1,29 @@
 import PostDetailButton from "@/components/postDetail/atom/PostDetailButton";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import PostEditor from "../atom/PostEditor";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 import { extractImages, replaceImgTagWithTempTag } from "@/util/ckeditorImageTransformer";
 import useCreatePostController from "@/controller/postController/useCreatePostController";
 import useUpdatePostController from "@/controller/postController/useUpdatePostController";
+import useAlertBeforeUnload from "@/hook/useBeforeUnload";
 
 interface PostFormProps {
-  postId: number;
-  savedTitle: string;
-  savedContents: string;
+  isCreate: boolean;
   setIsLoading: SetStateBoolean;
 }
 
-export default function PostForm({ postId, savedTitle, savedContents, setIsLoading }: PostFormProps) {
-  const [title, setTitle] = useState("");
-  const [ckEditorData, setCkEditorData] = useState("");
-  const router = useRouter();
-  const searchParams = useSearchParams();
+const savedPostId = Number(sessionStorage.getItem("savedPostId")) ?? 0;
+const savedTitle = sessionStorage.getItem("savedTitle") ?? "";
+const savedContents = sessionStorage.getItem("savedContents") ?? "";
 
-  const type = searchParams.get("type");
-  const isCreate = type === "create";
+export default function PostForm({ isCreate, setIsLoading }: PostFormProps) {
+  const [title, setTitle] = useState(isCreate ? "" : savedTitle);
+  const [ckEditorData, setCkEditorData] = useState(isCreate ? "" : savedContents);
+  const router = useRouter();
 
   const { mutate: createPost } = useCreatePostController();
-  const { mutate: updatePost } = useUpdatePostController(postId);
+  const { mutate: updatePost } = useUpdatePostController(savedPostId);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -37,14 +36,9 @@ export default function PostForm({ postId, savedTitle, savedContents, setIsLoadi
   };
 
   useEffect(() => {
-    if (isCreate) return;
-    setTitle(savedTitle);
-    setCkEditorData(savedContents);
-  }, []);
-
-  useEffect(() => {
     setIsLoading(false);
   }, []);
+  useAlertBeforeUnload();
 
   return (
     <form className={`w-full h-full`} onSubmit={handleSubmit}>

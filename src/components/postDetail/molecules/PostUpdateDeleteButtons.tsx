@@ -3,13 +3,19 @@ import PostDetailButton from "../atom/PostDetailButton";
 import useDeletePostController from "@/controller/postController/useDeletePostController";
 import { useParams, useRouter } from "next/navigation";
 import { Post } from "@/types/model/post";
+import { replaceTempTagWithRealImgTag } from "@/util/ckeditorImageTransformer";
 
 export default function PostUpdateDeleteButtons({ post }: { post: Post | undefined }) {
+  const { postId = 0, title = "", contents = "", images = [] } = post ?? {};
+
   const { id } = useParams();
   const router = useRouter();
   const { mutate: deleteMutate } = useDeletePostController(+id ?? 0);
 
   const handleUpdateButtonClick = () => {
+    sessionStorage.setItem("savedPostId", postId + "");
+    sessionStorage.setItem("savedTitle", title);
+    sessionStorage.setItem("savedContents", replaceTempTagWithRealImgTag(contents, images));
     router.push(`/write?type=update`);
   };
 
