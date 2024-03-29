@@ -8,7 +8,7 @@ import { setIsOpenLoginModal, setLoggedInNickname } from "@/redux/modules/authSl
 import { RootState } from "@/redux/store/store";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookieUtils } from "@/util/cookieUtils";
-import LoadingSpinner from "@/components/atoms/LoadingSpinner";
+import LoadingSpinner from "@/components/atoms/ui/LoadingSpinner";
 import Username from "../molecules/Username";
 import { usePathname } from "next/navigation";
 

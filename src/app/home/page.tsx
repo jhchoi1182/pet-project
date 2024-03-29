@@ -1,4 +1,4 @@
-import BoardTab from "@/components/atoms/BoardTab";
+import BoardTab from "@/components/atoms/ui/BoardTab";
 import PostBoard from "@/components/postBoard/template/PostBoard";
 
 export default function Home() {
