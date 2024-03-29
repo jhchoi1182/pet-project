@@ -13,12 +13,12 @@ export const postApi = {
     const { data } = await instance.get(`/post/${postId}`);
     return data?.result;
   },
-  create: async (title: string, contents: string) => {
-    const data = await instance.post("/post", { title, contents });
+  create: async (title: string, contents: string, images: string[]) => {
+    const data = await instance.post("/post", { title, contents, images });
     return data;
   },
-  update: async (postId: number, title: string, contents: string) => {
-    const data = await instance.patch(`/post/${postId}`, { title, contents });
+  update: async (postId: number, title: string, contents: string, images: string[]) => {
+    const data = await instance.patch(`/post/${postId}`, { title, contents, images });
     return data;
   },
   delete: async (postId: number) => {

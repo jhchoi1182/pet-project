@@ -9,4 +9,5 @@ export interface PostWithoutContents {
 
 export interface Post extends PostWithoutContents {
   contents: string;
+  images: string[];
 }

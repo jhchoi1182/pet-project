@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "../../atoms/Logo";
+import Logo from "../../atoms/ui/Logo";
 import Button from "../../atoms/base/Button";
 import CloseButton from "../molecules/CloseButton";
 import NameInput from "../molecules/NameInput";

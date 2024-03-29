@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import MaxPageArrow from "@/components/atoms/icons/MaxPageArrow";
 import NextPageArrow from "@/components/atoms/icons/NextPageArrow";
-import usePagination from "@/service/postService/usePagination";
+import usePagination from "@/service/usePagination";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import { setCurrentPage } from "@/redux/modules/postSlice";
