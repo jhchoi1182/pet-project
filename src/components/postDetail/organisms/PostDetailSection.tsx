@@ -1,5 +1,5 @@
 import { Post } from "@/types/model/post";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PostDetailButton from "../atom/PostDetailButton";
 import { useRouter } from "next/navigation";
 import PostUpdateDeleteButtons from "../molecules/PostUpdateDeleteButtons";

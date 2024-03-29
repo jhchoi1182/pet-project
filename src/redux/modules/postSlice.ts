@@ -12,6 +12,7 @@ const initialState: PostSliceState = {
     postId: 0,
     title: "",
     contents: "",
+    images: [],
     nickname: "",
     commentsCount: 0,
     createdAt: "",

@@ -1,17 +1,30 @@
 import PostDetailButton from "@/components/postDetail/atom/PostDetailButton";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import PostEditor from "../atom/PostEditor";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 import { extractImages, replaceImgTagWithTempTag } from "@/util/ckeditorImageTransformer";
 import useCreatePostController from "@/controller/postController/useCreatePostController";
+import useUpdatePostController from "@/controller/postController/useUpdatePostController";
 
-export default function PostForm({ setIsLoading }: { setIsLoading: SetStateBoolean }) {
+interface PostFormProps {
+  postId: number;
+  savedTitle: string;
+  savedContents: string;
+  setIsLoading: SetStateBoolean;
+}
+
+export default function PostForm({ postId, savedTitle, savedContents, setIsLoading }: PostFormProps) {
   const [title, setTitle] = useState("");
   const [ckEditorData, setCkEditorData] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const { mutate } = useCreatePostController();
+  const type = searchParams.get("type");
+  const isCreate = type === "create";
+
+  const { mutate: createPost } = useCreatePostController();
+  const { mutate: updatePost } = useUpdatePostController(postId);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,8 +32,15 @@ export default function PostForm({ setIsLoading }: { setIsLoading: SetStateBoole
     const images = extractImages(ckEditorData);
     if (!window.confirm("글을 게시하시겠습니까?")) return;
     if (title === "" || ckEditorData === "") return alert("내용을 다시 확인해주세요.");
-    mutate({ title, contents, images });
+    const reqData = { title, contents, images };
+    isCreate ? createPost(reqData) : updatePost(reqData);
   };
+
+  useEffect(() => {
+    if (isCreate) return;
+    setTitle(savedTitle);
+    setCkEditorData(savedContents);
+  }, []);
 
   useEffect(() => {
     setIsLoading(false);
