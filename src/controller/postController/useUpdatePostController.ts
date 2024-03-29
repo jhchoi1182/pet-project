@@ -1,6 +1,6 @@
 import { postApi } from "@/api/postApi";
-import useMutationService from "@/service/postService/useMutationService";
-import { useMutation } from "@tanstack/react-query";
+import { QUERY_KEY } from "@/config/queyKeyConfig";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 interface MutateParameter {
@@ -10,15 +10,15 @@ interface MutateParameter {
 }
 
 function useUpdatePostController(postId: number) {
+  const queryClient = useQueryClient();
   const router = useRouter();
-  const { replaceFreshTitleCacheForPagination } = useMutationService(postId);
 
   return useMutation({
     mutationFn: ({ title, contents, images }: MutateParameter) => postApi.update(postId, title, contents, images),
-    onSuccess(_, variables) {
-      replaceFreshTitleCacheForPagination(variables);
+    onSuccess() {
       alert("수정이 완료됐습니다.");
       router.back();
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.posts] });
     },
   });
 }

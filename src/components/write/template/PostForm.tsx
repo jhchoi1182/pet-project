@@ -13,13 +13,13 @@ interface PostFormProps {
   setIsLoading: SetStateBoolean;
 }
 
-const savedPostId = Number(sessionStorage.getItem("savedPostId")) ?? 0;
-const savedTitle = sessionStorage.getItem("savedTitle") ?? "";
-const savedContents = sessionStorage.getItem("savedContents") ?? "";
-
 export default function PostForm({ isCreate, setIsLoading }: PostFormProps) {
-  const [title, setTitle] = useState(isCreate ? "" : savedTitle);
-  const [ckEditorData, setCkEditorData] = useState(isCreate ? "" : savedContents);
+  const savedPostId = Number(sessionStorage.getItem("savedPostId")) ?? 0;
+  const savedTitle = sessionStorage.getItem("savedTitle") ?? "";
+  const savedContents = sessionStorage.getItem("savedContents") ?? "";
+
+  const [title, setTitle] = useState(() => (isCreate ? "" : savedTitle));
+  const [ckEditorData, setCkEditorData] = useState(() => (isCreate ? "" : savedContents));
   const router = useRouter();
 
   const { mutate: createPost } = useCreatePostController();
