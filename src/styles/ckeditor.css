@@ -1,0 +1,83 @@
+.no-tailwind h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.no-tailwind h2 {
+  font-size: 2em;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.no-tailwind h3 {
+  font-size: 1.75em;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.no-tailwind h4 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.no-tailwind ul {
+  list-style-type: disc;
+  padding-left: 40px;
+}
+
+.no-tailwind ol {
+  list-style-type: decimal;
+  padding-left: 40px;
+}
+
+.no-tailwind ul ul,
+.no-tailwind ol ul {
+  list-style-type: circle;
+}
+
+.no-tailwind ol ol,
+.no-tailwind ul ol {
+  list-style-type: lower-latin;
+}
+
+.no-tailwind .todo-list li {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.no-tailwind figure {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.no-tailwind .image-style-side {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+* {
+  box-sizing: border-box;
+}
+
+.ck.ck-content {
+  height: var(--ckeditorHeight);
+}
+
+.ck-content h2 {
+  font-size: 2em;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.ck-content h3 {
+  font-size: 1.75em;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.ck-content h4 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
