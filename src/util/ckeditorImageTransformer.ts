@@ -10,13 +10,14 @@ export const extractImages = (content: string): string[] => {
   return content.match(DATA_IMAGE_REGEX) ?? [];
 };
 
-export const replaceTempTagWithRealImgTag = (content: string, imgArr: string[]): string => {
+export const replaceTempTagWithRealImgTag = (content: string, images: string[]): string => {
   return content.replace(/<TEMP \d+>/g, (match) => {
     const INDEX_OFFSET = 1;
     const matchedNumbers = match.match(/\d+/);
     if (!matchedNumbers) return match;
 
     const index = parseInt(matchedNumbers[0], 10) - INDEX_OFFSET;
-    return index >= 0 && index < imgArr.length ? imgArr[index] : match;
+    const isValidIndex = index >= 0 && index < images.length;
+    return isValidIndex ? `<img src="${images[index]}" />` : match;
   });
 };

@@ -5,13 +5,15 @@ import { useRouter } from "next/navigation";
 import PostUpdateDeleteButtons from "../molecules/PostUpdateDeleteButtons";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
+import "../../../styles/ckeditor.css";
+import { replaceTempTagWithRealImgTag } from "@/util/ckeditorImageTransformer";
 
 interface PostDetailSectionProps {
   post: Post | undefined;
 }
 
 export default function PostDetailSection({ post }: PostDetailSectionProps) {
-  const { title, nickname, createdAt, contents } = post ?? {};
+  const { title, nickname, createdAt, contents, images } = post ?? {};
 
   const [postInfoForEditing, setPostInfoForEditing] = useState({
     title: title ?? "",
@@ -29,6 +31,7 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
   useEffect(() => {
     setPostInfoForEditing({ title: title ?? "", contents: contents ?? "" });
   }, [post]);
+  console.log(images);
 
   return (
     <>
@@ -69,7 +72,10 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
           placeholder="내용을 입력해주세요."
         />
       ) : (
-        <section className={`mt-[75px] leading-6`}>{contents}</section>
+        <section
+          className={`no-tailwind mt-[75px] leading-6`}
+          dangerouslySetInnerHTML={{ __html: replaceTempTagWithRealImgTag(contents ?? "", images ?? []) }}
+        />
       )}
     </>
   );
