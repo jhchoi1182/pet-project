@@ -10,7 +10,7 @@ import useGetCommentsController from "@/controller/commentController/useGetComme
 import Board from "@/components/atoms/ui/Board";
 
 export default function PostDetail({ id }: { id: string }) {
-  const { post, isLoading } = useGetPostController(+id);
+  const { data, isLoading } = useGetPostController(+id);
   const { comments } = useGetCommentsController(+id);
 
   return (
@@ -23,7 +23,7 @@ export default function PostDetail({ id }: { id: string }) {
           </div>
         ) : (
           <>
-            <PostDetailSection post={post} />
+            <PostDetailSection post={data} />
             <CommentSection postId={+id} comments={comments} />
           </>
         )}
