@@ -3,17 +3,22 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import PostEditor from "../atom/PostEditor";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
+import { extractImages, replaceImgTagWithTempTag } from "@/util/ckeditorImageTransformer";
+import useCreatePostController from "@/controller/postController/useCreatePostController";
 
 export default function PostForm({ setIsLoading }: { setIsLoading: SetStateBoolean }) {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [ckEditorData, setCkEditorData] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const { mutate } = useCreatePostController();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const contents = replaceImgTagWithTempTag(ckEditorData);
+    const images = extractImages(ckEditorData);
     if (!window.confirm("글을 게시하시겠습니까?")) return;
-    console.log(title);
-    console.log(content);
+    mutate({ title, contents, images });
   };
 
   useEffect(() => {
@@ -38,7 +43,7 @@ export default function PostForm({ setIsLoading }: { setIsLoading: SetStateBoole
           <PostDetailButton>완료</PostDetailButton>
         </div>
       </div>
-      <PostEditor content={content} setContent={setContent} />
+      <PostEditor ckEditorData={ckEditorData} setCkEditorData={setCkEditorData} />
     </form>
   );
 }

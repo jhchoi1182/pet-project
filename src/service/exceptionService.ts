@@ -59,6 +59,12 @@ export function exceptionService(error: AxiosError<any, any>) {
     case "SERVER_ERROR":
       alert("서버 처리 과정에서 오류가 발생했습니다.");
       break;
+    case "S3_ERROR":
+      alert("서버 처리 과정에서 오류가 발생했습니다.");
+      break;
+    case "DATABASE_ERROR":
+      alert("서버 처리 과정에서 오류가 발생했습니다.");
+      break;
     default:
       alert("알 수 없는 오류가 발생했습니다.");
       break;

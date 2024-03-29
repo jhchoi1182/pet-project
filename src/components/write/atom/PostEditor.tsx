@@ -7,10 +7,10 @@ import { SetStateString } from "@/types/type/utilityTypes";
 import Editor from "ckeditor5-custom-build/build/ckeditor";
 
 interface PostEditorProps {
-  content: string;
-  setContent: SetStateString;
+  ckEditorData: string;
+  setCkEditorData: SetStateString;
 }
-export default function PostEditor({ content, setContent }: PostEditorProps) {
+export default function PostEditor({ ckEditorData, setCkEditorData }: PostEditorProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const adjustEditorHeight = () => {
@@ -31,7 +31,7 @@ export default function PostEditor({ content, setContent }: PostEditorProps) {
     <div ref={containerRef} className="w-full h-full grow">
       <CKEditor
         editor={Editor}
-        data={content}
+        data={ckEditorData}
         config={{
           placeholder: "내용을 입력해주세요.",
         }}
@@ -46,7 +46,7 @@ export default function PostEditor({ content, setContent }: PostEditorProps) {
         }}
         onChange={(_, editor) => {
           const data = editor.getData();
-          setContent(data);
+          setCkEditorData(data);
         }}
       />
     </div>
