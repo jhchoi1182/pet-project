@@ -30,7 +30,7 @@ export default function EmailPasswordInput({ type, value, password, handleInputC
     <>
       <div className="relative">
         <Input variant="signup" label={label[type]} name={type}>
-          <Input.TextField variant="signup" type={type === "passwordConfirm" ? "password" : type} onChange={handleInputChange} required />
+          <Input.TextField variant="primary" type={type === "passwordConfirm" ? "password" : type} onChange={handleInputChange} required />
         </Input>
         <ValidationText type={type} validationTextColor={validationTextColor} />
       </div>

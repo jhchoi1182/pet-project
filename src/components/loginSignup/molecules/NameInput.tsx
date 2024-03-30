@@ -38,7 +38,7 @@ export default function NameInput({ type, value, handleInputChange, setIsNameAva
     <div className={`relative`}>
       <div className={`flex gap-[22px]`}>
         <Input variant="signup" label={label[type]} name={type}>
-          <Input.TextField variant="signup" onChange={handleInputChange} required />
+          <Input.TextField variant="primary" onChange={handleInputChange} required />
         </Input>
         <Button size="small" type="button" onClick={() => handleNameDuplicationCheck(type)}>
           중복 확인

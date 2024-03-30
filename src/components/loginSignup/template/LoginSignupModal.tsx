@@ -7,7 +7,7 @@ import SignupForm from "../organisms/SignupForm";
 import { RootState } from "@/redux/store/store";
 import { useSelector } from "react-redux";
 
-export default function AuthModal() {
+export default function LoginSignupModal() {
   const isOpenLoginModal = useSelector(({ authSlice }: RootState) => authSlice.isOpenLoginModal);
   const [toggleLoginSignup, setToggleLoginSignup] = useState(true);
 
