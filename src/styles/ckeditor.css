@@ -1,62 +1,3 @@
-.no-tailwind h1 {
-  font-size: 2.5em;
-  font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.no-tailwind h2 {
-  font-size: 2em;
-  font-weight: 600;
-  margin-bottom: 14px;
-}
-
-.no-tailwind h3 {
-  font-size: 1.75em;
-  font-weight: 500;
-  margin-bottom: 12px;
-}
-
-.no-tailwind h4 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-.no-tailwind ul {
-  list-style-type: disc;
-  padding-left: 40px;
-}
-
-.no-tailwind ol {
-  list-style-type: decimal;
-  padding-left: 40px;
-}
-
-.no-tailwind ul ul,
-.no-tailwind ol ul {
-  list-style-type: circle;
-}
-
-.no-tailwind ol ol,
-.no-tailwind ul ol {
-  list-style-type: lower-latin;
-}
-
-.no-tailwind .todo-list li {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.no-tailwind figure {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.no-tailwind .image-style-side {
-  width: 100%;
-  display: flex;
-  justify-content: right;
-}
 * {
   box-sizing: border-box;
 }
@@ -65,19 +6,147 @@
   height: var(--ckeditorHeight);
 }
 
+.no-tailwind a,
+.ck-content a {
+  color: #38a5ee;
+}
+
+.ck-content .text-huge,
+.no-tailwind .text-huge {
+  font-size: 1.8em;
+}
+
+.ck-content .text-big,
+.no-tailwind .text-big {
+  font-size: 1.4em;
+}
+
+.ck-content .text-small,
+.no-tailwind .text-small {
+  font-size: 0.85em;
+}
+
+.ck-content .text-tiny,
+.no-tailwind .text-tiny {
+  font-size: 0.7em;
+}
+
+.no-tailwind h1,
+.ck-content h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.no-tailwind h2,
 .ck-content h2 {
   font-size: 2em;
   font-weight: 600;
   margin-bottom: 14px;
 }
 
+.no-tailwind h3,
 .ck-content h3 {
   font-size: 1.75em;
   font-weight: 500;
   margin-bottom: 12px;
 }
 
+.no-tailwind h4,
 .ck-content h4 {
   font-size: 1.5em;
   margin-bottom: 10px;
+}
+
+.no-tailwind ul,
+.ck-content ul {
+  list-style-type: disc;
+  padding-left: 40px;
+}
+
+.no-tailwind ol,
+.ck-content ol {
+  list-style-type: decimal;
+  padding-left: 40px;
+}
+
+.no-tailwind ul ul,
+.no-tailwind ol ul,
+.ck-content ul ul,
+.ck-content ol ul {
+  list-style-type: circle;
+}
+
+.no-tailwind ol ol,
+.no-tailwind ul ol,
+.ck-content ol ol,
+.ck-content ul ol {
+  list-style-type: lower-latin;
+}
+
+.no-tailwind .todo-list li,
+.ck-content .todo-list li {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.no-tailwind figure,
+.ck-content figure {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.no-tailwind .image-style-side,
+.ck-content .image-style-side {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+
+.no-tailwind blockquote,
+.ck-content blockquote {
+  border-left: 5px solid #ccc;
+  font-style: italic;
+  margin-left: 0;
+  margin-right: 0;
+  overflow: hidden;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+}
+
+.no-tailwind pre,
+.ck-content pre {
+  background: hsla(0, 0%, 78%, 0.3);
+  border: 1px solid #c4c4c4;
+  border-radius: 2px;
+  color: #353535;
+  direction: ltr;
+  font-style: normal;
+  min-width: 200px;
+  padding: 1em;
+  tab-size: 4;
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.no-tailwind .table table,
+.ck-content .table table {
+  border: 1px double #b3b3b3;
+  border-collapse: collapse;
+  border-spacing: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.no-tailwind .table table td,
+.ck-content .table table td,
+.no-tailwind .table table th,
+.ck-content .table table th {
+  border: 1px solid #bfbfbf;
+  min-width: 2em;
+  padding: 0.4em;
+  overflow-wrap: break-word;
+  position: relative;
 }
