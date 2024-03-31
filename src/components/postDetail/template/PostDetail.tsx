@@ -12,7 +12,7 @@ import Board from "@/components/atoms/ui/Board";
 export default function PostDetail({ id }: { id: string }) {
   const { data, isLoading } = useGetPostController(+id);
   const { comments } = useGetCommentsController(+id);
-
+  
   return (
     <>
       <BoardTab />

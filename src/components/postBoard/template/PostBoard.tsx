@@ -19,7 +19,7 @@ export default function PostBoard() {
           <div className={`w-[15%] text-center`}>작성자</div>
           <div className={`w-[15%] text-center`}>작성일</div>
         </header>
-        {!isLoading ? <PostList posts={content} /> : <BoardLoadingSpinner />}
+        {isLoading ? <BoardLoadingSpinner /> : <PostList posts={content} />}
       </Board>
       <PaginationNumGroup totalPages={totalPages} />
     </>

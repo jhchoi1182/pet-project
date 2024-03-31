@@ -21,10 +21,18 @@ export function useGetPostsController(enabled: boolean) {
     setIsReady(true);
   }, []);
 
-  return useQuery<PostsResponse>({
+  const {
+    data,
+    isLoading: isQueryLoading,
+    refetch,
+  } = useQuery<PostsResponse>({
     queryKey: [QUERY_KEY.posts, currentPage],
     queryFn: () => postApi.search(selectedSearchType as (typeof searchType)[number], inputValue, currentPage - 1),
     enabled: isReady && enabled,
     staleTime: 60 * 1000,
   });
+
+  const isLoading = !isReady || isQueryLoading;
+
+  return { data, isLoading, refetch };
 }
