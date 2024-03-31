@@ -3,15 +3,15 @@ const DATA_IMAGE_REGEX = /(?<=data:image\/[a-zA-Z+.-]+;base64,)[a-zA-Z0-9+/=]+/g
 
 export const replaceImgTagWithTempTag = (content: string): string => {
   let count = 0;
-  return content.replace(BASE64_IMAGE_REGEX, () => `<TEMP ${++count}>`);
+  return content?.replace(BASE64_IMAGE_REGEX, () => `<TEMP ${++count}>`);
 };
 
 export const extractImages = (content: string): string[] => {
-  return content.match(DATA_IMAGE_REGEX) ?? [];
+  return content?.match(DATA_IMAGE_REGEX) ?? [];
 };
 
 export const replaceTempTagWithRealImgTag = (content: string, images: string[]): string => {
-  return content.replace(/<TEMP \d+>/g, (match) => {
+  return content?.replace(/<TEMP \d+>/g, (match) => {
     const INDEX_OFFSET = 1;
     const matchedNumbers = match.match(/\d+/);
     if (!matchedNumbers) return match;
