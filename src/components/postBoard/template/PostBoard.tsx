@@ -8,7 +8,7 @@ import PaginationNumGroup from "../molecules/PaginationNumGroup";
 import Board from "@/components/atoms/ui/Board";
 
 export default function PostBoard() {
-  const { data, isLoading } = useGetPostsController();
+  const { data, isLoading } = useGetPostsController(true);
   const { content = [], totalPages = 0 } = data ?? {};
 
   return (

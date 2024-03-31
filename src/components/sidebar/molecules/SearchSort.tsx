@@ -1,18 +1,19 @@
 import { Dropdown } from "@/components/atoms/base/Dropdown";
 import DownArrow from "@/components/atoms/icons/DownArrow";
 import React, { useState } from "react";
-import { searchType } from "../organisms/SearchInput";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
+import { setSelectedSearchType } from "@/redux/modules/postSlice";
 
-interface SearchSortProps {
-  selectedSearchType: string;
-  setSelectedSearchType: React.Dispatch<React.SetStateAction<string>>;
-}
+export const searchType = ["제목+내용", "제목", "내용", "작성자"] as const;
 
-export default function SearchSort({ selectedSearchType, setSelectedSearchType }: SearchSortProps) {
+export default function SearchSort() {
+  const selectedSearchType = useSelector(({ postSlice }: RootState) => postSlice.selectedSearchType);
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const dispatch = useDispatch();
 
-  const handleClickDropdownList = (type: string) => {
-    setSelectedSearchType(type);
+  const handleClickDropdownList = (type: (typeof searchType)[number]) => {
+    dispatch(setSelectedSearchType(type));
     setToggleDropdown(false);
   };
 
