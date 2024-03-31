@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-
+import "../../../styles/ckeditor.css";
 import { SetStateString } from "@/types/type/utilityTypes";
 import Editor from "ckeditor5-custom-build/build/ckeditor";
 

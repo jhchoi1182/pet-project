@@ -11,7 +11,9 @@ export default function PostList({ posts }: { posts: PostWithoutContents[] }) {
         const title = `${post?.title} ${post?.commentsCount !== 0 ? `[${post?.commentsCount}]` : ``}`;
         return (
           <li key={i} className={`flex items-center w-full h-[10%] ${i % 2 === 1 ? "" : "bg-gray400"} ${i === postSlots.length - 1 ? "rounded-b-[20px]" : ""}`}>
-            {post ? (
+            {posts.length === 0 ? (
+              i === 4 && <div className={`flex mx-auto`}>게시글 없음</div>
+            ) : post ? (
               <>
                 <div className={`w-[70%]`}>
                   <div className={`w-full truncate p-3 text-center`}>

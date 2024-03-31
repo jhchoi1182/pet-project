@@ -8,7 +8,7 @@ import { RootState } from "@/redux/store/store";
 import "../../../styles/ckeditor.css";
 import { replaceTempTagWithRealImgTag } from "@/util/ckeditorImageTransformer";
 
-export default function PostDetailSection({ post }: {post: Post | undefined;}) {
+export default function PostDetailSection({ post }: { post: Post | undefined }) {
   const { title, nickname, createdAt, contents, images } = post ?? {};
 
   const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
@@ -28,9 +28,7 @@ export default function PostDetailSection({ post }: {post: Post | undefined;}) {
           <div className={`flex ml-auto`}>
             <PostDetailButton onClick={() => router.back()}>뒤로가기</PostDetailButton>
           </div>
-          {loggedInNickname === nickname && (
-            <PostUpdateDeleteButtons post={post} />
-          )}
+          {loggedInNickname === nickname && <PostUpdateDeleteButtons post={post} />}
         </div>
       </section>
       <hr className={`mt-9 bg-primary`} />

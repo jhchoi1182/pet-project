@@ -8,7 +8,7 @@ import PaginationNumGroup from "../molecules/PaginationNumGroup";
 import Board from "@/components/atoms/ui/Board";
 
 export default function PostBoard() {
-  const { data, isLoading } = useGetPostsController();
+  const { data, isLoading } = useGetPostsController(true);
   const { content = [], totalPages = 0 } = data ?? {};
 
   return (
@@ -19,7 +19,7 @@ export default function PostBoard() {
           <div className={`w-[15%] text-center`}>작성자</div>
           <div className={`w-[15%] text-center`}>작성일</div>
         </header>
-        {!isLoading ? <PostList posts={content} /> : <BoardLoadingSpinner />}
+        {isLoading ? <BoardLoadingSpinner /> : <PostList posts={content} />}
       </Board>
       <PaginationNumGroup totalPages={totalPages} />
     </>

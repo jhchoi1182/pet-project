@@ -48,7 +48,7 @@ export default function PostForm({ isCreate, setIsLoading }: PostFormProps) {
             className={`w-full px-1 pb-3 border-b-2 text-xl focus:outline-none`}
             placeholder="제목을 입력해주세요."
             value={title}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div className="flex gap-8">
