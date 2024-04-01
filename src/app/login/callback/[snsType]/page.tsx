@@ -33,7 +33,8 @@ export default function SnsLoginpage({ params: { snsType } }: snsTypeProps) {
       try {
         if (snsType === "google") {
           const { data } = await authApi.googleLogin(code);
-          const { nickname } = data?.result;
+          const { nickname, token } = data?.result;
+          await authApi.setCookies(token);
           setNickname(nickname);
         }
       } catch (error) {
