@@ -4,7 +4,7 @@ import { QUERY_KEY } from "@/config/queyKeyConfig";
 import { setInputValue, setSelectedSearchType } from "@/redux/modules/postSlice";
 import { RootState } from "@/redux/store/store";
 import { PostsResponse } from "@/types/response/postsResponse";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -35,4 +35,17 @@ export function useGetPostsController(enabled: boolean) {
   const isLoading = !isReady || isQueryLoading;
 
   return { data, isLoading, refetch };
+}
+
+export function usePrefetchPosts() {
+  const { selectedSearchType, inputValue } = useSelector(({ postSlice }: RootState) => postSlice);
+  const queryClient = useQueryClient();
+
+  return (page: number) => {
+    queryClient.prefetchQuery({
+      queryKey: [QUERY_KEY.posts, page],
+      queryFn: () => postApi.search(selectedSearchType as (typeof searchType)[number], inputValue, page - 1),
+      staleTime: 60 * 1000,
+    });
+  };
 }

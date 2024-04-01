@@ -7,6 +7,7 @@ import usePagination from "@/service/usePagination";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import { setCurrentPage } from "@/redux/modules/postSlice";
+import { usePrefetchPosts } from "@/controller/postController/useGetPostsController";
 
 interface PaginationNumGroupProps {
   totalPages: number;
@@ -16,6 +17,7 @@ export default function PaginationNumGroup({ totalPages }: PaginationNumGroupPro
   const currentPage = useSelector(({ postSlice }: RootState) => postSlice.currentPage);
   const dispatch = useDispatch();
   const { pages, movePage } = usePagination(currentPage, totalPages);
+  const prefetchPosts = usePrefetchPosts();
 
   useEffect(() => {
     const savedCurrentPage = Number(sessionStorage.getItem("currentPage"));
@@ -32,7 +34,9 @@ export default function PaginationNumGroup({ totalPages }: PaginationNumGroupPro
         <ul className={`flex gap-12`}>
           {pages.map((page) => (
             <li key={page} className={`${currentPage === page ? "font-bold" : ""}`}>
-              <button onClick={() => movePage(page)}>{page}</button>
+              <button onClick={() => movePage(page)} onMouseEnter={() => prefetchPosts(page)}>
+                {page}
+              </button>
             </li>
           ))}
         </ul>
