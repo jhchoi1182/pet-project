@@ -13,10 +13,10 @@ const electrolize = Electrolize({ weight: "400", subsets: ["latin"], variable: "
 export const metadata: Metadata = {
   applicationName: "StudySync [스터디씽크]",
   title: {
-    default: "StudySync [스터디씽크]",
+    default: "StudySync - 스터디씽크",
     template: "StudySync [스터디씽크] | %s",
   },
-  description: "[StudySync-스터디씽크] 공부를 주제로 잡다한 이야기를 나누는 커뮤니티",
+  description: "StudySync | 공부를 주제로 잡다한 이야기를 나누는 커뮤니티",
   icons: {
     icon: "/favicon.ico",
   },

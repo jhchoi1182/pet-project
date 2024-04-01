@@ -1,6 +1,6 @@
 ## 🗺프로젝트 아키텍처
 
-![image](https://github.com/jhchoi1182/pet-project-back/assets/116577489/32d82649-c833-4ca3-9d02-517964391e2d)
+![image](https://github.com/jhchoi1182/pet-project-front/assets/116577489/9d9e9a3e-ef7f-4032-a656-401389b101dc)
 
 ## 🎉소개
 

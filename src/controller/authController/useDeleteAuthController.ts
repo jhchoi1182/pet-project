@@ -16,7 +16,7 @@ function useDeleteAuthController() {
       alert(isWithdraw ? "정상적으로 탈퇴되었습니다." : "로그아웃되었습니다.");
       removeNickname();
     } catch (error) {
-      handleError(error, true);
+      handleError(error);
     } finally {
       setToggleDropdown(false);
     }
