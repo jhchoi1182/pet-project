@@ -11,6 +11,7 @@ export async function POST(request: NextRequest) {
       secure: true,
       sameSite: "none",
       path: "/",
+      domain: "https://jihyeon.store",
     });
     return new Response(JSON.stringify({ message: "Success" }));
   } catch (error) {
