@@ -1,13 +1,16 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
 
-export default function WriteButton({ accessToken }: { accessToken: RequestCookie | undefined }) {
+export default function WriteButton() {
+  const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
   const router = useRouter();
+
   const handleClick = () => {
-    if (!accessToken) return alert("권한이 없습니다.");
+    if (!loggedInNickname) return alert("권한이 없습니다.");
     router.push(`/write?type=create`);
   };
 

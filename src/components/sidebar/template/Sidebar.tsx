@@ -10,13 +10,9 @@ import WriteButton from "../atom/WriteButton";
 async function getNickname() {
   return cookies().get("nickname");
 }
-async function getAccessToken() {
-  return cookies().get("Access_Token");
-}
 
 export default async function Sidebar() {
   const nickname = await getNickname();
-  const accessToken = await getAccessToken();
 
   return (
     <section className={`flex flex-col items-center w-[28%] h-full`}>
@@ -27,7 +23,7 @@ export default async function Sidebar() {
         <UsernameOrLoginButton nickname={nickname} />
       </div>
       <div className={`flex flex-col items-center h-full justify-around`}>
-        <WriteButton accessToken={accessToken} />
+        <WriteButton />
         <SearchInput />
       </div>
       <LoginSignupModal />

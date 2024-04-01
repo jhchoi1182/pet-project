@@ -7,4 +7,3 @@ export const githubClientId = process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID;
 export const isDevelopmentEnv = process.env.NODE_ENV === "development";
 // export const studySyncServerURL = "http://localhost:8080/api";
 export const studySyncServerURL = isDevelopmentEnv ? "http://localhost:8080/api" : process.env.NEXT_PUBLIC_SERVER_URL;
-export const nextServerSideURL = isDevelopmentEnv ? "http://localhost:3000/api" : "https://www.studysync.store/api";
