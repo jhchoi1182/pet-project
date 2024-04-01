@@ -1,6 +1,6 @@
 import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
 import { instance } from "../config/axiosConfig";
-import { githubRedirectURI, googleRedirectURI, kakaoRedirectURI } from "@/config/envConfig";
+import axios from "axios";
 
 export const authApi = {
   checkUsername: (username: String) =>
@@ -35,6 +35,10 @@ export const authApi = {
   },
   getUserInfo: async () => {
     const { data } = await instance.get("/user");
+    return data?.result;
+  },
+  setCookies: async (token: string) => {
+    const { data } = await axios.post(`http://localhost:3000/api/setCookies`, { token });
     return data?.result;
   },
   logout: () => instance.post("/user/logout"),
