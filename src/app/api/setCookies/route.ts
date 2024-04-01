@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
       value: token,
       httpOnly: true,
       secure: true,
-      sameSite: "strict",
+      sameSite: "none",
       path: "/",
     });
     return new Response(JSON.stringify({ message: "Success" }));

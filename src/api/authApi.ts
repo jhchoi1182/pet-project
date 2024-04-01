@@ -1,6 +1,7 @@
 import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
 import { instance } from "../config/axiosConfig";
 import axios from "axios";
+import { nextServerSideURL } from "@/config/envConfig";
 
 export const authApi = {
   checkUsername: (username: String) =>
@@ -38,7 +39,7 @@ export const authApi = {
     return data?.result;
   },
   setCookies: async (token: string) => {
-    const { data } = await axios.post(`http://localhost:3000/api/setCookies`, { token });
+    const { data } = await axios.post(`${nextServerSideURL}/setCookies`, { token });
     return data?.result;
   },
   logout: () => instance.post("/user/logout"),
