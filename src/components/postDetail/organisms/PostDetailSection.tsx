@@ -6,7 +6,7 @@ import PostUpdateDeleteButtons from "../molecules/PostUpdateDeleteButtons";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import "../../../styles/ckeditor.css";
-import { replaceTempTagWithRealImgTag } from "@/util/ckeditorImageTransformer";
+import { convertTagsToMedia } from "@/util/ckeditorImageTransformer";
 
 export default function PostDetailSection({ post }: { post: Post | undefined }) {
   const { title, nickname, createdAt, contents, images } = post ?? {};
@@ -32,7 +32,7 @@ export default function PostDetailSection({ post }: { post: Post | undefined }) 
         </div>
       </section>
       <hr className={`mt-9 bg-primary`} />
-      <section className={`no-tailwind mt-[75px] leading-6`} dangerouslySetInnerHTML={{ __html: replaceTempTagWithRealImgTag(contents ?? "", images ?? []) }} />
+      <section className={`no-tailwind mt-[75px] leading-6`} dangerouslySetInnerHTML={{ __html: convertTagsToMedia(contents ?? "", images ?? []) }} />
     </>
   );
 }

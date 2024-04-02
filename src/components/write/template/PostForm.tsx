@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import PostEditor from "../atom/PostEditor";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
-import { extractImages, replaceImgTagWithTempTag } from "@/util/ckeditorImageTransformer";
+import { extractBase64Images, replaceImgTagWithTempTag } from "@/util/ckeditorImageTransformer";
 import useCreatePostController from "@/controller/postController/useCreatePostController";
 import useUpdatePostController from "@/controller/postController/useUpdatePostController";
 import useAlertBeforeUnload from "@/hook/useBeforeUnload";
@@ -28,7 +28,7 @@ export default function PostForm({ isCreate, setIsLoading }: PostFormProps) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const contents = replaceImgTagWithTempTag(ckEditorData);
-    const images = extractImages(ckEditorData);
+    const images = extractBase64Images(ckEditorData);
     if (!window.confirm("글을 게시하시겠습니까?")) return;
     if (title === "" || ckEditorData === "") return alert("내용을 다시 확인해주세요.");
     const reqData = { title, contents, images };

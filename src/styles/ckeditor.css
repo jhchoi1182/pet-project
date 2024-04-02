@@ -97,9 +97,16 @@
   justify-content: center;
 }
 
+.no-tailwind .video-iframe {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+}
+
 .no-tailwind .image-style-side,
 .ck-content .image-style-side {
   width: 100%;
+  height: auto;
   display: flex;
   justify-content: right;
 }

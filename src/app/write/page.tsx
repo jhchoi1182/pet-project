@@ -4,11 +4,8 @@ import Board from "@/components/atoms/ui/Board";
 import BoardTab from "@/components/atoms/ui/BoardTab";
 import "../../styles/ckeditor.css";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LoadingSpinner from "@/components/atoms/ui/LoadingSpinner";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
-import { replaceTempTagWithRealImgTag } from "@/util/ckeditorImageTransformer";
 import { useSearchParams } from "next/navigation";
 
 const PostForm = dynamic(() => import("@/components/write/template/PostForm"), { ssr: false });
