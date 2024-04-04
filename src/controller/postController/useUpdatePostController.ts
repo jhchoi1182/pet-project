@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 interface MutateParameter {
+  category: string;
   title: string;
   contents: string;
   images: string[];
@@ -14,7 +15,7 @@ function useUpdatePostController(postId: number) {
   const router = useRouter();
 
   return useMutation({
-    mutationFn: ({ title, contents, images }: MutateParameter) => postApi.update(postId, title, contents, images),
+    mutationFn: ({ category, title, contents, images }: MutateParameter) => postApi.update(postId, category, title, contents, images),
     onSuccess() {
       alert("수정이 완료됐습니다.");
       router.back();

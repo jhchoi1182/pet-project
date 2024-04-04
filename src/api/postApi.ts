@@ -6,6 +6,13 @@ enum SearchTypeEnum {
   "내용" = "contents",
   "작성자" = "nickname",
 }
+enum CategoryType {
+  "전체" = "All",
+  "잡담" = "Chat",
+  "모집" = "Recruit",
+  "정보" = "Information",
+  "질문" = "Question",
+}
 
 export const postApi = {
   getAllPost: async () => {
@@ -22,12 +29,14 @@ export const postApi = {
     const { data } = await instance.get(`/post/${postId}`);
     return data?.result;
   },
-  create: async (title: string, contents: string, images: string[]) => {
-    const data = await instance.post("/post", { title, contents, images });
+  create: async (category: string, title: string, contents: string, images: string[]) => {
+    const categoryQuery = CategoryType[category as keyof typeof CategoryType];
+    const data = await instance.post("/post", { categoryQuery, title, contents, images });
     return data;
   },
-  update: async (postId: number, title: string, contents: string, images: string[]) => {
-    const data = await instance.patch(`/post/${postId}`, { title, contents, images });
+  update: async (postId: number, category: string, title: string, contents: string, images: string[]) => {
+    const categoryQuery = CategoryType[category as keyof typeof CategoryType];
+    const data = await instance.patch(`/post/${postId}`, { categoryQuery, title, contents, images });
     return data;
   },
   delete: async (postId: number) => {

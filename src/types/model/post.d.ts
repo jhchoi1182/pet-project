@@ -1,5 +1,6 @@
 export interface PostWithoutContents {
   postId: number;
+  catery: string;
   title: string;
   nickname: string;
   commentsCount: number;
