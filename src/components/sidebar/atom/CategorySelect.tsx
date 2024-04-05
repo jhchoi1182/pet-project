@@ -15,14 +15,15 @@ export default function CategorySelect() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { refetch } = useGetPostsController(false);
+  const { refetch } = useGetPostsController(false, true);
 
   const handleClick = async (category: UnionOfCategoryAtSearch) => {
+    if (selectedCategory === category) return;
+    await dispatch(setSelectedCategory(category));
+    refetch();
+    dispatch(setCurrentPage(1));
     sessionStorage.setItem("currentPage", "1");
     sessionStorage.setItem("selectedCategory", category);
-    await dispatch(setSelectedCategory(category));
-    await dispatch(setCurrentPage(1));
-    refetch();
     router.push("/home");
   };
 

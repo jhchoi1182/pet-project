@@ -8,7 +8,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export function useGetPostsController(enabled: boolean) {
+export function useGetPostsController(enabled: boolean, resetToFirstPage?: boolean) {
   const { currentPage, selectedCategory, selectedSearchType, inputValue } = useSelector(({ postSlice }: RootState) => postSlice);
   const [isReady, setIsReady] = useState(false);
   const dispatch = useDispatch();
@@ -28,8 +28,8 @@ export function useGetPostsController(enabled: boolean) {
     isLoading: isQueryLoading,
     refetch,
   } = useQuery<PostsResponse>({
-    queryKey: [QUERY_KEY.posts, currentPage],
-    queryFn: () => postApi.search(selectedCategory, selectedSearchType, inputValue, currentPage - 1),
+    queryKey: [QUERY_KEY.posts, selectedCategory, currentPage],
+    queryFn: () => postApi.search(selectedCategory, selectedSearchType, inputValue, resetToFirstPage ? 0 : currentPage - 1),
     enabled: isReady && enabled,
     staleTime: 60 * 1000,
   });
@@ -45,7 +45,7 @@ export function usePrefetchPosts() {
 
   return (page: number) => {
     queryClient.prefetchQuery({
-      queryKey: [QUERY_KEY.posts, page],
+      queryKey: [QUERY_KEY.posts, selectedCategory, page],
       queryFn: () => postApi.search(selectedCategory, selectedSearchType, inputValue, page - 1),
       staleTime: 60 * 1000,
     });
