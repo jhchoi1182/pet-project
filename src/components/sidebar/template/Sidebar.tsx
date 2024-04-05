@@ -6,6 +6,7 @@ import UsernameOrLoginButton from "../organisms/UsernameOrLoginButton";
 import { cookies } from "next/headers";
 import SearchInput from "../organisms/SearchInput";
 import WriteButton from "../atom/WriteButton";
+import CategorySelect from "../atom/CategorySelect";
 
 async function getNickname() {
   return cookies().get("nickname");
@@ -24,6 +25,7 @@ export default async function Sidebar() {
       </div>
       <div className={`flex flex-col items-center h-full justify-around`}>
         <WriteButton />
+        <CategorySelect />
         <SearchInput />
       </div>
       <LoginSignupModal />

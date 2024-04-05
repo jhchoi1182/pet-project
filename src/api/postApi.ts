@@ -1,3 +1,4 @@
+import { SortCategoryType } from "@/components/sidebar/atom/CategorySelect";
 import { instance } from "../config/axiosConfig";
 
 enum SearchTypeEnum {
@@ -12,6 +13,13 @@ enum Category {
   "정보" = "INFORMATION",
   "질문" = "QUESTION",
 }
+enum SearchCategory {
+  "전체" = "all",
+  "잡담" = "chat",
+  "모집" = "recruit",
+  "정보" = "information",
+  "질문" = "question",
+}
 export type CategoryType = keyof typeof Category;
 
 export const postApi = {
@@ -19,11 +27,12 @@ export const postApi = {
     const { data } = await instance.get(`/post/all`);
     return data?.result;
   },
-  search: async (type: keyof typeof SearchTypeEnum, value: string, page: number, size: number = 9) => {
-    const queryType = SearchTypeEnum[type];
+  search: async (category: SortCategoryType, type: keyof typeof SearchTypeEnum, value: string, page: number, size: number = 9) => {
+    const formattedCategory = SearchCategory[category];
+    const formattedType = SearchTypeEnum[type];
     const encodedValue = encodeURIComponent(value);
     const { data } = await instance.get(
-      `/post/search?category=${`all`}&searchType=${queryType}&value=${encodedValue}&page=${page}&size=${size}&sort=createdAt,desc`,
+      `/post/search?category=${formattedCategory}&searchType=${formattedType}&value=${encodedValue}&page=${page}&size=${size}&sort=createdAt,desc`,
     );
     return data?.result;
   },

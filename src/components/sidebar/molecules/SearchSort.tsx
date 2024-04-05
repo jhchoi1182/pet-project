@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import { setSelectedSearchType } from "@/redux/modules/postSlice";
 
-export const searchType = ["제목+내용", "제목", "내용", "작성자"] as const;
+const searchType = ["제목+내용", "제목", "내용", "작성자"] as const;
+export type SearchType = (typeof searchType)[number];
 
 export default function SearchSort() {
   const selectedSearchType = useSelector(({ postSlice }: RootState) => postSlice.selectedSearchType);
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const dispatch = useDispatch();
 
-  const handleClickDropdownList = (type: (typeof searchType)[number]) => {
+  const handleClickDropdownList = (type: SearchType) => {
     dispatch(setSelectedSearchType(type));
     setToggleDropdown(false);
   };
