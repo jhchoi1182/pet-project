@@ -21,7 +21,7 @@ export default function CategorySelect() {
     sessionStorage.setItem("currentPage", "1");
     sessionStorage.setItem("selectedCategory", category);
     await dispatch(setSelectedCategory(category));
-    dispatch(setCurrentPage(1));
+    await dispatch(setCurrentPage(1));
     refetch();
     router.push("/home");
   };
