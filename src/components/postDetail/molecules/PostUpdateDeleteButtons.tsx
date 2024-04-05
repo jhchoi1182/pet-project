@@ -14,6 +14,7 @@ export default function PostUpdateDeleteButtons({ post }: { post: Post | undefin
 
   const handleUpdateButtonClick = () => {
     sessionStorage.setItem("savedPostId", postId + "");
+    sessionStorage.setItem("savedCategory", title);
     sessionStorage.setItem("savedTitle", title);
     sessionStorage.setItem("savedContents", replaceTempTagWithRealImgTag(contents, images));
     router.push(`/write?type=update`);

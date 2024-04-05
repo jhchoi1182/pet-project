@@ -15,7 +15,8 @@ export default function PostBoard() {
     <>
       <Board>
         <header className={`flex items-center w-full h-[10%] font-semibold border-b-[1px] border-black`}>
-          <div className={`w-[70%] text-center`}>제목</div>
+          <div className={`w-[10%] text-center`}>분류</div>
+          <div className={`w-[60%] text-center`}>제목</div>
           <div className={`w-[15%] text-center`}>작성자</div>
           <div className={`w-[15%] text-center`}>작성일</div>
         </header>

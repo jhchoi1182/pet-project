@@ -7,18 +7,24 @@ import { extractBase64Images, replaceImgTagWithTempTag } from "@/util/ckeditorIm
 import useCreatePostController from "@/controller/postController/useCreatePostController";
 import useUpdatePostController from "@/controller/postController/useUpdatePostController";
 import useAlertBeforeUnload from "@/hook/useBeforeUnload";
+import Select from "@/components/atoms/base/Select";
+import { UnionOfCategoryAtCreate } from "@/types/request/post";
 
 interface PostFormProps {
   isCreate: boolean;
   setIsLoading: SetStateBoolean;
 }
 
+const categoryType = ["잡담", "모집", "정보", "질문"] as const;
+
 export default function PostForm({ isCreate, setIsLoading }: PostFormProps) {
   const savedPostId = Number(sessionStorage.getItem("savedPostId")) ?? 0;
+  const savedCategory = (sessionStorage.getItem("savedCategory") as UnionOfCategoryAtCreate) ?? "";
   const savedTitle = sessionStorage.getItem("savedTitle") ?? "";
   const savedContents = sessionStorage.getItem("savedContents") ?? "";
 
   const [title, setTitle] = useState(() => (isCreate ? "" : savedTitle));
+  const [category, setCategory] = useState<UnionOfCategoryAtCreate>(() => (isCreate ? categoryType[0] : savedCategory));
   const [ckEditorData, setCkEditorData] = useState(() => (isCreate ? "" : savedContents));
   const router = useRouter();
 
@@ -31,7 +37,7 @@ export default function PostForm({ isCreate, setIsLoading }: PostFormProps) {
     const images = extractBase64Images(ckEditorData);
     if (!window.confirm("글을 게시하시겠습니까?")) return;
     if (title === "" || ckEditorData === "") return alert("내용을 다시 확인해주세요.");
-    const reqData = { title, contents, images };
+    const reqData = { category, title, contents, images };
     isCreate ? createPost(reqData) : updatePost(reqData);
   };
 
@@ -42,6 +48,13 @@ export default function PostForm({ isCreate, setIsLoading }: PostFormProps) {
 
   return (
     <form className={`w-full h-full`} onSubmit={handleSubmit}>
+      <div className={`mb-5`}>
+        <Select name="category" selectedValue={category} onChange={(e) => setCategory(e.target.value as UnionOfCategoryAtCreate)}>
+          {categoryType.map((category) => (
+            <Select.Option key={category} value={category} />
+          ))}
+        </Select>
+      </div>
       <div className={`flex justify-between mb-10`}>
         <div className="w-[70%]">
           <input

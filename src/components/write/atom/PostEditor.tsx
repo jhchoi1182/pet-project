@@ -16,7 +16,7 @@ export default function PostEditor({ ckEditorData, setCkEditorData }: PostEditor
   const adjustEditorHeight = () => {
     if (containerRef.current) {
       const containerHeight = containerRef.current.offsetHeight;
-      document.documentElement.style.setProperty("--ckeditorHeight", `${containerHeight - 120}px`);
+      document.documentElement.style.setProperty("--ckeditorHeight", `${containerHeight - 170}px`);
     }
   };
 

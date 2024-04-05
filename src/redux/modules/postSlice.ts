@@ -1,14 +1,16 @@
-import { searchType } from "@/components/sidebar/molecules/SearchSort";
+import { UnionOfCategoryAtSearch, UnionOfSearchType } from "@/types/request/post";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface PostSliceState {
   currentPage: number;
-  selectedSearchType: (typeof searchType)[number];
+  selectedCategory: UnionOfCategoryAtSearch;
+  selectedSearchType: UnionOfSearchType;
   inputValue: string;
 }
 
 const initialState: PostSliceState = {
   currentPage: 1,
+  selectedCategory: "전체",
   selectedSearchType: "제목+내용",
   inputValue: "",
 };
@@ -20,6 +22,9 @@ export const postSlice = createSlice({
     setCurrentPage: (state, { payload }) => {
       state.currentPage = payload;
     },
+    setSelectedCategory: (state, { payload }) => {
+      state.selectedCategory = payload;
+    },
     setSelectedSearchType: (state, { payload }) => {
       state.selectedSearchType = payload;
     },
@@ -29,6 +34,6 @@ export const postSlice = createSlice({
   },
 });
 
-export const { setCurrentPage, setSelectedSearchType, setInputValue } = postSlice.actions;
+export const { setCurrentPage, setSelectedCategory, setSelectedSearchType, setInputValue } = postSlice.actions;
 
 export default postSlice.reducer;
