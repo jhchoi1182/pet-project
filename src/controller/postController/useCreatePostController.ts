@@ -1,10 +1,11 @@
-import { CategoryType, postApi } from "@/api/postApi";
+import { postApi } from "@/api/postApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
+import { UnionOfCategoryAtCreate } from "@/types/request/post";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 interface CreatePostParameter {
-  category: CategoryType;
+  category: UnionOfCategoryAtCreate;
   title: string;
   contents: string;
   images: string[];

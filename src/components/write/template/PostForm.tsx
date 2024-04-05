@@ -8,7 +8,7 @@ import useCreatePostController from "@/controller/postController/useCreatePostCo
 import useUpdatePostController from "@/controller/postController/useUpdatePostController";
 import useAlertBeforeUnload from "@/hook/useBeforeUnload";
 import Select from "@/components/atoms/base/Select";
-import { CategoryType } from "@/api/postApi";
+import { UnionOfCategoryAtCreate } from "@/types/request/post";
 
 interface PostFormProps {
   isCreate: boolean;
@@ -19,12 +19,12 @@ const categoryType = ["잡담", "모집", "정보", "질문"] as const;
 
 export default function PostForm({ isCreate, setIsLoading }: PostFormProps) {
   const savedPostId = Number(sessionStorage.getItem("savedPostId")) ?? 0;
-  const savedCategory = (sessionStorage.getItem("savedCategory") as CategoryType) ?? "";
+  const savedCategory = (sessionStorage.getItem("savedCategory") as UnionOfCategoryAtCreate) ?? "";
   const savedTitle = sessionStorage.getItem("savedTitle") ?? "";
   const savedContents = sessionStorage.getItem("savedContents") ?? "";
 
   const [title, setTitle] = useState(() => (isCreate ? "" : savedTitle));
-  const [category, setCategory] = useState<CategoryType>(() => (isCreate ? categoryType[0] : savedCategory));
+  const [category, setCategory] = useState<UnionOfCategoryAtCreate>(() => (isCreate ? categoryType[0] : savedCategory));
   const [ckEditorData, setCkEditorData] = useState(() => (isCreate ? "" : savedContents));
   const router = useRouter();
 
@@ -49,7 +49,7 @@ export default function PostForm({ isCreate, setIsLoading }: PostFormProps) {
   return (
     <form className={`w-full h-full`} onSubmit={handleSubmit}>
       <div className={`mb-5`}>
-        <Select name="category" selectedValue={category} onChange={(e) => setCategory(e.target.value as CategoryType)}>
+        <Select name="category" selectedValue={category} onChange={(e) => setCategory(e.target.value as UnionOfCategoryAtCreate)}>
           {categoryType.map((category) => (
             <Select.Option key={category} value={category} />
           ))}

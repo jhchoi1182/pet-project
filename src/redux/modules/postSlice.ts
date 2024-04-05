@@ -1,11 +1,10 @@
-import { SortCategoryType } from "@/components/sidebar/atom/CategorySelect";
-import { SearchType } from "@/components/sidebar/molecules/SearchSort";
+import { UnionOfCategoryAtSearch, UnionOfSearchType } from "@/types/request/post";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface PostSliceState {
   currentPage: number;
-  selectedCategory: SortCategoryType;
-  selectedSearchType: SearchType;
+  selectedCategory: UnionOfCategoryAtSearch;
+  selectedSearchType: UnionOfSearchType;
   inputValue: string;
 }
 

@@ -1,9 +1,8 @@
 import { postApi } from "@/api/postApi";
-import { SortCategoryType } from "@/components/sidebar/atom/CategorySelect";
-import { SearchType } from "@/components/sidebar/molecules/SearchSort";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
 import { setInputValue, setSelectedCategory, setSelectedSearchType } from "@/redux/modules/postSlice";
 import { RootState } from "@/redux/store/store";
+import { UnionOfCategoryAtSearch, UnionOfSearchType } from "@/types/request/post";
 import { PostsResponse } from "@/types/response/postsResponse";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
@@ -15,8 +14,8 @@ export function useGetPostsController(enabled: boolean) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const selectedCategory = (sessionStorage.getItem("selectedCategory") as SortCategoryType) ?? "전체";
-    const selectedSearchType = (sessionStorage.getItem("selectedSearchType") as SearchType) ?? "제목+내용";
+    const selectedCategory = (sessionStorage.getItem("selectedCategory") as UnionOfCategoryAtSearch) ?? "전체";
+    const selectedSearchType = (sessionStorage.getItem("selectedSearchType") as UnionOfSearchType) ?? "제목+내용";
     const inputValue = sessionStorage.getItem("inputValue") ?? "";
     dispatch(setSelectedCategory(selectedCategory));
     dispatch(setSelectedSearchType(selectedSearchType));

@@ -3,12 +3,12 @@
 import { useGetPostsController } from "@/controller/postController/useGetPostsController";
 import { setCurrentPage, setSelectedCategory } from "@/redux/modules/postSlice";
 import { RootState } from "@/redux/store/store";
+import { UnionOfCategoryAtSearch } from "@/types/request/post";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const sortCategory = ["전체", "잡담", "모집", "정보", "질문"] as const;
-export type SortCategoryType = (typeof sortCategory)[number];
 
 export default function CategorySelect() {
   const selectedCategory = useSelector(({ postSlice }: RootState) => postSlice.selectedCategory);
@@ -17,7 +17,7 @@ export default function CategorySelect() {
 
   const { refetch } = useGetPostsController(false);
 
-  const handleClick = async (category: SortCategoryType) => {
+  const handleClick = async (category: UnionOfCategoryAtSearch) => {
     sessionStorage.setItem("currentPage", "1");
     sessionStorage.setItem("selectedCategory", category);
     await dispatch(setSelectedCategory(category));

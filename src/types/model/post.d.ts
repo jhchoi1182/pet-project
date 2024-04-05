@@ -1,12 +1,13 @@
 export interface PostWithoutContents {
   postId: number;
-  catery: string;
+  category: Category;
   title: string;
   nickname: string;
   commentsCount: number;
   createdAt: string;
   updatedAt: string;
 }
+type Category = "CHAT" | "RECRUIT" | "INFORMATION" | "QUESTION";
 
 export interface Post extends PostWithoutContents {
   contents: string;
