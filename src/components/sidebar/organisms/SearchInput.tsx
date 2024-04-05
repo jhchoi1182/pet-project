@@ -5,7 +5,7 @@ import Search from "@/components/atoms/icons/Search";
 import React, { FormEvent } from "react";
 import SearchSort from "../molecules/SearchSort";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage, setInputValue } from "@/redux/modules/postSlice";
+import { setCurrentPage, setInputValue, setSearchValue } from "@/redux/modules/postSlice";
 import { useGetPostsController } from "@/controller/postController/useGetPostsController";
 import { RootState } from "@/redux/store/store";
 import { useRouter } from "next/navigation";
@@ -22,7 +22,9 @@ export default function SearchInput() {
     sessionStorage.setItem("currentPage", "1");
     sessionStorage.setItem("selectedSearchType", selectedSearchType);
     sessionStorage.setItem("inputValue", inputValue);
+    sessionStorage.setItem("searchValue", inputValue);
     dispatch(setCurrentPage(1));
+    dispatch(setSearchValue(inputValue));
     refetch();
     router.push("/home");
   };
