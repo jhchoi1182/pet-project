@@ -7,9 +7,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import "../../../styles/ckeditor.css";
 import { convertTagsToMedia } from "@/util/ckeditorImageTransformer";
+import { Category } from "@/components/postBoard/molecules/PostList";
 
 export default function PostDetailSection({ post }: { post: Post | undefined }) {
-  const { title, nickname, createdAt, contents, images } = post ?? {};
+  const { category, title, nickname, createdAt, contents, images } = post ?? {};
 
   const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
   const router = useRouter();
@@ -18,6 +19,9 @@ export default function PostDetailSection({ post }: { post: Post | undefined }) 
     <>
       <section className={`flex justify-between`}>
         <div className={`w-[75%]`}>
+          <div className={`text-body03 mb-5`}>
+            <span>{Category[category ?? "CHAT"]}</span>
+          </div>
           <h1 className={`text-body02`}>{title}</h1>
           <div className={`flex gap-[55px] mt-[30px] text-body04`}>
             <span>{nickname}</span>

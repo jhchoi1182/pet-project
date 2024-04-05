@@ -2,7 +2,7 @@ import { PostWithoutContents } from "@/types/model/post";
 import Link from "next/link";
 import React from "react";
 
-enum Category {
+export enum Category {
   "CHAT" = "잡담",
   "RECRUIT" = "모집",
   "INFORMATION" = "정보",
