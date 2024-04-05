@@ -6,13 +6,13 @@ enum SearchTypeEnum {
   "내용" = "contents",
   "작성자" = "nickname",
 }
-enum CategoryType {
-  "전체" = "All",
-  "잡담" = "Chat",
-  "모집" = "Recruit",
-  "정보" = "Information",
-  "질문" = "Question",
+enum Category {
+  "잡담" = "CHAT",
+  "모집" = "RECRUIT",
+  "정보" = "INFORMATION",
+  "질문" = "QUESTION",
 }
+export type CategoryType = keyof typeof Category;
 
 export const postApi = {
   getAllPost: async () => {
@@ -22,21 +22,23 @@ export const postApi = {
   search: async (type: keyof typeof SearchTypeEnum, value: string, page: number, size: number = 9) => {
     const queryType = SearchTypeEnum[type];
     const encodedValue = encodeURIComponent(value);
-    const { data } = await instance.get(`/post/search?type=${queryType}&value=${encodedValue}&page=${page}&size=${size}&sort=createdAt,desc`);
+    const { data } = await instance.get(
+      `/post/search?category=${`all`}&searchType=${queryType}&value=${encodedValue}&page=${page}&size=${size}&sort=createdAt,desc`,
+    );
     return data?.result;
   },
   getPost: async (postId: number) => {
     const { data } = await instance.get(`/post/${postId}`);
     return data?.result;
   },
-  create: async (category: string, title: string, contents: string, images: string[]) => {
-    const categoryQuery = CategoryType[category as keyof typeof CategoryType];
-    const data = await instance.post("/post", { categoryQuery, title, contents, images });
+  create: async (category: CategoryType, title: string, contents: string, images: string[]) => {
+    const formattedCategory = Category[category];
+    const data = await instance.post("/post", { category: formattedCategory, title, contents, images });
     return data;
   },
-  update: async (postId: number, category: string, title: string, contents: string, images: string[]) => {
-    const categoryQuery = CategoryType[category as keyof typeof CategoryType];
-    const data = await instance.patch(`/post/${postId}`, { categoryQuery, title, contents, images });
+  update: async (postId: number, category: CategoryType, title: string, contents: string, images: string[]) => {
+    const formattedCategory = Category[category];
+    const data = await instance.patch(`/post/${postId}`, { category: formattedCategory, title, contents, images });
     return data;
   },
   delete: async (postId: number) => {

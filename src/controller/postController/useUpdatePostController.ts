@@ -1,10 +1,10 @@
-import { postApi } from "@/api/postApi";
+import { CategoryType, postApi } from "@/api/postApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 interface MutateParameter {
-  category: string;
+  category: CategoryType;
   title: string;
   contents: string;
   images: string[];
