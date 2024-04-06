@@ -1,12 +1,12 @@
 import { Comment } from "@/types/model/comment";
 import React from "react";
 import PostDetailButton from "./PostDetailButton";
-import useUpdateCommentController from "@/controller/commentController/useUpdateCommentController";
+import useUpdateCommentMutation from "@/service/comment/useUpdateCommentMutation";
 import CommentForm from "../molecules/CommentForm";
-import useDeleteCommentController from "@/controller/commentController/useDeleteCommentController";
+import useDeleteCommentMutation from "@/service/comment/useDeleteCommentMutation";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
-import { setOpenCommentEditor } from "@/redux/modules/commentSlice";
+import { RootState } from "@/stores/store/store";
+import { setOpenCommentEditor } from "@/stores/modules/commentSlice";
 
 interface CommentItemProps {
   postId: number;
@@ -16,8 +16,8 @@ interface CommentItemProps {
 export default function CommentItem({ postId, comment: { commentId, nickname, createdAt, comment } }: CommentItemProps) {
   const openCommentEditor = useSelector(({ commentSlice }: RootState) => commentSlice.openCommentEditor);
   const dispatch = useDispatch();
-  const { mutate: updateMutate } = useUpdateCommentController(postId, commentId);
-  const { mutate: deleteMutate } = useDeleteCommentController(postId, commentId);
+  const { mutate: updateMutate } = useUpdateCommentMutation(postId, commentId);
+  const { mutate: deleteMutate } = useDeleteCommentMutation(postId, commentId);
 
   const editComment = (editedComment: string) => {
     updateMutate(editedComment);

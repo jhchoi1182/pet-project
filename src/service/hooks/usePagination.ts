@@ -1,4 +1,4 @@
-import { setCurrentPage } from "@/redux/modules/postSlice";
+import { setCurrentPage } from "@/stores/modules/postSlice";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 

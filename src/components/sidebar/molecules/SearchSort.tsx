@@ -2,9 +2,9 @@ import { Dropdown } from "@/components/atoms/base/Dropdown";
 import DownArrow from "@/components/atoms/icons/DownArrow";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
-import { setSelectedSearchType } from "@/redux/modules/postSlice";
-import { UnionOfSearchType } from "@/types/request/post";
+import { RootState } from "@/stores/store/store";
+import { setSelectedSearchType } from "@/stores/modules/postSlice";
+import { UnionOfSearchType } from "@/types/type/post";
 
 const searchType = ["제목+내용", "제목", "내용", "작성자"] as const;
 

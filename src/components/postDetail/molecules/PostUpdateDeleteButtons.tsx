@@ -1,6 +1,6 @@
 import React from "react";
 import PostDetailButton from "../atom/PostDetailButton";
-import useDeletePostController from "@/controller/postController/useDeletePostController";
+import useDeletePostMutation from "@/service/post/useDeletePostMutation";
 import { useParams, useRouter } from "next/navigation";
 import { Post } from "@/types/model/post";
 import { replaceTempTagWithRealImgTag } from "@/util/ckeditorImageTransformer";
@@ -10,7 +10,7 @@ export default function PostUpdateDeleteButtons({ post }: { post: Post | undefin
 
   const { id } = useParams();
   const router = useRouter();
-  const { mutate: deleteMutate } = useDeletePostController(+id ?? 0);
+  const { mutate: deleteMutate } = useDeletePostMutation(+id ?? 0);
 
   const handleUpdateButtonClick = () => {
     sessionStorage.setItem("savedPostId", postId + "");

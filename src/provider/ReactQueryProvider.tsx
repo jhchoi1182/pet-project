@@ -1,8 +1,8 @@
 "use client";
 
-import { setIsRemovedNicknameCookie } from "@/redux/modules/authSlice";
-import { RootState } from "@/redux/store/store";
-import useHandleError from "@/service/useHandleError";
+import { setIsRemovedNicknameCookie } from "@/stores/modules/authSlice";
+import { RootState } from "@/stores/store/store";
+import useHandleError from "@/service/hooks/useHandleError";
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import React, { useState } from "react";

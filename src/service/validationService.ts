@@ -2,7 +2,7 @@ import { SetStateString } from "@/types/type/utilityTypes";
 import { AuthInputType } from "@/components/loginSignup/atom/ValidationText";
 import { ErrorResponse } from "@/types/response/ErrorResponse";
 import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
-import useHandleError from "./useHandleError";
+import useHandleError from "./hooks/useHandleError";
 
 export function useHandleExceptionText() {
   const { handleError } = useHandleError();
@@ -23,7 +23,11 @@ export function useHandleExceptionText() {
 }
 
 export function validationService() {
-  function valideSignupInput({ username, nickname, email, password, passwordConfirm }: EnteredInfoType, isUsernameAvailable: boolean, isNicknameAvailable: boolean) {
+  function valideSignupInput(
+    { username, nickname, email, password, passwordConfirm }: EnteredInfoType,
+    isUsernameAvailable: boolean,
+    isNicknameAvailable: boolean,
+  ) {
     const isValid =
       isValidUsernameOrNickname(username) &&
       isValidUsernameOrNickname(nickname) &&

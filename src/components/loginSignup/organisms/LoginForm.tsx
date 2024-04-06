@@ -3,7 +3,7 @@ import Logo from "../../atoms/ui/Logo";
 import Input from "../../atoms/base/Input";
 import Button from "../../atoms/base/Button";
 import CloseButton from "../molecules/CloseButton";
-import useLoginController from "@/controller/authController/useLoginController";
+import useLoginAxios from "@/service/auth/useLoginAxios";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 import SocialLoginIcons from "../molecules/SocialLoginIcons";
 
@@ -17,7 +17,7 @@ export default function LoginModal({ setToggleLoginSignup }: LoginModalProps) {
     password: "",
   });
   const [validationTextColor, setValidationTextColor] = useState("text-transparent");
-  const { handleUserLogin } = useLoginController();
+  const { handleUserLogin } = useLoginAxios();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

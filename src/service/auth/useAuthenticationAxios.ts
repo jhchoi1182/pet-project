@@ -1,9 +1,9 @@
 import { authApi } from "@/api/authApi";
-import useHandleError from "@/service/useHandleError";
-import useAuthService from "@/service/useAuthService";
+import useHandleError from "@/service/hooks/useHandleError";
+import useAuthManagementService from "@/service/auth/useAuthManagementService";
 
-function useAuthenticationController() {
-  const { setNickname } = useAuthService();
+function useAuthenticationAxios() {
+  const { setNickname } = useAuthManagementService();
   const { handleError } = useHandleError();
 
   const fetchAuth = async () => {
@@ -18,4 +18,4 @@ function useAuthenticationController() {
   return { fetchAuth };
 }
 
-export default useAuthenticationController;
+export default useAuthenticationAxios;

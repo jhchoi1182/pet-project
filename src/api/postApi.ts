@@ -1,5 +1,5 @@
 import { instance } from "../config/axiosConfig";
-import { CategoryAtCreate, CategoryAtSearch, SearchType, UnionOfCategoryAtCreate, UnionOfCategoryAtSearch, UnionOfSearchType } from "@/types/request/post";
+import { CategoryAtCreate, CategoryAtSearch, SearchType, UnionOfCategoryAtCreate, UnionOfCategoryAtSearch, UnionOfSearchType } from "@/types/type/post";
 
 export const postApi = {
   getAllPost: async () => {

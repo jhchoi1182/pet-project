@@ -1,6 +1,6 @@
 import HighlightMatch from "@/components/atoms/ui/HighlightMatch";
-import { setSearchValue } from "@/redux/modules/postSlice";
-import { RootState } from "@/redux/store/store";
+import { setSearchValue } from "@/stores/modules/postSlice";
+import { RootState } from "@/stores/store/store";
 import { PostWithoutContents } from "@/types/model/post";
 import Link from "next/link";
 import React, { useEffect } from "react";
@@ -33,8 +33,6 @@ export default function PostList({ posts }: { posts: PostWithoutContents[] }) {
           ? HighlightMatch(post?.title, searchValue)
           : `${post?.title} ${post?.commentsCount !== 0 ? `[${post?.commentsCount}]` : ``}`;
         const nickname = shouldHighlightNickname ? HighlightMatch(post?.nickname, searchValue) : post?.nickname;
-
-        console.log(title);
 
         return (
           <li key={i} className={`flex items-center w-full h-[10%] ${i % 2 === 1 ? "" : "bg-gray400"} ${i === postSlots.length - 1 ? "rounded-b-[20px]" : ""}`}>

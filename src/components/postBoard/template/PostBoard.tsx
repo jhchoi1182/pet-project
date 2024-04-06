@@ -1,14 +1,14 @@
 "use client";
 
 import BoardLoadingSpinner from "@/components/atoms/ui/BoardLoadingSpinner";
-import { useGetPostsController } from "@/controller/postController/useGetPostsController";
+import useGetPostsQuery from "@/service/post/useGetPostsQuery";
 import React from "react";
 import PostList from "../molecules/PostList";
 import PaginationNumGroup from "../molecules/PaginationNumGroup";
 import Board from "@/components/atoms/ui/Board";
 
 export default function PostBoard() {
-  const { data, isLoading } = useGetPostsController(true);
+  const { data, isLoading } = useGetPostsQuery(true);
   const { content = [], totalPages = 0 } = data ?? {};
 
   return (

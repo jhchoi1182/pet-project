@@ -3,7 +3,7 @@ import { QUERY_KEY } from "@/config/queyKeyConfig";
 import { PostsResponse } from "@/types/response/postsResponse";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-function useCreatCommentController(postId: number) {
+function useCreatCommentMutation(postId: number) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (comment: string) => commentApi.post(postId, comment),
@@ -17,4 +17,4 @@ function useCreatCommentController(postId: number) {
   });
 }
 
-export default useCreatCommentController;
+export default useCreatCommentMutation;

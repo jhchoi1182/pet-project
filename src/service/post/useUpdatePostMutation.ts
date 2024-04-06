@@ -1,6 +1,6 @@
 import { postApi } from "@/api/postApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
-import { UnionOfCategoryAtCreate } from "@/types/request/post";
+import { UnionOfCategoryAtCreate } from "@/types/type/post";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 

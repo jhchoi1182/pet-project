@@ -1,10 +1,10 @@
-import { setLoggedInNickname } from "@/redux/modules/authSlice";
+import { setLoggedInNickname } from "@/stores/modules/authSlice";
 import { cookieUtils } from "@/util/cookieUtils";
 import { useDispatch } from "react-redux";
 
 const { setCookie, removeCookie } = cookieUtils();
 
-function useAuthService() {
+function useAuthManagementService() {
   const dispatch = useDispatch();
 
   function setNickname(nickname: string) {
@@ -20,4 +20,4 @@ function useAuthService() {
   return { setNickname, removeNickname };
 }
 
-export default useAuthService;
+export default useAuthManagementService;

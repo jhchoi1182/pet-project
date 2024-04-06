@@ -2,10 +2,10 @@
 
 import Button from "@/components/atoms/base/Button";
 import React, { useEffect, useState } from "react";
-import useAuthenticationController from "@/controller/authController/useAuthenticationController";
+import useAuthenticationAxios from "@/service/auth/useAuthenticationAxios";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsOpenLoginModal, setLoggedInNickname } from "@/redux/modules/authSlice";
-import { RootState } from "@/redux/store/store";
+import { setIsOpenLoginModal, setLoggedInNickname } from "@/stores/modules/authSlice";
+import { RootState } from "@/stores/store/store";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookieUtils } from "@/util/cookieUtils";
 import LoadingSpinner from "@/components/atoms/ui/LoadingSpinner";
@@ -20,7 +20,7 @@ export default function UsernameOrLoginButton({ nickname }: { nickname: RequestC
   const { loggedInNickname, isSocialLoginInProgress, isRemovedNicknameCookie } = useSelector(({ authSlice }: RootState) => authSlice);
   const dispatch = useDispatch();
 
-  const { fetchAuth } = useAuthenticationController();
+  const { fetchAuth } = useAuthenticationAxios();
 
   useEffect(() => {
     dispatch(setLoggedInNickname(getCookie()));

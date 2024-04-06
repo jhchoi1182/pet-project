@@ -1,14 +1,14 @@
 import { postApi } from "@/api/postApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
-import { setInputValue, setSelectedCategory, setSelectedSearchType } from "@/redux/modules/postSlice";
-import { RootState } from "@/redux/store/store";
-import { UnionOfCategoryAtSearch, UnionOfSearchType } from "@/types/request/post";
+import { setInputValue, setSelectedCategory, setSelectedSearchType } from "@/stores/modules/postSlice";
+import { RootState } from "@/stores/store/store";
+import { UnionOfCategoryAtSearch, UnionOfSearchType } from "@/types/type/post";
 import { PostsResponse } from "@/types/response/postsResponse";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export function useGetPostsController(enabled: boolean, resetToFirstPage?: boolean) {
+function useGetPostsQuery(enabled: boolean, resetToFirstPage?: boolean) {
   const { currentPage, selectedCategory, selectedSearchType, inputValue } = useSelector(({ postSlice }: RootState) => postSlice);
   const [isReady, setIsReady] = useState(false);
   const dispatch = useDispatch();
@@ -39,15 +39,4 @@ export function useGetPostsController(enabled: boolean, resetToFirstPage?: boole
   return { data, isLoading, refetch };
 }
 
-export function usePrefetchPosts() {
-  const { selectedCategory, selectedSearchType, inputValue } = useSelector(({ postSlice }: RootState) => postSlice);
-  const queryClient = useQueryClient();
-
-  return (page: number) => {
-    queryClient.prefetchQuery({
-      queryKey: [QUERY_KEY.posts, selectedCategory, page],
-      queryFn: () => postApi.search(selectedCategory, selectedSearchType, inputValue, page - 1),
-      staleTime: 60 * 1000,
-    });
-  };
-}
+export default useGetPostsQuery;

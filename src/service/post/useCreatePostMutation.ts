@@ -1,6 +1,6 @@
 import { postApi } from "@/api/postApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
-import { UnionOfCategoryAtCreate } from "@/types/request/post";
+import { UnionOfCategoryAtCreate } from "@/types/type/post";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
@@ -11,7 +11,7 @@ interface CreatePostParameter {
   images: string[];
 }
 
-function useCreatePostController() {
+function useCreatePostMutation() {
   const queryClient = useQueryClient();
   const router = useRouter();
   return useMutation({
@@ -24,4 +24,4 @@ function useCreatePostController() {
   });
 }
 
-export default useCreatePostController;
+export default useCreatePostMutation;
