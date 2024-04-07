@@ -3,7 +3,7 @@
 import React from "react";
 import ReactQueryProvider from "./ReactQueryProvider";
 import { Provider } from "react-redux";
-import { store } from "@/redux/store/store";
+import { store } from "@/stores/store/store";
 
 export default function AppProvider({ children }: { children: React.ReactNode }) {
   return (

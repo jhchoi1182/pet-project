@@ -3,11 +3,11 @@
 import React, { useEffect } from "react";
 import MaxPageArrow from "@/components/atoms/icons/MaxPageArrow";
 import NextPageArrow from "@/components/atoms/icons/NextPageArrow";
-import usePagination from "@/service/usePagination";
+import usePagination from "@/service/hooks/usePagination";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
-import { setCurrentPage } from "@/redux/modules/postSlice";
-import { usePrefetchPosts } from "@/controller/postController/useGetPostsController";
+import { RootState } from "@/stores/store/store";
+import { setCurrentPage } from "@/stores/modules/postSlice";
+import usePrefetchPosts from "@/service/post/usePrefetchPosts";
 
 interface PaginationNumGroupProps {
   totalPages: number;

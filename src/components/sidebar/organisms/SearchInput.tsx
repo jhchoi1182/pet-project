@@ -5,9 +5,9 @@ import Search from "@/components/atoms/icons/Search";
 import React, { FormEvent } from "react";
 import SearchSort from "../molecules/SearchSort";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage, setInputValue, setSearchValue } from "@/redux/modules/postSlice";
-import { useGetPostsController } from "@/controller/postController/useGetPostsController";
-import { RootState } from "@/redux/store/store";
+import { setCurrentPage, setInputValue, setSearchValue } from "@/stores/modules/postSlice";
+import useGetPostsQuery from "@/service/post/useGetPostsQuery";
+import { RootState } from "@/stores/store/store";
 import { useRouter } from "next/navigation";
 
 export default function SearchInput() {
@@ -15,7 +15,7 @@ export default function SearchInput() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { refetch } = useGetPostsController(false);
+  const { refetch } = useGetPostsQuery(false);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();

@@ -1,12 +1,12 @@
 import { authApi } from "@/api/authApi";
-import useHandleError from "@/service/useHandleError";
-import useAuthService from "@/service/useAuthService";
+import useHandleError from "@/service/hooks/useHandleError";
+import useAuthManagementService from "@/service/auth/useAuthManagementService";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 
 type ActionType = "logout" | "withdraw";
 
-function useDeleteAuthController() {
-  const { removeNickname } = useAuthService();
+function useDeleteAuthAxios() {
+  const { removeNickname } = useAuthManagementService();
   const { handleError } = useHandleError();
   async function handleWithdraw(setToggleDropdown: SetStateBoolean, type: ActionType) {
     const isWithdraw = type === "withdraw";
@@ -24,4 +24,4 @@ function useDeleteAuthController() {
   return { handleWithdraw };
 }
 
-export default useDeleteAuthController;
+export default useDeleteAuthAxios;

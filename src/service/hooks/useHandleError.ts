@@ -1,9 +1,9 @@
 import { ErrorResponse } from "@/types/response/ErrorResponse";
 import axios from "axios";
-import useAuthService from "./useAuthService";
+import useAuthManagementService from "../auth/useAuthManagementService";
 
 function useHandleError() {
-  const { removeNickname } = useAuthService();
+  const { removeNickname } = useAuthManagementService();
 
   function handleError(error: unknown, skipNameRemove: boolean = false) {
     const { response } = error as ErrorResponse;
@@ -33,7 +33,7 @@ function useHandleError() {
         case "INVALID_TOKEN":
         case "AUTHENTICATION_ERROR":
           !skipNameRemove && removeNickname();
-          alert("사용자 권한이 유효하지 않습니다.");
+          alert("로그인 후 이용해주세요.");
           break;
         case "USER_NOT_FOUND":
         case "USER_REMOVED":

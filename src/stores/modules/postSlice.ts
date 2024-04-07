@@ -1,4 +1,4 @@
-import { UnionOfCategoryAtSearch, UnionOfSearchType } from "@/types/request/post";
+import { UnionOfCategoryAtSearch, UnionOfSearchType } from "@/types/type/post";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface PostSliceState {

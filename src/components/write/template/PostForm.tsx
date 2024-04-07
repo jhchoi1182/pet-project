@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 import PostEditor from "../atom/PostEditor";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 import { extractBase64Images, replaceImgTagWithTempTag } from "@/util/ckeditorImageTransformer";
-import useCreatePostController from "@/controller/postController/useCreatePostController";
-import useUpdatePostController from "@/controller/postController/useUpdatePostController";
-import useAlertBeforeUnload from "@/hook/useBeforeUnload";
+import useCreatePostMutation from "@/service/post/useCreatePostMutation";
+import useUpdatePostController from "@/service/post/useUpdatePostMutation";
+import useAlertBeforeUnload from "@/service/hooks/useBeforeUnload";
 import Select from "@/components/atoms/base/Select";
-import { UnionOfCategoryAtCreate } from "@/types/request/post";
+import { UnionOfCategoryAtCreate } from "@/types/type/post";
 
 interface PostFormProps {
   isCreate: boolean;
@@ -28,7 +28,7 @@ export default function PostForm({ isCreate, setIsLoading }: PostFormProps) {
   const [ckEditorData, setCkEditorData] = useState(() => (isCreate ? "" : savedContents));
   const router = useRouter();
 
-  const { mutate: createPost } = useCreatePostController();
+  const { mutate: createPost } = useCreatePostMutation();
   const { mutate: updatePost } = useUpdatePostController(savedPostId);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

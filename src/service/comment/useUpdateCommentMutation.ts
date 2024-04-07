@@ -1,11 +1,11 @@
 import { commentApi } from "@/api/commentApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
-import { setComments } from "@/redux/modules/commentSlice";
+import { setComments } from "@/stores/modules/commentSlice";
 import { Comment } from "@/types/model/comment";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 
-function useUpdateCommentController(postId: number, commentId: number) {
+function useUpdateCommentMutation(postId: number, commentId: number) {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
   return useMutation({
@@ -28,4 +28,4 @@ function useUpdateCommentController(postId: number, commentId: number) {
   });
 }
 
-export default useUpdateCommentController;
+export default useUpdateCommentMutation;

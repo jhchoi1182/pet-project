@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import ModalPortal from "../../atoms/base/ModalPortal";
 import LoginForm from "../organisms/LoginForm";
 import SignupForm from "../organisms/SignupForm";
-import { RootState } from "@/redux/store/store";
+import { RootState } from "@/stores/store/store";
 import { useSelector } from "react-redux";
 
 export default function LoginSignupModal() {

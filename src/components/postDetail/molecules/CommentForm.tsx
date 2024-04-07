@@ -1,5 +1,5 @@
 import Button from "@/components/atoms/base/Button";
-import { setOpenCommentEditor } from "@/redux/modules/commentSlice";
+import { setOpenCommentEditor } from "@/stores/modules/commentSlice";
 import React, { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 

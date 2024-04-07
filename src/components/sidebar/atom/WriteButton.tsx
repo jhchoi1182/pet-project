@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
+import { RootState } from "@/stores/store/store";
 
 export default function WriteButton() {
   const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);

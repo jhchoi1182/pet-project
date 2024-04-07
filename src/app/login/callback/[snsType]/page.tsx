@@ -3,10 +3,10 @@
 import React, { useEffect } from "react";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { authApi } from "@/api/authApi";
-import useHandleError from "@/service/useHandleError";
-import useAuthService from "@/service/useAuthService";
+import useHandleError from "@/service/hooks/useHandleError";
+import useAuthManagementService from "@/service/auth/useAuthManagementService";
 import { useDispatch } from "react-redux";
-import { setIsSocialLoginInProgress } from "@/redux/modules/authSlice";
+import { setIsSocialLoginInProgress } from "@/stores/modules/authSlice";
 
 interface snsTypeProps {
   params: {
@@ -16,7 +16,7 @@ interface snsTypeProps {
 
 export default function SnsLoginpage({ params: { snsType } }: snsTypeProps) {
   const dispatch = useDispatch();
-  const { setNickname } = useAuthService();
+  const { setNickname } = useAuthManagementService();
   const { handleError } = useHandleError();
   const searchParams = useSearchParams();
   const router = useRouter();

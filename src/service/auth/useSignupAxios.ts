@@ -1,7 +1,7 @@
 import { authApi } from "@/api/authApi";
 import { EnteredInfoType } from "@/components/loginSignup/organisms/SignupForm";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
-import useHandleError from "@/service/useHandleError";
+import useHandleError from "@/service/hooks/useHandleError";
 import { validationService } from "@/service/validationService";
 
 interface SignupControllerParemeter {
@@ -12,7 +12,7 @@ interface SignupControllerParemeter {
 }
 const { valideSignupInput } = validationService();
 
-function useSignupController() {
+function useSignupAxios() {
   const { handleError } = useHandleError();
   async function handleSignup({ enteredInfo, isUsernameAvailable, isNicknameAvailable, setToggleLoginSignup }: SignupControllerParemeter) {
     if (!valideSignupInput(enteredInfo, isUsernameAvailable, isNicknameAvailable)) return alert("항목을 모두 확인해주세요.");
@@ -28,4 +28,4 @@ function useSignupController() {
   return { handleSignup };
 }
 
-export default useSignupController;
+export default useSignupAxios;

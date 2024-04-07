@@ -4,7 +4,7 @@ import Button from "../../atoms/base/Button";
 import CloseButton from "../molecules/CloseButton";
 import NameInput from "../molecules/NameInput";
 import EmailPasswordInput from "../molecules/EmailPasswordInput";
-import useSignupController from "@/controller/authController/useSignupController";
+import useSignupAxios from "@/service/auth/useSignupAxios";
 
 export type EnteredInfoType = {
   username: string;
@@ -27,7 +27,7 @@ export default function SignupModal({ setToggleLoginSignup }: SignupModalProps) 
   });
   const [isUsernameAvailable, setIsUsernameAvailable] = useState(false);
   const [isNicknameAvailable, setIsNicknameAvailable] = useState(false);
-  const { handleSignup } = useSignupController();
+  const { handleSignup } = useSignupAxios();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

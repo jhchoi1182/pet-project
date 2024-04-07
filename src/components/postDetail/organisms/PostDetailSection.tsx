@@ -4,7 +4,7 @@ import PostDetailButton from "../atom/PostDetailButton";
 import { useRouter } from "next/navigation";
 import PostUpdateDeleteButtons from "../molecules/PostUpdateDeleteButtons";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
+import { RootState } from "@/stores/store/store";
 import "../../../styles/ckeditor.css";
 import { convertTagsToMedia } from "@/util/ckeditorImageTransformer";
 import { Category } from "@/components/postBoard/molecules/PostList";

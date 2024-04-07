@@ -5,14 +5,14 @@ import React from "react";
 import PostDetailSection from "../organisms/PostDetailSection";
 import CommentSection from "../organisms/CommentSection";
 import LoadingSpinner from "@/components/atoms/ui/LoadingSpinner";
-import { useGetPostController } from "@/controller/postController/useGetPostController";
-import useGetCommentsController from "@/controller/commentController/useGetCommentsController";
+import useGetPostQuery from "@/service/post/useGetPostQuery";
+import useGetCommentsQuery from "@/service/comment/useGetCommentsQuery";
 import Board from "@/components/atoms/ui/Board";
 
 export default function PostDetail({ id }: { id: string }) {
-  const { data, isLoading } = useGetPostController(+id);
-  const { comments } = useGetCommentsController(+id);
-  
+  const { data, isLoading } = useGetPostQuery(+id);
+  const { comments } = useGetCommentsQuery(+id);
+
   return (
     <>
       <BoardTab />

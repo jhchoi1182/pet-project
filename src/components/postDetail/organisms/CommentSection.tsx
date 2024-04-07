@@ -1,10 +1,10 @@
 import React from "react";
 import CommentForm from "../molecules/CommentForm";
 import CommentItem from "../atom/CommentItem";
-import useCreatCommentController from "@/controller/commentController/useCreatCommentController";
+import useCreatCommentMutation from "@/service/comment/useCreatCommentMutation";
 import { Comment } from "@/types/model/comment";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
+import { RootState } from "@/stores/store/store";
 
 interface CommentSectionProps {
   postId: number;
@@ -12,7 +12,7 @@ interface CommentSectionProps {
 }
 
 export default function CommentSection({ postId, comments }: CommentSectionProps) {
-  const { mutate } = useCreatCommentController(postId);
+  const { mutate } = useCreatCommentMutation(postId);
   const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
 
   const createComment = (comment: string) => {

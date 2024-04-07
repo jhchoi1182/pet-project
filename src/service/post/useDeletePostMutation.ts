@@ -3,7 +3,7 @@ import { QUERY_KEY } from "@/config/queyKeyConfig";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
-function useDeletePostController(postId: number) {
+function useDeletePostMutation(postId: number) {
   const queryClient = useQueryClient();
   const router = useRouter();
   return useMutation({
@@ -15,4 +15,4 @@ function useDeletePostController(postId: number) {
   });
 }
 
-export default useDeletePostController;
+export default useDeletePostMutation;

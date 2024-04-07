@@ -1,6 +1,6 @@
 import { authApi } from "@/api/authApi";
-import { setIsOpenLoginModal } from "@/redux/modules/authSlice";
-import useAuthService from "@/service/useAuthService";
+import { setIsOpenLoginModal } from "@/stores/modules/authSlice";
+import useAuthManagementService from "@/service/auth/useAuthManagementService";
 import { SetStateString } from "@/types/type/utilityTypes";
 import { useDispatch } from "react-redux";
 
@@ -9,9 +9,9 @@ interface handleUserLoginParameter {
   password: string;
 }
 
-function useLoginController() {
+function useLoginAxios() {
   const dispatch = useDispatch();
-  const { setNickname } = useAuthService();
+  const { setNickname } = useAuthManagementService();
 
   async function handleUserLogin({ username, password }: handleUserLoginParameter, setValidationTextColor: SetStateString) {
     try {
@@ -27,4 +27,4 @@ function useLoginController() {
   return { handleUserLogin };
 }
 
-export default useLoginController;
+export default useLoginAxios;

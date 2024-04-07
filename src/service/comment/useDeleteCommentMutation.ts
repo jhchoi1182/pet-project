@@ -3,7 +3,7 @@ import { QUERY_KEY } from "@/config/queyKeyConfig";
 import { PostsResponse } from "@/types/response/postsResponse";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-function useDeleteCommentController(postId: number, commentId: number) {
+function useDeleteCommentMutation(postId: number, commentId: number) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => commentApi.delete(postId, commentId),
@@ -17,4 +17,4 @@ function useDeleteCommentController(postId: number, commentId: number) {
   });
 }
 
-export default useDeleteCommentController;
+export default useDeleteCommentMutation;

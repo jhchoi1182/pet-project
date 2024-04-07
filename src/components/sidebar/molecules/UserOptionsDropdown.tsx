@@ -1,11 +1,11 @@
 import { Dropdown } from "@/components/atoms/base/Dropdown";
 import DownArrow from "@/components/atoms/icons/DownArrow";
-import useDeleteAuthController from "@/controller/authController/useDeleteAuthController";
+import useDeleteAuthAxios from "@/service/auth/useDeleteAuthAxios";
 import React, { useState } from "react";
 
 export default function UserOptionsDropdown() {
   const [toggleDropdown, setToggleDropdown] = useState(false);
-  const { handleWithdraw } = useDeleteAuthController();
+  const { handleWithdraw } = useDeleteAuthAxios();
 
   const logoutHandler = () => {
     handleWithdraw(setToggleDropdown, "logout");

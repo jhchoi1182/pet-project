@@ -1,13 +1,13 @@
 import { commentApi } from "@/api/commentApi";
 import { QUERY_KEY } from "@/config/queyKeyConfig";
-import { setComments } from "@/redux/modules/commentSlice";
-import { RootState } from "@/redux/store/store";
+import { setComments } from "@/stores/modules/commentSlice";
+import { RootState } from "@/stores/store/store";
 import { Comment } from "@/types/model/comment";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-function useGetCommentsController(postId: number) {
+function useGetCommentsQuery(postId: number) {
   const comments = useSelector(({ commentSlice }: RootState) => commentSlice.comments);
   const dispatch = useDispatch();
 
@@ -24,4 +24,4 @@ function useGetCommentsController(postId: number) {
   return { comments, isLoading };
 }
 
-export default useGetCommentsController;
+export default useGetCommentsQuery;

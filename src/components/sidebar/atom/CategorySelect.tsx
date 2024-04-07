@@ -1,9 +1,9 @@
 "use client";
 
-import { useGetPostsController } from "@/controller/postController/useGetPostsController";
-import { setCurrentPage, setInputValue, setSelectedCategory } from "@/redux/modules/postSlice";
-import { RootState } from "@/redux/store/store";
-import { UnionOfCategoryAtSearch } from "@/types/request/post";
+import useGetPostsQuery from "@/service/post/useGetPostsQuery";
+import { setCurrentPage, setInputValue, setSelectedCategory } from "@/stores/modules/postSlice";
+import { RootState } from "@/stores/store/store";
+import { UnionOfCategoryAtSearch } from "@/types/type/post";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,7 @@ export default function CategorySelect() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { refetch } = useGetPostsController(false, true);
+  const { refetch } = useGetPostsQuery(false, true);
 
   const handleClick = async (category: UnionOfCategoryAtSearch) => {
     if (selectedCategory === category) return;
