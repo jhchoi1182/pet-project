@@ -2,6 +2,9 @@ import { instance } from "../config/axiosConfig";
 import { CategoryAtCreate, CategoryAtSearch, SearchType, UnionOfCategoryAtCreate, UnionOfCategoryAtSearch, UnionOfSearchType } from "@/types/type/post";
 
 export const postApi = {
+  setInitialViewRecordCookie: async () => {
+    await instance.get(`/post/initializeViewRecord`);
+  },
   getAllPost: async () => {
     const { data } = await instance.get(`/post/all`);
     return data?.result;
