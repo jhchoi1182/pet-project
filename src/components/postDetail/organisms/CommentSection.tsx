@@ -20,7 +20,7 @@ export default function CommentSection({ postId, comments }: CommentSectionProps
   };
 
   return (
-    <section className={`mt-36`}>
+    <section className={`mt-16`}>
       <div className={`text-body04`}>{`댓글 수 (${comments?.length})`}</div>
       {loggedInNickname ? <CommentForm type="create" onSubmit={createComment} /> : <></>}
       <hr className={`mt-[60px] bg-primary`} />

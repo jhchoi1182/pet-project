@@ -2,6 +2,9 @@ import { instance } from "../config/axiosConfig";
 import { CategoryAtCreate, CategoryAtSearch, SearchType, UnionOfCategoryAtCreate, UnionOfCategoryAtSearch, UnionOfSearchType } from "@/types/type/post";
 
 export const postApi = {
+  setInitialViewRecordCookie: async () => {
+    await instance.get(`/post/initializeViewRecord`);
+  },
   getAllPost: async () => {
     const { data } = await instance.get(`/post/all`);
     return data?.result;
@@ -13,6 +16,10 @@ export const postApi = {
     const { data } = await instance.get(
       `/post/search?category=${formattedCategory}&searchType=${formattedType}&value=${encodedValue}&page=${page}&size=${size}&sort=createdAt,desc`,
     );
+    return data?.result;
+  },
+  getPostForISR: async (postId: number) => {
+    const { data } = await instance.get(`/post/${postId}/isr`);
     return data?.result;
   },
   getPost: async (postId: number) => {
@@ -27,6 +34,10 @@ export const postApi = {
   update: async (postId: number, category: UnionOfCategoryAtCreate, title: string, contents: string, images: string[]) => {
     const formattedCategory = CategoryAtCreate[category];
     const data = await instance.patch(`/post/${postId}`, { category: formattedCategory, title, contents, images });
+    return data;
+  },
+  toggleLike: async (postId: number) => {
+    const data = await instance.patch(`/post/${postId}/toggle-like`);
     return data;
   },
   delete: async (postId: number) => {

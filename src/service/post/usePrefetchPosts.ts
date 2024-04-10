@@ -12,7 +12,6 @@ function usePrefetchPosts() {
     queryClient.prefetchQuery({
       queryKey: [QUERY_KEY.posts, selectedCategory, page],
       queryFn: () => postApi.search(selectedCategory, selectedSearchType, inputValue, page - 1),
-      staleTime: 60 * 1000,
     });
   };
 }
