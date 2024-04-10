@@ -18,6 +18,10 @@ export const postApi = {
     );
     return data?.result;
   },
+  getPostForISR: async (postId: number) => {
+    const { data } = await instance.get(`/post/isr/${postId}`);
+    return data?.result;
+  },
   getPost: async (postId: number) => {
     const { data } = await instance.get(`/post/${postId}`);
     return data?.result;
