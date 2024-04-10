@@ -19,6 +19,9 @@ export default function PaginationNumGroup({ totalPages }: PaginationNumGroupPro
   const { pages, movePage } = usePagination(currentPage, totalPages);
   const prefetchPosts = usePrefetchPosts();
 
+  const prevPage = Math.max(1, currentPage - 1);
+  const nextPage = Math.min(totalPages, currentPage + 1);
+
   useEffect(() => {
     const savedCurrentPage = Number(sessionStorage.getItem("currentPage"));
     if (savedCurrentPage) dispatch(setCurrentPage(savedCurrentPage));
@@ -28,8 +31,10 @@ export default function PaginationNumGroup({ totalPages }: PaginationNumGroupPro
     <div className={`flex items-end w-[80%] h-[60px] px-10 text-yellow`}>
       <div className={`flex justify-between w-full`}>
         <div className={`flex gap-5`}>
-          <div className={`w-5`}>{currentPage > 1 && <MaxPageArrow isMin onClick={() => movePage(1)} />}</div>
-          <div className={`w-2`}>{currentPage > 1 && <NextPageArrow isPrev onClick={() => movePage(Math.max(1, currentPage - 1))} />}</div>
+          <div className={`w-5`}>{currentPage > 1 && <MaxPageArrow isMin onMouseEnter={() => prefetchPosts(1)} onClick={() => movePage(1)} />}</div>
+          <div className={`w-2`}>
+            {currentPage > 1 && <NextPageArrow isPrev onMouseEnter={() => prefetchPosts(prevPage)} onClick={() => movePage(prevPage)} />}
+          </div>
         </div>
         <ul className={`flex gap-12`}>
           {pages.map((page) => (
@@ -41,8 +46,12 @@ export default function PaginationNumGroup({ totalPages }: PaginationNumGroupPro
           ))}
         </ul>
         <div className={`flex gap-5`}>
-          <div className={`w-2`}>{currentPage < totalPages && <NextPageArrow onClick={() => movePage(Math.min(totalPages, currentPage + 1))} />}</div>
-          <div className={`w-5`}>{currentPage < totalPages && <MaxPageArrow onClick={() => movePage(totalPages)} />}</div>
+          <div className={`w-2`}>
+            {currentPage < totalPages && <NextPageArrow onMouseEnter={() => prefetchPosts(nextPage)} onClick={() => movePage(nextPage)} />}
+          </div>
+          <div className={`w-5`}>
+            {currentPage < totalPages && <MaxPageArrow onMouseEnter={() => prefetchPosts(totalPages)} onClick={() => movePage(totalPages)} />}
+          </div>
         </div>
       </div>
     </div>
