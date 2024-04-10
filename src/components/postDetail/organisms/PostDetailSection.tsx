@@ -11,7 +11,7 @@ import { Category } from "@/components/postBoard/molecules/PostList";
 import LikeButton from "../molecules/LikeButton";
 
 export default function PostDetailSection({ post }: { post: Post | undefined }) {
-  const { category, title, nickname, createdAt, contents, images, view, likes } = post ?? {};
+  const { postId, category, title, nickname, createdAt, contents, images, view, likes, hasLiked } = post ?? {};
 
   const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
   const router = useRouter();
@@ -40,7 +40,7 @@ export default function PostDetailSection({ post }: { post: Post | undefined }) 
       </section>
       <hr className={`mt-9 bg-primary`} />
       <section className={`no-tailwind mt-[75px] leading-6`} dangerouslySetInnerHTML={{ __html: convertTagsToMedia(contents ?? "", images ?? []) }} />
-      <LikeButton likes={likes} />
+      <LikeButton postId={postId} likes={likes} hasLiked={hasLiked} />
     </>
   );
 }

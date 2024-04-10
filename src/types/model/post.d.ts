@@ -6,6 +6,7 @@ export interface PostWithoutContents {
   commentsCount: number;
   view: number;
   likes: number;
+  hasLiked: boolean;
   createdAt: string;
   updatedAt: string;
 }
