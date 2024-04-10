@@ -4,6 +4,8 @@ export interface PostWithoutContents {
   title: string;
   nickname: string;
   commentsCount: number;
+  view: number;
+  likes: number;
   createdAt: string;
   updatedAt: string;
 }

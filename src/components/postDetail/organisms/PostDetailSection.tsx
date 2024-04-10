@@ -8,9 +8,10 @@ import { RootState } from "@/stores/store/store";
 import "../../../styles/ckeditor.css";
 import { convertTagsToMedia } from "@/util/ckeditorImageTransformer";
 import { Category } from "@/components/postBoard/molecules/PostList";
+import LikeButton from "../molecules/LikeButton";
 
 export default function PostDetailSection({ post }: { post: Post | undefined }) {
-  const { category, title, nickname, createdAt, contents, images } = post ?? {};
+  const { category, title, nickname, createdAt, contents, images, view, likes } = post ?? {};
 
   const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
   const router = useRouter();
@@ -23,9 +24,11 @@ export default function PostDetailSection({ post }: { post: Post | undefined }) 
             <span>{Category[category ?? "CHAT"]}</span>
           </div>
           <h1 className={`text-body02`}>{title}</h1>
-          <div className={`flex gap-[55px] mt-[30px] text-body04`}>
-            <span>{nickname}</span>
-            <span>{createdAt}</span>
+          <div className={`flex gap-[55px] mt-[30px]`}>
+            <span className={`text-body04`}>{nickname}</span>
+            <span className={`text-body04`}>{createdAt}</span>
+            <span className={`text-body03`}>{`조회수 ${view}`}</span>
+            <span className={`text-body03`}>{`추천수 ${likes}`}</span>
           </div>
         </div>
         <div className={`flex flex-col self-end mr-[50px]`}>
@@ -37,6 +40,7 @@ export default function PostDetailSection({ post }: { post: Post | undefined }) 
       </section>
       <hr className={`mt-9 bg-primary`} />
       <section className={`no-tailwind mt-[75px] leading-6`} dangerouslySetInnerHTML={{ __html: convertTagsToMedia(contents ?? "", images ?? []) }} />
+      <LikeButton likes={likes} />
     </>
   );
 }

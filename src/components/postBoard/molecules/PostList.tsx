@@ -35,19 +35,24 @@ export default function PostList({ posts }: { posts: PostWithoutContents[] }) {
         const nickname = shouldHighlightNickname ? HighlightMatch(post?.nickname, searchValue) : post?.nickname;
 
         return (
-          <li key={i} className={`flex items-center w-full h-[10%] ${i % 2 === 1 ? "" : "bg-gray400"} ${i === postSlots.length - 1 ? "rounded-b-[20px]" : ""}`}>
-            {posts.length === 0 ? (
-              i === 4 && <div className={`flex mx-auto`}>게시글 없음</div>
+          <li
+            key={i}
+            className={`flex items-center w-full h-[10%] pr-[2%] ${i % 2 === 1 ? "" : "bg-gray400"} ${i === postSlots.length - 1 ? "rounded-b-[20px]" : ""}`}
+          >
+            {posts?.length === 0 ? (
+              i === 4 && <div className={`flex mx-auto -pr-[3%]`}>게시글 없음</div>
             ) : post ? (
               <>
-                <div className={`w-[10%] text-center`}>{Category[post.category]}</div>
-                <div className={`w-[60%]`}>
+                <div className={`w-[10%] text-center`}>{Category[post?.category]}</div>
+                <div className={`w-[49%]`}>
                   <div className={`w-full truncate p-3 text-center`}>
-                    <Link href={`/post/${post.postId}`}>{title}</Link>
+                    <Link href={`/post/${post?.postId}`}>{title}</Link>
                   </div>
                 </div>
                 <div className={`w-[15%] text-center`}>{nickname}</div>
-                <div className={`w-[15%] text-center`}>{post.createdAt}</div>
+                <div className={`w-[10%] text-center`}>{post?.createdAt}</div>
+                <div className={`w-[8%] text-center`}>{post?.view}</div>
+                <div className={`w-[8%] text-center`}>{post?.likes}</div>
               </>
             ) : (
               <></>

@@ -17,6 +17,7 @@ module.exports = {
         red500: "#FF0000",
         red600: "#D63031",
         blue: "#0984E3",
+        "blue-opacity0.2": "rgba(9, 132, 227, 0.2)",
       },
       fontSize: {
         logo: ["42px", { fontFamily: "var(--font-ubuntu)", fontWeight: "500" }],
