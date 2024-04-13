@@ -43,7 +43,7 @@ export default function PostList({ posts }: { posts: PostWithoutContents[] }) {
                 <div className={`w-[10%] text-center`}>{Category[post?.category]}</div>
                 <div className={`w-[49%]`}>
                   <div className={`w-full p-3 text-center`}>
-                    <Link className={`flex justify-center items-center gap-1`} href={`/post/${post?.postId}`}>
+                    <Link className={`flex justify-center items-center gap-1`} href={`/post/${post?.postId}`} prefetch={false}>
                       <span className="truncate inline-block">
                         {shouldHighlightTitle ? <HighlightMatch text={post?.title} query={searchValue} /> : <span>{post?.title}</span>}
                       </span>

@@ -12,10 +12,9 @@ import LikeButton from "../molecules/LikeButton";
 
 interface PostDetailSectionProps {
   post: Post | undefined;
-  viewCount: number;
 }
 
-export default function PostDetailSection({ post, viewCount }: PostDetailSectionProps) {
+export default function PostDetailSection({ post }: PostDetailSectionProps) {
   const { postId, category, title, nickname, createdAt, contents, images, views, likes, hasLiked } = post ?? {};
 
   const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
@@ -34,7 +33,7 @@ export default function PostDetailSection({ post, viewCount }: PostDetailSection
             <span className={`text-body04`}>{createdAt}</span>
             <span className={`text-body03`}>
               <span>조회수 </span>
-              <span>{viewCount ?? views}</span>
+              <span>{views ?? 0}</span>
             </span>
             <span className={`text-body03`}>{`추천수 ${likes}`}</span>
           </div>

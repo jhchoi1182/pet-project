@@ -8,10 +8,8 @@ import LoadingSpinner from "@/components/atoms/ui/LoadingSpinner";
 import useGetPostQuery from "@/service/post/useGetPostQuery";
 import useGetCommentsQuery from "@/service/comment/useGetCommentsQuery";
 import Board from "@/components/atoms/ui/Board";
-import useUpdatePostViewMutation from "@/service/post/useUpdatePostViewMutation";
 
 export default function PostDetail({ id }: { id: string }) {
-  const { data: viewCount } = useUpdatePostViewMutation(+id);
   const { data, isLoading } = useGetPostQuery(+id);
   const { comments } = useGetCommentsQuery(+id);
 
@@ -25,7 +23,7 @@ export default function PostDetail({ id }: { id: string }) {
           </div>
         ) : (
           <>
-            <PostDetailSection post={data} viewCount={viewCount} />
+            <PostDetailSection post={data} />
             <CommentSection postId={+id} comments={comments} />
           </>
         )}
