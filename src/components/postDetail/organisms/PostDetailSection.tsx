@@ -1,14 +1,17 @@
 import { Post } from "@/types/model/post";
 import React from "react";
 import PostDetailButton from "../atom/PostDetailButton";
-import { useRouter } from "next/navigation";
 import PostUpdateDeleteButtons from "../molecules/PostUpdateDeleteButtons";
-import { useSelector } from "react-redux";
-import { RootState } from "@/stores/store/store";
 import "../../../styles/ckeditor.css";
 import { convertTagsToMedia } from "@/util/ckeditorImageTransformer";
-import { Category } from "@/components/postBoard/molecules/PostList";
 import LikeButton from "../molecules/LikeButton";
+
+enum Category {
+  "CHAT" = "잡담",
+  "RECRUIT" = "모집",
+  "INFORMATION" = "정보",
+  "QUESTION" = "질문",
+}
 
 interface PostDetailSectionProps {
   post: Post | undefined;
@@ -16,9 +19,6 @@ interface PostDetailSectionProps {
 
 export default function PostDetailSection({ post }: PostDetailSectionProps) {
   const { postId, category, title, nickname, createdAt, contents, images, views, likes, hasLiked } = post ?? {};
-
-  const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
-  const router = useRouter();
 
   return (
     <>
@@ -40,9 +40,9 @@ export default function PostDetailSection({ post }: PostDetailSectionProps) {
         </div>
         <div className={`flex flex-col self-end mr-[50px]`}>
           <div className={`flex ml-auto`}>
-            <PostDetailButton onClick={() => router.back()}>뒤로가기</PostDetailButton>
+            <PostDetailButton>뒤로가기</PostDetailButton>
           </div>
-          {loggedInNickname === nickname && <PostUpdateDeleteButtons post={post} />}
+          <PostUpdateDeleteButtons post={post} nickname={nickname} />
         </div>
       </section>
       <hr className={`mt-9 bg-primary`} />

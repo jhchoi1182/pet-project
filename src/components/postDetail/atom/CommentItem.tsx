@@ -1,3 +1,5 @@
+"use client";
+
 import { Comment } from "@/types/model/comment";
 import React from "react";
 import PostDetailButton from "./PostDetailButton";

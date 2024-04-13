@@ -1,32 +1,18 @@
-"use client";
-
 import BoardTab from "@/components/atoms/ui/BoardTab";
 import React from "react";
 import PostDetailSection from "../organisms/PostDetailSection";
 import CommentSection from "../organisms/CommentSection";
-import LoadingSpinner from "@/components/atoms/ui/LoadingSpinner";
-import useGetPostQuery from "@/service/post/useGetPostQuery";
-import useGetCommentsQuery from "@/service/comment/useGetCommentsQuery";
 import Board from "@/components/atoms/ui/Board";
+import { Post } from "@/types/model/post";
+import { Comment } from "@/types/model/comment";
 
-export default function PostDetail({ id }: { id: string }) {
-  const { data, isLoading } = useGetPostQuery(+id);
-  const { comments } = useGetCommentsQuery(+id);
-
+export default function PostDetail({ id, post, comments }: { id: string; post: Post; comments: Comment[] }) {
   return (
     <>
       <BoardTab />
       <Board className={`px-[56px] py-[67px] overflow-auto`}>
-        {isLoading ? (
-          <div className={`flex justify-center items-center h-full`}>
-            <LoadingSpinner />
-          </div>
-        ) : (
-          <>
-            <PostDetailSection post={data} />
-            <CommentSection postId={+id} comments={comments} />
-          </>
-        )}
+        <PostDetailSection post={post} />
+        <CommentSection postId={+id} comments={comments} />
       </Board>
     </>
   );
