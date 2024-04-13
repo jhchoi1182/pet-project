@@ -29,10 +29,7 @@ export default function PostList({ posts }: { posts: PostWithoutContents[] }) {
   return (
     <ul className={`w-full h-full`}>
       {postSlots.map((post, i) => {
-        const title = shouldHighlightTitle
-          ? HighlightMatch(post?.title, searchValue)
-          : `${post?.title} ${post?.commentsCount !== 0 ? `[${post?.commentsCount}]` : ``}`;
-        const nickname = shouldHighlightNickname ? HighlightMatch(post?.nickname, searchValue) : post?.nickname;
+        const commentsCount = post?.commentsCount !== 0 ? `[${post?.commentsCount}]` : ``;
 
         return (
           <li
@@ -45,11 +42,18 @@ export default function PostList({ posts }: { posts: PostWithoutContents[] }) {
               <>
                 <div className={`w-[10%] text-center`}>{Category[post?.category]}</div>
                 <div className={`w-[49%]`}>
-                  <div className={`w-full truncate p-3 text-center`}>
-                    <Link href={`/post/${post?.postId}`}>{title}</Link>
+                  <div className={`w-full p-3 text-center`}>
+                    <Link className={`flex justify-center items-center gap-1`} href={`/post/${post?.postId}`}>
+                      <span className="truncate inline-block">
+                        {shouldHighlightTitle ? <HighlightMatch text={post?.title} query={searchValue} /> : <span>{post?.title}</span>}
+                      </span>
+                      <span className="inline-block">{commentsCount}</span>
+                    </Link>
                   </div>
                 </div>
-                <div className={`w-[15%] text-center`}>{nickname}</div>
+                <div className={`w-[15%] text-center`}>
+                  {shouldHighlightNickname ? <HighlightMatch text={post?.nickname} query={searchValue} /> : post?.nickname}
+                </div>
                 <div className={`w-[10%] text-center`}>{post?.createdAt}</div>
                 <div className={`w-[8%] text-center`}>{post?.views}</div>
                 <div className={`w-[8%] text-center`}>{post?.likes}</div>
