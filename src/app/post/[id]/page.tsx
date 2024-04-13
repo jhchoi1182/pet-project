@@ -12,7 +12,7 @@ interface Params {
 export const revalidate = 60;
 
 export async function generateMetadata({ params: { id } }: Params): Promise<Metadata> {
-  const { title, noHtmlContents } = await postApi.getPostForISR(+id);
+  const { title, noHtmlContents } = await postApi.getPost(+id);
   return {
     title,
     description: noHtmlContents,

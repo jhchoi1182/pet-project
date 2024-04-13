@@ -15,10 +15,6 @@ export const postApi = {
     );
     return data?.result;
   },
-  getPostForISR: async (postId: number) => {
-    const { data } = await instance.get(`/post/${postId}/isr`);
-    return data?.result;
-  },
   getPost: async (postId: number) => {
     const { data } = await instance.get(`/post/${postId}`);
     return data?.result;
@@ -32,6 +28,10 @@ export const postApi = {
     const formattedCategory = CategoryAtCreate[category];
     const data = await instance.patch(`/post/${postId}`, { category: formattedCategory, title, contents, images });
     return data;
+  },
+  updateViews: async (postId: number) => {
+    const data = await instance.patch(`/post/${postId}/views`);
+    return data?.data?.result?.views;
   },
   toggleLike: async (postId: number) => {
     const data = await instance.patch(`/post/${postId}/toggle-like`);
