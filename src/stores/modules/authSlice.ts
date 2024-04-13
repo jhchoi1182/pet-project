@@ -8,6 +8,7 @@ export interface AuthSliceState {
   isSocialLoginInProgress: boolean;
   isRemovedNicknameCookie: boolean;
   loggedInNickname: string | undefined;
+  isLike: boolean;
 }
 
 const initialState: AuthSliceState = {
@@ -15,6 +16,7 @@ const initialState: AuthSliceState = {
   isSocialLoginInProgress: false,
   isRemovedNicknameCookie: false,
   loggedInNickname: getCookie(),
+  isLike: false,
 };
 
 export const authSlice = createSlice({
@@ -33,9 +35,12 @@ export const authSlice = createSlice({
     setLoggedInNickname: (state, { payload }) => {
       state.loggedInNickname = payload;
     },
+    setIsLike: (state, { payload }) => {
+      state.isLike = payload;
+    },
   },
 });
 
-export const { setIsOpenLoginModal, setIsSocialLoginInProgress, setIsRemovedNicknameCookie, setLoggedInNickname } = authSlice.actions;
+export const { setIsOpenLoginModal, setIsSocialLoginInProgress, setIsRemovedNicknameCookie, setLoggedInNickname, setIsLike } = authSlice.actions;
 
 export default authSlice.reducer;

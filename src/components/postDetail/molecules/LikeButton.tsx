@@ -3,7 +3,10 @@
 import Like from "@/components/atoms/icons/Like";
 import UnLike from "@/components/atoms/icons/UnLike";
 import useToggleLikePostMutation from "@/service/post/useToggleLikePostMutation";
-import React, { useEffect, useState } from "react";
+import { setIsLike } from "@/stores/modules/authSlice";
+import { RootState } from "@/stores/store/store";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 interface LikeButtonProps {
   postId: number | undefined;
@@ -12,12 +15,13 @@ interface LikeButtonProps {
 }
 
 export default function LikeButton({ postId, likes, hasLiked }: LikeButtonProps) {
-  const [isLike, setIsLike] = useState(false);
+  const isLike = useSelector(({ authSlice }: RootState) => authSlice.isLike);
+  const dispatch = useDispatch();
 
-  const { mutate } = useToggleLikePostMutation(postId ?? 1, setIsLike);
+  const { mutate } = useToggleLikePostMutation(postId ?? 1, dispatch);
 
   useEffect(() => {
-    setIsLike(hasLiked ?? false);
+    dispatch(setIsLike(hasLiked ?? false));
   }, [hasLiked]);
 
   return (
