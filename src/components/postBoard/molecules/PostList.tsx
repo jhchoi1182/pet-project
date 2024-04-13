@@ -51,7 +51,7 @@ export default function PostList({ posts }: { posts: PostWithoutContents[] }) {
                 </div>
                 <div className={`w-[15%] text-center`}>{nickname}</div>
                 <div className={`w-[10%] text-center`}>{post?.createdAt}</div>
-                <div className={`w-[8%] text-center`}>{post?.view}</div>
+                <div className={`w-[8%] text-center`}>{post?.views}</div>
                 <div className={`w-[8%] text-center`}>{post?.likes}</div>
               </>
             ) : (
