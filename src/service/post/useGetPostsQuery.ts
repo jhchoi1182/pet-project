@@ -31,6 +31,8 @@ function useGetPostsQuery(enabled: boolean, resetToFirstPage?: boolean) {
     queryKey: [QUERY_KEY.posts, selectedCategory, currentPage],
     queryFn: () => postApi.search(selectedCategory, selectedSearchType, inputValue, resetToFirstPage ? 0 : currentPage - 1),
     enabled: isReady && enabled,
+    staleTime: 60 * 1000,
+    gcTime: 60 * 1000,
   });
 
   const isLoading = !isReady || isQueryLoading;

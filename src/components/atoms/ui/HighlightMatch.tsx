@@ -1,6 +1,6 @@
 import React from "react";
 
-function HighlightMatch(text: string, query: string) {
+function HighlightMatch({ text, query }: { text: string; query: string }) {
   if (!query?.trim()) return text;
   const textFragments = text?.split(new RegExp(`(${query})`, "gi"));
   return textFragments?.map((fragment, i) =>
@@ -9,7 +9,7 @@ function HighlightMatch(text: string, query: string) {
         {fragment}
       </span>
     ) : (
-      fragment
+      <span key={i}>{fragment}</span>
     ),
   );
 }

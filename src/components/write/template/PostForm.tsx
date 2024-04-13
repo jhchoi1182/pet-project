@@ -5,7 +5,7 @@ import PostEditor from "../atom/PostEditor";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
 import { extractBase64Images, replaceImgTagWithTempTag } from "@/util/ckeditorImageTransformer";
 import useCreatePostMutation from "@/service/post/useCreatePostMutation";
-import useUpdatePostController from "@/service/post/useUpdatePostMutation";
+import useUpdatePostMutation from "@/service/post/useUpdatePostMutation";
 import useAlertBeforeUnload from "@/service/hooks/useBeforeUnload";
 import Select from "@/components/atoms/base/Select";
 import { UnionOfCategoryAtCreate } from "@/types/type/post";
@@ -29,7 +29,7 @@ export default function PostForm({ isCreate, setIsLoading }: PostFormProps) {
   const router = useRouter();
 
   const { mutate: createPost } = useCreatePostMutation();
-  const { mutate: updatePost } = useUpdatePostController(savedPostId);
+  const { mutate: updatePost } = useUpdatePostMutation(savedPostId);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

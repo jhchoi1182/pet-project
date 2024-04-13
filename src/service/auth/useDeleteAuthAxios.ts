@@ -2,10 +2,13 @@ import { authApi } from "@/api/authApi";
 import useHandleError from "@/service/hooks/useHandleError";
 import useAuthManagementService from "@/service/auth/useAuthManagementService";
 import { SetStateBoolean } from "@/types/type/utilityTypes";
+import { useDispatch } from "react-redux";
+import { setIsLike } from "@/stores/modules/authSlice";
 
 type ActionType = "logout" | "withdraw";
 
 function useDeleteAuthAxios() {
+  const dispatch = useDispatch();
   const { removeNickname } = useAuthManagementService();
   const { handleError } = useHandleError();
   async function handleWithdraw(setToggleDropdown: SetStateBoolean, type: ActionType) {
@@ -14,6 +17,7 @@ function useDeleteAuthAxios() {
     try {
       isWithdraw ? await authApi.withdraw() : await authApi.logout();
       alert(isWithdraw ? "정상적으로 탈퇴되었습니다." : "로그아웃되었습니다.");
+      dispatch(setIsLike(false));
       removeNickname();
     } catch (error) {
       handleError(error);

@@ -12,6 +12,12 @@ export enum CategoryAtCreate {
   "정보" = "INFORMATION",
   "질문" = "QUESTION",
 }
+export enum CategoryAtUpdate {
+  "CHAT" = "잡담",
+  "RECRUIT" = "모집",
+  "INFORMATION" = "정보",
+  "QUESTION" = "질문",
+}
 export type UnionOfCategoryAtCreate = keyof typeof CategoryAtCreate;
 
 export enum CategoryAtSearch {

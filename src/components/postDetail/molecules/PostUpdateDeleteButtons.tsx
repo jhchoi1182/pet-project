@@ -4,9 +4,10 @@ import useDeletePostMutation from "@/service/post/useDeletePostMutation";
 import { useParams, useRouter } from "next/navigation";
 import { Post } from "@/types/model/post";
 import { replaceTempTagWithRealImgTag } from "@/util/ckeditorImageTransformer";
+import { CategoryAtUpdate } from "@/types/type/post";
 
 export default function PostUpdateDeleteButtons({ post }: { post: Post | undefined }) {
-  const { postId = 0, title = "", contents = "", images = [] } = post ?? {};
+  const { category = "CHAT", postId = 0, title = "", contents = "", images = [] } = post ?? {};
 
   const { id } = useParams();
   const router = useRouter();
@@ -14,7 +15,7 @@ export default function PostUpdateDeleteButtons({ post }: { post: Post | undefin
 
   const handleUpdateButtonClick = () => {
     sessionStorage.setItem("savedPostId", postId + "");
-    sessionStorage.setItem("savedCategory", title);
+    sessionStorage.setItem("savedCategory", CategoryAtUpdate[category]);
     sessionStorage.setItem("savedTitle", title);
     sessionStorage.setItem("savedContents", replaceTempTagWithRealImgTag(contents, images));
     router.push(`/write?type=update`);

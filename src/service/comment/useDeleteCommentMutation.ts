@@ -10,9 +10,10 @@ function useDeleteCommentMutation(postId: number, commentId: number) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.comments, postId] });
       const currentPage = sessionStorage.getItem("currentPage") ?? 1;
-      const prevPosts = queryClient.getQueryData<PostsResponse>([QUERY_KEY.posts, +currentPage]);
+      const selectedCategory = sessionStorage.getItem("selectedCategory") ?? "전체";
+      const prevPosts = queryClient.getQueryData<PostsResponse>([QUERY_KEY.posts, selectedCategory, +currentPage]);
       const updatedPosts = prevPosts?.content?.map((post) => (post.postId === postId ? { ...post, commentsCount: post.commentsCount - 1 } : post));
-      queryClient.setQueryData([QUERY_KEY.posts, +currentPage], { ...prevPosts, content: updatedPosts });
+      queryClient.setQueryData([QUERY_KEY.posts, selectedCategory, +currentPage], { ...prevPosts, content: updatedPosts });
     },
   });
 }

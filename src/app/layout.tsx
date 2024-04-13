@@ -5,8 +5,6 @@ import { Electrolize, Inter, Ubuntu } from "next/font/google";
 import { Metadata, Viewport } from "next";
 import Sidebar from "@/components/sidebar/template/Sidebar";
 import AppProvider from "@/provider/AppProvider";
-import ViewRecordCookieInitializer from "@/components/features/ViewRecordCookieInitializer";
-import { cookies } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 const ubuntu = Ubuntu({ weight: "500", subsets: ["latin"], variable: "--font-ubuntu" });
@@ -39,7 +37,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AppProvider>
           <Sidebar />
           {children}
-          <ViewRecordCookieInitializer />
         </AppProvider>
       </body>
     </html>

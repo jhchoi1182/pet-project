@@ -10,8 +10,13 @@ import { convertTagsToMedia } from "@/util/ckeditorImageTransformer";
 import { Category } from "@/components/postBoard/molecules/PostList";
 import LikeButton from "../molecules/LikeButton";
 
-export default function PostDetailSection({ post }: { post: Post | undefined }) {
-  const { postId, category, title, nickname, createdAt, contents, images, view, likes, hasLiked } = post ?? {};
+interface PostDetailSectionProps {
+  post: Post | undefined;
+  viewCount: number;
+}
+
+export default function PostDetailSection({ post, viewCount }: PostDetailSectionProps) {
+  const { postId, category, title, nickname, createdAt, contents, images, views, likes, hasLiked } = post ?? {};
 
   const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
   const router = useRouter();
@@ -27,7 +32,10 @@ export default function PostDetailSection({ post }: { post: Post | undefined }) 
           <div className={`flex gap-[55px] mt-[30px]`}>
             <span className={`text-body04`}>{nickname}</span>
             <span className={`text-body04`}>{createdAt}</span>
-            <span className={`text-body03`}>{`조회수 ${view}`}</span>
+            <span className={`text-body03`}>
+              <span>조회수 </span>
+              <span>{viewCount ?? views}</span>
+            </span>
             <span className={`text-body03`}>{`추천수 ${likes}`}</span>
           </div>
         </div>
