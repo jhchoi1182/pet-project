@@ -8,6 +8,8 @@ interface Params {
   };
 }
 
+export const revalidate = 1;
+
 export async function generateMetadata({ params: { id } }: Params): Promise<Metadata> {
   const { result } = await fetch(`https://api.studysync.store/api/post/${id}`).then((res) => res.json());
   return {
