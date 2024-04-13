@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import PostDetailButton from "../atom/PostDetailButton";
 import useDeletePostMutation from "@/service/post/useDeletePostMutation";
@@ -5,8 +7,11 @@ import { useParams, useRouter } from "next/navigation";
 import { Post } from "@/types/model/post";
 import { replaceTempTagWithRealImgTag } from "@/util/ckeditorImageTransformer";
 import { CategoryAtUpdate } from "@/types/type/post";
+import { useSelector } from "react-redux";
+import { RootState } from "@/stores/store/store";
 
-export default function PostUpdateDeleteButtons({ post }: { post: Post | undefined }) {
+export default function PostUpdateDeleteButtons({ post, nickname }: { post: Post | undefined; nickname: string | undefined }) {
+  const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
   const { category = "CHAT", postId = 0, title = "", contents = "", images = [] } = post ?? {};
 
   const { id } = useParams();
@@ -27,9 +32,13 @@ export default function PostUpdateDeleteButtons({ post }: { post: Post | undefin
   };
 
   return (
-    <div className={`flex gap-[10px] mt-4 text-body03`}>
-      <PostDetailButton onClick={handleUpdateButtonClick}>수정</PostDetailButton>
-      <PostDetailButton onClick={deletePost}>삭제</PostDetailButton>
-    </div>
+    <>
+      {loggedInNickname === nickname && (
+        <div className={`flex gap-[10px] mt-4 text-body03`}>
+          <PostDetailButton onClick={handleUpdateButtonClick}>수정</PostDetailButton>
+          <PostDetailButton onClick={deletePost}>삭제</PostDetailButton>
+        </div>
+      )}
+    </>
   );
 }
