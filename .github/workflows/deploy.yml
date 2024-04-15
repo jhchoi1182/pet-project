@@ -32,4 +32,4 @@ jobs:
         run: ${{ env.SSH_CMD }} "${{env.DIRECTORY_MOVE}} && npm run build"
 
       - name: Start project
-        run: ${{ env.SSH_CMD }} "screen && ${{env.DIRECTORY_MOVE}} && npm run start"
+        run: ${{ env.SSH_CMD }} "screen -dmS next bash -c 'cd pet-project-front && npm run start'"
