@@ -1,0 +1,35 @@
+name: EC2 CI/CD
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SSH_CMD: ssh -o StrictHostKeyChecking=no -i ec2_ssh_key.pem ec2-user@${{ secrets.EC2_HOST }}
+      DIRECTORY_MOVE: cd pet-project-front
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH Key
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > ec2_ssh_key.pem
+          chmod 600 ec2_ssh_key.pem
+
+      - name: End all Screen sessions
+        run: ${{ env.SSH_CMD }} "screen -ls | grep 'Attached\|Detached' | cut -d. -f1 | awk '{print $1}' | xargs -I {} screen -S {} -X quit"
+
+      - name: Update server code
+        run: ${{ env.SSH_CMD }} "${{env.DIRECTORY_MOVE}} && git pull origin main"
+
+      - name: Package Install
+        run: ${{ env.SSH_CMD }} "${{env.DIRECTORY_MOVE}} && npm install"
+
+      - name: Build project
+        run: ${{ env.SSH_CMD }} "${{env.DIRECTORY_MOVE}} && npm run build"
+
+      - name: Start project
+        run: ${{ env.SSH_CMD }} "screen -dmS next bash -c 'cd pet-project-front && npm run start'"
