@@ -7,7 +7,7 @@ import { useEffect } from "react";
 function useUpdatePostViewMutation(postId: number) {
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: () => postApi.updateViews(postId),
+    mutationFn: ({ skipNameRemove }: { skipNameRemove: boolean }) => postApi.updateViews(postId),
     onSuccess: (data) => {
       const currentPage = sessionStorage.getItem("currentPage") ?? 1;
       const selectedCategory = sessionStorage.getItem("selectedCategory") ?? "전체";
@@ -18,7 +18,7 @@ function useUpdatePostViewMutation(postId: number) {
   });
 
   useEffect(() => {
-    mutation.mutate();
+    mutation.mutate({ skipNameRemove: true });
   }, []);
 
   return mutation;

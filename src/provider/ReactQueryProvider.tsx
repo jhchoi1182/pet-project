@@ -8,6 +8,10 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+interface MutationVariables {
+  skipNameRemove?: boolean;
+}
+
 export default function ReactQueryProvider({ children }: { children: React.ReactNode }) {
   const { handleError } = useHandleError();
   const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
@@ -21,8 +25,8 @@ export default function ReactQueryProvider({ children }: { children: React.React
           },
         }),
         mutationCache: new MutationCache({
-          onSuccess: (_) => {
-            if (loggedInNickname) return;
+          onSuccess: (_, variables) => {
+            if (loggedInNickname || (variables as MutationVariables)?.skipNameRemove) return;
             dispatch(setIsRemovedNicknameCookie(true));
           },
           onError: (error) => {
