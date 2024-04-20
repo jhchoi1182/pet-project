@@ -41,7 +41,7 @@ export default function PostDetailSection({ post, viewCount }: PostDetailSection
         </div>
         <div className={`flex flex-col self-end mr-[50px]`}>
           <div className={`flex ml-auto`}>
-            <PostDetailButton onClick={() => router.back()}>뒤로가기</PostDetailButton>
+            <PostDetailButton onClick={() => router.push("/home")}>뒤로가기</PostDetailButton>
           </div>
           {loggedInNickname === nickname && <PostUpdateDeleteButtons post={post} />}
         </div>
