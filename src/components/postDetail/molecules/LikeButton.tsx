@@ -10,12 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 interface LikeButtonProps {
   postId: number | undefined;
-  likes: number | undefined;
   hasLiked: boolean | undefined;
 }
 
-export default function LikeButton({ postId, likes, hasLiked }: LikeButtonProps) {
+export default function LikeButton({ postId, hasLiked }: LikeButtonProps) {
   const isLike = useSelector(({ authSlice }: RootState) => authSlice.isLike);
+  const likes = useSelector(({ postSlice }: RootState) => postSlice.postLikes);
   const dispatch = useDispatch();
 
   const { mutate } = useToggleLikePostMutation(postId ?? 1, dispatch);

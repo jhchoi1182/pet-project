@@ -9,6 +9,7 @@ import "../../../styles/ckeditor.css";
 import { convertTagsToMedia } from "@/util/ckeditorImageTransformer";
 import { Category } from "@/components/postBoard/molecules/PostList";
 import LikeButton from "../molecules/LikeButton";
+import PostDetailLikesText from "../atom/PostDetailLikesText";
 
 interface PostDetailSectionProps {
   post: Post | undefined;
@@ -16,7 +17,7 @@ interface PostDetailSectionProps {
 }
 
 export default function PostDetailSection({ post, viewCount }: PostDetailSectionProps) {
-  const { postId, category, title, nickname, createdAt, contents, images, views, likes, hasLiked } = post ?? {};
+  const { postId, category, title, nickname, createdAt, contents, images, views, hasLiked } = post ?? {};
 
   const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
   const router = useRouter();
@@ -36,7 +37,7 @@ export default function PostDetailSection({ post, viewCount }: PostDetailSection
               <span>조회수 </span>
               <span>{viewCount ?? views}</span>
             </span>
-            <span className={`text-body03`}>{`추천수 ${likes}`}</span>
+            <PostDetailLikesText />
           </div>
         </div>
         <div className={`flex flex-col self-end mr-[50px]`}>
@@ -48,7 +49,7 @@ export default function PostDetailSection({ post, viewCount }: PostDetailSection
       </section>
       <hr className={`mt-9 bg-primary`} />
       <section className={`no-tailwind mt-[75px] leading-6`} dangerouslySetInnerHTML={{ __html: convertTagsToMedia(contents ?? "", images ?? []) }} />
-      <LikeButton postId={postId} likes={likes} hasLiked={hasLiked} />
+      <LikeButton postId={postId} hasLiked={hasLiked} />
     </>
   );
 }

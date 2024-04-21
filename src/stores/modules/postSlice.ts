@@ -7,6 +7,7 @@ export interface PostSliceState {
   selectedSearchType: UnionOfSearchType;
   inputValue: string;
   searchValue: string;
+  postLikes: number;
 }
 
 const initialState: PostSliceState = {
@@ -15,6 +16,7 @@ const initialState: PostSliceState = {
   selectedSearchType: "제목+내용",
   inputValue: "",
   searchValue: "",
+  postLikes: 0,
 };
 
 export const postSlice = createSlice({
@@ -36,9 +38,12 @@ export const postSlice = createSlice({
     setSearchValue: (state, { payload }) => {
       state.searchValue = payload;
     },
+    setPostLikes: (state, { payload }) => {
+      state.postLikes = payload;
+    },
   },
 });
 
-export const { setCurrentPage, setSelectedCategory, setSelectedSearchType, setInputValue, setSearchValue } = postSlice.actions;
+export const { setCurrentPage, setSelectedCategory, setSelectedSearchType, setInputValue, setSearchValue, setPostLikes } = postSlice.actions;
 
 export default postSlice.reducer;
