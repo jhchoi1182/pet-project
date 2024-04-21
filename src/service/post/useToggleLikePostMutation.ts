@@ -22,8 +22,10 @@ function useToggleLikePostMutation(postId: number, dispatch: Dispatch<UnknownAct
       const currentPage = sessionStorage.getItem("currentPage") ?? 1;
       const selectedCategory = sessionStorage.getItem("selectedCategory") ?? "전체";
       const prevPosts = queryClient.getQueryData<PostsResponse>([QUERY_KEY.posts, selectedCategory, +currentPage]);
-      const updatedPosts = prevPosts?.content?.map((post) => (post.postId === postId ? { ...post, likes: updatedLikes } : post));
-      queryClient.setQueryData([QUERY_KEY.posts, selectedCategory, +currentPage], { ...prevPosts, content: updatedPosts });
+      if (prevPosts?.content) {
+        const updatedPosts = prevPosts?.content?.map((post) => (post.postId === postId ? { ...post, likes: updatedLikes } : post));
+        queryClient.setQueryData([QUERY_KEY.posts, selectedCategory, +currentPage], { ...prevPosts, content: updatedPosts });
+      }
     },
   });
 }
