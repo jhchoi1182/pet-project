@@ -57,7 +57,10 @@ export default function SignupModal({ setToggleLoginSignup }: SignupModalProps) 
         <EmailPasswordInput type="password" value={enteredInfo.password} handleInputChange={handleInputChange} />
         <EmailPasswordInput type="passwordConfirm" value={enteredInfo.passwordConfirm} password={enteredInfo.password} handleInputChange={handleInputChange} />
       </div>
-      <div className={`mt-[49px] ml-auto mr-[45px]`}>
+      <div className={`flex justify-between w-full mt-[45px] px-[45px]`}>
+        <Button type="button" onClick={() => setToggleLoginSignup(true)}>
+          뒤로가기
+        </Button>
         <Button>회원가입</Button>
       </div>
     </form>
