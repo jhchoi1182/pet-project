@@ -10,6 +10,7 @@ jobs:
     env:
       SSH_CMD: ssh -o StrictHostKeyChecking=no -i ec2_ssh_key.pem ec2-user@${{ secrets.EC2_HOST }}
       DIRECTORY_MOVE: cd pet-project-front
+      NEXT_PUBLIC_SERVER_URL: ${{ secrets.NEXT_PUBLIC_SERVER_URL }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
