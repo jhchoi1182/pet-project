@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: Run Jest tests
-        run: npm run test:ci
+        run: npm run test
 
       - name: Build the app
         run: npm run build
@@ -40,7 +40,7 @@ jobs:
         run: ${{ env.SSH_CMD }} "${{env.DIRECTORY_MOVE}} && git pull origin main"
 
       - name: Package Install
-        run: ${{ env.SSH_CMD }} "${{env.DIRECTORY_MOVE}} && npm install"
+        run: ${{ env.SSH_CMD }} "${{env.DIRECTORY_MOVE}} && npm ci"
 
       - name: Build Project
         run: ${{ env.SSH_CMD }} "${{env.DIRECTORY_MOVE}} && npm run build"
