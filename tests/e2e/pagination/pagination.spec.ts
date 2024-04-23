@@ -95,3 +95,71 @@ test.describe("분류 탭 테스트", () => {
     await expect(page.getByTestId("category").filter({ hasNotText: "질문" })).toHaveCount(0);
   });
 });
+
+test.describe("검색 테스트", () => {
+  let selectedSearchType: Locator, dropdownArrow: Locator;
+
+  test.beforeEach(async ({ page }) => {
+    selectedSearchType = page.getByTestId("selectedSearchType");
+    dropdownArrow = page.getByLabel("검색 분류 열기");
+  });
+  test("검색 타입 바꾸면 셀렉터가 잘 바뀌는지 테스트", async ({ page }) => {
+    await expect(selectedSearchType).toHaveText("제목+내용");
+
+    await dropdownArrow.click();
+    await page.getByRole("button", { name: "제목", exact: true }).click();
+    await expect(selectedSearchType).toHaveText("제목");
+
+    await dropdownArrow.click();
+    await page.getByRole("button", { name: "내용", exact: true }).click();
+    await expect(selectedSearchType).toHaveText("내용");
+
+    await dropdownArrow.click();
+    await page.getByRole("button", { name: "작성자", exact: true }).click();
+    await expect(selectedSearchType).toHaveText("작성자");
+
+    await dropdownArrow.click();
+    await page.getByRole("button", { name: "제목+내용", exact: true }).click();
+    await expect(selectedSearchType).toHaveText("제목+내용");
+  });
+
+  test("제목 검색하면 검색어에 해당되는 결과물만 렌더링되어야 함", async ({ page }) => {
+    await dropdownArrow.click();
+    await page.getByRole("button", { name: "제목", exact: true }).click();
+    await page.fill("#search", "안녕");
+    await page.press("#search", "Enter");
+
+    await page.waitForSelector('[data-testid="title"]', { state: "attached" });
+    const resultCount = await page.getByTestId("title").count();
+    await expect(resultCount).toBeGreaterThan(0);
+    await expect(page.getByTestId("title").filter({ hasNotText: "안녕" })).toHaveCount(0);
+  });
+
+  test("작성자 검색하면 검색어에 해당되는 결과물만 렌더링되어야 함", async ({ page }) => {
+    await dropdownArrow.click();
+    await page.getByRole("button", { name: "작성자", exact: true }).click();
+    await page.fill("#search", "yhhnnmm");
+    await page.press("#search", "Enter");
+
+    await page.waitForSelector('[data-testid="nickname"]', { state: "attached" });
+    const resultCount = await page.getByTestId("nickname").count();
+    await expect(resultCount).toBeGreaterThan(0);
+    await expect(page.getByTestId("nickname").filter({ hasNotText: "yhhnnmm" })).toHaveCount(0);
+  });
+
+  test("검색 결과에 하이라이트되어야 함", async ({ page }) => {
+    await dropdownArrow.click();
+    await page.getByRole("button", { name: "제목+내용", exact: true }).click();
+    await page.fill("#search", "안녕");
+    await page.press("#search", "Enter");
+
+    const highlightSpan = page.getByTestId("highlight_span");
+
+    await page.waitForSelector('[data-testid="highlight_span"]', { state: "attached" });
+    const resultCount = await highlightSpan.count();
+    await expect(resultCount).toBeGreaterThan(0);
+    await expect(highlightSpan.filter({ hasNotText: "안녕" })).toHaveCount(0);
+
+    for (let i = 0; i < resultCount; ++i) await expect(highlightSpan.nth(i)).toHaveCSS("background-color", "rgb(251, 197, 49)");
+  });
+});
