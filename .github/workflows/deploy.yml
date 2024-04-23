@@ -6,6 +6,7 @@ on:
 
 jobs:
   deploy:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
       SSH_CMD: ssh -o StrictHostKeyChecking=no -i ec2_ssh_key.pem ec2-user@${{ secrets.EC2_HOST }}
@@ -23,15 +24,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Jest tests
-        run: npm run test
-
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
         run: npx playwright test
-        
+
+      - name: Run Jest tests
+        run: npm run test
+
       - name: Build the app
         run: npm run build
 
