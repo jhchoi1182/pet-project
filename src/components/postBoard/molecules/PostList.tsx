@@ -40,18 +40,20 @@ export default function PostList({ posts }: { posts: PostWithoutContents[] }) {
               i === 4 && <div className={`flex mx-auto -pr-[3%]`}>게시글 없음</div>
             ) : post ? (
               <>
-                <div className={`w-[10%] text-center`}>{Category[post?.category]}</div>
+                <div data-testid={`category`} className={`w-[10%] text-center`}>
+                  {Category[post?.category]}
+                </div>
                 <div className={`w-[49%]`}>
                   <div className={`w-full p-3 text-center`}>
                     <Link className={`flex justify-center items-center gap-1`} href={`/post/${post?.postId}`}>
-                      <span className="truncate inline-block">
+                      <span data-testid={`title`} className="truncate inline-block">
                         {shouldHighlightTitle ? <HighlightMatch text={post?.title} query={searchValue} /> : <span>{post?.title}</span>}
                       </span>
                       <span className="inline-block">{commentsCount}</span>
                     </Link>
                   </div>
                 </div>
-                <div className={`w-[15%] text-center`}>
+                <div data-testid={`nickname`} className={`w-[15%] text-center`}>
                   {shouldHighlightNickname ? <HighlightMatch text={post?.nickname} query={searchValue} /> : post?.nickname}
                 </div>
                 <div className={`w-[10%] text-center`}>{post?.createdAt}</div>

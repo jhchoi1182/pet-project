@@ -5,7 +5,7 @@ function HighlightMatch({ text, query }: { text: string; query: string }) {
   const textFragments = text?.split(new RegExp(`(${query})`, "gi"));
   return textFragments?.map((fragment, i) =>
     fragment.toLowerCase() === query.toLowerCase() ? (
-      <span key={i} className="bg-yellow">
+      <span data-testid={`highlight_span`} key={i} className="bg-yellow">
         {fragment}
       </span>
     ) : (

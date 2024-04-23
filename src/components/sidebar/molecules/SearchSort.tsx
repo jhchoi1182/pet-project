@@ -20,7 +20,9 @@ export default function SearchSort() {
 
   return (
     <div className={`flex gap-3 mb-3 text-body03 text-yellow`}>
-      <span className="w-20 text-center">{selectedSearchType}</span>
+      <span data-testid={`selectedSearchType`} className="w-20 text-center">
+        {selectedSearchType}
+      </span>
       <div className="relative">
         <DownArrow aria-label="검색 분류 열기" onClick={() => setToggleDropdown(true)} />
         {toggleDropdown && (

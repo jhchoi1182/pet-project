@@ -33,7 +33,7 @@ export default function SearchInput() {
     <div className={`mb-[15%] ml-10`}>
       <SearchSort />
       <form className="flex gap-[17px] items-center" onSubmit={handleSubmit}>
-        <Input variant="hideLabel" label="search" name="search" hideLabel>
+        <Input variant="hideLabel" label="search" name="search" hideLabel data-testid={`search`}>
           <Input.TextField variant="primary" value={inputValue} onChange={(e) => dispatch(setInputValue(e.target.value))} />
         </Input>
         <Search />
