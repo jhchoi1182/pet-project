@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import CommentForm from "../molecules/CommentForm";
 import CommentItem from "../atom/CommentItem";
 import useCreatCommentMutation from "@/service/comment/useCreatCommentMutation";
@@ -11,7 +11,7 @@ interface CommentSectionProps {
   comments: Comment[];
 }
 
-export default function CommentSection({ postId, comments }: CommentSectionProps) {
+export default memo(function CommentSection({ postId, comments }: CommentSectionProps) {
   const { mutate } = useCreatCommentMutation(postId);
   const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
 
@@ -35,4 +35,4 @@ export default function CommentSection({ postId, comments }: CommentSectionProps
       </div>
     </section>
   );
-}
+});

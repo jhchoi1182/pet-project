@@ -1,5 +1,5 @@
 import { Post } from "@/types/model/post";
-import React from "react";
+import React, { memo } from "react";
 import PostDetailButton from "../atom/PostDetailButton";
 import { useRouter } from "next/navigation";
 import PostUpdateDeleteButtons from "../molecules/PostUpdateDeleteButtons";
@@ -16,7 +16,7 @@ interface PostDetailSectionProps {
   viewCount: number;
 }
 
-export default function PostDetailSection({ post, viewCount }: PostDetailSectionProps) {
+export default memo(function PostDetailSection({ post, viewCount }: PostDetailSectionProps) {
   const { postId, category, title, nickname, createdAt, contents, images, views, hasLiked } = post ?? {};
 
   const loggedInNickname = useSelector(({ authSlice }: RootState) => authSlice.loggedInNickname);
@@ -52,4 +52,4 @@ export default function PostDetailSection({ post, viewCount }: PostDetailSection
       <LikeButton postId={postId} hasLiked={hasLiked} />
     </>
   );
-}
+});
