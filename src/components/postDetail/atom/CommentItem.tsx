@@ -14,7 +14,8 @@ interface CommentItemProps {
 }
 
 export default function CommentItem({ postId, comment: { commentId, nickname, createdAt, comment } }: CommentItemProps) {
-  const openCommentEditor = useSelector(({ commentSlice }: RootState) => commentSlice.openCommentEditor);
+  const { loggedInNickname } = useSelector(({ authSlice }: RootState) => authSlice);
+  const { openCommentEditor } = useSelector(({ commentSlice }: RootState) => commentSlice);
   const dispatch = useDispatch();
   const { mutate: updateMutate } = useUpdateCommentMutation(postId, commentId);
   const { mutate: deleteMutate } = useDeleteCommentMutation(postId, commentId);
@@ -32,8 +33,12 @@ export default function CommentItem({ postId, comment: { commentId, nickname, cr
   return (
     <div className="relative">
       <div className="absolute top-0 right-0 flex gap-3">
-        {openCommentEditor !== commentId && <PostDetailButton onClick={() => dispatch(setOpenCommentEditor(commentId))}>수정</PostDetailButton>}
-        <PostDetailButton onClick={deleteComment}>삭제</PostDetailButton>
+        {loggedInNickname === nickname && (
+          <>
+            {openCommentEditor !== commentId && <PostDetailButton onClick={() => dispatch(setOpenCommentEditor(commentId))}>수정</PostDetailButton>}
+            <PostDetailButton onClick={deleteComment}>삭제</PostDetailButton>
+          </>
+        )}
       </div>
       <div className={`flex gap-5 mt-6 text-body04`}>
         <span>{nickname}</span>
