@@ -127,15 +127,14 @@ test.describe("검색 테스트", () => {
     await dropdownArrow.click();
     await page.getByRole("button", { name: "제목", exact: true }).click();
     await page.fill("#search", "안녕");
-
-    const searchValue = await page.inputValue("#search");
-    console.log(`입력된 검색어: ${searchValue}`);
-
     await page.press("#search", "Enter");
 
     await page.waitForSelector('[data-testid="title"]', { state: "attached" });
     const resultCount = await page.getByTestId("title").count();
     await expect(resultCount).toBeGreaterThan(0);
+
+    await page.screenshot({ path: "./screenshots/failure-screenshot.png" });
+
     await expect(page.getByTestId("title").filter({ hasNotText: "안녕" })).toHaveCount(0);
   });
 
