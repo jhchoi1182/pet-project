@@ -48,9 +48,6 @@ jobs:
           echo "${{ secrets.EC2_SSH_KEY }}" > ec2_ssh_key.pem
           chmod 600 ec2_ssh_key.pem
 
-      - name: End all Screen Sessions
-        run: ${{ env.SSH_CMD }} "screen -ls | grep 'Attached\|Detached' | cut -d. -f1 | awk '{print $1}' | xargs -I {} screen -S {} -X quit"
-
       - name: Update Code
         run: ${{ env.SSH_CMD }} "${{env.DIRECTORY_MOVE}} && git pull origin main"
 
@@ -59,6 +56,9 @@ jobs:
 
       - name: Build Project
         run: ${{ env.SSH_CMD }} "${{env.DIRECTORY_MOVE}} && npm run build"
+
+      - name: End all Screen Sessions
+        run: ${{ env.SSH_CMD }} "screen -ls | grep 'Attached\|Detached' | cut -d. -f1 | awk '{print $1}' | xargs -I {} screen -S {} -X quit"
 
       - name: Start Project
         run: ${{ env.SSH_CMD }} "screen -dmS next bash -c 'cd pet-project-front && npm run start'"

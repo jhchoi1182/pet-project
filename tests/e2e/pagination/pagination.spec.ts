@@ -125,6 +125,8 @@ test.describe("검색 테스트", () => {
   });
 
   test("제목 검색하면 검색어에 해당되는 결과물만 렌더링되어야 함", async ({ page }) => {
+    await page.waitForSelector('[data-testid="title"]', { state: "attached" });
+
     await dropdownArrow.click();
     await page.getByRole("button", { name: "제목", exact: true }).click();
     await page.fill("#search", "안녕");
@@ -137,6 +139,8 @@ test.describe("검색 테스트", () => {
   });
 
   test("작성자 검색하면 검색어에 해당되는 결과물만 렌더링되어야 함", async ({ page }) => {
+    await page.waitForSelector('[data-testid="title"]', { state: "attached" });
+
     await dropdownArrow.click();
     await page.getByRole("button", { name: "작성자", exact: true }).click();
     await page.fill("#search", "yhhnnmm");
@@ -149,6 +153,8 @@ test.describe("검색 테스트", () => {
   });
 
   test("검색 결과에 하이라이트되어야 함", async ({ page }) => {
+    await page.waitForSelector('[data-testid="title"]', { state: "attached" });
+
     await dropdownArrow.click();
     await page.getByRole("button", { name: "제목+내용", exact: true }).click();
     await page.fill("#search", "안녕");
