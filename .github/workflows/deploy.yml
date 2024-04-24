@@ -30,12 +30,12 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
 
-      - name: Upload screenshots
+      - name: Upload Playwright HTML report and traces
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: screenshots
-          path: ./screenshots/
+          name: playwright-report
+          path: playwright-report/
 
       - name: Run Jest tests
         run: npm run test

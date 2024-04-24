@@ -97,11 +97,12 @@ test.describe("분류 탭 테스트", () => {
 });
 
 test.describe("검색 테스트", () => {
-  let selectedSearchType: Locator, dropdownArrow: Locator;
+  let selectedSearchType: Locator, dropdownArrow: Locator, searchButton: Locator;
 
   test.beforeEach(async ({ page }) => {
     selectedSearchType = page.getByTestId("selectedSearchType");
     dropdownArrow = page.getByLabel("검색 분류 열기");
+    searchButton = page.getByTestId("search_button");
   });
   test("검색 타입 바꾸면 셀렉터가 잘 바뀌는지 테스트", async ({ page }) => {
     await expect(selectedSearchType).toHaveText("제목+내용");
@@ -127,14 +128,11 @@ test.describe("검색 테스트", () => {
     await dropdownArrow.click();
     await page.getByRole("button", { name: "제목", exact: true }).click();
     await page.fill("#search", "안녕");
-    await page.press("#search", "Enter");
+    await searchButton.click();
 
     await page.waitForSelector('[data-testid="title"]', { state: "attached" });
     const resultCount = await page.getByTestId("title").count();
     await expect(resultCount).toBeGreaterThan(0);
-
-    await page.screenshot({ path: "./screenshots/failure-screenshot.png" });
-
     await expect(page.getByTestId("title").filter({ hasNotText: "안녕" })).toHaveCount(0);
   });
 
@@ -142,7 +140,7 @@ test.describe("검색 테스트", () => {
     await dropdownArrow.click();
     await page.getByRole("button", { name: "작성자", exact: true }).click();
     await page.fill("#search", "yhhnnmm");
-    await page.press("#search", "Enter");
+    await searchButton.click();
 
     await page.waitForSelector('[data-testid="nickname"]', { state: "attached" });
     const resultCount = await page.getByTestId("nickname").count();
@@ -154,7 +152,7 @@ test.describe("검색 테스트", () => {
     await dropdownArrow.click();
     await page.getByRole("button", { name: "제목+내용", exact: true }).click();
     await page.fill("#search", "안녕");
-    await page.press("#search", "Enter");
+    await searchButton.click();
 
     const highlightSpan = page.getByTestId("highlight_span");
 
