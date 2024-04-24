@@ -22,6 +22,8 @@ function useGetCommentsQuery(postId: number) {
   useEffect(() => {
     if (!data) return;
     dispatch(setComments(data));
+    const initalTotalPosts = queryClient.getQueryData<PostsResponse>([QUERY_KEY.posts, "전체", 1]);
+    if (!initalTotalPosts?.content) return;
     const currentPage = sessionStorage.getItem("currentPage") ?? 1;
     const selectedCategory = sessionStorage.getItem("selectedCategory") ?? "전체";
     const prevPosts = queryClient.getQueryData<PostsResponse>([QUERY_KEY.posts, selectedCategory, +currentPage]);

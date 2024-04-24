@@ -13,10 +13,11 @@ export default function QueryInitializer() {
     if (initalTotalPosts) return;
 
     const removeInitalTotalPosts = setTimeout(() => {
-      queryClient.invalidateQueries({ queryKey: ["posts", "전체", 1] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.posts] });
     }, 300);
 
     return () => clearTimeout(removeInitalTotalPosts);
   }, []);
+
   return <></>;
 }
