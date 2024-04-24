@@ -18,7 +18,7 @@ function useCreatePostMutation() {
     mutationFn: ({ category, title, contents, images }: CreatePostParameter) => postApi.create(category, title, contents, images),
     onSuccess: () => {
       alert("작성한 글이 게시되었습니다.");
-      router.back();
+      router.push("/home");
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.posts] });
     },
   });
