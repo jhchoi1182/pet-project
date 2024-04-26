@@ -14,7 +14,7 @@ export const revalidate = 60;
 export async function generateMetadata({ params: { id } }: Params): Promise<Metadata> {
   const { result } = await fetch(`${studySyncServerURL}/post/${id}`).then((res) => res.json());
   return {
-    title: result?.title,
+    title: `${result?.title} - ${result?.category}`,
     description: result?.noHtmlContents,
   };
 }
